@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container mt-3">
+		<div class="row ">
+
+			{% for i in 0..10 %}
+				<div class="col-mb mr-2">
+					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+
+						<div class="card-body">
+							<h2 class="card-title p-4">U 18</h2>
+
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
+	</div>
+{% endblock %}

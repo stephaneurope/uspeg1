@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adhérents
+{% endblock %}
+
+{% block body %}
+
+	<pre>
+        
+    </pre>
+	<div class="container mt-3">
+		<h1 class="text-center">Adhérents</h1>
+
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Rechercher ..."/>
+
+		</div>
+
+        <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      
+    </div>
+    <div class="col-sm">
+      
+    </div>
+    <div class="col-sm-3 mb-2">
+      <a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+    </div>
+  </div>
+</div>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">Id.</th>
+					<th class="text-center">Nom</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Catégorie</th>
+					<th class="text-center">Numéro</th>
+					<th class="text-center">Cotisation</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for ad in pagination.data %}
+
+					<td class="text-center">{{ad.id}}</td>
+					<td class="text-center">
+						<a href="#">{{ad.firstName}}
+							{{ad.lastName}}</a>
+					</td>
+					<td class="text-center">{{ad.email}}</td>
+					<td class="text-center">{{ad.subcategory}}</td>
+					<td class="text-center">
+						<span class="badge badge-primary">{{ad.toNumber}}</span>
+
+					</td>
+					<td class="text-center">Payée</td>
+					<td>
+
+						
+                        <a href="{{ path('adherent_edit', {'id': ad.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+						<button class="btn btn-sm btn-secondary">Modifier
+						</button>
+						
+                        <a href="{{ path('adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+	{{pagination.display()}}
+
+</div>{% endblock %}
+
