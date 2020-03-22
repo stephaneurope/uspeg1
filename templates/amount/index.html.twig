@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Amount{% endblock %}
+
+{% block body %}
+<div class="container">
+{% for amount in amount %}
+    {{amount.amount1}}
+
+    <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Montant 1
+    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount1}}</span>
+    <span class="badge badge-primary badge-pill">{{amount.amount1}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Montant 2
+   <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount2}}</span>
+    <span class="badge badge-primary badge-pill">{{amount.amount2}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Montant 3
+    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount3}}</span>
+    <span class="badge badge-primary badge-pill">{{amount.amount3}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Montant 4
+    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount4}}</span>
+    <span class="badge badge-primary badge-pill">{{amount.amount4}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Total
+    {% set total = (amount.amount1 + amount.amount2 + amount.amount3 + amount.amount4 ) %}
+    {% set reste = 120 - total %} 
+    {% set cotisation = 120 %}
+   
+   {% if total is same as(cotisation) %}
+   <span class="badge badge-success badge-pill">{{total}}</span>
+   {% endif %}
+   <span class="badge badge-danger badge-pill">{{total}}</span>
+   Il reste a payé {{reste}} €
+  </li>
+</ul>
+{% endfor %}
+</div>
+{% endblock %}
