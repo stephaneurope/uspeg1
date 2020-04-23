@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -57,6 +58,12 @@ class Produit
      * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="produit")
      */
     private $commandes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categoryproduit", inversedBy="title")
+     * @JoinColumn(name="categoryproduit_id", referencedColumnName="id")
+     */
+    private $categoryproduit;
 
     public function __construct()
     {
@@ -179,6 +186,18 @@ class Produit
                 $commande->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategoryproduit(): ?Categoryproduit
+    {
+        return $this->categoryproduit;
+    }
+
+    public function setCategoryproduit(?Categoryproduit $categoryproduit): self
+    {
+        $this->categoryproduit = $categoryproduit;
 
         return $this;
     }

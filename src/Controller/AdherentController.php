@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Amount;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -39,13 +40,9 @@ class AdherentController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
 
-        //$adherent = $this->getDoctrine()
-        //->getRepository(Adherent::class)
-        // ->find($id);
 
         return $this->render('adherent/edit.html.twig', [
-            'adherent' => $adherent,
-
+            'adherent' => $adherent
 
         ]);
     }
@@ -102,7 +99,7 @@ class AdherentController extends AbstractController
     /**
      * Permet de modifier un adhérent
      *
-     * @Route("adherent/{id}/modif", name="admin_comment_modif")
+     * @Route("adherent/{id}/modif", name="adherent_modif")
      * 
      * @return Response
      */

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,10 +63,21 @@ class Amount
      */
     private $amountTotal;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adherent", inversedBy="amounts")
+     */
+    private $adherent;
+
+  /*  public function __construct()
+    {
+        $this->adherent = new ArrayCollection();
+    }*/
+
     public function getId(): ?int
     {
         return $this->id;
     }
+    
 
     public function getAmount1(): ?float
     {
@@ -170,6 +183,18 @@ class Amount
     public function setAmountTotal(?float $amountTotal): self
     {
         $this->amountTotal = $amountTotal;
+
+        return $this;
+    }
+
+    public function getAdherent(): ?Adherent
+    {
+        return $this->adherent;
+    }
+
+    public function setAdherent(?Adherent $adherent): self
+    {
+        $this->adherent = $adherent;
 
         return $this;
     }

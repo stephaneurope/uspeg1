@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{categoryproduit.title}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>{{categoryproduit.title}}</h1>
+	</div>
+
+	{% for produit in produit %}
+		{% if (produit.categoryproduit.id is same as(categoryproduit.id)) %}
+
+
+			{% include 'produit.html.twig' %}
+
+
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}
+

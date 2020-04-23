@@ -1,46 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Amount{% endblock %}
+{% block title %}Amount
+{% endblock %}
 
 {% block body %}
-<div class="container">
-{% for amount in amount %}
-    {{amount.amount1}}
 
-    <ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Montant 1
-    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount1}}</span>
-    <span class="badge badge-primary badge-pill">{{amount.amount1}}</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-   Montant 2
-   <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount2}}</span>
-    <span class="badge badge-primary badge-pill">{{amount.amount2}}</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Montant 3
-    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount3}}</span>
-    <span class="badge badge-primary badge-pill">{{amount.amount3}}</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Montant 4
-    <span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount4}}</span>
-    <span class="badge badge-primary badge-pill">{{amount.amount4}}</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Total
-    {% set total = (amount.amount1 + amount.amount2 + amount.amount3 + amount.amount4 ) %}
-    {% set reste = 120 - total %} 
-    {% set cotisation = 120 %}
-   
-   {% if total is same as(cotisation) %}
-   <span class="badge badge-success badge-pill">{{total}}</span>
-   {% endif %}
-   <span class="badge badge-danger badge-pill">{{total}}</span>
-   Il reste a payé {{reste}} €
-  </li>
-</ul>
-{% endfor %}
+<div class="container mt-3">
+		<h1 class="text-center mb-5">Cotisation de
+			{{amount.adherent.lastName}}
+			{{amount.adherent.firstName}}</h1>
+
+
+		
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm"></div>
+				<div class="col-sm"></div>
+				<div class="col-sm-3 mb-2">
+					<a href="{{ path('amount_create') }}" class="btn btn-sm btn-primary">+ Créer une cotisation</a>
+				</div>
+			</div>
+		</div>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">Cotisation Id.</th>
+					<th class="text-center">Nom</th>
+					<th class="text-center">Catégorie</th>
+					<th class="text-center">Valeur cotisation</th>
+			
+					<th class="text-center">Cotisation</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				
+
+					<td class="text-center">{{amount.id}}</td>
+					<td class="text-center">
+						<a href="#">{{amount.adherent.lastName}}
+			{{amount.adherent.firstName}}</a>
+					</td>
+					<td class="text-center">{{amount.adherent.subcategory}}</td>
+					<td class="text-center">150</td>
+					
+					<td class="text-center">Payée</td>
+					<td>
+
+
+						<a href="{{ path('amount_edit', {'id': amount.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+						<a href="{{ path('amount_modif', {'id': amount.id}) }}" class="btn btn-sm btn-secondary">modifier</a>
+
+						<a href="{{ path('amount_delete', {'id': amount.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+					</td>
+				</tr>
+			
+
+		</tbody>
+	</table>
+
+<div class="progress mb-5 mt-5">
+  <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+
+
+<div class="container mt-3">
+
+<div class="container mt-2">
+		
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Montant 1
+					<span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount1}}</span>
+					<span class="badge badge-primary badge-pill">{{amount.amount1}}</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Montant 2
+					<span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount2}}</span>
+					<span class="badge badge-primary badge-pill">{{amount.amount2}}</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Montant 3
+					<span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount3}}</span>
+					<span class="badge badge-primary badge-pill">{{amount.amount3}}</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Montant 4
+					<span class="badge badge-primary badge-pill">{{amount.paymentMethodAmount4}}</span>
+					<span class="badge badge-primary badge-pill">{{amount.amount4}}</span>
+				</li>
+
+				
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Total
+					{% set total = (amount.amount1 + amount.amount2 + amount.amount3 + amount.amount4 ) %}
+					{% set reste = 120 - total %}
+					{% set cotisation = 120 %}
+
+					{% if total is same as(cotisation) %}
+						<span class="badge badge-success badge-pill">{{total}}</span>
+					{% endif %}
+					<span class="badge badge-danger badge-pill">{{total}}</span>
+					Il reste a payé
+					{{reste}}
+					€
+				</li>
+			</ul>
+
+	</div></div>
+
+
+ 
+  <button class="btn btn-outline-primary mt-3"  value="Précédent" onclick="history.go(-1)">Précédent</button>
+
+ 
+
+
+
+
+
+
 {% endblock %}
+

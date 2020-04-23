@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les articles
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Tous les articles</h1>
+	</div>
+	{% for produit in pagination.data %}
+
+		{% include 'produit.html.twig' %}
+	{% endfor %}
+	{{pagination.display()}}
+
+{% endblock %}
+

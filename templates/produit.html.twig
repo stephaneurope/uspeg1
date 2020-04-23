@@ -1,0 +1,93 @@
+<section class="cart_area section_padding">
+	<div class="container">
+		<div class="cart_inner">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+
+							<th scope="col">Product</th>
+							<th scope="col">Catégorie</th>
+							<th scope="col">Description</th>
+							<th scope="col">Code barre</th>
+							<th scope="col">Prix</th>
+							<th scope="col">Quantité</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr>
+
+							<td>
+								<div class="media">
+
+									<div class="d-flex mr-2">
+										<img src="http://placeimg.com/140/180/tech" alt="">
+									</div>
+									<div class="media-body">
+										<p>{{produit.description}}</p>
+									</div>
+
+								</div>
+
+
+							</td>
+
+							<td>
+								<h5>{{produit.categoryproduit.title}}</h5>
+							</td>
+							<td>
+								<div class="media">
+
+									<div class="media-body">
+										<p>{{produit.title}}</p>
+									</div>
+								</div>
+							</td>
+
+							<td>
+								<h5>{{produit.code}}</h5>
+							</td>
+							<td>
+								<h5>{{produit.price}}€</h5>
+							</td>
+							<td>
+								<div class="product_count">
+
+									<span class="input-number-decrement">
+										<i class="ti-minus"></i>
+									</span>
+									<input class="input-number" type="text" value="{{produit.qteinit}}" min="0" max="10">
+									<span class="input-number-increment">
+										<i class="ti-plus"></i>
+									</span>
+								</div>
+							</td>
+							<td>
+								<a href="{{ path('produit_one_show', {'id': produit.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+								<a href="{{ path('produit_delete', {'id': produit.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+								<a href="{{ path('produit_modif', {'id': produit.id}) }}" class="btn btn-sm btn-info">modifier</a>
+							</td>
+						</tr>
+
+						<tr class="bottom_button">
+							<td>
+								<a class="btn_1" href="#">Update Cart</a>
+							</td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="cupon_text float-right">
+									<a class="btn_1" href="#">Close Coupon</a>
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</section>

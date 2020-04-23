@@ -128,9 +128,15 @@ class Adherent
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amount", mappedBy="adherent")
+     */
+    private $amounts;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->amounts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -415,6 +421,45 @@ class Adherent
             // set the owning side to null (unless already changed)
             if ($commande->getAdherent() === $this) {
                 $commande->setAdherent(null);
+            }
+        }
+
+        return $this;
+    }
+    
+     /**
+     * @return Collection|Amount[]
+     */
+    public function getAmounts(): Collection
+    {
+        return $this->amounts;
+    }
+
+   
+    public function setAmounts(?Amount $amounts): self
+    {
+        $this->amounts = $amounts;
+
+        return $this;
+    }
+
+     public function addAmount(Amount $amount): self
+    {
+        if (!$this->amounts->contains($amount)) {
+            $this->amounts[] = $amount;
+            $amount->setAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmount(Amount $amount): self
+    {
+        if ($this->amounts->contains($amount)) {
+            $this->amounts->removeElement($amount);
+            // set the owning side to null (unless already changed)
+            if ($amount->getAdherent() === $this) {
+                $amount->setAdherent(null);
             }
         }
 

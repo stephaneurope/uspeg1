@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification de la fiche appartenant à
-	{{adherent.lastName}}
-	{{adherent.firstName}}
+{% block title %}Modification du produit 
+	{{produit.title}}
+
+	
 {% endblock %}
+
+
 
 {% block body %}
 
 	<div class="container">
-		<h1 class="my-5">Modification de la fiche adhérent de
-			{{adherent.lastName}}
-			{{adherent.firstName}}</h1>
+		<h1 class="my-5">Modification du produit 
+	{{produit.title}}</h1>
 
 
 		{{ form_start(form) }}
 
+		
+    
+
+
 		{{ form_widget(form) }}
+
 
 		<button class="btn btn-primary" type="submit">
 			<i class="fas fa-check"></i>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{produit.title}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>{{produit.title}}</h1>
+	</div>
+	{% include 'produit.html.twig' %}
+
+
+	<a href="{{ path('category_produit', {'id': produit.categoryproduit.id}) }}" class="btn btn-sm btn-primary">Voir la catégorie</a>
+
+
+{% endblock %}
+

@@ -5,9 +5,7 @@
 
 {% block body %}
 
-	<pre>
-        
-    </pre>
+
 	<div class="container mt-3">
 		<h1 class="text-center">Adhérents</h1>
 
@@ -16,19 +14,15 @@
 
 		</div>
 
-        <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      
-    </div>
-    <div class="col-sm">
-      
-    </div>
-    <div class="col-sm-3 mb-2">
-      <a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
-    </div>
-  </div>
-</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm"></div>
+				<div class="col-sm"></div>
+				<div class="col-sm-3 mb-2">
+					<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+				</div>
+			</div>
+		</div>
 
 		<table class="table table-hover">
 			<thead>
@@ -60,12 +54,11 @@
 					<td class="text-center">Payée</td>
 					<td>
 
-						
-                        <a href="{{ path('adherent_edit', {'id': ad.id}) }}" class="btn btn-sm btn-primary">Voir</a>
-						<button class="btn btn-sm btn-secondary">Modifier
-						</button>
-						
-                        <a href="{{ path('adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+
+						<a href="{{ path('adherent_edit', {'id': ad.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+						<a href="{{ path('adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">modifier</a>
+
+						<a href="{{ path('adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
 					</td>
 				</tr>
 			{% endfor %}
