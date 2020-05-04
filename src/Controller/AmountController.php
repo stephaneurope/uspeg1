@@ -19,16 +19,16 @@ class AmountController extends AbstractController
      * Permet d'afficher toutes les cotisations de tous les adherents
      * @Route("/amount", name="amount")
      */
-   // public function index()
-   // {
-      //  $repo = $this->getDoctrine()->getRepository(Amount::class);
-       // $amount = $repo->findAll();
-        //return $this->render('amount/index.html.twig', [
-           //'amount' => $amount
-        //]);
+    // public function index()
+    // {
+    //  $repo = $this->getDoctrine()->getRepository(Amount::class);
+    // $amount = $repo->findAll();
+    //return $this->render('amount/index.html.twig', [
+    //'amount' => $amount
+    //]);
     //}
 
-     /**
+    /**
      * Permet d'afficher la cotisation d'un adherents
      * @Route("amount/{id}/edit", name="amount_edit")
      * 
@@ -41,11 +41,11 @@ class AmountController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Amount::class);
         $amount = $repo->find($id);
         return $this->render('amount/index.html.twig', [
-           'amount' => $amount
+            'amount' => $amount
         ]);
     }
 
- /**
+    /**
      * Permet de créer une cotisation
      *
      * @Route("/amount/{id}/new" , name="amount_create")
@@ -53,20 +53,21 @@ class AmountController extends AbstractController
      * 
      * @return Response
      */
-    public function create(Request $request, ObjectManager $manager,$id){
+    public function create(Request $request, ObjectManager $manager, $id)
+    {
 
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
 
         $amount = new Amount();
 
-       
+
         $form = $this->createForm(AmountCreateType::class, $amount);
 
         $form->handleRequest($request);
 
-        
-        if($form->isSubmitted() && $form->isValid()){
+
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $amount->setAdherent($adherent);
 
@@ -76,20 +77,16 @@ class AmountController extends AbstractController
             $this->addFlash(
                 'success',
                 "La cotisation a bien été enregistrée !"
-             );
-
-
-            
+            );
         }
 
         return $this->render('amount/new.html.twig', [
             'form' => $form->createView()
         ]);
-
     }
 
 
-     /**
+    /**
      * Permet de modifier une cotisation
      *
      * @Route("amount/{id}/modif", name="amount_modif")
@@ -98,32 +95,35 @@ class AmountController extends AbstractController
      * 
      * @return Response
      */
-    public function modif(Amount $amount, Request $request,ObjectManager $manager) {
+    public function modif(Amount $amount, Request $request, ObjectManager $manager)
+    {
 
-        
+
         $form = $this->createForm(AmountType::class, $amount);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($amount);
             $manager->flush();
             $this->addFlash(
                 'success',
                 "La cotisation a bien été modifiée !"
             );
-            return $this->redirectToRoute("amount_edit", array(
-                'id' => $amount->getId())
+            return $this->redirectToRoute(
+                "amount_edit",
+                array(
+                    'id' => $amount->getId()
+                )
             );
         }
-        return $this->render('amount/amount_modif.html.twig',[
+        return $this->render('amount/amount_modif.html.twig', [
             'amount' => $amount,
             'form' => $form->createView()
-    ]);
+        ]);
+    }
 
-}
-
-/**
+    /**
      * Permet de suprimer une cotisation
      * 
      * @Route("amount/{id}/delete", name="amount_delete")
@@ -139,11 +139,4 @@ class AmountController extends AbstractController
 
         return $this->redirectToRoute("amount");
     }
-
-   
-
-
-
-
-   
 }

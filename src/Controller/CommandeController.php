@@ -7,76 +7,66 @@ use App\Entity\Commande;
 use App\Entity\Produit;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
-use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Command\SecretsSetCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeController extends AbstractController
-{  
-   
-
+{
 
     /**
      * Permet de créer une commande
      * 
      * @Route("/commande/adherent/{id}/new/", name="commande_create")
      */
-    public function create(Request $request, ObjectManager $manager,$id)
-    {  
-       
-        
+    public function create(Request $request, ObjectManager $manager, $id)
+    {
+
+
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
-        
-       
-     
-        
-        //$produit = $adherent->set_error_handler;
-        
-        //pour enlever la commande du stock
-        
-     
-        //fin   
+
+
+
         $commande = new Commande();
-        
-       
-        $form = $this->createForm(CommandeType::class,$commande);
+
+
+        $form = $this->createForm(CommandeType::class, $commande);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() and $form->isValid()){
-             $p = $form['produit']->getData()->getId();
-             $repo1 = $this->getDoctrine()->getRepository(Produit::class);
-             $produit = $repo1->find($p);
-             dump($produit);
+        if ($form->isSubmitted() and $form->isValid()) {
+            /*Recupere l'Id du produit selectionné*/
+            $p = $form['produit']->getData()->getId();
+            /*recupere le produit et lui ajoute l'Id du produit selectionné */
+            $repo1 = $this->getDoctrine()->getRepository(Produit::class);
+            $produit = $repo1->find($p);
+            /*Recupere la quantité du produit attribué a l'adherent */
             $stockmoins = $form['qte']->getData();
-            
-            
 
-           $produit->setQteinit($produit->getQteinit() - $stockmoins);
-           
-           
+
+            /*mis a jour de la quantité du stock initial */
+            $produit->setQteinit($produit->getQteinit() - $stockmoins);
+
+            /*Attribue l'id de l'adherent a la commande*/
             $commande->setAdherent($adherent);
-       
-          
-           $manager->persist($commande);
-          
-           $manager->flush();
-          
-           $this->AddFlash(
-               'succes',
-               "Le produit a bien été enregistré  !"
-           );
 
+
+            $manager->persist($commande);
+
+            $manager->flush();
+
+            $this->AddFlash(
+                'succes',
+                "Le produit a bien été enregistré  !"
+            );
         }
 
-        return $this->render("commande/create.html.twig",[
-            'adherent'=> $adherent,
-            'commande' =>$commande,
-             'form'=> $form->createView()
+        return $this->render("commande/create.html.twig", [
+            'adherent' => $adherent,
+            'commande' => $commande,
+            'form' => $form->createView()
         ]);
     }
 
@@ -93,7 +83,7 @@ class CommandeController extends AbstractController
 
         return $this->render('commande/index.html.twig', [
             'commande' => $commande
-            
+
         ]);
     }
 
@@ -114,7 +104,7 @@ class CommandeController extends AbstractController
 
         return $this->render('commande/show.html.twig', [
             'commande' => $commande
-            
+
         ]);
     }
 
@@ -141,7 +131,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
- /**
+    /**
      * Permet de suprimer un produit
      * 
      * @Route("/commande/produit/{id}/delete", name="commande_delete")
@@ -156,8 +146,5 @@ class CommandeController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute("commande");
-        
-
     }
-
 }

@@ -103,7 +103,8 @@ class AdherentController extends AbstractController
      * 
      * @return Response
      */
-    public function modif(Adherent $adherent, Request $request,ObjectManager $manager) {
+    public function modif(Adherent $adherent, Request $request, ObjectManager $manager)
+    {
 
         //$repo = $this->getDoctrine()->getRepository(Adherent::class);
         //$adherent = $repo->find($id);
@@ -111,7 +112,7 @@ class AdherentController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($adherent);
             $manager->flush();
             $this->addFlash(
@@ -119,13 +120,11 @@ class AdherentController extends AbstractController
                 "L'adherent {$adherent->getLastName()} {$adherent->getFirstName()} a bien été modifié !"
             );
         }
-        
 
-        return $this->render('adherent/modif.html.twig',[
-                'adherent' => $adherent,
-                'form' => $form->createView()
+
+        return $this->render('adherent/modif.html.twig', [
+            'adherent' => $adherent,
+            'form' => $form->createView()
         ]);
-
     }
-
 }
