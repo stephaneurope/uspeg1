@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+	{% form_theme form _self %}
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-3">
+		<h1>Nouvelle commande</h1>
+		{{ form_start(form) }}
+
+
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+
+		<button type="submit" class="btn btn-primary">Créer une nouvelle commande</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

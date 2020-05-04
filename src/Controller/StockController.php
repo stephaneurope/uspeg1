@@ -8,7 +8,7 @@ use App\Entity\Categoryproduit;
 use App\Service\PaginationService;
 use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ObjectManager;
-use App\Repository\CategoryproduitRepository;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -114,6 +114,8 @@ class StockController extends AbstractController
                 'success',
                 "Le produit {$produit->getTitle()} a bien été modifié !"
             );
+
+            return $this->redirectToRoute('category_produit',['id' => $produit->getCategoryproduit()->getId(),'withAlert' => true]);
         }
         return $this->render('stock/produit_modif.html.twig',[
             'produit' => $produit,

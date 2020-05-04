@@ -70,15 +70,8 @@ class AmountCreateType extends AbstractType
                     'Espece' => 'Espèce',
                     'Chequier Jeunes' => 'Chequier Jeunes'
                 ],
-                ])
-            ->add('adherent',EntityType::class
-            , [
-                'class' => Adherent::class,
-                'choice_label' => function() {
-                    
-                  return ('lastName');}
-                
                 ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver)

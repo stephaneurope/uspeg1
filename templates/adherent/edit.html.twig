@@ -16,7 +16,13 @@
 				<div class="col-sm"></div>
 				<div class="col-sm-3 mb-2">
 					<a href="{{ path('amount_edit', {'id':amount.id}) }}" class="btn btn-sm btn-primary">cotisation</a>
+			
 				</div>
+
+<div class="col-sm-3 mb-2">
+					<a href="{{ path('amount_create',{'id':amount.adherent.id}) }}" class="btn btn-sm btn-primary">+ Créer une cotisation</a>
+				</div>
+
 			</div>
 		</div>
 

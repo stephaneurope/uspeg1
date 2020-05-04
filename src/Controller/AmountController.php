@@ -48,25 +48,27 @@ class AmountController extends AbstractController
  /**
      * Permet de créer une cotisation
      *
-     * @Route("/amount/new" , name="amount_create")
+     * @Route("/amount/{id}/new" , name="amount_create")
      * 
      * 
      * @return Response
      */
-    public function create(Request $request, ObjectManager $manager){
+    public function create(Request $request, ObjectManager $manager,$id){
+
+        $repo = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repo->find($id);
+
         $amount = new Amount();
 
        
-
         $form = $this->createForm(AmountCreateType::class, $amount);
 
         $form->handleRequest($request);
 
         
-
         if($form->isSubmitted() && $form->isValid()){
 
-            
+            $amount->setAdherent($adherent);
 
             $manager->persist($amount);
             $manager->flush();
