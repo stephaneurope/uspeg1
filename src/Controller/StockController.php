@@ -32,6 +32,8 @@ class StockController extends AbstractController
         ]);
     }
 
+    
+
     /**
      * Permet d'afficher tous les produits produit
      * 

@@ -14,6 +14,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryProduitController extends AbstractController
 {
     /**
+     * Permet d'afficher les catégories de produits
+     * 
+     * @Route("/stock/produit/category", name="dash_category")
+     */
+    public function dashboard()
+    {
+      $repo = $this->getDoctrine()->getRepository(Categoryproduit::class);
+      $category = $repo->findAll();
+    
+    
+        return $this->render('stock/dashboard.html.twig', [
+            'category' => $category
+         
+        ]);
+    }
+
+
+
+    /**
      * Permet d'afficher une seule catégorie
      * 
      * @Route("/category/produit/{id}/edit", name="category_produit")
@@ -35,6 +54,7 @@ class CategoryProduitController extends AbstractController
             'produit' => $produit
         ]);
     }
+
     /**
      * Permet de créer une catégorie
      * 

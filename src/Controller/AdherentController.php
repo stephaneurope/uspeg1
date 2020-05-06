@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Amount;
 use App\Entity\Adherent;
+use App\Entity\Commande;
 use App\Form\AdherentType;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
@@ -40,10 +41,12 @@ class AdherentController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
 
+     
+
 
         return $this->render('adherent/edit.html.twig', [
             'adherent' => $adherent
-
+            
         ]);
     }
 

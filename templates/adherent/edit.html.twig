@@ -8,6 +8,8 @@
 {% block body %}
 <div class="container mt-3">
 
+<a href="{{ path('commande_create',{'id':adherent.id}) }}" class="btn btn-sm btn-primary">Attribution Habits</a>
+
 	  {% for amount in adherent.amounts %}
 		  
 	<div class="container mt-2">
