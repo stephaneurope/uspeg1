@@ -9,7 +9,7 @@
 
 
 <div class="container mt-3">
-		<h1 class="text-center">Toutes les commandes</h1>
+		<h1 class="text-center">Toutes les attributions d'équipements</h1>
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
@@ -21,7 +21,7 @@
 				<div class="col-sm"></div>
 				<div class="col-sm"></div>
 				<div class="col-sm-3 mb-2">
-					<a href="#" class="btn btn-sm btn-primary">+ Ajouter une commande</a>
+					
 				</div>
 			</div>
 		</div>
@@ -56,10 +56,10 @@
 					<td>
 
 
-						<a href="#" class="btn btn-sm btn-primary">Voir</a>
-						<a href="#" class="btn btn-sm btn-secondary">modifier</a>
+						<a href="{{ path('commande_produit', {'id': c.adherent.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+						
 
-						<a href="#" class="btn btn-sm btn-danger">supprimer</a>
+						<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
 					</td>
 				</tr>
 			{% endfor %}

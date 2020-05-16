@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie d'Adhérents
+{% block title %}Catégories d'Adhérents
 {% endblock %}
 
 {% block body %}
 
 
 	<div class="container mt-3">
-		<h1 class="text-center">Catégorie d'Adhérents</h1>
+		<h1 class="text-center">Catégorie d'Adhérents<a class="ml-1" href="{{ path('category_adherent_create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h1>
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
@@ -18,9 +18,7 @@
 			<div class="row">
 				<div class="col-sm"></div>
 				<div class="col-sm"></div>
-				<div class="col-sm-3 mb-2">
-					<a href="{{ path('category_adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter une catégorie d'Adhérent</a>
-				</div>
+				
 			</div>
 		</div>
 
@@ -36,6 +34,7 @@
 			<tbody>
 
 				{% for c in catadherent %}
+			
 
 					<td class="text-center">{{c.id}}</td>
 					
@@ -44,9 +43,9 @@
 
 
 						
-						<a href="{{ path('category_adherent_modif', {'id': c.id}) }}" class="btn btn-sm btn-secondary">modifier</a>
+						<a href="{{ path('category_adherent_modif', {'id': c.id}) }}" class="btn btn-sm btn-secondary"><i class="fas fa-pen"></i></a>
 
-						<a href="{{ path('category_adherent_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+						<a href="{{ path('category_adherent_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 					</td>
 				</tr>
 			{% endfor %}

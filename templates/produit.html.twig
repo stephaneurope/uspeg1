@@ -1,93 +1,51 @@
-<section class="cart_area section_padding">
-	<div class="container">
-		<div class="cart_inner">
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
 
-							<th scope="col">Product</th>
-							<th scope="col">Catégorie</th>
-							<th scope="col">Description</th>
-							<th scope="col">Code barre</th>
-							<th scope="col">Prix</th>
-							<th scope="col">Quantité</th>
+	
+		<div class="col-4 col-sm-3 my-1 my-sm-0">
+			<div class="card">
+				<div class="position-relative">
+					<img src="https://images.asos-media.com/products/nike-air-max-90-baskets-en-cuir-bleu-302519-400/9536548-1-blue?$n_640w$&wid=634&fit=constrain" class="card-img-top" alt="Nike - Air Max 90">
+					<div class="card-img-overlay d-flex justify-content-end align-items-end">
+						
+					</div>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">
+						<small>{{produit.title}}
+							- catégorie:
+							<strong>{{produit.categoryproduit.title}}</strong>
+							- code barre:
+							<strong>{{produit.code}}</strong>
+						</small>
+					</h5>
+					<p class="card-text">
+						<strong class="text-danger">Prix:
+							{{produit.price}}€</strong>
+						<span class="ml-3">Qté:
+							<strong>{{produit.qteinit}}</strong>
+						</span>
+						{% if produit.qteinit <= produit.qtemin %}
 
-						</tr>
-					</thead>
-					<tbody>
+							<i data-toggle="tooltip" data-placement="top" title="Stock faible" class="far fa-angry" style="color:orange"></i></p>
+						
+{% else %}<i data-toggle="tooltip" data-placement="top" title="Stock satisfaisant" class="far fa-smile" style="color:green"></i>
+</p>
+	
+					{% endif %}
+						
+	
+					<a href="{{ path('produit_one_show', {'id': produit.id}) }}" class="btn btn-sm btn-success">
+						<i class="fas fa-eye"></i>
+					</a>
+					<a href="{{ path('produit_modif', {'id': produit.id}) }}" class="btn btn-sm btn-info">
+						<i class="fas fa-pen"></i>
+					</a>
+					<a href="{{ path('produit_delete', {'id': produit.id}) }}" class="btn btn-sm btn-danger">
+						<i class="fas fa-trash-alt"></i>
+					</a>
 
-						<tr>
-
-							<td>
-								<div class="media">
-
-									<div class="d-flex mr-2">
-										<img src="http://placeimg.com/140/180/tech" alt="">
-									</div>
-									<div class="media-body">
-										<p>{{produit.description}}</p>
-									</div>
-
-								</div>
-
-
-							</td>
-
-							<td>
-								<h5>{{produit.categoryproduit.title}}</h5>
-							</td>
-							<td>
-								<div class="media">
-
-									<div class="media-body">
-										<p>{{produit.title}}</p>
-									</div>
-								</div>
-							</td>
-
-							<td>
-								<h5>{{produit.code}}</h5>
-							</td>
-							<td>
-								<h5>{{produit.price}}€</h5>
-							</td>
-							<td>
-								<div class="product_count">
-
-									<span class="input-number-decrement">
-										<i class="ti-minus"></i>
-									</span>
-									<input class="input-number" type="text" value="{{produit.qteinit}}" min="0" max="10">
-									<span class="input-number-increment">
-										<i class="ti-plus"></i>
-									</span>
-								</div>
-							</td>
-							<td>
-								<a href="{{ path('produit_one_show', {'id': produit.id}) }}" class="btn btn-sm btn-primary">Voir</a>
-								<a href="{{ path('produit_delete', {'id': produit.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
-								<a href="{{ path('produit_modif', {'id': produit.id}) }}" class="btn btn-sm btn-info">modifier</a>
-							</td>
-						</tr>
-
-						<tr class="bottom_button">
-							<td>
-								<a class="btn_1" href="#">Update Cart</a>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<div class="cupon_text float-right">
-									<a class="btn_1" href="#">Close Coupon</a>
-								</div>
-							</td>
-						</tr>
-
-					</tbody>
-				</table>
-
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+
+
+

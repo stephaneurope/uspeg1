@@ -7,6 +7,7 @@
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/style.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 		 {% block stylesheets %}{% endblock %}
 		</head>
@@ -22,12 +23,14 @@
 </div>
 </div>
 			{% endfor %}
+			
 
 			{% block body %}{% endblock %}
 
 			<script src="/js/jquery.min.js"></script>
 			<script src="/js/popper.min.js"></script>
 			<script src="/js/bootstrap.min.js"></script>
+			<script src="/js/login.js"></script>
 			{% block javascripts %}{% endblock %}
 		</body>
 	</html>

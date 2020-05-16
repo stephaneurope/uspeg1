@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<div>
 	<div class="container mt-3">
 		<div class="row ">
-
+		<div class="jumbotron">
+  <h1 class="display-3">Bienvenue sur le site de l'Uspeg</h1>
+  
+  <hr class="my-4">
+  <h3 class= "text-center">Choisissez votre catégorie</h3>
+</div>
+<h1></h1>
 			{% for c in catadherent %}
 				<div class="col-mb mr-2">
 					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
@@ -20,5 +26,41 @@
 
 		</div>
 	</div>
+
+
+	
+<div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="boxe carde">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/cap-maquette_1310-498.jpg" alt="...">
+                    </div>
+                    <div class="info">
+                        <h3>Casquette</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Voir</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="boxe carde">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/casquette-realiste-se-moque_1310-152.jpg" alt="...">
+                    </div>
+                    <div class="info">
+                        <h3>T-Shirt</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Voir</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
 {% endblock %}
 

@@ -6,6 +6,7 @@ use App\Entity\Amount;
 use App\Entity\Adherent;
 use App\Entity\Commande;
 use App\Form\AdherentType;
+use App\Entity\CategoryAdherent;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -38,15 +39,16 @@ class AdherentController extends AbstractController
      */
     public function show($id)
     {
+        
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
-
-     
-
+        $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
+        $cat = $repo1->findAll();
 
         return $this->render('adherent/edit.html.twig', [
-            'adherent' => $adherent
-            
+            'adherent' => $adherent,
+            'cat' => $cat
+              
         ]);
     }
 
@@ -95,6 +97,11 @@ class AdherentController extends AbstractController
     {
         $manager->remove($adherent);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "L'adhérent à bien été supprimé !"
+        );
 
         return $this->redirectToRoute("adherent");
     }

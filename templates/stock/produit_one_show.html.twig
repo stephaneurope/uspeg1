@@ -5,13 +5,88 @@
 {% endblock %}
 
 {% block body %}
+
 	<div class="container">
-		<h1>{{produit.title}}</h1>
+		<div
+			class="row">
+			<!-- Image -->
+			<div class="col-12 col-lg-6">
+				<div class="card bg-light mb-3">
+					<div class="card-body">
+						<a href="" data-toggle="modal" data-target="#productModal">
+							<img class="img-fluid" src="https://images.asos-media.com/products/nike-air-max-90-baskets-en-cuir-bleu-302519-400/9536548-1-blue?$n_640w$&wid=634&fit=constrain"/>
+
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Add to cart -->
+			<div class="col-12 col-lg-6 add_to_cart_block">
+				<div class="card bg-light mb-3">
+					<div class="card-body">
+						<p class="price mb-3">{{produit.title}}
+						</p>
+
+						<ul class="list-group text-center">
+							<li class="list-group-item">Catégorie:<strong>
+									{{produit.categoryProduit.title}}
+								</strong>
+							</li>
+							<li class="list-group-item">Prix:
+								<strong>{{produit.price}}
+									€</strong>
+							</li>
+							<li class="list-group-item">N° Code Barre:
+								<strong>{{produit.code}}
+									</strong>
+							</li>
+							<li class="list-group-item">Couleur:<strong>
+									Rouge</strong>
+							</li>
+							<li class="list-group-item">Taille:<strong>
+									XXL</strong>
+							</li>
+							<li class="list-group-item">Quantité en stock:<strong>
+									{{produit.qteinit}}</strong>
+							</li>
+							<li class="list-group-item">
+							<img src="https://www.stickersmalin.com/images/ajoute/prd/64/64495-image2_448x448.png" style="width:200px;" alt="">
+							</li>
+
+						</ul>
+
+
+						
+						
+						<div class="datasheet p-3 mb-2 mt-3 bg-info text-white">
+							<a href="{{ path('category_produit',{'id':produit.categoryProduit.id})}}" class="text-white">
+								<i class="fa fa-file-text"></i>
+								Retour à la catégorie {{produit.categoryProduit.title}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="row">
+			<!-- Description -->
+			<div class="col-12">
+				<div class="card border-light mb-3">
+					<div class="card-header bg-primary text-white text-uppercase">
+						<i class="fa fa-align-justify"></i>
+						Description</div>
+					<div class="card-body">
+						<p class="card-text">
+							{{produit.description}}</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
 	</div>
-	{% include 'produit.html.twig' %}
-
-
-	<a href="{{ path('category_produit', {'id': produit.categoryproduit.id}) }}" class="btn btn-sm btn-primary">Voir la catégorie</a>
 
 
 {% endblock %}

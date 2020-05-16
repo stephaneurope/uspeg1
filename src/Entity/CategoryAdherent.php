@@ -21,10 +21,24 @@ class CategoryAdherent
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $montantcot;
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+   
 
     public function getTitle(): ?string
     {
@@ -37,4 +51,18 @@ class CategoryAdherent
 
         return $this;
     }
+
+    public function getMontantcot(): ?int
+    {
+        return $this->montantcot;
+    }
+
+    public function setMontantcot(int $montantcot): self
+    {
+        $this->montantcot = $montantcot;
+
+        return $this;
+    }
+
+    
 }

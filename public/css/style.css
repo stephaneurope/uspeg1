@@ -1,0 +1,177 @@
+html,
+        body,
+        header,
+        .view {
+          height: 100vh;
+        }
+
+        @media (max-width: 740px) {
+          html,
+          body,
+          header,
+          .view {
+            height: 815px;
+          }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+          html,
+          body,
+          header,
+          .view  {
+            height: 650px;
+          }
+        }
+
+        .intro-2 {
+            background: url("/image/login/grass.jpg")no-repeat center center;
+            background-size: cover;
+        }
+        
+      
+
+        .card {
+            background-color:lightblue;
+        }
+        .md-form label {
+            color: #fff;
+        }
+        h6 {
+            line-height: 1.7;
+        }
+        
+
+        .card {
+            margin-top: 30px;
+            /*margin-bottom: -45px;*/
+
+        }
+
+        .md-form input[type=text]:focus:not([readonly]),
+        .md-form input[type=password]:focus:not([readonly]) {
+            border-bottom: 1px solid rgb(7, 7, 7);
+            box-shadow: 0 1px 0 0 rgb(12, 12, 12);
+        }
+        .md-form input[type=text]:focus:not([readonly])+label,
+        .md-form input[type=password]:focus:not([readonly])+label {
+            color: rgb(10, 10, 10);
+        }
+
+        .md-form .form-control {
+            color: rgb(7, 6, 6);
+        }
+
+        /* Page produit*/
+        .card {
+          border: 0;
+        }
+        
+        .card-body {
+          padding: .5rem 5;
+          font-size: 14px;
+        }
+        
+        .card-title small {
+          font-size: 14px;
+          font-weight: 200;
+        }
+        
+        .card-text del {
+          font-weight: 200;
+        }
+        
+        .card-img-overlay button i {
+          font-weight: normal;
+        }
+        
+        .btn-light:not(:disabled):not(.disabled).active,
+        .btn-light:not(:disabled):not(.disabled):active,
+        .show>.btn-light.dropdown-toggle {
+          background-color: red;
+          color: white;
+          content: "";
+        }
+
+        /*
+** Style Simple Ecommerce Theme for Bootstrap 4 mono produit
+*/
+.bloc_left_price {
+  color: #c01508;
+  text-align: center;
+  font-weight: bold;
+  font-size: 150%;
+}
+.category_block li:hover {
+  background-color: #007bff;
+}
+.category_block li:hover a {
+  color: #ffffff;
+}
+.category_block li a {
+  color: #343a40;
+}
+.add_to_cart_block .price {
+  color: rgb(44,62,80);
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+  margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+  color: #343a40;
+  text-align: center;
+  text-decoration: line-through;
+  font-size: 140%;
+}
+
+/*categorie produit*/
+.boxe
+{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+.carde
+{
+    margin-top: 80px;
+    height: 300px;
+    transition: 0.5s;
+}
+.carde:hover
+{
+    border: 1px solid red;
+    border-radius: 30px;
+}
+.carde .cardImg
+{
+    height: 150px;
+    width: 90%;
+    position: relative;
+    top: -15px;
+    left: 5%;
+}
+.carde .cardImg img
+{
+    width: 100%;
+    height: 100%;
+}
+
+.carde .info
+{
+    text-align: center;
+}
+.carde .info h3
+{
+    color: rgb(70, 66, 66);
+}
+.carde .info p
+{
+    color: rgb(41, 201, 49);
+}
+
+.ligne
+{
+    display: flex;
+}
+
+        
+        

@@ -36,7 +36,7 @@ class CommandeController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() and $form->isValid()) {
+        if ($form->isSubmitted() and $form->isValid() ) {
             /*Recupere l'Id du produit selectionné*/
             $p = $form['produit']->getData()->getId();
             /*recupere le produit et lui ajoute l'Id du produit selectionné */
@@ -47,7 +47,9 @@ class CommandeController extends AbstractController
 
 
             /*mis a jour de la quantité du stock initial */
+            if($stockmoins <= $produit->getQteinit()){
             $produit->setQteinit($produit->getQteinit() - $stockmoins);
+            
 
             /*Attribue l'id de l'adherent a la commande*/
             $commande->setAdherent($adherent);
@@ -58,9 +60,13 @@ class CommandeController extends AbstractController
             $manager->flush();
 
             $this->AddFlash(
-                'succes',
+                'success',
                 "Le produit a bien été enregistré  !"
             );
+
+        }else $this->AddFlash(
+            'danger',
+            "Vous n'avez pas assez de produit en stock  !");
         }
 
         return $this->render("commande/create.html.twig", [
@@ -132,7 +138,7 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * Permet de suprimer un produit
+     * Permet de suprimer une commande
      * 
      * @Route("/commande/produit/{id}/delete", name="commande_delete")
      * 
@@ -140,10 +146,15 @@ class CommandeController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function produit_delete(Commande $commande, ObjectManager $manager)
+    public function commande_delete(Commande $commande, ObjectManager $manager)
     {
         $manager->remove($commande);
         $manager->flush();
+
+        $this->AddFlash(
+            'success',
+            "L'éqipement a bien été supprimé !"
+        );
 
         return $this->redirectToRoute("commande");
     }

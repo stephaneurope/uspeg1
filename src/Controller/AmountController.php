@@ -40,9 +40,10 @@ class AmountController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Amount::class);
         $amount = $repo->find($id);
-        return $this->render('amount/index.html.twig', [
+        return $this->render(('amount/index.html.twig'), [
             'amount' => $amount
-        ]);
+        ]
+    );
     }
 
     /**
@@ -78,6 +79,14 @@ class AmountController extends AbstractController
                 'success',
                 "La cotisation a bien été enregistrée !"
             );
+
+            return $this->redirectToRoute(
+                "adherent_edit",
+                array(
+                    'id' => $amount->getAdherent()->getId()
+                )
+            );
+            
         }
 
         return $this->render('amount/new.html.twig', [
@@ -111,9 +120,9 @@ class AmountController extends AbstractController
                 "La cotisation a bien été modifiée !"
             );
             return $this->redirectToRoute(
-                "amount_edit",
+                "adherent_edit",
                 array(
-                    'id' => $amount->getId()
+                    'id' => $amount->getAdherent()->getId()
                 )
             );
         }

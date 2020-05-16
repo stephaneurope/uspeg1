@@ -55,10 +55,16 @@
 					<td>
 
 
-						<a href="{{ path('adherent_edit', {'id': ad.id}) }}" class="btn btn-sm btn-primary">Voir</a>
-						<a href="{{ path('adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">modifier</a>
+						<a href="{{ path('adherent_edit', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
+							<i class="fas fa-eye"></i>
+						</a>
+						<a href="{{ path('adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
+							<i class="fas fa-pen"></i>
+						</a>
 
-						<a href="{{ path('adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+						<a href="{{ path('adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">
+							<i class="fas fa-trash-alt"></i>
+						</a>
 					</td>
 				</tr>
 			{% endfor %}
@@ -68,4 +74,5 @@
 	{{pagination.display()}}
 
 </div>{% endblock %}
+
 

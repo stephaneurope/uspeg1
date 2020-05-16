@@ -80,7 +80,7 @@ class CategoryProduitController extends AbstractController
                 "La catégorie <strong>{$categoryproduit->getTitle()} </strong> a bien été ajouter à la liste des catégories !"
             );
 
-            return $this->redirectToRoute('category');
+            return $this->redirectToRoute('dash_category');
         }
 
         return $this->render('category_produit/new.html.twig', [
@@ -101,8 +101,11 @@ class CategoryProduitController extends AbstractController
     {
         $manager->remove($categoryproduit);
         $manager->flush();
+        $this->addFlash(
+            'success',
+            "La catégorie {$categoryproduit->getTitle()} a bien été supprimée !");
 
-        return $this->redirectToRoute("category");
+        return $this->redirectToRoute("dash_category");
     }
 
      /**
@@ -126,7 +129,7 @@ class CategoryProduitController extends AbstractController
                 'success',
                 "La catégorie {$categoryproduit->getTitle()} a bien été modifiée !"
             );
-            return $this->redirectToRoute("category");
+            return $this->redirectToRoute("dash_category");
         }
         return $this->render('stock/produit_modif.html.twig',[
             'produit' => $categoryproduit,

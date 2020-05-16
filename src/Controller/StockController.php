@@ -35,7 +35,7 @@ class StockController extends AbstractController
     
 
     /**
-     * Permet d'afficher tous les produits produit
+     * Permet d'afficher tous les produits 
      * 
      * @Route("/stock/produits/{page<\d+>?1}", name="produit_edit")
      * 
@@ -109,6 +109,8 @@ class StockController extends AbstractController
 
           
             $stockplus= $form['stockplus']->getData();
+
+           if( ($produit->getQteinit() + $stockplus) >= 0){
             $produit->setQteinit($produit->getQteinit() + $stockplus);
             $manager->persist($produit);
             $manager->flush();
@@ -116,8 +118,13 @@ class StockController extends AbstractController
                 'success',
                 "Le produit {$produit->getTitle()} a bien été modifié !"
             );
+ 
 
             return $this->redirectToRoute('category_produit',['id' => $produit->getCategoryproduit()->getId(),'withAlert' => true]);
+
+         } else $this->AddFlash(
+                'danger',
+                "Vous n'avez pas assez de produit en stock  !");
         }
         return $this->render('stock/produit_modif.html.twig',[
             'produit' => $produit,

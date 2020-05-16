@@ -6,141 +6,275 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mt-3">
 
-<a href="{{ path('commande_create',{'id':adherent.id}) }}" class="btn btn-sm btn-primary">Attribution Habits</a>
+<div class="container">
 
-	  {% for amount in adherent.amounts %}
-		  
-	<div class="container mt-2">
-			<div class="row">
-				<div class="col-sm"></div>
-				<div class="col-sm"></div>
-				<div class="col-sm-3 mb-2">
-					<a href="{{ path('amount_edit', {'id':amount.id}) }}" class="btn btn-sm btn-primary">cotisation</a>
-			
+	<div class="container mt-3">
+
+
+		<div class="container mt-2">
+			<h1 class="text-center">Fiche de
+				{{adherent.lastName}}
+				{{adherent.firstName}}</h1>
+
+			<table class="table mt-5" class="table table-hover">
+				<thead>
+					<tr class="table table-primary">
+						<th class="text-center" scope="col">Nom Prénom</th>
+						<th class="text-center" scope="col">Date de naissance</th>
+						<th class="text-center" scope="col">Catégorie</th>
+						<th class="text-center" scope="col">Numéro adhérent</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table table-default font-weight-bold">
+						<td class="text-center" scope="row">{{adherent.lastName}}
+							{{adherent.firstName}}</td>
+						<td class="text-center">{{adherent.born|date("d/m/Y")}}</td>
+						<td class="text-center">{{adherent.subCategory}}
+						</td>
+						<td class="text-center">{{adherent.toNumber}}</td>
+					</tr>
+				</tbody>
+
+				<thead>
+					<tr class="table table-primary">
+						<th class="text-center" scope="col">Sexe</th>
+						<th class="text-center" scope="col">Addresse</th>
+						<th class="text-center" scope="col">Complément</th>
+						<th class="text-center" scope="col">lieut</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table table-default font-weight-bold">
+						<td class="text-center" scope="row">{{adherent.sex}}</td>
+						<td class="text-center">{{adherent.address}}</td>
+						<td class="text-center">{{adherent.complement}}
+						</td>
+						<td class="text-center">{{adherent.lieut}}</td>
+					</tr>
+				</tbody>
+
+				<thead>
+					<tr class="table table-primary">
+						<th class="text-center" scope="col">Code Postal</th>
+						<th class="text-center" scope="col">Ville</th>
+						<th class="text-center" scope="col">Enregistrement</th>
+						<th class="text-center" scope="col">Type de licence</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table table-default font-weight-bold">
+						<td class="text-center" scope="row">{{adherent.postalCode}}</td>
+						<td class="text-center">{{adherent.city}}</td>
+						<td class="text-center">{{adherent.record|date("d/m/Y")}}
+						</td>
+						<td class="text-center">{{adherent.licenceType}}</td>
+					</tr>
+				</tbody>
+
+				<thead>
+					<tr class="table table-primary">
+						<th class="text-center" scope="col">Téléphone maison</th>
+						<th class="text-center" scope="col">Téléphone mobile</th>
+						<th class="text-center" scope="col">fax</th>
+						<th class="text-center" scope="col">Email</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table table-default font-weight-bold">
+						<td class="text-center" scope="row">{{adherent.homePhone}}</td>
+						<td class="text-center">{{adherent.mobilePhone}}</td>
+						<td class="text-center">{{adherent.fax}}
+						</td>
+						<td class="text-center">{{adherent.email}}</td>
+					</tr>
+				</tbody>
+
+				<thead>
+					<tr class="table table-primary">
+						<th class="text-center" scope="col">Catégory arbitre</th>
+						<th class="text-center" scope="col">Lieu de naissance</th>
+						<th class="text-center" scope="col">Changement de club</th>
+						<th class="text-center" scope="col">Club quitté</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table table-default font-weight-bold">
+						<td class="text-center" scope="row">{{adherent.categoryArbitre}}</td>
+						<td class="text-center">{{adherent.placeOfBirth}}</td>
+						<td class="text-center">{{adherent.clubChange}}
+						</td>
+						<td class="text-center">{{adherent.clubOut}}</td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+
+
+	</div>
+
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-sm mb-3">
+				<h2 class="text-center">Equipements<a href="{{ path('commande_create',{'id':adherent.id}) }}" class="btn btn-sm btn-success ml-2">
+						<i class="fas fa-plus"></i>
+					</a>
+				</h2>
+
+
+				<div class="container">
+					<div class="row">
+						<div class="col-sm"></div>
+						<div class="col-sm"></div>
+
+					</div>
 				</div>
+				{% for c in adherent.commandes %}
+					{% if (c.adherent.id is same as(adherent.id)) %}
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th class="text-center">Id.</th>
+									<th class="text-center">Nom</th>
+									<th class="text-center">Produit</th>
+									<th class="text-center">Catégorie</th>
+									<th class="text-center">Quantité</th>
 
-<div class="col-sm-3 mb-2">
-					<a href="{{ path('amount_create',{'id':amount.adherent.id}) }}" class="btn btn-sm btn-primary">+ Créer une cotisation</a>
-				</div>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+
+								<td class="text-center">{{c.id}}</td>
+								<td class="text-center">
+									<a href="#">{{c.adherent.firstName}}
+										{{c.adherent.lastName}}</a>
+								</td>
+								<td class="text-center">{{c.produit.title}}</td>
+								<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+								<td class="text-center">
+									<span class="badge badge-primary">{{c.qte}}</span>
+
+								</td>
+
+								<td>
+
+
+									<a href="{{ path('commande_show', {'id': c.id}) }}" class="btn btn-sm btn-primary">
+										<i class="fas fa-eye"></i>
+									</a>
+
+									<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							</tbody>
+						</tr>
+
+
+					</tbody>
+				</table>
+			{% endif %}
+		{% endfor %}
+
+
+	</div>
+	<div class="col-sm">
+
+
+		<h2 class="text-center">Cotisation
+
+		{% for a in adherent.amounts %}
+			<a href="{{ path('amount_create',{'id':adherent.id}) }}" class="btn btn-sm btn-success mr-1">
+				<i class="fas fa-plus"></i>
+			</i>
+		</a>
+		<a href="{{ path('amount_modif',{'id':a.id}) }}" class="btn btn-sm btn-danger">
+			<i class="fas fa-pen"></i>
+		</a>
+	</h2>
+
+	
+
+
+		<div class="container mt-3">
+
+			<div class="container mt-2">
+
+				<ul class="list-group">
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<strong>Montant de la cotisation
+						</strong>
+						{% for cat in cat %}
+							{% if (cat.title is same as(adherent.subcategory)) %}
+								{% set montant_total =  'cat.montantcot' %}
+								<h3>
+									<span class="badge badge-info">{{cat.montantcot}}€</span>
+								</h3>
+							{% endif %}
+						{% endfor %}
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Montant 1
+						<span>{{a.paymentMethodAmount1}}</span>
+						<span class="badge badge-primary badge-pill">{{a.amount1}}€</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Montant 2
+						<span>{{a.paymentMethodAmount2}}</span>
+						<span class="badge badge-primary badge-pill">{{a.amount2}}€</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Montant 3
+						<span>{{a.paymentMethodAmount3}}</span>
+						<span class="badge badge-primary badge-pill">{{a.amount3}}€</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Montant 4
+						<span>{{a.paymentMethodAmount4}}</span>
+						<span class="badge badge-primary badge-pill">{{a.amount4}}€</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Total
+						{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+
+						<span class="badge badge-success badge-pill">{{total}}</span>
+					</li>
+
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Reste à payer
+						{% for cat in cat %}
+							{% if (cat.title is same as(adherent.subcategory)) %}
+								{% set montant_total = cat.montantcot %}
+
+								{% set reste = montant_total - total %}
+								{% if total < cat.montantcot  %}
+								<span class="badge badge-danger badge-pill">{{reste}}€</span>
+								{% endif %}
+								{% if total == cat.montantcot  %}
+								<span class="badge badge-success badge-pill">{{reste}}€</span>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					</li>
+				</ul>
 
 			</div>
 		</div>
+	</div>
 
-	  {% endfor %}
-      
-    
-	<div class="container mt-2">
-		<h1 class="text-center">Fiche de
-			{{adherent.lastName}}
-			{{adherent.firstName}}</h1>
+</div></div>{% endfor %}<button class="btn btn-outline-primary mt-3" value="Précédent" onclick="history.go(-1)">Précédent</button>{% endblock %}
 
-		<table class="table mt-5" class="table table-hover">
-			<thead>
-				<tr class="table table-primary">
-					<th class="text-center" scope="col">Nom Prénom</th>
-					<th class="text-center" scope="col">Date de naissance</th>
-					<th class="text-center" scope="col">Catégorie</th>
-					<th class="text-center" scope="col">Numéro adhérent</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr class="table table-default font-weight-bold">
-					<td class="text-center" scope="row">{{adherent.lastName}}
-						{{adherent.firstName}}</td>
-					<td class="text-center">{{adherent.born|date("d/m/Y")}}</td>
-					<td class="text-center">{{adherent.subCategory}}
-					</td>
-					<td class="text-center">{{adherent.toNumber}}</td>
-				</tr>
-			</tbody>
-
-			<thead>
-				<tr class="table table-primary">
-					<th class="text-center" scope="col">Sexe</th>
-					<th class="text-center" scope="col">Addresse</th>
-					<th class="text-center" scope="col">Complément</th>
-					<th class="text-center" scope="col">lieut</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr class="table table-default font-weight-bold">
-					<td class="text-center" scope="row">{{adherent.sex}}</td>
-					<td class="text-center">{{adherent.address}}</td>
-					<td class="text-center">{{adherent.complement}}
-					</td>
-					<td class="text-center">{{adherent.lieut}}</td>
-				</tr>
-			</tbody>
-
-			<thead>
-				<tr class="table table-primary">
-					<th class="text-center" scope="col">Code Postal</th>
-					<th class="text-center" scope="col">Ville</th>
-					<th class="text-center" scope="col">Enregistrement</th>
-					<th class="text-center" scope="col">Type de licence</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr class="table table-default font-weight-bold">
-					<td class="text-center" scope="row">{{adherent.postalCode}}</td>
-					<td class="text-center">{{adherent.city}}</td>
-					<td class="text-center">{{adherent.record|date("d/m/Y")}}
-					</td>
-					<td class="text-center">{{adherent.licenceType}}</td>
-				</tr>
-			</tbody>
-
-			<thead>
-				<tr class="table table-primary">
-					<th class="text-center" scope="col">Téléphone maison</th>
-					<th class="text-center" scope="col">Téléphone mobile</th>
-					<th class="text-center" scope="col">fax</th>
-					<th class="text-center" scope="col">Email</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr class="table table-default font-weight-bold">
-					<td class="text-center" scope="row">{{adherent.homePhone}}</td>
-					<td class="text-center">{{adherent.mobilePhone}}</td>
-					<td class="text-center">{{adherent.fax}}
-					</td>
-					<td class="text-center">{{adherent.email}}</td>
-				</tr>
-			</tbody>
-
-			<thead>
-				<tr class="table table-primary">
-					<th class="text-center" scope="col">Catégory arbitre</th>
-					<th class="text-center" scope="col">Lieu de naissance</th>
-					<th class="text-center" scope="col">Changement de club</th>
-					<th class="text-center" scope="col">Club quitté</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr class="table table-default font-weight-bold">
-					<td class="text-center" scope="row">{{adherent.categoryArbitre}}</td>
-					<td class="text-center">{{adherent.placeOfBirth}}</td>
-					<td class="text-center">{{adherent.clubChange}}
-					</td>
-					<td class="text-center">{{adherent.clubOut}}</td>
-				</tr>
-			</tbody>
-
-
-		</table>
-
-</div>
-	
-	<button class="btn btn-outline-primary mt-3"  value="Précédent" onclick="history.go(-1)">Précédent</button>
-	
-</div>
-{% endblock %}
 
 
