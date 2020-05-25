@@ -65,6 +65,11 @@ class Produit
      */
     private $categoryproduit;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ImageProduit", cascade={"persist", "remove"})
+     */
+    private $imageProduit;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -123,17 +128,19 @@ class Produit
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage($image)
     {
         $this->image = $image;
 
         return $this;
     }
+
+    
 
     public function getQteinit(): ?int
     {
@@ -198,6 +205,26 @@ class Produit
     public function setCategoryproduit(?Categoryproduit $categoryproduit): self
     {
         $this->categoryproduit = $categoryproduit;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageProduit
+     */ 
+    public function getImageProduit()
+    {
+        return $this->imageProduit;
+    }
+
+    /**
+     * Set the value of imageProduit
+     *
+     * @return  self
+     */ 
+    public function setImageProduit($imageProduit)
+    {
+        $this->imageProduit = $imageProduit;
 
         return $this;
     }

@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Entity\Categoryproduit;
 use App\Service\PaginationService;
 use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ObjectManager;
-
+use App\Repository\CategoryproduitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,35 +21,16 @@ class StockController extends AbstractController
      */
     public function index()
     {
-      $repo = $this->getDoctrine()->getRepository(Categoryproduit::class);
-      $category = $repo->findAll();
-    
-    
+        $repo = $this->getDoctrine()->getRepository(Categoryproduit::class);
+        $category = $repo->findAll();
+
         return $this->render('stock/index.html.twig', [
             'category' => $category
-         
+
         ]);
     }
 
     
-
-    /**
-     * Permet d'afficher tous les produits 
-     * 
-     * @Route("/stock/produits/{page<\d+>?1}", name="produit_edit")
-     * 
-     * @param ProduitRepository $repo
-     * @return Response
-     */
-    public function show_produit(ProduitRepository $repo,$page, PaginationService $pagination)
-    {
-        $pagination->setEntityClass(Produit::class)
-                   ->setPage($page);
-
-        return $this->render('stock/show_produit.html.twig', [
-            'pagination'=> $pagination
-        ]);
-    }
 
     /**
      * Permet d'afficher un seul produit
@@ -66,10 +46,9 @@ class StockController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Produit::class);
         $produit = $repo->find($id);
-       return $this->render('stock/produit_one_show.html.twig', [
+        return $this->render('stock/produit_one_show.html.twig', [
             'produit' => $produit
         ]);
-
     }
 
     /**
@@ -87,85 +66,9 @@ class StockController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute("produit_edit");
-        
-
-    }
-
-    /**
-     * Permet de modifier un produit
-     *
-     * @Route("produit/{id}/modif", name="produit_modif")
-     * 
-     * @return Response
-     */
-    public function modif(Produit $produit, Request $request,ObjectManager $manager) {
-
-        
-        $form = $this->createForm(ProduitType::class, $produit);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-
-          
-            $stockplus= $form['stockplus']->getData();
-
-           if( ($produit->getQteinit() + $stockplus) >= 0){
-            $produit->setQteinit($produit->getQteinit() + $stockplus);
-            $manager->persist($produit);
-            $manager->flush();
-            $this->addFlash(
-                'success',
-                "Le produit {$produit->getTitle()} a bien été modifié !"
-            );
- 
-
-            return $this->redirectToRoute('category_produit',['id' => $produit->getCategoryproduit()->getId(),'withAlert' => true]);
-
-         } else $this->AddFlash(
-                'danger',
-                "Vous n'avez pas assez de produit en stock  !");
-        }
-        return $this->render('stock/produit_modif.html.twig',[
-            'produit' => $produit,
-            'form' => $form->createView()
-    ]);
-
-}
-
-
- /**
-     * Permet d'ajouter un produit
-     * 
-     * @Route("produit/new", name="produit_create")
-     *
-     * @return Response
-     */
-    public function create(Request $request, ObjectManager $manager)
-    {
-        $adherent = new produit();
-
-        $form = $this->createForm(ProduitType::class, $adherent);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            //$manager =$this->getDoctrine()->getManager();
-
-            $manager->persist($adherent);
-            $manager->flush();
-            $this->addFlash(
-                'success',
-                "Le produit <strong>{$adherent->getTitle()} </strong> a bien été ajouter à la liste des produits !"
-            );
-
-            return $this->redirectToRoute('produit_edit');
-        }
-
-        return $this->render('stock/new.html.twig', [
-            'form' => $form->createView()
-        ]);
     }
 
     
-    
+
+   
 }

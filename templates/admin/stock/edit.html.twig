@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'article {{produit.title}}
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="my-5">Modification de l'article {{produit.title}}
+			</h1>
+
+
+		{{ form_start(form) }}
+
+		{{ form_widget(form) }}
+{% if produit.imageProduit.name is defined %}
+        <div><img style="max-width:200px;" src="{{asset('image/produits/')~ produit.imageProduit.name}}" alt="{{produit.title}}" class="img-thumbnail mb-4"></div>
+{% endif %}<div><img style="max-width:200px;" src="{{asset('image/produits/pas-d-image-disponible.jpg')}}" alt="Pas d'image" class="img-thumbnail mb-4"></div>
+		<button class="btn btn-primary" type="submit">
+			<i class="fas fa-check"></i>
+			Enregistrer les modifications
+		</button>
+
+		{{ form_end(form) }}
+
+
+	</div>
+
+</div>{% endblock %}
+

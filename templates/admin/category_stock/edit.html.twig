@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du produit 
+	{{produit.title}}
+
+	
+{% endblock %}
+
+
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="my-5">Modification du produit 
+	{{produit.title}}</h1>
+
+
+		{{ form_start(form,{'attr': {'novalidate': 'novalidate'} }) }}
+
+
+		{{ form_widget(form) }}
+
+		{% if produit.imageproduit.name is defined %}
+							<img  style="max-width:200px;" class="img-fluid img-thumbnail" src="{{asset('image/produits/')~ produit.imageProduit.name}}"/>
+                               {% else %}<p>Il n'y a pas de photo</p>
+								    
+								{% endif %}         
+
+
+		<div class="mt-3 mb-3"><button class="btn btn-primary" type="submit">
+			<i class="fas fa-check"></i>
+			Enregistrer les modifications
+		</button></div>
+
+		{{ form_end(form) }}
+
+
+	</div>
+
+</div>{% endblock %}
+
+

@@ -24,7 +24,7 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							{% for c in catadherent %}
 								<li class="text-center">
-									<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+									<a href="{{ path('admin/category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
 								</li>
 
 								<li role="separator" class="divider"></li>
@@ -44,7 +44,7 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							{% for c in catadherent %}
 								<li class="text-center">
-									<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+									<a href="{{ path('admin/category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
 								</li>
 
 								<li role="separator" class="divider"></li>
@@ -93,9 +93,9 @@
 
 
 						<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
-						
+						<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary"><i class="fas fa-pen"></i></a>
 
-				
+						<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 					</td>
 				</tr>
                 {% endif %}

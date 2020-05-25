@@ -77,21 +77,7 @@ class CommandeController extends AbstractController
     }
 
 
-    /**
-     * Permet d'afficher toutes les commandes
-     * 
-     * @Route("/commande", name="commande")
-     */
-    public function index()
-    {
-        $repo = $this->getDoctrine()->getRepository(Commande::class);
-        $commande = $repo->findAll();
-
-        return $this->render('commande/index.html.twig', [
-            'commande' => $commande
-
-        ]);
-    }
+    
 
     /**
      * Permet d'afficher un produit d'une commande lié a un adhérent

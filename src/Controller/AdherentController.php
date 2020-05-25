@@ -2,36 +2,40 @@
 
 namespace App\Controller;
 
-use App\Entity\Amount;
 use App\Entity\Adherent;
-use App\Entity\Commande;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdherentController extends AbstractController
 {
     /**
+     * Permet d'afficher tous les adhérents
+     * 
      * @Route("/adherent/{page<\d+>?1}", name="adherent")
      */
-    public function index(AdherentRepository $repo, $page, PaginationService $pagination)
+    public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination)
     {
         $pagination->setEntityClass(Adherent::class)
             ->setPage($page);
+        $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
+        $catadherent = $repo->findAll();
 
-        return $this->render('adherent/adherent.html.twig', [
-            'pagination' => $pagination
+        return $this->render('adherent/index.html.twig', [
+            'pagination' => $pagination,
+            'catadherent' => $catadherent
         ]);
     }
     /**
-     * Permet d'editer un adherent
+     * Permet d'afficher un adherent
      * 
-     * @Route("/adherent/{id}/edit", name="adherent_edit")
+     * @Route("/adherent/{id}/show", name="adherent_show")
      *
      * @param AdherentRepository $repo
      * @param ObjectManager $manager
@@ -45,7 +49,7 @@ class AdherentController extends AbstractController
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
 
-        return $this->render('adherent/edit.html.twig', [
+        return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
             'cat' => $cat
               
@@ -84,57 +88,6 @@ class AdherentController extends AbstractController
         ]);
     }
 
-    /**
-     * Permet de suprimer un adherent
-     * 
-     * @Route("adherent/{id}/delete", name="adherent_delete")
-     *
-     * @param Adherent $adherent
-     * @param ObjectManager $manager
-     * @return Response
-     */
-    public function delete(Adherent $adherent, ObjectManager $manager)
-    {
-        $manager->remove($adherent);
-        $manager->flush();
-
-        $this->addFlash(
-            'success',
-            "L'adhérent à bien été supprimé !"
-        );
-
-        return $this->redirectToRoute("adherent");
-    }
-
-    /**
-     * Permet de modifier un adhérent
-     *
-     * @Route("adherent/{id}/modif", name="adherent_modif")
-     * 
-     * @return Response
-     */
-    public function modif(Adherent $adherent, Request $request, ObjectManager $manager)
-    {
-
-        //$repo = $this->getDoctrine()->getRepository(Adherent::class);
-        //$adherent = $repo->find($id);
-        $form = $this->createForm(AdherentType::class, $adherent);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($adherent);
-            $manager->flush();
-            $this->addFlash(
-                'success',
-                "L'adherent {$adherent->getLastName()} {$adherent->getFirstName()} a bien été modifié !"
-            );
-        }
-
-
-        return $this->render('adherent/modif.html.twig', [
-            'adherent' => $adherent,
-            'form' => $form->createView()
-        ]);
-    }
+    
+   
 }

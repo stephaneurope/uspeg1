@@ -20,7 +20,7 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							{% for c in category %}
 								<li class="text-center">
-									<a href="{{ path('category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
 								</li>
 
 								<li role="separator" class="divider"></li>
@@ -40,7 +40,7 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							{% for c in category %}
 								<li class="text-center">
-									<a href="{{ path('category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
 								</li>
 
 								<li role="separator" class="divider"></li>
@@ -64,7 +64,7 @@
 		{% if (produit.categoryproduit.id is same as(categoryproduit.id)) %}
 
 
-			{% include 'produit.html.twig' %}
+			{% include 'admin/produit.html.twig' %}
 
 
 		{% endif %}

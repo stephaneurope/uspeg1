@@ -14,8 +14,11 @@
 				<div class="card bg-light mb-3">
 					<div class="card-body">
 						<a href="" data-toggle="modal" data-target="#productModal">
-							<img class="img-fluid" src="https://images.asos-media.com/products/nike-air-max-90-baskets-en-cuir-bleu-302519-400/9536548-1-blue?$n_640w$&wid=634&fit=constrain"/>
-
+						{% if produit.imageproduit.name is defined %}
+							<img class="img-fluid" src="{{asset('image/produits/')~ produit.imageProduit.name}}"/>
+                               {% else %}<img class="img-fluid"  src="{{asset('image/produits/pas-d-image-disponible.jpg')}}">
+								    
+								{% endif %}         
 						</a>
 					</div>
 				</div>

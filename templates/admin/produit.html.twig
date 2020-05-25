@@ -41,7 +41,12 @@
 					<a href="{{ path('produit_one_show', {'id': produit.id}) }}" class="btn btn-sm btn-success">
 						<i class="fas fa-eye"></i>
 					</a>
-					
+					<a href="{{ path('produit_modif', {'id': produit.id}) }}" class="btn btn-sm btn-info">
+						<i class="fas fa-pen"></i>
+					</a>
+					<a href="{{ path('produit_delete', {'id': produit.id}) }}" class="btn btn-sm btn-danger">
+						<i class="fas fa-trash-alt"></i>
+					</a>
 
 				</div>
 			</div>

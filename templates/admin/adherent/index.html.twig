@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adhérents
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container mt-3">
+		<h1 class="text-center">Adhérents</h1>
+
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Rechercher ..."/>
+
+		</div>
+
+
+		<div class="container mt-2 mb-2">
+
+			<div class="row ">
+				<div class="col-sm mt-1 mb-3">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							Catégories d'adhérents
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							{% for c in catadherent %}
+								<li class="text-center">
+									<a href="{{ path('admin/category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+								</li>
+
+								<li role="separator" class="divider"></li>
+							{% endfor %}
+						</ul>
+
+					</div>
+
+				</div>
+
+				<div class="col-sm mt-1 mb-3">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							Equipes
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							{% for c in catadherent %}
+								<li class="text-center">
+									<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+								</li>
+
+								<li role="separator" class="divider"></li>
+							{% endfor %}
+						</ul>
+
+					</div>
+				</div>
+				<div class="col-sm mt-1 mb-3">
+					<div class="dropdown">
+
+						<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+					</div>
+
+				</div>
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="text-center">Id.</th>
+							<th class="text-center">Nom</th>
+							<th class="text-center">Email</th>
+							<th class="text-center">Catégorie</th>
+							<th class="text-center">Numéro</th>
+							<th class="text-center">Cotisation</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for ad in pagination.data %}
+
+							<td class="text-center">{{ad.id}}</td>
+							<td class="text-center">
+								<a href="#">{{ad.firstName}}
+									{{ad.lastName}}</a>
+							</td>
+							<td class="text-center">{{ad.email}}</td>
+							<td class="text-center">{{ad.subcategory}}</td>
+							<td class="text-center">
+								<span class="badge badge-primary">{{ad.toNumber}}</span>
+
+							</td>
+							<td class="text-center">Payée</td>
+							<td>
+
+
+								<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
+									<i class="fas fa-eye"></i>
+								</a>
+								<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
+									<i class="fas fa-pen"></i>
+								</a>
+
+								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+			</div>
+			{{pagination.display()}}
+
+		</div>
+
+	
+
+	{% endblock %}
+
