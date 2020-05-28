@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container">
+         <h1 class="my-5">Inscription</h1>
+         
+          {{form_start(form)}}
+             <div class="row">
+
+          <div class="col">
+
+               <div class="alert alert-light">
+
+                    <h2 class="alert-heading">Informations générales</h2>
+                    <hr>
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.email) }}
+                    
+               </div>
+          </div>
+          <div class="col">
+
+              <div class="alert alert-light">
+
+                  <h2 class="alert-heading">Mot de Passe</h2>
+
+                  <hr>
+                   {{ form_row(form.hash) }}
+                    {{ form_row(form.passwordConfirm) }}
+
+              </div>
+                  <div class="alert alert-light">
+
+                    <h2 class="alert-heading">Détails</h2>
+                    <hr>
+                 
+                    {{ form_row(form.description)}}
+                    <hr>
+                    <p>Vous y etes presque, confirmez votre instruction et rejoignez-nous !</p>
+                   <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i>
+                        Confirmez l'inscription</button>
+          </div>
+     </div>
+        
+          {{form_end(form)}}
+    </div>
+{% endblock %}

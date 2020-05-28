@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block body %}
+
+
+	<!--Intro Section-->
+	<section class="view intro-2">
+  
+		<div class="mask rgba-stylish-strong h-100 d-flex justify-content-center align-items-center">
+			<div class="container">
+ 
+				<div class="row">
+           
+					<div
+						class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
+  {% if hasError %}
+<div class="alert alert-danger">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide!</div>
+{% endif %}
+						<!--Form with header-->
+						<div class="cardlogin wow fadeIn" data-wow-delay="0.3s">
+							<div
+								class="card-body">
+
+								<!--Header-->
+								<div class="form-header purple-gradient text-light">
+									<h3>
+										<i class="fas fa-user mt-2 mb-2 text-light"></i>
+										Connexion:</h3>
+								</div>
+
+								<!--Body-->
+								<form action="{{ path('account_login') }}" method="post">
+									<div class="md-form">
+										<i class="fas fa-envelope prefix white-text text-light "></i>
+										<input type="text" name="_username" required="required" id="email" class="form-control" value={{username}} placeholder="Adresse email ...">
+										<label for="email">Email</label>
+									</div>
+
+									<div class="md-form">
+										<i class="fas fa-lock prefix white-text text-light"></i>
+										<input type="password" name="_password" required="required" id="password" class="form-control" placeholder="Mot de passe ...">
+										<label for="password">Ton mot de passe</label>
+									</div>
+
+									<div class="text-center">
+										<button class="btn btn-success btn-lg text-light">Connexion</button>
+										<hr>
+
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+						<!--/Form with header-->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</header>
+<!--Main Navigation-->{% endblock %}
+
+

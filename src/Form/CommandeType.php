@@ -4,35 +4,15 @@ namespace App\Form;
 
 use App\Entity\Produit;
 use App\Entity\Commande;
-use App\Repository\AdherentRepository;
-use Symfony\Component\Form\AbstractType;
+use App\form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
-class CommandeType extends AbstractType
+class CommandeType extends ApplicationType
 {
-
-
-    /**
-     * Permet d'avoir la configuration de base d'un champ
-     *
-     * @param string $label
-     * @param string $placeholder
-     * @return array
-     */
-    private function getConfiguration($label, $placeholder)
-    {
-        return [
-            'label' => $label,
-            'attr'  => [
-                'placeholder' => $placeholder
-            ]
-        ];
-    }
 
 
     public function buildForm(FormBuilderInterface $builder, array $options)

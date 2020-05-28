@@ -2,26 +2,27 @@
 
 namespace App\Form;
 
-use App\form\ApplicationType;
-use App\Entity\Categoryproduit;
+use App\Entity\User;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class CategoryProduitType extends ApplicationType
+class AccountType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class,$this->getConfiguration("Catégorie","Tapez la catégorie"))
+            ->add('firstName')
+            ->add('lastName')
+            ->add('email')
+            ->add('description')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Categoryproduit::class,
+            'data_class' => User::class,
         ]);
     }
 }

@@ -1,3 +1,5 @@
+/******************Login***************/
+
 html,
         body,
         header,
@@ -30,8 +32,10 @@ html,
         
       
 
-        .card {
-            background-color:lightblue;
+        .cardlogin {
+            background-color:rgba(44, 62, 80, 0.5);
+            margin-top: 30px;
+        
         }
         .md-form label {
             color: #fff;
@@ -41,11 +45,7 @@ html,
         }
         
 
-        .card {
-            margin-top: 30px;
-            /*margin-bottom: -45px;*/
-
-        }
+        
 
         .md-form input[type=text]:focus:not([readonly]),
         .md-form input[type=password]:focus:not([readonly]) {
@@ -60,9 +60,9 @@ html,
         .md-form .form-control {
             color: rgb(7, 6, 6);
         }
-
+/*********************************/
         /* Page produit*/
-        .card {
+        .cardlogin {
           border: 0;
         }
         
@@ -173,5 +173,12 @@ html,
     display: flex;
 }
 
+/**********liste de produits*******************/
+.cardproduct
+{
+  margin-top: 80px;
+  height: 300px;
+  transition: 0.5s;
+}
         
         

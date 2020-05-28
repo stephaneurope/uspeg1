@@ -23,19 +23,24 @@
 		</ul>
 		<ul class="navbar-nav ml-auto">
 
-			<li classname="nav-item">
-				<a href="#" class="nav-link">Inscription</a>
-			</li>
-
-			<li classname="nav-item">
-				<a href="#" class="btn btn-success mr-1">
-
-					connexion !
-				</a>
-			</li>
-			<li class="nav-item">
-				<a href="#" class="btn btn-danger">Déconnexion</a>
-			</li>
+			
+{% if app.user %}
+			 <li class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
+              {{app.user.lastName}} {{app.user.firstName}}
+               </a>
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+               
+               <div class="dropdown-divider"></div>
+               <a href="{{path('account_index')}}" class="dropdown-item">Mon compte</a>
+               
+               <a href="{{path('account_profile')}}" class="dropdown-item">Modifier mon profil</a>
+               <div class="dropdown-divider"></div>
+               <a href="{{path('account_logout')}}" class="dropdown-item">Déconnexion</a>
+               </div>
+           </li>
+			{% endif %}
 		</ul>
 	</div>
 </div></nav>
+
