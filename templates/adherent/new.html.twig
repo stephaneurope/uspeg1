@@ -6,20 +6,19 @@
 {% endblock %}
 
 {% block body %}
+	{% set name = 'Nouvel Adhérent' %}
+	{% include "header_title.html.twig" %}
+	
 	<div class="container mt-3">
-		<h1>Nouvel adhérent</h1>
+
 		{{ form_start(form) }}
 
 
 		{{ form_start(form) }}
 		{{ form_widget(form) }}
 
-		<button type="submit" class="btn btn-primary">Créer un nouvel adhérent</button>
+		<button type="submit" class="btn btn-primary my-3 ">Créer un nouvel adhérent</button>
 		{{ form_end(form) }}
 	</div>
 {% endblock %}
-
-
-
-
 

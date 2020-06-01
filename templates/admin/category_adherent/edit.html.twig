@@ -6,8 +6,10 @@
 {% endblock %}
 
 {% block body %}
+{% set name = 'Modification de la catégorie ' ~ categoryadherent.title %}
+	{% include "header_title.html.twig" %}
 	<div class="container mt-3">
-		<h1>Modification de la catégorie {{categoryadherent.title}}</h1>
+		
 		{{ form_start(form) }}
 
 

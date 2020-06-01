@@ -3,9 +3,10 @@
  {% block title %}Modification du profil utilisateur{% endblock %}
 
  {% block body %}
-
+{% set name = "Modification du profil"  %}
+	{% include "header_title.html.twig" %}
  <div class="container">
-      <h1 class="my-5">Modification du profil</h1>
+    
 
       {{ form_start(form) }}
      <div class="row">

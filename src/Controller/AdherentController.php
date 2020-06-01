@@ -11,14 +11,19 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class AdherentController extends AbstractController
 {
     /**
      * Permet d'afficher tous les adhérents
      * 
      * @Route("/adherent/{page<\d+>?1}", name="adherent")
+     * 
      */
     public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination)
     {
@@ -66,6 +71,7 @@ class AdherentController extends AbstractController
     public function create(Request $request, ObjectManager $manager)
     {
         $adherent = new adherent();
+        $adherent->setRecord(new \DateTime('now'));
 
         $form = $this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);

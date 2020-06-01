@@ -5,73 +5,26 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>{{categoryproduit.title}}</h1>
+{% set name = categoryproduit.title %}
+	{% include "header_title.html.twig" %}
+	
 
 	</div>
 	<div class="container">
-	<div class="row ">
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Familles d'articles
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							{% for c in category %}
-								<li class="text-center">
-									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-								</li>
-
-								<li role="separator" class="divider"></li>
-							{% endfor %}
-						</ul>
-
-					</div>
-
-				</div>
-
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Equipes
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							{% for c in category %}
-								<li class="text-center">
-									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-								</li>
-
-								<li role="separator" class="divider"></li>
-							{% endfor %}
-						</ul>
-
-					</div>
-				</div>
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-
-						<a href="#" class="btn btn-sm btn-primary">+ Ajouter un Produit</a>
-					</div>
-
-				</div>
+		{% include "navbar_cat_prod.html.twig" %}
+		<div class="row my-3">
+			{% for produit in produit %}
+				{% if (produit.categoryproduit.id is same as(categoryproduit.id)) %}
 
 
+					{% include 'admin/produit.html.twig' %}
+
+
+				{% endif %}
+			{% endfor %}
+
+		</div>
 	</div>
-<div class="row my-3">
-	{% for produit in produit %}
-		{% if (produit.categoryproduit.id is same as(categoryproduit.id)) %}
-
-
-			{% include 'admin/produit.html.twig' %}
-
-
-		{% endif %}
-	{% endfor %}
-
-	</div>
-</div>
 
 
 {% endblock %}

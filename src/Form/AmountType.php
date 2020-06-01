@@ -20,6 +20,7 @@ class AmountType extends ApplicationType
             ->add('amount1',IntegerType::class,$this->getConfiguration("Montant 1","Tapez le montant"))
             ->add('paymentMethodAmount1',ChoiceType::class, [
                 'choices' => [
+                    'Néant' => 'Néant',
                     'CB' => 'CB',
                     'Cheque' => 'Chèque',
                     'Espece' => 'Espèce',
@@ -29,6 +30,7 @@ class AmountType extends ApplicationType
             ->add('amount2',IntegerType::class,$this->getConfiguration("Montant 2","Tapez le montant"))
             ->add('paymentMethodAmount2',ChoiceType::class, [
                 'choices' => [
+                    'Néant' => 'Néant',
                     'CB' => 'CB',
                     'Cheque' => 'Chèque',
                     'Espece' => 'Espèce',
@@ -38,6 +40,7 @@ class AmountType extends ApplicationType
             ->add('amount3',IntegerType::class,$this->getConfiguration("Montant 3","Tapez le montant"))
             ->add('paymentMethodAmount3',ChoiceType::class, [
                 'choices' => [
+                    'Néant' => 'Néant',
                     'CB' => 'CB',
                     'Cheque' => 'Chèque',
                     'Espece' => 'Espèce',
@@ -47,6 +50,7 @@ class AmountType extends ApplicationType
             ->add('amount4',IntegerType::class,$this->getConfiguration("Montant 4","Tapez le montant"))
             ->add('paymentMethodAmount4',ChoiceType::class, [
                 'choices' => [
+                    'Néant' => 'Néant',
                     'CB' => 'CB',
                     'Cheque' => 'Chèque',
                     'Espece' => 'Espèce',

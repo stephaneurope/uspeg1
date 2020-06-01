@@ -5,18 +5,19 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Entity\Categoryproduit;
 use App\Form\CategoryProduitType;
+use Doctrine\Persistence\ObjectManager;
 use App\Repository\CategoryproduitRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class CategoryProduitController extends AbstractController
 {
     
-
-
-
     /**
      * Permet d'afficher une seule catégorie
      * 

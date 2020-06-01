@@ -3,16 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Amount;
+use App\Entity\Adherent;
 use App\Form\AmountType;
 use App\Form\AmountCreateType;
-use App\Entity\Adherent;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+
+
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class AmountController extends AbstractController
 {
     /**
@@ -81,7 +85,7 @@ class AmountController extends AbstractController
             );
 
             return $this->redirectToRoute(
-                "adherent_edit",
+                "adherent_show",
                 array(
                     'id' => $amount->getAdherent()->getId()
                 )
@@ -120,7 +124,7 @@ class AmountController extends AbstractController
                 "La cotisation a bien été modifiée !"
             );
             return $this->redirectToRoute(
-                "adherent_edit",
+                "adherent_show",
                 array(
                     'id' => $amount->getAdherent()->getId()
                 )

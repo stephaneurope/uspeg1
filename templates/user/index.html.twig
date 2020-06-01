@@ -2,7 +2,10 @@
 {% block title %}Page de
     {{user.firstName}} {{user.lastName}}{% endblock %}
 {% block body %}
-<div class="container text-center mt-3">
+{% set name = 'Mon compte' %}
+	{% include "header_title.html.twig" %}
+<div class="container text-center mt-5">
+
     <h1>{{user.firstName}} {{user.lastName}}</h1>
 
     {% if user is same as (app.user) %}

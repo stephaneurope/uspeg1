@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 use App\Entity\Produit;
-use App\Form\ProduitType;
 use App\Entity\Categoryproduit;
 use App\Service\PaginationService;
 use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ObjectManager;
-use App\Repository\CategoryproduitRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class StockController extends AbstractController
 {
     /**
@@ -29,8 +30,6 @@ class StockController extends AbstractController
 
         ]);
     }
-
-    
 
     /**
      * Permet d'afficher un seul produit
@@ -65,7 +64,7 @@ class StockController extends AbstractController
         $manager->remove($produit);
         $manager->flush();
 
-        return $this->redirectToRoute("produit_edit");
+        return $this->redirectToRoute("admin/produit_edit");
     }
 
     

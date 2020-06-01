@@ -6,8 +6,11 @@
 {% endblock %}
 
 {% block body %}
+{% set name = 'Nouvelle Commande ' %}
+{% include "header_title.html.twig" %}
+
 	<div class="container mt-3">
-		<h1>Nouvelle commande</h1>
+		
 		{{ form_start(form) }}
 
 

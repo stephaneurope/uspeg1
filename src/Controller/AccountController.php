@@ -12,9 +12,12 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class AccountController extends AbstractController
 {
@@ -22,6 +25,8 @@ class AccountController extends AbstractController
      * Permet d'afficher et de gérer le formulaire de connexion
      *  
      * @Route("/login", name="account_login")
+     * 
+     * 
      * 
      * @return Response
      *  
@@ -44,6 +49,8 @@ class AccountController extends AbstractController
      *
      * @Route("/logout", name="account_logout")
      * 
+     * @IsGranted("ROLE_USER")
+     * 
      * @return void
      */
     public function logout()
@@ -55,6 +62,8 @@ class AccountController extends AbstractController
      * Permet d'afficher le formulaire d'inscription
      *
      * @Route("/register", name="account_register")
+     * 
+     * @IsGranted("ROLE_ADMIN")
      * 
      * @return Response
      */
@@ -89,6 +98,7 @@ class AccountController extends AbstractController
      * Permet d'afficher et de traiter le formulaire de modification de profil
      * 
      * @Route("/account/profile", name="account_profile")
+     * @IsGranted("ROLE_USER")
      * 
      *
      * @return Response
@@ -119,6 +129,8 @@ class AccountController extends AbstractController
      * Permet de modifier un mot de passe
      * 
      * @Route("/account/password-update", name="account_password")
+     * 
+     * @IsGranted("ROLE_USER")
      * 
      *
      * @return Response
@@ -166,6 +178,7 @@ class AccountController extends AbstractController
      * 
      * @Route("/account",name="account_index")
      * 
+     * @IsGranted("ROLE_USER")
      * 
      * @return Response
      */

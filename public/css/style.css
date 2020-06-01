@@ -7,6 +7,7 @@ html,
           height: 100vh;
         }
 
+
         @media (max-width: 740px) {
           html,
           body,
@@ -180,5 +181,202 @@ html,
   height: 300px;
   transition: 0.5s;
 }
+/**********header*********************/
         
-        
+.header {
+  position: relative;
+  width: 100vw;	
+  height: 300px;	
+}
+.header .center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 90%;
+	transform:translate(-50%,-50%);
+	z-index: 5; 
+  padding: 1rem;
+}
+.header .left {
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 90%;
+	transform:translate(-50%,-50%);
+	z-index: 5; 
+  padding: 1rem;
+}
+.header .right {
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 90%;
+	transform:translate(-50%,-50%);
+	z-index: 5; 
+  padding: 1rem;
+}
+
+/*=== Large devices (desktops, 992px and up) ===*/
+@media (min-width: 992px) {
+.header .center {
+  width: 50%;
+}
+.header .left {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 40%;
+  height: 60%;
+  transform:translate(0, 0);
+  padding: 1rem;
+}
+.header .right {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 40%;
+  height: 60%;
+  transform:translate(0, 0);
+  padding: 1rem;
+}
+
+}
+
+
+
+/* =======================================
+ header#4
+========================================*/
+#header4 {
+	background: #355c7d;  
+  background:
+    linear-gradient(
+      rgba(53, 92, 125, 0.8), /* #355c7d */
+      rgba(108, 91, 123, 0.8), /* #6c5b7b */
+      rgba(10, 10, 10, 0.8) /* #c06c7b */
+    ),
+    url('/image/category_adherent/equipements.png') no-repeat left top;
+  background-size: cover;  
+  z-index: 0; /* bottom layout */
+  margin-top:-100px;
+  box-shadow: 2px 2px 12px #555;
+}
+#header4 .caption {
+	z-index: 5; 
+  text-align: center;
+  color: #fff;
+
+}
+#header4 .caption .title {
+	margin-bottom: 1.5rem;
+}
+#header4 .caption .text {
+	margin-bottom: 1.5rem;
+}
+#header4 .caption .action {
+  display: flex;
+  margin-bottom: 1rem;
+  margin-left: 15%;
+  width: 70%;
+}
+/*=== Large devices (desktops, 992px and up) ===*/
+@media (min-width: 992px) {
+#header4 .caption .action {
+  margin-left: 10%;
+  width: 80%;
+}
+}
+/****card home*****/
+@import url(https://fonts.googleapis.com/css?family=Open+sans:700);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display);
+.snip1560 {
+  font-family: 'Open Sans', Arial, sans-serif;
+  display: inline-block;
+  margin: 8px;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: none !important;
+  position: relative;
+  padding: 10px;
+  border: 2px solid #e8b563;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.snip1560:before {
+  content: '';
+  background-color: #000000;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: -1;
+}
+
+.snip1560 * {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+
+.snip1560 img {
+  max-width: 100%;
+  vertical-align: top;
+  background-image: linear-gradient(#000000, #ffffff);
+}
+
+.snip1560 figcaption,
+.snip1560 .link {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.snip1560 h2,
+.snip1560 h3,
+.snip1560 h4 {
+  margin: 0px;
+  position: absolute;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.snip1560 h2 {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 2em;
+  font-family: 'Playfair Display', Arial, sans-serif;
+}
+
+.snip1560 h2 span {
+  color: #e8b563;
+}
+
+.snip1560 h3 {
+  font-size: 1.3em;
+  bottom: 0;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.snip1560 h4 {
+  top: 0;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+  font-weight: 400;
+  opacity: 0.9;
+  font-family: 'Playfair Display', Arial, sans-serif;
+}
+
+.snip1560:hover img,
+.snip1560.hover img {
+  opacity: 0.35;
+}

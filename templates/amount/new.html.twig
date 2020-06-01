@@ -6,9 +6,11 @@
 {% endblock %}
 
 {% block body %}
+{% set name = 'Créer une cotisation ' %}
+{% include "header_title.html.twig" %}
 	<div class="container mt-3">
-		<h1>Créer une cotisation</h1>
-		{{ form_start(form) }}
+		
+		{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
 
 
 		{{ form_start(form) }}

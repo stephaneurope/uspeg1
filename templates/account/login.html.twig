@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base.html.twig' %}
 
 {% block title %}Connexion
 {% endblock %}
@@ -35,7 +35,7 @@
 								<form action="{{ path('account_login') }}" method="post">
 									<div class="md-form">
 										<i class="fas fa-envelope prefix white-text text-light "></i>
-										<input type="text" name="_username" required="required" id="email" class="form-control" value={{username}} placeholder="Adresse email ...">
+										<input type="text" name="_username" required="required" id="email" class="form-control" value="{{username}}" placeholder="Adresse email ...">
 										<label for="email">Email</label>
 									</div>
 
@@ -48,6 +48,7 @@
 									<div class="text-center">
 										<button class="btn btn-success btn-lg text-light">Connexion</button>
 										<hr>
+<div style="color:white;font:bold;"><p>Si vous avez oubliez votre mot de passe , merci de contacter l'administarteur du site.</p></div>
 
 									</div>
 

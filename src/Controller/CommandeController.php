@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\Adherent;
-use App\Entity\Commande;
 use App\Entity\Produit;
+use App\Entity\Adherent;
+
+use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class CommandeController extends AbstractController
 {
 
@@ -30,6 +36,7 @@ class CommandeController extends AbstractController
 
 
         $commande = new Commande();
+        $commande->setDatecommande(new \DateTime('now'));
 
 
         $form = $this->createForm(CommandeType::class, $commande);
@@ -128,7 +135,7 @@ class CommandeController extends AbstractController
      * 
      * @Route("/commande/produit/{id}/delete", name="commande_delete")
      * 
-     * @param ProCommande $commande
+     * @param Commande $commande
      * @param ObjectManager $manager
      * @return Response
      */
@@ -139,7 +146,7 @@ class CommandeController extends AbstractController
 
         $this->AddFlash(
             'success',
-            "L'éqipement a bien été supprimé !"
+            "L'équipement a bien été supprimé !"
         );
 
         return $this->redirectToRoute("commande");

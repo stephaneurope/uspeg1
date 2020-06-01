@@ -5,27 +5,36 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Entity\Categoryproduit;
 use App\Form\CategoryProduitType;
+use Doctrine\Persistence\ObjectManager;
 use App\Repository\CategoryproduitRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class AdminCategoryStockController extends AbstractController
 {
     /**
      * Permet d'afficher les catégories de produits
      * 
      * @Route("admin/category", name="dash_category")
+     * 
+     * @param Categoryproduit $categoryproduit
      */
     public function dashboard()
     {
       $repo = $this->getDoctrine()->getRepository(Categoryproduit::class);
       $category = $repo->findAll();
-    
+      $repo = $this->getDoctrine()->getRepository(Produit::class);
+      $produit = $repo->findAll();
     
         return $this->render('admin/category_stock/dashboard.html.twig', [
-            'category' => $category
+            'category' => $category,
+            'produit'  => $produit
          
         ]);
     }

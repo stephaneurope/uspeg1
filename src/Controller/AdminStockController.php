@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Entity\Categoryproduit;
@@ -10,7 +11,12 @@ use Doctrine\Persistence\ObjectManager;
 use App\Repository\CategoryproduitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class AdminStockController extends AbstractController
 {
     /**
@@ -25,16 +31,16 @@ class AdminStockController extends AbstractController
     public function show_produit(ProduitRepository $repo, CategoryproduitRepository $categoryproduit, $page, PaginationService $pagination)
     {
         $repo1 = $this->getDoctrine()->getRepository(Categoryproduit::class);
-        $categoryproduit = $repo1->findAll();
+        $category = $repo1->findAll();
         $pagination->setEntityClass(Produit::class)
             ->setPage($page);
 
         return $this->render('admin/stock/show_produit.html.twig', [
             'pagination' => $pagination,
-            'categoryproduit' => $categoryproduit
+            'category' => $category
         ]);
     }
-   
+
     /**
      * Permet d'ajouter un produit
      * 
@@ -48,12 +54,12 @@ class AdminStockController extends AbstractController
 
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-       //dd($form->get("imageProduit")->getData());
+        //dd($form->get("imageProduit")->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             //récupère les valeurs sous forme d'objet produit
             $produit = $form->getData();
-           
-            
+
+
             //recupere l'image
             $image = $produit->getImageProduit();
             //recupere le file soumis
@@ -65,9 +71,9 @@ class AdminStockController extends AbstractController
             //je donne le nom a l'image
 
             $image->setName($name);
-    
-           
-            
+
+
+
             $manager->persist($produit);
             $manager->flush();
             $this->addFlash(
@@ -118,9 +124,9 @@ class AdminStockController extends AbstractController
                 $image->setName($name);
             } else // aucune nouvelle image envoyée
                 //on recupère l'ancienne image
-              
+
                 $produit->setImageProduit($imageproduit);
-            
+
 
             $stockplus = $form['stockplus']->getData();
 
@@ -135,19 +141,17 @@ class AdminStockController extends AbstractController
                 );
 
 
-                // return $this->redirectToRoute('admin/category_produit',['id' => $produit->getCategoryproduit()->getId(),'withAlert' => true]);
-
+                return $this->redirectToRoute('admin/category_produit', ['id' => $produit->getCategoryproduit()->getId(), 'withAlert' => true]);
             } else $this->AddFlash(
                 'danger',
                 "Vous n'avez pas assez de produit en stock  !"
             );
         }
-    
+
         return $this->render('admin/stock/edit.html.twig', [
             'produit' => $produit,
             'form' => $form->createView()
 
         ]);
     }
-
 }

@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block body %}
-
+{% set name = 'Modification de la cotisation' %}
+{% include "header_title.html.twig" %}
 	<div class="container">
-		<h1 class="my-5">Modification de la cotisation
-		</h1>
+		
 
 
-		{{ form_start(form) }}
+		{{ form_start(form,{ attr: { novalidate: 'novalidate' } }) }}
 
 		{{ form_widget(form) }}
 

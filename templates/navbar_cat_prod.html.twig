@@ -1,0 +1,52 @@
+<div class="row ">
+			<div class="col-sm mt-1 mb-3">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Familles d'articles
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li class="text-center">
+							<a href="{{ path('admin/produit_edit') }}">Tous les produits</a>
+						</li>
+						{% for c in category%}
+							<li class="text-center">
+								<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+							</li>
+
+							<li role="separator" class="divider"></li>
+						{% endfor %}
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="col-sm mt-1 mb-3">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Equipes
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						{% for c in category %}
+							<li class="text-center">
+								<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+							</li>
+
+							<li role="separator" class="divider"></li>
+						{% endfor %}
+					</ul>
+
+				</div>
+			</div>
+			<div class="col-sm mt-1 mb-3">
+				<div class="dropdown">
+
+					<a href="{{path('produit_create')}}" class="btn btn-sm btn-primary">+ Ajouter un Produit</a>
+				</div>
+
+			</div>
+
+
+		</div>

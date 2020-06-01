@@ -12,9 +12,17 @@
 		 {% block stylesheets %}{% endblock %}
 		</head>
 		<body>
-			{% include 'navbar.html.twig' %}
+			
 
-
+			{% for label, messages in app.flashes %}
+<div class="container mt-2">
+<div class="alert alert-{{ label }}">
+{% for message in messages %}
+  <p>{{ message | raw }}</p>
+{% endfor %}
+</div>
+</div>
+			{% endfor %}
 			
 
 			{% block body %}{% endblock %}
@@ -23,7 +31,6 @@
 			<script src="/js/popper.min.js"></script>
 			<script src="/js/bootstrap.min.js"></script>
 			<script src="/js/login.js"></script>
-			<script src="/js/file.js"></script>
 			{% block javascripts %}{% endblock %}
 		</body>
 	</html>

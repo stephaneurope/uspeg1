@@ -1,0 +1,20 @@
+
+<!-- header #4 -->
+<header class="header mb-4 " id="header4">
+	<div class="center">
+		<div class="caption">
+			<h2 class="title display-3">{{name}}</h2>
+			
+		</div>	
+	</div>
+
+</header>
+			{% for label, messages in app.flashes %}
+<div class="container mt-2">
+<div class="alert alert-{{ label }}">
+{% for message in messages %}
+  <p class="mt-2">{{ message | raw }}</p>
+{% endfor %}
+</div>
+</div>
+			{% endfor %}

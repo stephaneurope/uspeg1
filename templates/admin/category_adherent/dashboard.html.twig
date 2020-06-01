@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block body %}
-
+{% set name = "Catégories d'adhérents" %}
+	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		<h1 class="text-center">Catégorie d'Adhérents<a class="ml-1" href="{{ path('category_adherent_create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h1>
-
+		<div class="container my-3"><h1 class="text-center">Catégorie d'Adhérents<a class="ml-1" href="{{ path('category_adherent_create') }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h1>
+</div>
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
 
@@ -27,6 +28,7 @@
 				<tr>
 					<th class="text-center">Id.</th>
 					<th class="text-center">Catégorie</th>
+					<th class="text-center">Montant de la cotisation</th>
 				
 					<th></th>
 				</tr>
@@ -39,13 +41,14 @@
 					<td class="text-center">{{c.id}}</td>
 					
 					<td class="text-center"><strong>{{c.title}}</strong></td>
+					<td class="text-center"><strong>{{c.montantcot}} €</strong></td>
 					<td>
 
 
 						
 						<a href="{{ path('category_adherent_modif', {'id': c.id}) }}" class="btn btn-sm btn-secondary"><i class="fas fa-pen"></i></a>
 
-						<a href="{{ path('category_adherent_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<a href="{{ path('category_adherent_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes vous sûr de vouloir supprimer cette catégorie ?"><i class="fas fa-trash-alt"></i></a>
 					</td>
 				</tr>
 			{% endfor %}

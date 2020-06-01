@@ -5,15 +5,18 @@ namespace App\Controller;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
-use App\Form\CategoryAdherentType;
 use App\Service\PaginationService;
-use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class AdminAdherentController extends AbstractController
 {
     /**
@@ -59,9 +62,6 @@ class AdminAdherentController extends AbstractController
             'categoryadherent' => $categoryadherent
         ]);
     }
-
-  
-    
 
      /**
      * Permet de modifier un adhérent

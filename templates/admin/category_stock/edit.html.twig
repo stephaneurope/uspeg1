@@ -9,10 +9,10 @@
 
 
 {% block body %}
-
+{% set name = 'Modification de la famille de produit' %}
+	{% include "header_title.html.twig" %}
 	<div class="container">
-		<h1 class="my-5">Modification du produit 
-	{{produit.title}}</h1>
+	
 
 
 		{{ form_start(form,{'attr': {'novalidate': 'novalidate'} }) }}

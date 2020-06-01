@@ -4,11 +4,10 @@
 {% endblock %}
 
 {% block body %}
-
+{% set name = 'Cotisation de '~ adherent.lastName ~' '~ adherent.firstName %}
+{% include "header_title.html.twig" %}
 	<div class="container mt-3">
-		<h1 class="text-center mb-5">Cotisation de
-			{{amount.adherent.lastName}}
-			{{amount.adherent.firstName}}</h1>
+		
 
 
 		<div class="container">

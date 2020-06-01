@@ -26,7 +26,7 @@ class Categoryproduit
 
     /**
      * 
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categoryproduit")
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categoryproduit", cascade={"remove"})
      */
     private $produit;
     

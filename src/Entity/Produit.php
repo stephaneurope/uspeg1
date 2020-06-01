@@ -55,7 +55,7 @@ class Produit
     private $qtemin;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="produit")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="produit",cascade={"remove"})
      */
     private $commandes;
 

@@ -1,36 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div>
-	<div class="container mt-3">
-		<div class="row ">
-		<div class="jumbotron">
-  <h1 class="display-3">Bienvenue sur le site de l'Uspeg</h1>
-  
-  <hr class="my-4">
-  <h3 class= "text-center">Choisissez votre catégorie</h3>
-</div>
-<h1></h1>
-			{% for c in catadherent %}
-				<div class="col-mb mr-2">
-					<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
 
-						<div class="card-body">
-							<a href="{{ path('category_adherent', {'id': c.id}) }}"><h2 class="card-title p-4">{{c.title}}</h2></a>
+	{% set name = 'Catégories' %}
+	{% include "header_title.html.twig" %}
 
-						</div>
-					</div>
-				</div>
 
-			{% endfor %}
+	<div>
+		<div class="container mt-3">
+			<div class="row ">
 
+
+				{% for c in catadherent %}
+
+					<!-- Include the above in your HEAD tag -->
+
+					<figure class="snip1560">
+						<img src="{{asset('image/category_adherent/soccer.jpg')}}" alt="pr-sample23"/>
+						<figcaption>
+
+							<h2>catégorie
+								<span>{{c.title}}</span>
+							</h2>
+							<h3>Voir</h3>
+						</figcaption>
+						<a href="{{ path('category_adherent', {'id': c.id}) }}" class="link"></a>
+					</figure>
+
+
+				{% endfor %}
+
+			</div>
 		</div>
-	</div>
+
+	{% endblock %}
 
 
-	
-
-
-
-{% endblock %}
 

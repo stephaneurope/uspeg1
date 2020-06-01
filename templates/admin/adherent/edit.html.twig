@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block body %}
-
+	{% set name = 'Modification de la fiche de ' ~ adherent.lastName ~  ' ' ~
+			adherent.firstName %}
+	{% include "header_title.html.twig" %}
 	<div class="container">
-		<h1 class="my-5">Modification de la fiche adhérent de
-			{{adherent.lastName}}
-			{{adherent.firstName}}</h1>
+	
 
 
 		{{ form_start(form) }}

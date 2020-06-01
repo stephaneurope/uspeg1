@@ -4,73 +4,25 @@
 {% endblock %}
 
 {% block body %}
+
+	{% set name = "Tous les articles" %}
+	{% include "header_title.html.twig" %}
+
 	<div class="container">
 
-	
-		<h1>Tous les articles</h1>
 
-<div class="row ">
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Familles d'articles
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							{% for c in categoryproduit %}
-								<li class="text-center">
-									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-								</li>
+		{% include "navbar_cat_prod.html.twig" %}
+		<div class="container">
+			<div class="row my-3">
+				{% for produit in pagination.data %}
 
-								<li role="separator" class="divider"></li>
-							{% endfor %}
-						</ul>
+					{% include 'admin/produit.html.twig' %}
+				{% endfor %}
 
-					</div>
-
-				</div>
-
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Equipes
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							{% for c in categoryproduit %}
-								<li class="text-center">
-									<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-								</li>
-
-								<li role="separator" class="divider"></li>
-							{% endfor %}
-						</ul>
-
-					</div>
-				</div>
-				<div class="col-sm mt-1 mb-3">
-					<div class="dropdown">
-
-						<a href="#" class="btn btn-sm btn-primary">+ Ajouter un Produit</a>
-					</div>
-
-				</div>
+			</div>
+		</div>
+		{{pagination.display()}}
 
 
-	</div>
-	<div class="container">
-<div class="row my-3">
-	{% for produit in pagination.data %}
-
-		{% include 'admin/produit.html.twig' %}
-	{% endfor %}
-
-	</div>
-	</div>
-	{{pagination.display()}}
-
-
-	
-
-{% endblock %}
+	{% endblock %}
 

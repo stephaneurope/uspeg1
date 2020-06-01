@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur la Boutique
+{% block title %}Famille de produit
 {% endblock %}
 
 {% block body %}
-
-
+{% set name = "Famille de produits" %}
+	{% include "header_title.html.twig" %}
 	
+	
+
 	<div class="container mt-3">
-		<h1 class="text-center">Catégorie</h1>
-
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Rechercher ..."/>
-
-		</div>
 
 		<div class="container">
 			<div class="row">
@@ -35,9 +31,13 @@
 			</thead>
 			<tbody>
 
+
 				{% for categories in category %}
+			
+
 
 					<td class="text-center">{{categories.id}}</td>
+					
 					<td class="text-center">
 						<a href="#">{{categories.title}}
 							</a>
@@ -47,12 +47,16 @@
 					<td>
 
 
-						
-						<a href="{{ path('category_produit_modif', {'id': categories.id}) }}" class="btn btn-sm btn-secondary">modifier</a>
+	
+                          <a href="{{ path('category_produit_modif', {'id': categories.id}) }}" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
+						<a href="{{ path('category_produit_delete', {'id': categories.id}) }}" class="btn btn-sm btn-danger" data-confirm="La suppression de la catégorie supprimera tous les produits liés à celle-ci ! Etes-vous certain de vouloir la supprimer?" ><i class="fas fa-trash-alt"></i></a>
+					
 
-						<a href="{{ path('category_produit_delete', {'id': categories.id}) }}" class="btn btn-sm btn-danger">supprimer</a>
+					
 					</td>
+					
 				</tr>
+			
 			{% endfor %}
 
 		</tbody>

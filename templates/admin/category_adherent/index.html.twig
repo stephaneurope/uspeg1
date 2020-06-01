@@ -4,7 +4,8 @@
 {% endblock %}
 
 {% block body %}
-
+{% set name = 'Liste des adhérents de la catégorie ' ~ categoryadherent.title %}
+	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
 		<h1 class="text-center">Liste des adhérents de la catégorie {{categoryadherent.title}}</h1>

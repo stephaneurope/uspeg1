@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>{{categoryproduit.title}}</h1>
 
-	</div>
+{% set name = categoryproduit.title  %}
+	{% include "header_title.html.twig" %}
+	
 	<div class="container">
 	<div class="row ">
 				<div class="col-sm mt-1 mb-3">

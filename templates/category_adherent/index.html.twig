@@ -4,10 +4,11 @@
 {% endblock %}
 
 {% block body %}
-
+	{% set name = 'Catégorie ' ~ categoryadherent.title %}
+	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		<h1 class="text-center">Liste des adhérents de la catégorie {{categoryadherent.title}}</h1>
+		
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
@@ -61,10 +62,10 @@
 
 				</div>
 
-		<table class="table table-hover">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th class="text-center">Id.</th>
+				
 					<th class="text-center">Nom</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Catégorie</th>
@@ -77,7 +78,7 @@
 
 				{% for ad in adherent %}
 {% if (categoryadherent.title is same as(ad.subcategory)) %}
-					<td class="text-center">{{ad.id}}</td>
+				
 					<td class="text-center">
 						<a href="#">{{ad.firstName}}
 							{{ad.lastName}}</a>
@@ -85,7 +86,7 @@
 					<td class="text-center">{{ad.email}}</td>
 					<td class="text-center">{{ad.subcategory}}</td>
 					<td class="text-center">
-						<span class="badge badge-primary">{{ad.toNumber}}</span>
+						<span class="">{{ad.toNumber}}</span>
 
 					</td>
 					<td class="text-center">Payée</td>
