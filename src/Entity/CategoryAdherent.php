@@ -26,6 +26,11 @@ class CategoryAdherent
      */
     private $montantcot;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pack")
+     */
+    private $pack;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +65,18 @@ class CategoryAdherent
     public function setMontantcot(int $montantcot): self
     {
         $this->montantcot = $montantcot;
+
+        return $this;
+    }
+
+    public function getPack(): ?Pack
+    {
+        return $this->pack;
+    }
+
+    public function setPack(?Pack $pack): self
+    {
+        $this->pack = $pack;
 
         return $this;
     }

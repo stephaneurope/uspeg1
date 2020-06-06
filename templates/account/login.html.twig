@@ -8,17 +8,16 @@
 
 	<!--Intro Section-->
 	<section class="view intro-2">
-  
+
 		<div class="mask rgba-stylish-strong h-100 d-flex justify-content-center align-items-center">
 			<div class="container">
- 
+
 				<div class="row">
-           
-					<div
-						class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
-  {% if hasError %}
-<div class="alert alert-danger">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide!</div>
-{% endif %}
+
+					<div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
+						{% if hasError %}
+							<div class="alert alert-danger">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide!</div>
+						{% endif %}
 						<!--Form with header-->
 						<div class="cardlogin wow fadeIn" data-wow-delay="0.3s">
 							<div
@@ -48,7 +47,9 @@
 									<div class="text-center">
 										<button class="btn btn-success btn-lg text-light">Connexion</button>
 										<hr>
-<div style="color:white;font:bold;"><p>Si vous avez oubliez votre mot de passe , merci de contacter l'administarteur du site.</p></div>
+										<div style="color:white;font:bold;">
+											<p>Si vous avez oubliez votre mot de passe , merci de contacter l'administarteur du site.</p>
+										</div>
 
 									</div>
 
@@ -66,5 +67,4 @@
 
 </header>
 <!--Main Navigation-->{% endblock %}
-
 

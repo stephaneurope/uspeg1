@@ -27,7 +27,7 @@ class CommandeType extends ApplicationType
                 EntityType::class,
                 [
                     'class' => Produit::class,
-                    'choice_label' => 'title'
+                    'choice_label' => 'code'
 
                 ]
             );

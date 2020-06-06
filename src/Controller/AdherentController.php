@@ -53,6 +53,7 @@ class AdherentController extends AbstractController
         $adherent = $repo->find($id);
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
+       
 
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,

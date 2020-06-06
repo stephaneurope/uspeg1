@@ -8,7 +8,7 @@
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-	
+
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
@@ -55,7 +55,7 @@
 
 					</div>
 				</div>
-	<div class="col-sm mt-1 mb-3">
+				<div class="col-sm mt-1 mb-3">
 					<div class="dropdown">
 
 						<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
@@ -63,49 +63,51 @@
 
 				</div>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					
-					<th class="text-center">Nom</th>
-					<th class="text-center">Email</th>
-					<th class="text-center">Catégorie</th>
-					<th class="text-center">Numéro</th>
-					<th class="text-center">Cotisation</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+				<table class="table table-striped">
+					<thead>
+						<tr>
 
-				{% for ad in pagination.data %}
+							<th class="text-center">Nom</th>
+							<th class="text-center">Email</th>
+							<th class="text-center">Catégorie</th>
+							<th class="text-center">Numéro</th>
+							<th class="text-center">Cotisation</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 
-					
-					<td class="text-center">
-						{{ad.firstName}}
-							{{ad.lastName}}
-					</td>
-					<td class="text-center">{{ad.email}}</td>
-					<td class="text-center">{{ad.subcategory}}</td>
-					<td class="text-center">
-						<span class="">{{ad.toNumber}}</span>
-
-					</td>
-					<td class="text-center">Payée</td>
-					<td>
+						{% for ad in pagination.data %}
 
 
-						<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
-							<i class="fas fa-eye"></i>
-						</a>
-						
-					</td>
-				</tr>
-			{% endfor %}
+							<td class="text-center">
+								{{ad.firstName}}
+								{{ad.lastName}}
+							</td>
+							<td class="text-center">{{ad.email}}</td>
+							<td class="text-center">{{ad.subcategory}}</td>
+							<td class="text-center">
+								<span class="">{{ad.toNumber}}</span>
 
-		</tbody>
-	</table></div>
-	{{pagination.display()}}
+							</td>
+							<td class="text-center">Payée</td>
+							<td>
 
-{% endblock %}
+
+								<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
+									<i class="fas fa-eye"></i>
+								</a>
+
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+		{{pagination.display()}}
+
+	{% endblock %}
+
 
 

@@ -15,9 +15,8 @@
 	<div class="container mt-3 table-responsive-md">
 
 
-	
 		<div class="container mt-2">
-		
+
 
 			<table class="table mt-5" class="table table-hover">
 				<thead>
@@ -133,6 +132,8 @@
 					</a>
 				</h2>
 
+{% include "partials/equipement.html.twig" %}
+
 
 				<div class="container">
 					<div class="row">
@@ -141,6 +142,7 @@
 
 					</div>
 				</div>
+
 				{% for c in adherent.commandes|slice(0, 5) %}
 					{% if (c.adherent.id is same as(adherent.id)) %}
 						<table class="table table-hover">
@@ -223,6 +225,7 @@
 							</strong>
 							{% for cat in cat %}
 								{% if (cat.title is same as(adherent.subcategory)) %}
+
 									{% set montant_total =  'cat.montantcot' %}
 									<h3>
 										<span class="badge badge-info">{{cat.montantcot}}€</span>
@@ -285,5 +288,3 @@
 
 	</div>
 </div>{% endfor %}<button class="btn btn-outline-primary mt-3" value="Précédent" onclick="history.go(-1)">Précédent</button>{% endblock %}
-
-

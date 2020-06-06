@@ -36,7 +36,8 @@ class CommandeController extends AbstractController
 
 
         $commande = new Commande();
-        $commande->setDatecommande(new \DateTime('now'));
+        
+
 
 
         $form = $this->createForm(CommandeType::class, $commande);

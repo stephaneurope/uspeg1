@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block body %}
-{% set name = 'Adhérents' %}
+	{% set name = 'Adhérents' %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		
+
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Rechercher ..."/>
@@ -112,12 +112,11 @@
 
 				</tbody>
 			</table>
-			</div>
-			{{pagination.display()}}
-
 		</div>
+		{{pagination.display()}}
 
-	
+	</div>
 
-	{% endblock %}
+
+{% endblock %}
 
