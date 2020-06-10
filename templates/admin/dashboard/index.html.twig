@@ -55,7 +55,7 @@
                         </thead>
                         <tbody>
                              
-                            <tr class="text-warning" >
+                            <tr class="text-light" >
                                 <td>Adhérents</td>
                                 <td>
                                    
@@ -70,6 +70,24 @@
                                 <td>
                                    
                                    <a href="{{ path('category_adherent_dashboard')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
+                                </td>
+                                
+                            </tr>
+                            
+                            <tr class="text-light">
+                                <td>Attribution Matèriel</td>
+                                <td>
+                                   
+                                   <a href="{{ path('commande')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
+                                </td>
+                               
+                            </tr>
+                             <tr class="text-light" >
+                                <td>Equipes</td>
+                                <td>
+                                   
+                                   <a href="{{ path('admin_team')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
+                                   <a href="{{ path('admin_team_create')}}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></a>
                                 </td>
                                 
                             </tr>
@@ -110,14 +128,6 @@
                                
                             </tr>
 
-                            <tr>
-                                <td>Attribution Matèriel</td>
-                                <td>
-                                   
-                                   <a href="{{ path('commande')}}" class="btn btn-sm btn-success text-primary"><i class="fas fa-pen"></i></a>
-                                </td>
-                               
-                            </tr>
                          
                         </tbody>
                     </table>

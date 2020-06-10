@@ -62,15 +62,24 @@ class AdminStockController extends AbstractController
 
             //recupere l'image
             $image = $produit->getImageProduit();
+            
+            if ($image != null) {
             //recupere le file soumis
             $file = $image->getFile();
+            
             //je crais un nom unique
-            $name = md5(uniqid()) . '.' . $file->guessExtension();
+           
+                $name = md5(uniqid()) . '.' . $file->guessExtension();
             //deplace le fichier
             $file->move($this->getParameter('upload_directory'), $name);
             //je donne le nom a l'image
 
             $image->setName($name);
+            }else{
+
+            } 
+            
+            
 
 
 
@@ -92,11 +101,18 @@ class AdminStockController extends AbstractController
      * Permet de modifier un produit
      *
      * @Route("/admin/produit/{id}/modif", name="produit_modif")
-     * 
+     * @param ProduitRepository $repo
      * @return Response
      */
-    public function modif(Produit $produit, Request $request, ObjectManager $manager)
+    public function modif(Produit $produit, Request $request, ObjectManager $manager,$id)
     {
+        $nameold=null;
+        $repo = $this->getDoctrine()->getRepository(Produit::class);
+            $produit = $repo->find($id);
+            if ($produit->getImageProduit() != null) {
+                $nameold= $produit->getImageProduit()->getName();
+            }else{}
+            
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -107,12 +123,16 @@ class AdminStockController extends AbstractController
             $produit = $form->getData();
 
             $imageproduit = $form->get("imageProduit")->getData();
+            
 
-
-            if ($produit->getImageProduit()->getFile() != null) {
+            if ($produit->getImageProduit() != null) {
                 //dd($produit->getImageProduit('file'));
+
+               
                 //recupere l'image
                 $image = $produit->getImageProduit();
+                
+                if ($image != null) {
                 //recupere le file soumis
                 $file = $image->getFile();
                 //je crais un nom unique
@@ -122,6 +142,11 @@ class AdminStockController extends AbstractController
                 //je donne le nom a l'image
 
                 $image->setName($name);
+                if ($nameold != null) {
+                    unlink("image/produits/$nameold"); //ici je supprime le fichier
+                }else{}
+               
+                }else{}
             } else // aucune nouvelle image envoyée
                 //on recupère l'ancienne image
 

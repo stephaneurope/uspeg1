@@ -14,10 +14,7 @@
 				</a>
 			</h1>
 		</div>
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Rechercher ..."/>
-
-		</div>
+		
 
 		<div class="container">
 			<div class="row">
@@ -30,9 +27,10 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th class="text-center">Id.</th>
+					
 					<th class="text-center">Catégorie</th>
 					<th class="text-center">Montant de la cotisation</th>
+					
 
 					<th></th>
 				</tr>
@@ -42,15 +40,16 @@
 				{% for c in catadherent %}
 
 
-					<td class="text-center">{{c.id}}</td>
+				
 
 					<td class="text-center">
 						<strong>{{c.title}}</strong>
 					</td>
 					<td class="text-center">
-						<strong>{{c.montantcot}}
+						<strong>{{c.montantcot}} 
 							€</strong>
 					</td>
+					
 					<td>
 
 

@@ -84,6 +84,8 @@ class AdminAdherentController extends AbstractController
                 'success',
                 "L'adherent {$adherent->getLastName()} {$adherent->getFirstName()} a bien été modifié !"
             );
+
+            return $this->redirectToRoute("admin/adherent");
         }
 
 
@@ -112,7 +114,7 @@ class AdminAdherentController extends AbstractController
             "L'adhérent à bien été supprimé !"
         );
 
-        return $this->redirectToRoute("adherent");
+        return $this->redirectToRoute("admin/adherent");
     }
 
 

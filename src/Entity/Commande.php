@@ -17,7 +17,7 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $datecommande;
 
@@ -35,6 +35,11 @@ class Commande
      * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="commandes")
      */
     private $produit;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateattribution;
 
     public function getId(): ?int
     {
@@ -85,6 +90,18 @@ class Commande
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getDateattribution(): ?\DateTimeInterface
+    {
+        return $this->dateattribution;
+    }
+
+    public function setDateattribution(?\DateTimeInterface $dateattribution): self
+    {
+        $this->dateattribution = $dateattribution;
 
         return $this;
     }

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste d'équipes
+{% endblock %}
+
+{% block body %}
+	{% set name = "Liste d'équipes" %}
+	{% include "header_title.html.twig" %}
+
+	<div class="container mt-3">
+		<div class="container my-3">
+			<h1 class="text-center">Equipe<a class="ml-1" href="{{ path('admin_team_create') }}" class="btn btn-sm btn-success">
+					<i class="fas fa-plus"></i>
+				</a>
+			</h1>
+		</div>
+		
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm"></div>
+				<div class="col-sm"></div>
+
+			</div>
+		</div>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					
+					<th class="text-center">Liste d'équipes</th>
+					
+					
+
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for team in team %}
+
+					<td class="text-center">
+						<strong>{{team.name}}</strong>
+					</td>
+					
+					
+					<td>
+
+
+						<a href="{{ path('admin_team_edit', {'id': team.id}) }}" class="btn btn-sm btn-secondary">
+							<i class="fas fa-pen"></i>
+						</a>
+
+						<a href="{{ path('admin_team_delete', {'id': team.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes vous sûr de vouloir supprimer cette équipe ?">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+
+</div>{% endblock %}
+

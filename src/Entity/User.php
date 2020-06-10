@@ -67,7 +67,7 @@ class User implements UserInterface
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users",cascade={"persist"})
      */
     private $userRoles;
 
@@ -163,7 +163,7 @@ class User implements UserInterface
 
         return $roles;
     }
-
+  
     public function getpassword()
     {
         return $this->hash;

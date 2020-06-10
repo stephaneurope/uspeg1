@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'équipe{% endblock %}
+
+{% block body %}
+{% set name = "Modification de l'équipe" %}
+	{% include "header_title.html.twig" %}
+
+<div class="container">
+	
+
+
+	{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+	{{ form_widget(form) }}
+
+		<button class="btn btn-primary my-5" type="submit">
+			<i class="fas fa-check"></i>
+			Enregistrer les modifications
+		</button>
+	</div>
+
+	{{ form_end(form) }}
+
+    </div>
+
+
+</div>{% endblock %}

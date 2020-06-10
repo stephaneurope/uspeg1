@@ -126,37 +126,85 @@
 
 	<div class="container mt-3">
 		<div class="row">
-			<div class="col-sm mb-3">
-				<h2 class="text-center">Equipements<a href="{{ path('commande_create',{'id':adherent.id}) }}" class="btn btn-sm btn-success ml-2">
+			<div class="col-sm">
+				<h2 class="text-center">Attribution<a href="{{ path('commande_create',{'id':adherent.id}) }}" class="btn btn-sm btn-success ml-2">
 						<i class="fas fa-plus"></i>
-					</a>
+					</a>{% include "partials/equipement.html.twig" %}
 				</h2>
+	
 
-{% include "partials/equipement.html.twig" %}
+				<table class="table table-hover">
+	
+					<thead>
+						<tr>
+
+							<th class="text-center">distribué le</th>
+							<th class="text-center">Produit</th>
+							<th class="text-center">Catégorie</th>
+							<th class="text-center">Quantité</th>
+
+							<th></th>
+
+						</tr>
 
 
-				<div class="container">
-					<div class="row">
-						<div class="col-sm"></div>
-						<div class="col-sm"></div>
+					</thead>
+					
+					{% for c in adherent.commandes|slice(0, 5) %}
+						{% if (c.adherent.id is same as(adherent.id)) %}
+							{% if c.dateattribution  != null %}
+								<tbody>
 
-					</div>
-				</div>
 
+									<td class="text-center">
+										{{c.datecommande|date("d/m/Y")}}
+
+									</td>
+									<td class="text-center">{{c.produit.title}}</td>
+									<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+									<td class="text-center">
+										<span class="">{{c.qte}}</span>
+
+									</td>
+
+									<td>
+										<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+											<i class="fas fa-trash-alt"></i>
+										</a>
+									</td>
+
+								</tbody>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+
+				</tr>
+
+
+			</table>
+
+
+		</div>
+		<div class="col-sm">
+			<h2 class="text-center">Commande en cours
+			</h2>
+
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+
+						<th class="text-center">Date</th>
+						<th class="text-center">Produit</th>
+						<th class="text-center">Catégorie</th>
+						<th class="text-center">Quantité</th>
+
+						<th></th>
+					</tr>
+				</thead>
 				{% for c in adherent.commandes|slice(0, 5) %}
 					{% if (c.adherent.id is same as(adherent.id)) %}
-						<table class="table table-hover">
-							<thead>
-								<tr>
-
-									<th class="text-center">Date</th>
-									<th class="text-center">Produit</th>
-									<th class="text-center">Catégorie</th>
-									<th class="text-center">Quantité</th>
-
-									<th></th>
-								</tr>
-							</thead>
+						{% if c.dateattribution == null %}
 							<tbody>
 
 
@@ -174,26 +222,25 @@
 								<td>
 
 
-									<a href="{{ path('commande_show', {'id': c.id}) }}" class="btn btn-sm btn-primary">
-										<i class="fas fa-eye"></i>
+									<a href="{{ path('commande_validate', {'id': c.id}) }}" class="btn btn-sm btn-primary">
+										<i class="fas fa-angle-down"></i>
 									</a>
 
 
-									<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
-										<i class="fas fa-trash-alt"></i>
-									</a>
 								</td>
+
 							</tbody>
-						</tr>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			</tr>
 
 
-					</tbody>
-				</table>
-			{% endif %}
-		{% endfor %}
-
+		</table>
 
 	</div>
+
+
 	<div class="col-sm">
 
 		<h2 class="text-center">Cotisation
@@ -287,4 +334,8 @@
 		</div>
 
 	</div>
-</div>{% endfor %}<button class="btn btn-outline-primary mt-3" value="Précédent" onclick="history.go(-1)">Précédent</button>{% endblock %}
+</div>{% endfor %}
+
+
+{% endblock %}
+

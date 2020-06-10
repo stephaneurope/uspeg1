@@ -20,37 +20,40 @@ class ProduitType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class,$this->getConfiguration("Produit","Nom du produit"))
-            ->add('price',IntegerType::class,$this->getConfiguration("Prix","Tapez le montant"))
-            ->add('code',TextType::class,$this->getConfiguration("Code barre","Tapez le code barre"))
-            ->add('description',TextType::class,$this->getConfiguration("Description","Tapez la description"))
-            ->add('qteinit',IntegerType::class,$this->getConfiguration("Quantité en stock","Quantité en stock"))
+            ->add('title', TextType::class, $this->getConfiguration("Produit", "Nom du produit"))
+            ->add('price', IntegerType::class, $this->getConfiguration("Prix", "Tapez le montant"))
+            ->add('code', TextType::class, $this->getConfiguration("Code barre", "Tapez le code barre"))
+            ->add('description', TextType::class, $this->getConfiguration("Description", "Tapez la description"))
+            ->add('qteinit', IntegerType::class, $this->getConfiguration("Quantité en stock", "Quantité en stock"))
             ->add('stockplus', IntegerType::class, [
                 'label' => 'Ajouter ou Enlever du Stock',
                 'mapped' => false,
                 'required' => false
-               
-    ])
-            /*->add('image',FileType::class,[
-                'data_class'=>null,
-                'label' => 'Choisissez votre fichier'
-            ])*/
-            ->add('qtemin',IntegerType::class,$this->getConfiguration("Quantité minimale","Quantité minimale"))
-            ->add('categoryproduit',EntityType::class
-            , [
-                'class' => Categoryproduit::class,
-                'choice_label' => 'title',
-                'label' => 'Catégorie du produit'
-                
-                ])
-            ->add('imageProduit',ImageProduitType::class,
-            [     'label' => false
-                 
-               
-            
-                
-               ])
-        ;
+
+            ])
+
+            ->add('taille', TextType::class, $this->getConfiguration("Taille", "Taille"))
+            ->add('qtemin', IntegerType::class, $this->getConfiguration("Quantité minimale", "Quantité minimale"))
+            ->add(
+                'categoryproduit',
+                EntityType::class,
+                [
+                    'class' => Categoryproduit::class,
+                    'choice_label' => 'title',
+                    'label' => 'Catégorie du produit'
+
+                ]
+            )
+            ->add(
+                'imageProduit',
+                ImageProduitType::class,
+                [
+                    'required'   =>false,
+                    
+                   
+
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

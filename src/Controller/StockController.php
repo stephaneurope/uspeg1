@@ -54,15 +54,27 @@ class StockController extends AbstractController
      * Permet de suprimer un produit
      * 
      * @Route("/stock/produit/{id}/delete", name="produit_delete")
-     * 
+     * @param ProduitRepository $repo
      * @param Produit $produit
      * @param ObjectManager $manager
      * @return Response
      */
-    public function produit_delete(Produit $produit, ObjectManager $manager)
+    public function produit_delete(Produit $produit, ObjectManager $manager,$id)
     {
+        $repo = $this->getDoctrine()->getRepository(Produit::class);
+        $produit = $repo->find($id);
+       $name= $produit->getImageProduit()->getName();
+     
+      
         $manager->remove($produit);
+        
+        unlink("image/produits/$name"); //ici je supprime le fichier
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "Le produit  a bien été supprimé !"
+        );
 
         return $this->redirectToRoute("admin/produit_edit");
     }

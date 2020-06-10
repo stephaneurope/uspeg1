@@ -29,22 +29,18 @@ class CommandeController extends AbstractController
     public function create(Request $request, ObjectManager $manager, $id)
     {
 
-
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
 
-
-
         $commande = new Commande();
         
-
-
 
         $form = $this->createForm(CommandeType::class, $commande);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() and $form->isValid() ) {
+        if ($form->isSubmitted() and $form->isValid()) {
+            
             /*Recupere l'Id du produit selectionné*/
             $p = $form['produit']->getData()->getId();
             /*recupere le produit et lui ajoute l'Id du produit selectionné */
@@ -55,37 +51,108 @@ class CommandeController extends AbstractController
 
 
             /*mis a jour de la quantité du stock initial */
-            if($stockmoins <= $produit->getQteinit()){
-            $produit->setQteinit($produit->getQteinit() - $stockmoins);
+            if ($stockmoins <= $produit->getQteinit()) {
+                $produit->setQteinit($produit->getQteinit() - $stockmoins);
             
 
-            /*Attribue l'id de l'adherent a la commande*/
-            $commande->setAdherent($adherent);
+                /*Attribue l'id de l'adherent a la commande*/
+                $commande->setAdherent($adherent);
 
+                $commande->setDateattribution(new \DateTime('now'));
+                $manager->persist($commande);
+
+                $manager->flush();
+
+                $this->AddFlash(
+                    'success',
+                    "Le produit a bien été enregistré  !"
+                );
+                return $this->redirectToRoute('adherent_show', [
+                    'id' => $adherent->getId(),
+                ]);
+            } else
+                $commande->setAdherent($adherent);
+                $commande->setDatecommande(new \DateTime('now'));
 
             $manager->persist($commande);
 
             $manager->flush();
 
             $this->AddFlash(
-                'success',
-                "Le produit a bien été enregistré  !"
+                'danger',
+                "Vous n'avez pas assez de produit en stock , le produit est passé en commande !"
             );
-
-        }else $this->AddFlash(
-            'danger',
-            "Vous n'avez pas assez de produit en stock  !");
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $adherent->getId(),
+            ]);
         }
 
         return $this->render("commande/create.html.twig", [
             'adherent' => $adherent,
             'commande' => $commande,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Permet de valider une commande
+     * 
+     * @Route("/commande/adherent/{id}/validate/", name="commande_validate")
+     */
+    public function validate(Commande $commande,Request $request,ObjectManager $manager)
+    {
+        $form = $this->createForm(CommandeType::class, $commande);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+             /*Recupere l'Id du produit selectionné*/
+             $p = $form['produit']->getData()->getId();
+             /*recupere le produit et lui ajoute l'Id du produit selectionné */
+             $repo1 = $this->getDoctrine()->getRepository(Produit::class);
+             $produit = $repo1->find($p);
+             /*Recupere la quantité du produit attribué a l'adherent */
+             $stockmoins = $form['qte']->getData();
+ 
+ 
+             /*mis a jour de la quantité du stock initial */
+             if ($stockmoins <= $produit->getQteinit()) {
+                 $produit->setQteinit($produit->getQteinit() - $stockmoins);
+             
+ 
+                 $commande->setDateattribution(new \DateTime('now'));
+                 $manager->persist($commande);
+ 
+                 $manager->flush();
+ 
+                 $this->AddFlash(
+                     'success',
+                     "Le produit a bien été enregistré  !"
+                 );
+                 return $this->redirectToRoute('adherent_show', [
+                     'id' => $commande->getAdherent()->getId(),
+                 ]);
+             } else
+                 
+ 
+             $this->AddFlash(
+                 'danger',
+                 "Vous n'avez pas assez de produit en stock , le produit est toujours en commande !"
+             );
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $commande->getAdherent()->getId(),
+            ]);
+        }
+        
+
+        return $this->render("commande/validate.html.twig", [
+           'commande' => $commande,
+           'form' => $form->createView(),
         ]);
     }
 
 
-    
+
+
 
     /**
      * Permet d'afficher un produit d'une commande lié a un adhérent

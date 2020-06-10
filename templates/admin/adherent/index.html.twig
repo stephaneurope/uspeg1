@@ -73,7 +73,7 @@
 							<th class="text-center">Email</th>
 							<th class="text-center">Catégorie</th>
 							<th class="text-center">Numéro</th>
-							<th class="text-center">Cotisation</th>
+							
 							<th></th>
 						</tr>
 					</thead>
@@ -89,10 +89,10 @@
 							<td class="text-center">{{ad.email}}</td>
 							<td class="text-center">{{ad.subcategory}}</td>
 							<td class="text-center">
-								<span class="badge badge-primary">{{ad.toNumber}}</span>
+								<span class="">{{ad.toNumber}}</span>
 
 							</td>
-							<td class="text-center">Payée</td>
+							
 							<td>
 
 
@@ -103,7 +103,7 @@
 									<i class="fas fa-pen"></i>
 								</a>
 
-								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger">
+								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adhérent. En êtes vous certains ?">
 									<i class="fas fa-trash-alt"></i>
 								</a>
 							</td>

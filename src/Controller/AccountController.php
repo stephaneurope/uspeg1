@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
+use App\Entity\Role;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
 use Symfony\Component\Form\FormError;
@@ -64,36 +65,44 @@ class AccountController extends AbstractController
      * @Route("/register", name="account_register")
      * 
      * @IsGranted("ROLE_ADMIN")
+     * @param AdherentRepository $repo
      * 
      * @return Response
      */
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
+        $repo = $this->getDoctrine()->getRepository(Role::class);
+        $adminRole = $repo->find(1);
 
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $p = $form['add']->getData();
+
             $hash = $encoder->encodePassword($user,$user->getHash());
             $user->setHash($hash);
+           if( $p === 1){
+            $user->addUserRole($adminRole);
+           }
 
             $manager->persist($user);
             $manager->flush();
 
             $this->addFlash(
                 'success',
-                "Votre compte a bien été créé ! Vous pouvez maintenant vous connectez !"
+                "Le compte a bien été créé ! Le nouvel utilisateur peut maintenant se connectez !"
             );
-            return $this->redirectToRoute("account_login");
+            return $this->redirectToRoute("home");
         }
 
         return $this->render('account/registration.html.twig', [
             'form'=> $form->createView()
         ]);
     }
-
+   
     /**
      * Permet d'afficher et de traiter le formulaire de modification de profil
      * 

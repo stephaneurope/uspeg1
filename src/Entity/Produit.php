@@ -70,6 +70,11 @@ class Produit
      */
     private $imageProduit;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $taille;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -225,6 +230,18 @@ class Produit
     public function setImageProduit($imageProduit)
     {
         $this->imageProduit = $imageProduit;
+
+        return $this;
+    }
+
+    public function getTaille(): ?string
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(?string $taille): self
+    {
+        $this->taille = $taille;
 
         return $this;
     }

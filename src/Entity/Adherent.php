@@ -127,12 +127,12 @@ class Adherent
     private $clubOut;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="adherent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="adherent", cascade="remove")
      */
     private $commandes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Amount", mappedBy="adherent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Amount", mappedBy="adherent", cascade="remove")
      */
     private $amounts;
 
