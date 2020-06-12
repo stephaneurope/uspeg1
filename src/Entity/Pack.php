@@ -76,8 +76,7 @@ class Pack
 
     /**
      * 
-     * @ORM\OneToMany(targetEntity="App\Entity\CategoryAdherent", mappedBy="pack",orphanRemoval=true)
-     * @JoinColumn(name="pack_id", referencedColumnName="pack_id",nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\CategoryAdherent", mappedBy="pack")
      */
     private $categoryAdherents;
 
@@ -251,6 +250,13 @@ class Pack
             }
         }
 
+        return $this;
+    }
+    public function removeCategoryAdherents(): self {
+        foreach ($this->getCategoryAdherents() AS $categoryadherent) {
+            $this->removeCategoryAdherent($categoryadherent);
+        }
+  
         return $this;
     }
 }

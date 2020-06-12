@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Team;
 use App\Entity\Adherent;
 use App\Entity\CategoryAdherent;
-use App\Form\CategoryAdherentType;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,13 +32,15 @@ class CategoryAdherentController extends AbstractController
 
         $repo1 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo1->findAll();
-
+        $repo2 = $this->getDoctrine()->getRepository(Team::class);
+        $team1 = $repo2->findAll();
 
 
         return $this->render('category_adherent/index.html.twig', [
             'adherent' => $adherent,
             'catadherent' => $catadherent,
-            'categoryadherent' => $categoryadherent
+            'categoryadherent' => $categoryadherent,
+            'team1' => $team1
         ]);
     }
 

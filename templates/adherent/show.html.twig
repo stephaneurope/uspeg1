@@ -10,8 +10,10 @@
 {% set name = 'Fiche de '~ adherent.lastName ~' '~ adherent.firstName %}
 {% include "header_title.html.twig" %}
 <div class="container">
-
-
+{% if adherent.team != null %}
+<h4 class="text-center">Attribué à l'équipe {{adherent.team.name}}</h4>
+{% else %} <h4 class="text-center">Non associé à une équipe</h4>
+	{% endif %}
 	<div class="container mt-3 table-responsive-md">
 
 

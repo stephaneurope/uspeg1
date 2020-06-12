@@ -6,34 +6,34 @@
 	{% include "header_title.html.twig" %}
 
 
-	<div>
-		<div class="container mt-3">
-			<div class="row ">
+	<div class="container mt-3">
+		<div class="row ">
 
 
-				{% for c in catadherent %}
+			{% for c in catadherent %}
 
-					<!-- Include the above in your HEAD tag -->
+				<!-- Include the above in your HEAD tag -->
 
-					<figure class="snip1560">
-						<img src="{{asset('image/category_adherent/soccer.jpg')}}" alt="pr-sample23"/>
-						<figcaption>
+				<figure class="snip1560">
+					<img src="{{asset('image/category_adherent/soccer.jpg')}}" alt="pr-sample23"/>
+					<figcaption>
 
-							<h2>catégorie
-								<span>{{c.title}}</span>
-							</h2>
-							<h3>Voir</h3>
-						</figcaption>
-						<a href="{{ path('category_adherent', {'id': c.id}) }}" class="link"></a>
-					</figure>
+						<h2>catégorie
+							<span>{{c.title}}</span>
+						</h2>
+						<h3>Voir</h3>
+					</figcaption>
+					<a href="{{ path('category_adherent', {'id': c.id}) }}" class="link"></a>
+				</figure>
 
 
-				{% endfor %}
+			{% endfor %}
 
-			</div>
 		</div>
 
+
 	{% endblock %}
+
 
 
 

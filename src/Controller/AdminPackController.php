@@ -2,20 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\CategoryAdherent;
-use App\Entity\Categoryproduit;
 use App\Entity\Pack;
 use App\Form\PackType;
+use App\Entity\Categoryproduit;
+use App\Entity\CategoryAdherent;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class AdminPackController extends AbstractController
 {
     /**
      * Permet d'afficher la liste de pack
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/pack", name="admin_pack")
      */
     public function index()
@@ -35,7 +37,7 @@ class AdminPackController extends AbstractController
      * Permet de modifier un pack
      * 
      * @Route("/admin/pack/{id}/edit", name="pack_edit")
-     * 
+     * @IsGranted("ROLE_ADMIN")
      * @return Response
      */
     public function edit(Pack $pack,Request $request,ObjectManager $manager)
@@ -59,8 +61,8 @@ class AdminPackController extends AbstractController
         ]);
     }
     /**
-     * Permet de suprimer une catégorie
-     * 
+     * Permet de suprimer un pack
+     * @IsGranted("ROLE_ADMIN")
      * @Route("admin/pack/{id}/delete", name="pack_delete")
      *
      * @param Pack $pack
@@ -71,7 +73,7 @@ class AdminPackController extends AbstractController
      */
     public function delete(Pack $pack,ObjectManager $manager)
     {
-       
+        $pack->removeCategoryAdherents();
         $manager->remove($pack);
     
 
@@ -84,10 +86,10 @@ class AdminPackController extends AbstractController
     }
 
     /**
-     * Permet d'ajouter un produit
+     * Permet d'ajouter un pack
      * 
      * @Route("admin/pack/new", name="pack_create")
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @return Response
      */
     public function new(Request $request, ObjectManager $manager)

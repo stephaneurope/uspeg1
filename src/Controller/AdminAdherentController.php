@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Team;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
@@ -32,10 +33,14 @@ class AdminAdherentController extends AbstractController
 
             $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $catadherent = $repo->findAll();
+        $repo2 = $this->getDoctrine()->getRepository(Team::class);
+        $team1 = $repo2->findAll();
+
 
         return $this->render('/admin/adherent/index.html.twig', [
             'pagination' => $pagination,
-            'catadherent'  => $catadherent
+            'catadherent'  => $catadherent,
+            'team1' => $team1
         ]);
     }
 
@@ -53,13 +58,16 @@ class AdminAdherentController extends AbstractController
 
         $repo1 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo1->findAll();
+        $repo2 = $this->getDoctrine()->getRepository(Team::class);
+        $team1 = $repo2->findAll();
 
 
 
         return $this->render('admin/category_adherent/index.html.twig', [
             'adherent' => $adherent,
             'catadherent' => $catadherent,
-            'categoryadherent' => $categoryadherent
+            'categoryadherent' => $categoryadherent,
+            'team1' => $team1
         ]);
     }
 
@@ -85,7 +93,7 @@ class AdminAdherentController extends AbstractController
                 "L'adherent {$adherent->getLastName()} {$adherent->getFirstName()} a bien été modifié !"
             );
 
-            return $this->redirectToRoute("admin/adherent");
+            return $this->redirectToRoute("adherent");
         }
 
 
@@ -114,7 +122,7 @@ class AdminAdherentController extends AbstractController
             "L'adhérent à bien été supprimé !"
         );
 
-        return $this->redirectToRoute("admin/adherent");
+        return $this->redirectToRoute("adherent");
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use App\Entity\Team;
 use App\Entity\CategoryAdherent;
 use App\Form\CategoryAdherentType;
 use Doctrine\Persistence\ObjectManager;
@@ -54,16 +55,17 @@ class AdminCategoryAdherentController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $categoryadherent = $repo->find($id);
         $catadherent = $repo->findAll();
+        $repo = $this->getDoctrine()->getRepository(Team::class);
+        $team1 = $repo->findAll();
 
         $repo1 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo1->findAll();
 
-
-
         return $this->render('admin/category_adherent/index.html.twig', [
             'adherent' => $adherent,
             'catadherent' => $catadherent,
-            'categoryadherent' => $categoryadherent
+            'categoryadherent' => $categoryadherent,
+            'team1' => $team1
         ]);
     }
 

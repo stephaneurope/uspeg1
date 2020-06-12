@@ -21,7 +21,7 @@ class HomeController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->findAll();
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
-        $catadherent = $repo1->findAll();
+        $catadherent = $repo1->findBy([], ['title' => 'ASC']);
         return $this->render('home/index.html.twig', [
             'adherent' => $adherent,
             'catadherent'=>$catadherent

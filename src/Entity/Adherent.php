@@ -136,6 +136,11 @@ class Adherent
      */
     private $amounts;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="adherents")
+     */
+    private $team;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -465,6 +470,18 @@ class Adherent
                 $amount->setAdherent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

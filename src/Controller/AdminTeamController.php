@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Team;
 use App\Form\TeamType;
+use App\Entity\Adherent;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -96,11 +97,14 @@ class AdminTeamController extends AbstractController
      *
      * @param Team $team
      * @param ObjectManager $manager
+     * @param Adherent $adherent 
      * 
      * @return Response
      */
     public function delete(Team $team,ObjectManager $manager)
     {
+      
+        $team->removeAdherents();
        
         $manager->remove($team);
     

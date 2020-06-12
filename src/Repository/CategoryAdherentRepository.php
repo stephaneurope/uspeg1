@@ -19,22 +19,20 @@ class CategoryAdherentRepository extends ServiceEntityRepository
         parent::__construct($registry, CategoryAdherent::class);
     }
 
-    // /**
-    //  * @return CategoryAdherent[] Returns an array of CategoryAdherent objects
-    //  */
-    /*
+     /**
+      * @return CategoryAdherent[] Returns an array of CategoryAdherent objects
+     **/
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('c.title', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?CategoryAdherent

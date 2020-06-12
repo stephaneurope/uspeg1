@@ -1,185 +1,211 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau de bord{% endblock %}
+{% block title %}Tableau de bord
+{% endblock %}
 
 {% block body %}
-{% set name = 'Tableau de Bord' %}
+	{% set name = 'Tableau de Bord' %}
 	{% include "header_title.html.twig" %}
 
-<div class="container mt-2">
-    <div class="row">
-        <div class="col">
-              <div class="card bg-primary text-white mb-3 text-center">
-                   <div class="card-body">
-                        <div class="row">
-                         <div class="col-4">
-                           <i class="fas fa-users fa-3x"></i>
-                         </div>
-                         <div class="col-8">
-                            <h4 class="card-title">200 Adherents</h4>
-                         </div>
-                        </div>
-                   </div>
-              </div>
-        </div>
-        <div class="col">
-             <div class="card text-white bg-dark mb-3 text-center">
-                 <div class="card-body">
-                    <div class="row">
-                         <div class="col-4">
-                            <i class="fas fa-futbol fa-3x"></i>
-                         </div>
-                         <div class="col-8">
-                               <h4 class="card-title">100 produits</h4>
-                         </div>
-                    </div>
-                 </div>
-             </div>
-        </div>
-        
-       
-    </div>
-    <hr>
-    <div class="row">
-         <div class="col">
-             <div class="alert alert-primary">
-                    <h2 class="alert-heading my-3"><i class="fas fa-users"></i> Adhérents</h2>
-
-                    <table class="table table-hover ">
-                        <thead>
-                            <tr class="text-warning">
-                            <th>Gestion</th>
-                            <th>Action</th>
-                           
-                            </tr class="text-warning">
-                        </thead>
-                        <tbody>
-                             
-                            <tr class="text-light" >
-                                <td>Adhérents</td>
-                                <td>
-                                   
-                                   <a href="{{ path('admin/adherent')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
-                                   <a href="{{ path('adherent_create')}}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></a>
-                                </td>
-                                
-                            </tr>
-
-                            <tr class="text-light">
-                                <td>Catégories</td>
-                                <td>
-                                   
-                                   <a href="{{ path('category_adherent_dashboard')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
-                                </td>
-                                
-                            </tr>
-                            
-                            <tr class="text-light">
-                                <td>Attribution Matèriel</td>
-                                <td>
-                                   
-                                   <a href="{{ path('commande')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
-                                </td>
-                               
-                            </tr>
-                             <tr class="text-light" >
-                                <td>Equipes</td>
-                                <td>
-                                   
-                                   <a href="{{ path('admin_team')}}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></a>
-                                   <a href="{{ path('admin_team_create')}}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></a>
-                                </td>
-                                
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-             </div>
-         </div>
-         <div class="col">
-          <div class="alert alert-success">
-                    <h2 class="alert-heading my-3"><i class="fas fa-futbol"></i> Boutique</h2>
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="text-primary">
-                            <th>Gestion</th>
-                            <th>Action</th>
-                           
-                            </tr>
-                        </thead>
-                        <tbody class="text-primary">
-                             
-                            <tr >
-                                <td>Produits</td>
-                                <td>
-                                   
-                                   <a href="{{ path('admin/produit_edit')}}" class="btn btn-sm btn-success text-primary"><i class="fas fa-pen"></i></a>
-                                   <a href="{{ path('produit_create')}}" class="btn btn-sm btn-success text-primary"><i class="fas fa-plus"></i></a>
-                                </td>
-                               
-                            </tr>
-                             <tr>
-                                <td>Familles</td>
-                                <td>
-                                   
-                                   <a href="{{ path('dash_category')}}" class="btn btn-sm btn-success text-primary"><i class="fas fa-pen"></i></a>
-                                </td>
-                               
-                            </tr>
-
-                         
-                        </tbody>
-                    </table>
-             </div>
-         </div>
-
-         <div class="col">
-          <div class="alert alert-info">
-                    <h2 class="alert-heading my-3"><i class="fas fa-cogs"></i> Paramètres</h2>
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="text-primary">
-                            <th>Gestion</th>
-                            <th>Action</th>
-                           
-                            </tr>
-                        </thead>
-                        <tbody class="text-primary">
-                             
-                            <tr >
-                                <td>Inscription</td>
-                                <td>
-                                   
-                                   <a href="{{ path('account_register')}}" class="btn btn-sm btn-info text-primary"><i class="fas fa-plus"></i></a>
-                                   
-                                </td>
-                               
-                            </tr>
-                             <tr>
-                                <td>Cotisation</td>
-                                <td>
-                                   
-                                   <a href="#" class="btn btn-sm btn-info text-primary"><i class="fas fa-undo" data-confirm="Etes vous sûr de vouloir supprimer cette commande ?"></i></a>
-                                </td>
-                               
-                            </tr>
-
-                            
-                         
-                        </tbody>
-                    </table>
-             </div>
-         </div>
-    </div>
-</div>
+	<div class="container mt-2">
+		<div class="row">
+			<div class="col">
+				<div class="card bg-primary text-white mb-3 text-center">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<i class="fas fa-users fa-3x"></i>
+							</div>
+							<div class="col-8">
+								<h4 class="card-title">200 Adherents</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-white bg-dark mb-3 text-center">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<i class="fas fa-futbol fa-3x"></i>
+							</div>
+							<div class="col-8">
+								<h4 class="card-title">100 produits</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col">
+				<div class="alert alert-primary">
+					<h2 class="alert-heading my-3">
+						<i class="fas fa-users"></i>
+						Adhérents</h2>
+
+					<table class="table table-hover ">
+						<thead>
+							<tr class="text-warning">
+								<th>Gestion</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					</trclass="text-warning">
+				</thead>
+				<tbody>
+
+					<tr class="text-light">
+						<td>Adhérents</td>
+						<td>
+
+							<a href="{{ path('adherent')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+							<a href="{{ path('adherent_create')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-plus"></i>
+							</a>
+						</td>
+
+					</tr>
+
+					<tr class="text-light">
+						<td>Catégories</td>
+						<td>
+
+							<a href="{{ path('category_adherent_dashboard')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+						</td>
+
+					</tr>
+
+					<tr class="text-light">
+						<td>Attribution Matèriel</td>
+						<td>
+
+							<a href="{{ path('commande')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+						</td>
+
+					</tr>
+					<tr class="text-light">
+						<td>Equipes</td>
+						<td>
+
+							<a href="{{ path('admin_team')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+							<a href="{{ path('admin_team_create')}}" class="btn btn-sm btn-primary">
+								<i class="fas fa-plus"></i>
+							</a>
+						</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col">
+		<div class="alert alert-success">
+			<h2 class="alert-heading my-3">
+				<i class="fas fa-futbol"></i>
+				Boutique</h2>
+
+			<table class="table table-hover">
+				<thead>
+					<tr class="text-primary">
+						<th>Gestion</th>
+						<th>Action</th>
+
+					</tr>
+				</thead>
+				<tbody class="text-primary">
+
+					<tr>
+						<td>Produits</td>
+						<td>
+
+							<a href="{{ path('admin/produit_edit')}}" class="btn btn-sm btn-success text-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+							<a href="{{ path('produit_create')}}" class="btn btn-sm btn-success text-primary">
+								<i class="fas fa-plus"></i>
+							</a>
+						</td>
+
+					</tr>
+					<tr>
+						<td>Familles</td>
+						<td>
+
+							<a href="{{ path('dash_category')}}" class="btn btn-sm btn-success text-primary">
+								<i class="fas fa-pen"></i>
+							</a>
+						</td>
+					</tr>
+					<tr></tr>
+				</tbody>
+			</td>
+
+			<td>Packs</td>
+			<td>
+
+				<a href="{{ path('admin_pack')}}" class="btn btn-sm btn-success text-primary">
+					<i class="fas fa-pen"></i>
+				</a>
+                <a href="{{ path('pack_create')}}" class="btn btn-sm btn-success text-primary">
+								<i class="fas fa-plus"></i>
+							</a>
+			</td>
+		</tr>
+	</tbody>
+</table></div></div><div class="col"><div class="alert alert-info">
+<h2 class="alert-heading my-3">
+	<i class="fas fa-cogs"></i>
+	Paramètres</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr class="text-primary">
+			<th>Gestion</th>
+			<th>Action</th>
+
+		</tr>
+	</thead>
+	<tbody class="text-primary">
+
+		<tr>
+			<td>Inscription</td>
+			<td>
+
+				<a href="{{ path('account_register')}}" class="btn btn-sm btn-info text-primary">
+					<i class="fas fa-plus"></i>
+				</a>
+
+			</td>
+
+		</tr>
+		<tr>
+			<td>Cotisation</td>
+			<td>
+
+				<a href="#" class="btn btn-sm btn-info text-primary">
+					<i class="fas fa-undo" data-confirm="Etes vous sûr de vouloir supprimer cette commande ?"></i>
+				</a>
+			</td>
+
+		</tr>
 
 
+	</tbody>
+</table></div></div></div></div>{% endblock %}
 
-
-{% endblock %}
 
 

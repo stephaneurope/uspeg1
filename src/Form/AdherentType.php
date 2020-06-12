@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Adherent;
+use App\Entity\Team;
 use App\form\ApplicationType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -51,6 +53,10 @@ class AdherentType extends ApplicationType
             ->add('placeOfBirth',TextType::class,$this->getConfiguration("Lieu de naissance","Tapez le lieu de naissance"))
             ->add('clubChange',TextType::class,$this->getConfiguration("Changement de club","Tapez le changement de club"))
             ->add('clubOut',TextType::class,$this->getConfiguration("Club quitté","Tapez le club quitté"))
+            ->add('team', EntityType::class,[
+                'choice_label' => 'name',
+                'class' => Team::class
+            ])
         ;
     }
 

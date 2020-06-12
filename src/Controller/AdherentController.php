@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Team;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
@@ -31,10 +32,13 @@ class AdherentController extends AbstractController
             ->setPage($page);
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $catadherent = $repo->findAll();
+        $repo = $this->getDoctrine()->getRepository(Team::class);
+        $team1 = $repo->findAll();
 
         return $this->render('adherent/index.html.twig', [
             'pagination' => $pagination,
-            'catadherent' => $catadherent
+            'catadherent' => $catadherent,
+            'team1' => $team1
         ]);
     }
     /**

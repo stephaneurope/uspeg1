@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+	{% set name = "Nouvelle Catégorie d'adhérent" %}
+	{% include "header_title.html.twig" %}
 	<div class="container mt-3">
 		<h1>Nouvelle Catégorie d'adhérent</h1>
 		{{ form_start(form) }}
