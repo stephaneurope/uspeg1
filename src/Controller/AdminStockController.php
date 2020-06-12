@@ -79,10 +79,6 @@ class AdminStockController extends AbstractController
 
             } 
             
-            
-
-
-
             $manager->persist($produit);
             $manager->flush();
             $this->addFlash(
@@ -123,16 +119,15 @@ class AdminStockController extends AbstractController
             $produit = $form->getData();
 
             $imageproduit = $form->get("imageProduit")->getData();
-            
+            //dd($imageproduit);die();
 
             if ($produit->getImageProduit() != null) {
-                //dd($produit->getImageProduit('file'));
-
-               
+         
                 //recupere l'image
                 $image = $produit->getImageProduit();
+               
                 
-                if ($image != null) {
+                if ($image->getFile() != null) {
                 //recupere le file soumis
                 $file = $image->getFile();
                 //je crais un nom unique
