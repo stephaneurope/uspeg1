@@ -218,6 +218,7 @@ html,
 
 /*=== Large devices (desktops, 992px and up) ===*/
 @media (min-width: 992px) {
+
 .header .center {
   width: 50%;
 }
@@ -258,7 +259,7 @@ html,
     url('/image/category_adherent/equipements.png') no-repeat left top;
   background-size: cover;  
   z-index: 0; /* bottom layout */
-  margin-top:-100px;
+ 
   box-shadow: 2px 2px 12px #555;
 }
 #header4 .caption {
@@ -279,7 +280,7 @@ html,
   margin-left: 15%;
   width: 70%;
 }
-/*=== Large devices (desktops, 992px and up) ===*/
+
 @media (min-width: 992px) {
 #header4 .caption .action {
   margin-left: 10%;
