@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\form\ApplicationType;
+use App\Form\ApplicationType;
 use App\Entity\Categoryproduit;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

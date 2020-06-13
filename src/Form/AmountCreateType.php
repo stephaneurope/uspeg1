@@ -4,7 +4,7 @@ namespace App\Form;
 
 
 use App\Entity\Amount;
-use App\form\ApplicationType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

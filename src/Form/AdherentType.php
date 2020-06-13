@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Adherent;
 use App\Entity\Team;
-use App\form\ApplicationType;
+use App\Form\ApplicationType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

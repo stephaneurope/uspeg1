@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Produit;
-use App\form\ApplicationType;
+use App\Form\ApplicationType;
 use App\Form\ImageProduitType;
 use App\Entity\Categoryproduit;
 use Symfony\Component\Form\FormBuilderInterface;
