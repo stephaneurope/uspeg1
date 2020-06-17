@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Entity\Amount;
 use App\Entity\Adherent;
+use App\Form\AmountType;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
 use App\Service\PaginationService;
@@ -28,8 +30,13 @@ class AdherentController extends AbstractController
      */
     public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination)
     {
-        $pagination->setEntityClass(Adherent::class)
-            ->setPage($page);
+        
+        $pagination->setEntityClass(Adherent::class) 
+            ->setPage($page)
+        
+            ;
+            
+          
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $catadherent = $repo->findAll();
         $repo = $this->getDoctrine()->getRepository(Team::class);
@@ -77,12 +84,18 @@ class AdherentController extends AbstractController
     {
         $adherent = new adherent();
         $adherent->setRecord(new \DateTime('now'));
+        
+
 
         $form = $this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);
 
+       
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             //$manager =$this->getDoctrine()->getManager();
+            
 
             $manager->persist($adherent);
             $manager->flush();

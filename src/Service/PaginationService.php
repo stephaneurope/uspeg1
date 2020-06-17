@@ -14,6 +14,7 @@ class PaginationService {
     private $twig;
     private $route;
     private $templatePath;
+    private $value;
 
     public function __construct(ObjectManager $manager, Environment $twig, RequestStack $request, $templatePath)
     {   
@@ -62,6 +63,7 @@ class PaginationService {
         }
         // 1) Connaitre le total des enregistrements de la table
             $repo = $this->manager->getRepository($this->entityClass);
+        
             $total = count($repo->findAll());
         // 2) Faire la division, l'arrondie et le renvoyer
             $pages = ceil($total / $this->limit);

@@ -8,6 +8,7 @@ use App\Entity\PasswordUpdate;
 use App\Entity\Role;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -196,5 +197,23 @@ class AccountController extends AbstractController
             'user' => $this->getUser()
         ]);
    }
+
+   /**
+     * Permet d'afficher la liste des utilisateurs et administrateurs
+     * 
+     * @Route("/account/utilisateurs",name="account_utilisateur")
+     * 
+     * 
+     * 
+     * @return Response
+     */
+    public function show(UserRepository $user)
+    {
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $user = $repo->findAll();
+        return $this->render('account/utilisateur.html.twig', [
+            'user' => $user
+        ]);
+    }
 
 }
