@@ -15,6 +15,7 @@ class PaginationService {
     private $route;
     private $templatePath;
     private $value;
+    
 
     public function __construct(ObjectManager $manager, Environment $twig, RequestStack $request, $templatePath)
     {   
@@ -77,11 +78,18 @@ class PaginationService {
             throw new \Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer !
             Utilisez la méthode setEntityClass de votre paginationService !");
         }
+
+        
         // 1) Calculer l'offset
               $offset = $this->currentPage * $this->limit - $this->limit;
-        // 2)Demander au repository de trouver les éléments
-             $repo =$this->manager->getRepository($this->entityClass);
-             $data = $repo->findBy([],[],$this->limit, $offset);
+
+               // 2)Demander au repository de trouver les éléments
+        $repo =$this->manager->getRepository($this->entityClass);
+           
+        $data = $repo->findBy([],['lastName' => 'ASC'],$this->limit, $offset);
+        
+            
+     
         // 3)Renvoyer les éléments en fonctions
             return $data;
     }

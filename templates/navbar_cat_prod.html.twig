@@ -22,24 +22,7 @@
 
 			</div>
 
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						Equipes
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						{% for c in category %}
-							<li class="text-center">
-								<a href="{{ path('admin/category_produit', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-							</li>
-
-							<li role="separator" class="divider"></li>
-						{% endfor %}
-					</ul>
-
-				</div>
-			</div>
+			
 			<div class="col-sm mt-1 mb-3">
 				<div class="dropdown">
 

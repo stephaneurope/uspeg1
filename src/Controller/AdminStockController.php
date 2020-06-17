@@ -32,12 +32,15 @@ class AdminStockController extends AbstractController
     {
         $repo1 = $this->getDoctrine()->getRepository(Categoryproduit::class);
         $category = $repo1->findAll();
-        $pagination->setEntityClass(Produit::class)
-            ->setPage($page);
+       // $pagination->setEntityClass(Produit::class)
+            //->setPage($page);
+            $repo = $this->getDoctrine()->getRepository(Produit::class);
+            $produit = $repo->findAll();
 
         return $this->render('admin/stock/show_produit.html.twig', [
-            'pagination' => $pagination,
-            'category' => $category
+            //'pagination' => $pagination,
+            'category' => $category,
+            'produit' => $produit
         ]);
     }
 

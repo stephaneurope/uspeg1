@@ -63,7 +63,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th class="text-center">Id.</th>
+						
 						<th class="text-center">Nom</th>
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
@@ -74,12 +74,12 @@
 				</thead>
 				<tbody>
 
-					{% for ad in adherent %}
+					{% for ad in adherent|sortByField('lastName') %}
 						{% if (categoryadherent.title is same as(ad.subcategory)) %}
-							<td class="text-center">{{ad.id}}</td>
+							
 							<td class="text-center">
-								<a href="#">{{ad.firstName}}
-									{{ad.lastName}}</a>
+								<a href="#">{{ad.lastName}} {{ad.firstName}}
+									</a>
 							</td>
 							<td class="text-center">{{ad.email}}</td>
 							<td class="text-center">{{ad.subcategory}}</td>

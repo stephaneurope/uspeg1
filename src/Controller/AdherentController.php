@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Team;
-use App\Entity\Amount;
 use App\Entity\Adherent;
-use App\Form\AmountType;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
 use App\Service\PaginationService;
@@ -16,6 +14,7 @@ use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 /**
  * @IsGranted("ROLE_USER")
@@ -33,10 +32,11 @@ class AdherentController extends AbstractController
         
         $pagination->setEntityClass(Adherent::class) 
             ->setPage($page)
+            
         
             ;
             
-          
+       
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $catadherent = $repo->findAll();
         $repo = $this->getDoctrine()->getRepository(Team::class);
