@@ -74,7 +74,7 @@
 				</thead>
 				<tbody>
 
-					{% for ad in adherent|sortByField('lastName') %}
+					{% for ad in adherent %}
 						{% if (categoryadherent.title is same as(ad.subcategory)) %}
 							
 							<td class="text-center">
