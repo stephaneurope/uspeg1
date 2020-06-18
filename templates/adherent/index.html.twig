@@ -4,11 +4,67 @@
 {% endblock %}
 
 {% block body %}
+
+
+
 	{% set name = 'Adhérents' %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
+	{{ form_start(form) }}
 
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.nom) }}
+ </div>
+
+  <div class="col">
+   <div class="form-group">
+      <button type="submit" class="btn btn-success">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+ {% for a in adherent %}
+<table class="table ">
+					
+					<tbody>
+
+						
+
+						<tr class="bg-success">
+							<td class="text-center">
+								{{a.lastName}} {{a.firstName}}
+									
+							</td>
+							<td class="text-center">{{a.email}}</td>
+							<td class="text-center">{{a.subcategory}}</td>
+							<td class="text-center">
+								<span class="">{{a.toNumber}}</span>
+
+							</td>
+							
+							<td>
+
+								<a href="{{ path('adherent_show', {'id': a.id}) }}" class="btn btn-sm btn-primary">
+									<i class="fas fa-eye"></i>
+								</a>
+								{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{ path('admin/adherent_modif', {'id': a.id}) }}" class="btn btn-sm btn-secondary">
+									<i class="fas fa-pen"></i>
+								</a>
+
+								<a href="{{ path('admin/adherent_delete', {'id': a.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adhérent. En êtes vous certains ?">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>
+							{% endif %}
+						</tr>
+					
+
+				</tbody>
+			</table>
+{% endfor %}
 		<div class="container mt-2 mb-2">
 
 			<div class="row ">

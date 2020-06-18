@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
+use App\Entity\PropertySearch;
 use App\Entity\CategoryAdherent;
+use App\Form\PropertySearchType;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -27,27 +29,49 @@ class AdherentController extends AbstractController
      * @Route("/adherent/{page<\d+>?1}", name="adherent")
      * 
      */
-    public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination)
+    public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination,Request $request)
     {
+        $propertySearch = new PropertySearch();
+      $form = $this->createForm(PropertySearchType::class,$propertySearch);
+      $form->handleRequest($request);
+     //initialement le tableau des articles est vide, 
+     //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
+      $adherent= [];
+      
+     if($form->isSubmitted() && $form->isValid()) {
+     //on récupère le nom d'article tapé dans le formulaire
+      $nom = $propertySearch->getNom();   
+      if ($nom!="") 
+        //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+        $adherent = $this->getDoctrine()->getRepository(Adherent::class)->findBy(['lastName' => $nom] );
+    else
+    $this->addFlash(
+        'warning',
+        "Désolé, le champ est vide !"
+    );
+  
+    } 
         
         $pagination->setEntityClass(Adherent::class) 
-            ->setPage($page)
-            
-        
-            ;
-            
-       
+            ->setPage($page);
+         
+        $pagination->setEntityClass(Adherent::class) 
+        ->setPage($page);   
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $catadherent = $repo->findAll();
         $repo = $this->getDoctrine()->getRepository(Team::class);
         $team1 = $repo->findAll();
-
+    
         return $this->render('adherent/index.html.twig', [
+            'form' =>$form->createView(),
+            'adherent'=>$adherent,
             'pagination' => $pagination,
             'catadherent' => $catadherent,
             'team1' => $team1
         ]);
     }
+
+    
     /**
      * Permet d'afficher un adherent
      * 
