@@ -1,3 +1,12 @@
+/*************General********************/
+@media (max-width: 740px) {
+  
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+  
+}
+
 /******************Login***************/
 
 html,
@@ -551,3 +560,4 @@ html,
     font-size: 35px;
   }
 }
+/***********navbar**************/
