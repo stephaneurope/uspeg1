@@ -6,7 +6,9 @@
 @media (min-width: 800px) and (max-width: 850px) {
   
 }
-
+.invisible {
+display:none;
+}
 /******************Login***************/
 
 html,

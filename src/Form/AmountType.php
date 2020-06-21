@@ -26,6 +26,7 @@ class AmountType extends ApplicationType
                     'Espece' => 'Espèce',
                     'Chequier Jeunes' => 'Chequier Jeunes'
                 ],
+                'label' => 'Méthode de paiement',
                 ])
             ->add('amount2',IntegerType::class,$this->getConfiguration("Montant 2","Tapez le montant"))
             ->add('paymentMethodAmount2',ChoiceType::class, [
@@ -36,6 +37,7 @@ class AmountType extends ApplicationType
                     'Espece' => 'Espèce',
                     'Chequier Jeunes' => 'Chequier Jeunes'
                 ],
+                'label' => 'Méthode de paiement',
                 ])
             ->add('amount3',IntegerType::class,$this->getConfiguration("Montant 3","Tapez le montant"))
             ->add('paymentMethodAmount3',ChoiceType::class, [
@@ -46,6 +48,7 @@ class AmountType extends ApplicationType
                     'Espece' => 'Espèce',
                     'Chequier Jeunes' => 'Chequier Jeunes'
                 ],
+                'label' => 'Méthode de paiement',
                 ])
             ->add('amount4',IntegerType::class,$this->getConfiguration("Montant 4","Tapez le montant"))
             ->add('paymentMethodAmount4',ChoiceType::class, [
@@ -56,6 +59,7 @@ class AmountType extends ApplicationType
                     'Espece' => 'Espèce',
                     'Chequier Jeunes' => 'Chequier Jeunes'
                 ],
+                'label' => 'Méthode de paiement',
                 ])
            
         ;

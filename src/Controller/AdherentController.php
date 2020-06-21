@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Entity\Amount;
 use App\Entity\Produit;
 use App\Entity\Adherent;
 use App\Entity\Commande;
 use App\Form\AdherentType;
 use App\Form\CommandeType;
 use App\Entity\PropertySearch;
+use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
 use App\Form\PropertySearchType;
 use App\Service\PaginationService;
@@ -149,15 +151,40 @@ class AdherentController extends AbstractController
                 'id' => $adherent->getId(),
             ]);
         }
-
-        
        
-       /*********************************************************************** */
+       /*************************************************************************/
+       /*******************Creation de la cotisation directement*****************/
+
+        $amount = new Amount();
+
+
+        $form1 = $this->createForm(AmountCreateType::class, $amount);
+
+        $form1->handleRequest($request);
+
+
+        if ($form1->isSubmitted() && $form1->isValid()) {
+
+            $amount->setAdherent($adherent);
+
+            $manager->persist($amount);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "La cotisation a bien été enregistrée !"
+            );
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $adherent->getId() ]);
+            
+        }
+       /*************************************************************************/ 
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
             'cat' => $cat,
             'commande' => $commande,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form1' => $form1->createView()
               
         ]);
     }
