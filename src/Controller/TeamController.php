@@ -23,7 +23,7 @@ class TeamController extends AbstractController
         $catadherent = $repo1->findAll();
       
         $repo2 = $this->getDoctrine()->getRepository(Adherent::class);
-        $adherent = $repo2->findAll();
+        $adherent = $repo2->findBy([],['lastName' => 'ASC']);
         return $this->render('team/index.html.twig', [
             'team' => $team,
             'team1' =>$team1,
