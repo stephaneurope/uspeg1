@@ -63,7 +63,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th class="text-center">Id.</th>
+						
 						<th class="text-center">Nom</th>
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
@@ -77,7 +77,7 @@
 					{% for ad in adherent %}
                     {% if (ad.team != null) %} 
 						 {% if (ad.team.id is same as(team.id)) %}
-							<td class="text-center">{{ad.id}}</td>
+							
 							<td class="text-center">
 								<a href="#">{{ad.lastName}} {{ad.firstName}}
 									</a>
