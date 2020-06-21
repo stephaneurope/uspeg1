@@ -1,8 +1,8 @@
 <!-- Button trigger modal-->
 {% for cat in cat %}
 	{% if (cat.title is same as(adherent.subcategory)) %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">{{cat.pack.name}}</button>
-{% endif %}
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">{{cat.pack.name}}</button>
+	{% endif %}
 {% endfor %}
 <!-- Modal: modalCart -->
 {% for cat in cat %}
@@ -36,107 +36,48 @@
 									<tr>
 										<th scope="row">1</th>
 										<td>
-										
-												{{ cat.pack.option1 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option2 != null %}
-									<tr>
-										<th scope="row">2</th>
-										<td>
-										
-												{{ cat.pack.option2 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option3 != null %}
-									<tr>
-										<th scope="row">3</th>
-										<td>
-										
-												{{ cat.pack.option3 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option4 != null %}
-									<tr>
-										<th scope="row">4</th>
-										<td>
-										
-												{{ cat.pack.option4 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option5 != null %}
-									<tr>
-										<th scope="row">5</th>
-										<td>
-										
-												{{ cat.pack.option5 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option6 != null %}
-									<tr>
-										<th scope="row">6</th>
-										<td>
-										
-												{{ cat.pack.option6 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option7 != null %}
-									<tr>
-										<th scope="row">7</th>
-										<td>
 
-											{{ cat.pack.option7 }}
-
-										</td>
+											{{ cat.pack.option1 }}</td>
 									</tr>
-								{% if cat.pack.option8 != null %}
-									<tr>
-										<th scope="row">8</th>
-										<td>
-										
-												{{ cat.pack.option8 }}</td>
-										</td>
-									</tr>
-
-								{% endif %}
-{% if cat.pack.option9 != null %}
-									<tr>
-										<th scope="row">9</th>
-										<td>
-										
-												{{ cat.pack.option9 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% if cat.pack.option10 != null %}
-									<tr>
-										<th scope="row">10</th>
-										<td>
-										
-												{{ cat.pack.option10 }}</td>
-										</td>
-									</tr>
-								{% endif %}
-								{% endif %}
-								<td></td>
+								</td>
 							</tbody>
 						</tr>
-					</tbody>
-				</table>
+					{% endif %}
+					{% if cat.pack.option2 != null %}
+						<tr>
+							<th scope="row">2</th>
+							<td>
 
-			</div>
-			<!--Footer-->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-				<button class="btn btn-primary">Checkout</button>
-			</div>
-		</div>
-	</div>
-</div>{% endif %}{% endfor %}<!-- Modal: modalCart -->
+								{{ cat.pack.option2 }}</td>
+						</tr>
+					</td>
+				</tr>
+			{% endif %}
+			{% if cat.pack.option3 != null %}
+				<tr>
+					<th scope="row">3</th>
+					<td>
+
+						{{ cat.pack.option3 }}</td>
+				</tr>
+			</td>
+		</tr>
+	{% endif %}
+	{% if cat.pack.option4 != null %}
+		<tr>
+			<th scope="row">4</th>
+			<td>
+
+				{{ cat.pack.option4 }}</td>
+		</tr>
+	</td>
+</tr>{% endif %}{% if cat.pack.option5 != null %}
+<tr>
+	<th scope="row">5</th>
+	<td>
+
+		{{ cat.pack.option5 }}</td>
+</tr></td></tr>{% endif %}{% if cat.pack.option6 != null %}<tr><th scope="row">6</th><td>
+
+{{ cat.pack.option6 }}</td></tr></td></tr>{% endif %}{% if cat.pack.option7 != null %}<tr><th scope="row">7</th><td>{{ cat.pack.option7 }}</td></tr>{% if cat.pack.option8 != null %}<tr><th scope="row">8</th><td>{{ cat.pack.option8 }}</td></tr></td></tr>{% endif %}{% if cat.pack.option9 != null %}<tr><th scope="row">9</th><td>{{ cat.pack.option9 }}</td></tr></td></tr>{% endif %}{% if cat.pack.option10 != null %}<tr><th scope="row">10</th><td>{{ cat.pack.option10 }}</td></tr></td></tr> {% endif %}{% endif %}<td></td></tbody></tr></tbody></table></div><!--Footer--><div class="modal-footer"><button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button><button class="btn btn-primary">Checkout</button></div></div></div></div>{% endif %}{% endfor %}<!-- Modal: modalCart -->
 

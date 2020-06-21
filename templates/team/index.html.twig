@@ -11,7 +11,6 @@
 		<h1 class="text-center">Liste des adhérents de l'équipe
 			{{team.name}}</h1>
 
-		
 
 		<div class="row ">
 			<div class="col-sm mt-1 mb-3">
@@ -63,56 +62,55 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						
+
 						<th class="text-center">Nom</th>
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
 						<th class="text-center">Numéro</th>
-						
+
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 
 					{% for ad in adherent %}
-                    {% if (ad.team != null) %} 
-						 {% if (ad.team.id is same as(team.id)) %}
-							
-							<td class="text-center">
-								<a href="#">{{ad.lastName}} {{ad.firstName}}
+						{% if (ad.team != null) %}
+							{% if (ad.team.id is same as(team.id)) %}
+
+								<td class="text-center">
+									{{ad.lastName}}
+									{{ad.firstName}}
+
+								</td>
+								<td class="text-center">{{ad.email}}</td>
+								<td class="text-center">{{ad.subcategory}}</td>
+								<td class="text-center">
+									<span class="">{{ad.toNumber}}</span>
+
+								</td>
+
+								<td>
+
+
+									<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
+										<i class="fas fa-eye"></i>
 									</a>
-							</td>
-							<td class="text-center">{{ad.email}}</td>
-							<td class="text-center">{{ad.subcategory}}</td>
-							<td class="text-center">
-								<span class="">{{ad.toNumber}}</span>
+									{% if is_granted('ROLE_ADMIN') %}
+										<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
+											<i class="fas fa-pen"></i>
+										</a>
 
-							</td>
-							
-							<td>
-
-
-								<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
-									<i class="fas fa-eye"></i>
-								</a>
-								{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
-									<i class="fas fa-pen"></i>
-								</a>
-
-								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
-									<i class="fas fa-trash-alt"></i>
-								</a>
-								{% endif %}
-							</td>
-						</tr>
-                        {% endif %}
+										<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
+											<i class="fas fa-trash-alt"></i>
+										</a>
+									{% endif %}
+								</td>
+							</tr>
+						{% endif %}
 					{% endif %}
 				{% endfor %}
-              
 			</tbody>
 		</table>
-
-
 	</div>
 {% endblock %}
+

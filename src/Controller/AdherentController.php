@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Entity\Produit;
 use App\Entity\Adherent;
+use App\Entity\Commande;
 use App\Form\AdherentType;
+use App\Form\CommandeType;
 use App\Entity\PropertySearch;
 use App\Entity\CategoryAdherent;
 use App\Form\PropertySearchType;
@@ -81,18 +84,80 @@ class AdherentController extends AbstractController
      * @param ObjectManager $manager
      * @return void
      */
-    public function show($id)
+    public function show($id,Request $request, ObjectManager $manager)
     {
         
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
-       
+        /************commande directement dans la page de l'adherent**************/
+        $repo = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repo->find($id);
 
+        $commande = new Commande();
+        
+
+        $form = $this->createForm(CommandeType::class, $commande);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+            
+            /*Recupere l'Id du produit selectionné*/
+            $p = $form['produit']->getData()->getId();
+            /*recupere le produit et lui ajoute l'Id du produit selectionné */
+            $repo1 = $this->getDoctrine()->getRepository(Produit::class);
+            $produit = $repo1->find($p);
+            /*Recupere la quantité du produit attribué a l'adherent */
+            $stockmoins = $form['qte']->getData();
+
+
+            /*mis a jour de la quantité du stock initial */
+            if ($stockmoins <= $produit->getQteinit()) {
+                $produit->setQteinit($produit->getQteinit() - $stockmoins);
+            
+
+                /*Attribue l'id de l'adherent a la commande*/
+                $commande->setAdherent($adherent);
+
+                $commande->setDateattribution(new \DateTime('now'));
+                $manager->persist($commande);
+
+                $manager->flush();
+
+                $this->AddFlash(
+                    'success',
+                    "Le produit a bien été enregistré  !"
+                );
+                return $this->redirectToRoute('adherent_show', [
+                    'id' => $adherent->getId(),
+                ]);
+            } else
+                $commande->setAdherent($adherent);
+                $commande->setDatecommande(new \DateTime('now'));
+
+            $manager->persist($commande);
+
+            $manager->flush();
+
+            $this->AddFlash(
+                'danger',
+                "Vous n'avez pas assez de produit en stock , le produit est passé en commande !"
+            );
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $adherent->getId(),
+            ]);
+        }
+
+        
+       
+       /*********************************************************************** */
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
-            'cat' => $cat
+            'cat' => $cat,
+            'commande' => $commande,
+            'form' => $form->createView()
               
         ]);
     }

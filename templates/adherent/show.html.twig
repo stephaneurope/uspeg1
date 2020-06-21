@@ -133,7 +133,15 @@
 						<i class="fas fa-plus"></i>
 					</a>{% include "partials/equipement.html.twig" %}
 				</h2>
-	
+	<div class="container mt-3">
+		
+
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+
+		<button type="submit" class="btn btn-primary">Créer une nouvelle commande</button>
+		{{ form_end(form) }}
+	</div>
 
 				<table class="table table-hover">
 	
