@@ -78,6 +78,7 @@ class Amount
         return $this->id;
     }
     
+    
 
     public function getAmount1(): ?float
     {

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+
 use App\Entity\Amount;
 use App\Entity\Produit;
 use App\Entity\Adherent;
 use App\Entity\Commande;
+use App\Form\AmountType;
 use App\Form\AdherentType;
 use App\Form\CommandeType;
 use App\Entity\PropertySearch;
@@ -21,6 +23,8 @@ use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 
 /**
@@ -36,7 +40,7 @@ class AdherentController extends AbstractController
      */
     public function index(CategoryAdherentRepository $repo, $page, PaginationService $pagination,Request $request)
     {
-        $propertySearch = new PropertySearch();
+     $propertySearch = new PropertySearch();
       $form = $this->createForm(PropertySearchType::class,$propertySearch);
       $form->handleRequest($request);
      //initialement le tableau des articles est vide, 
@@ -81,10 +85,12 @@ class AdherentController extends AbstractController
      * Permet d'afficher un adherent
      * 
      * @Route("/adherent/{id}/show", name="adherent_show")
-     *
-     * @param AdherentRepository $repo
+     * 
+     * 
      * @param ObjectManager $manager
-     * @return void
+     * @param AdherentRepository $repo
+     * 
+     * @return Response
      */
     public function show($id,Request $request, ObjectManager $manager)
     {
@@ -151,18 +157,18 @@ class AdherentController extends AbstractController
                 'id' => $adherent->getId(),
             ]);
         }
-       
+        
+   
        /*************************************************************************/
        /*******************Creation de la cotisation directement*****************/
-
+      
+       $a=$adherent->getAmounts()->toarray();
+       if ($a == null) {
         $amount = new Amount();
-
-
         $form1 = $this->createForm(AmountCreateType::class, $amount);
-
         $form1->handleRequest($request);
-
-
+ 
+     
         if ($form1->isSubmitted() && $form1->isValid()) {
 
             $amount->setAdherent($adherent);
@@ -177,15 +183,49 @@ class AdherentController extends AbstractController
             return $this->redirectToRoute('adherent_show', [
                 'id' => $adherent->getId() ]);
             
-        }
-       /*************************************************************************/ 
+        } 
+        
+     /*************************************************************************/
+       }else{
+ /*********************Permet de modifier les cotisations******************/
+      $a=$adherent->getAmounts()->toarray();
+      $id_amount=$a[0]->getId();
+      $repo2 = $this->getDoctrine()->getRepository(Amount::class);
+    
+      $amount = $repo2->find($id_amount);
+
+ $form1 = $this->createForm(AmountCreateType::class, $amount);
+
+ $form1->handleRequest($request);
+
+ if ($form1->isSubmitted() && $form1->isValid()) {
+     $manager->persist($amount);
+     $manager->flush();
+     $this->addFlash(
+         'success',
+         "La cotisation a bien été modifiée !"
+     );
+     return $this->redirectToRoute(
+         "adherent_show",
+         array(
+             'id' => $amount->getAdherent()->getId()
+         )
+     );
+ }
+ 
+ /*************************************************************************/ 
+       }
+    
+    
+         
+      
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
             'cat' => $cat,
             'commande' => $commande,
             'form' => $form->createView(),
-            'form1' => $form1->createView()
-              
+            'form1' => $form1->createView(),    
+            'amount' => $amount
         ]);
     }
 

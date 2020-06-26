@@ -14,11 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
+
 /**
  * @IsGranted("ROLE_USER")
  */
 class AmountController extends AbstractController
 {
+
+    
+
     /**
      * Permet d'afficher toutes les cotisations de tous les adherents
      * @Route("/amount", name="amount")
@@ -86,9 +90,9 @@ class AmountController extends AbstractController
 
             return $this->redirectToRoute(
                 "adherent_show",
-                array(
+                [
                     'id' => $amount->getAdherent()->getId()
-                )
+                ]
             );
             
         }
@@ -130,6 +134,7 @@ class AmountController extends AbstractController
                 )
             );
         }
+      
         return $this->render('amount/amount_modif.html.twig', [
             'amount' => $amount,
             'form' => $form->createView()
