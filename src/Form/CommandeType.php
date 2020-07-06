@@ -20,7 +20,7 @@ class CommandeType extends ApplicationType
 
         $builder
             //->add('datecommande', DateType::class, $this->getConfiguration("Date de la commande", "Inserez la date de la commande"))
-            ->add('qte', IntegerType::class, $this->getConfiguration("Quantité stock", "Tapez la quantité du stock"))
+            ->add('qte', IntegerType::class, $this->getConfiguration("Quantité à distribuer", "Tapez la quantité à distribuer"))
             ->add(
                 'produit',
                 EntityType::class,

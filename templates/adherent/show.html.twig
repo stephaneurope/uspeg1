@@ -163,7 +163,7 @@
 
 						</thead>
 
-						{% for c in adherent.commandes|slice(0, 5) %}
+						{% for c in adherent.commandes|slice(0, 10) %}
 							{% if (c.adherent.id is same as(adherent.id)) %}
 								{% if c.dateattribution  != null %}
 									<tbody>
@@ -215,7 +215,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					{% for c in adherent.commandes|slice(0, 5) %}
+					{% for c in adherent.commandes|slice(0, 10) %}
 						{% if (c.adherent.id is same as(adherent.id)) %}
 							{% if c.dateattribution == null %}
 								<tbody>
