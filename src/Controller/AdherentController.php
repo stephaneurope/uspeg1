@@ -61,9 +61,7 @@ class AdherentController extends AbstractController
   
     } 
         
-        $pagination->setEntityClass(Adherent::class) 
-            ->setPage($page);
-         
+       
         $pagination->setEntityClass(Adherent::class) 
         ->setPage($page);   
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);

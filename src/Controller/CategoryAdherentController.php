@@ -31,7 +31,8 @@ class CategoryAdherentController extends AbstractController
         $catadherent = $repo->findAll();
 
         $repo1 = $this->getDoctrine()->getRepository(Adherent::class);
-        $adherent = $repo1->findAll();
+        //$adherent = $repo1->findAll();
+        $adherent =$repo1->findBy([],['lastName' => 'ASC']);
         $repo2 = $this->getDoctrine()->getRepository(Team::class);
         $team1 = $repo2->findAll();
 
