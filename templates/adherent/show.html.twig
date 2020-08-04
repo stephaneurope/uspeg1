@@ -28,7 +28,7 @@
 							<th class="text-center" scope="col">Nom Prénom</th>
 							<th class="text-center" scope="col">Date de naissance</th>
 							<th class="text-center" scope="col">Catégorie</th>
-							<th class="text-center" scope="col">Numéro adhérent</th>
+							<th class="text-center" scope="col">Numéro de licence</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -48,7 +48,7 @@
 							<th class="text-center" scope="col">Sexe</th>
 							<th class="text-center" scope="col">Addresse</th>
 							<th class="text-center" scope="col">Complément</th>
-							<th class="text-center" scope="col">lieut</th>
+							<th class="text-center" scope="col">Code Postal</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -58,52 +58,38 @@
 							<td class="text-center">{{adherent.address}}</td>
 							<td class="text-center">{{adherent.complement}}
 							</td>
-							<td class="text-center">{{adherent.lieut}}</td>
+							<td class="text-center" scope="row">{{adherent.postalCode}}</td>
 						</tr>
 					</tbody>
 
 					<thead>
 						<tr class="table table-active">
-							<th class="text-center" scope="col">Code Postal</th>
+							
 							<th class="text-center" scope="col">Ville</th>
 							<th class="text-center" scope="col">Enregistrement</th>
-							<th class="text-center" scope="col">Type de licence</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr class="table table-default font-weight-bold">
-							<td class="text-center" scope="row">{{adherent.postalCode}}</td>
-							<td class="text-center">{{adherent.city}}</td>
-							<td class="text-center">{{adherent.record|date("d/m/Y")}}
-							</td>
-							<td class="text-center">{{adherent.licenceType}}</td>
-						</tr>
-					</tbody>
-
-					<thead>
-						<tr class="table table-active">
 							<th class="text-center" scope="col">Téléphone maison</th>
 							<th class="text-center" scope="col">Téléphone mobile</th>
-							<th class="text-center" scope="col">fax</th>
-							<th class="text-center" scope="col">Email</th>
 						</tr>
 					</thead>
 					<tbody>
 
 						<tr class="table table-default font-weight-bold">
+							
+							<td class="text-center">{{adherent.city}}</td>
+							<td class="text-center">{{adherent.record|date("d/m/Y")}}
 							<td class="text-center" scope="row">{{adherent.homePhone}}</td>
 							<td class="text-center">{{adherent.mobilePhone}}</td>
-							<td class="text-center">{{adherent.fax}}
 							</td>
-							<td class="text-center">{{adherent.email}}</td>
+							
 						</tr>
 					</tbody>
 
 					<thead>
 						<tr class="table table-active">
-							<th class="text-center" scope="col">Catégory arbitre</th>
-							<th class="text-center" scope="col">Lieu de naissance</th>
+							
+							
+							<th class="text-center" scope="col">Email</th>
+								<th class="text-center" scope="col">Lieu de naissance</th>
 							<th class="text-center" scope="col">Changement de club</th>
 							<th class="text-center" scope="col">Club quitté</th>
 						</tr>
@@ -111,13 +97,17 @@
 					<tbody>
 
 						<tr class="table table-default font-weight-bold">
-							<td class="text-center" scope="row">{{adherent.categoryArbitre}}</td>
+							
+							
+							<td class="text-center">{{adherent.email}}</td>
 							<td class="text-center">{{adherent.placeOfBirth}}</td>
 							<td class="text-center">{{adherent.clubChange}}
 							</td>
 							<td class="text-center">{{adherent.clubOut}}</td>
 						</tr>
 					</tbody>
+
+					
 
 
 				</table>

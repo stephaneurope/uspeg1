@@ -30,8 +30,8 @@ class AdherentType extends ApplicationType
                 
             ])
             
-            ->add('subCategory',TextType::class,$this->getConfiguration("Sous-catégorie","Tapez la catégorie "))
-            ->add('toNumber',IntegerType::class,$this->getConfiguration("Numéro adhérent","Tapez le numéro d'adhérent"))
+            ->add('subCategory',TextType::class,$this->getConfiguration("Catégorie","Tapez la catégorie "))
+            ->add('toNumber',IntegerType::class,$this->getConfiguration("Numéro de licence","Tapez le numéro d'adhérent"))
             ->add('sex', ChoiceType::class, [
                 'choices' => [
                     'M' => 'M',
