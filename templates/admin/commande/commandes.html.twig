@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% set name = "Equipements attribués" %}
+{% set name = "Attributions d'équipements" %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
@@ -28,9 +28,9 @@
 						
 						<th class="text-center">Nom</th>
 						<th class="text-center">Produit</th>
-						<th class="text-center">Produit</th>
+						<th class="text-center">code Barre</th>
 						<th class="text-center">Catégorie</th>
-						<th class="text-center">Attribué le</th>
+						<th class="text-center">Commandé le</th>
 						<th class="text-center">Quantité</th>
 
 						<th></th>
@@ -38,29 +38,29 @@
 				</thead>
 				{% for c in commande %}
 				<tbody>
-					{% if c.datecommande == null %}
-					<td class="text-center">
-						<a href="#">{{c.adherent.firstName}}
-							{{c.adherent.lastName}}</a>
-					</td>
+					{% if c.dateattribution == null %}
+				
+
+						<td class="text-center">	<a href="#">{{c.adherent.firstName}}
+							{{c.adherent.lastName}}</a></td>
+					
 					<td class="text-center">{{c.produit.title}}</td>
 					<td class="text-center">{{c.produit.code}}</td>
 					<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+					<td class="text-center">{{c.datecommande|date('d/m/yy')}}</td>
 					
-					<td class="text-center">{{c.dateattribution|date('d/m/yy')}}</td>
+						
+			
 					
 				
-				
+					
 						
 					<td class="text-center">
 						<span class="">{{c.qte}}</span>
 
 					</td>
-	
-					<td>
-						
-					</td>
-					{% endif %}
+		{% endif %}
+					
 				</tbody>
 			</tr>
 		{% endfor %}
