@@ -8,7 +8,7 @@ use Twig\Environment;
 
 class PaginationService {
     private $entityClass;
-    private $limit = 10;
+    private $limit = 20;
     private $currentPage = 1;
     private $manager;
     private $twig;
