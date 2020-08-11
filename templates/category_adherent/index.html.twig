@@ -75,7 +75,11 @@
 				<tbody>
 
 					{% for ad in adherent %}
-						{% if (categoryadherent.title is same as(ad.subcategory)) %}
+
+					
+  
+
+						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
 							
 							<td class="text-center">
 								<a href="#">{{ad.lastName}} {{ad.firstName}}
