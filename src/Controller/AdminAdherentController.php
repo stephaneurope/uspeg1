@@ -84,7 +84,24 @@ class AdminAdherentController extends AbstractController
         $form = $this->createForm(AdherentType::class, $adherent);
 
         $form->handleRequest($request);
+        $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);;
+        $cat = $repo->findAll();
+       
+        foreach($cat as $listecat)
+        {
+            $liste = $listecat->getTitle(); 
+            $catid = $listecat->getId();  
+     //var_dump(array($catid));
+     
+  
+if (in_array($adherent->getSubCategory(), array($liste))) {
+   
+   $a = $catid;
+//var_dump($a);
 
+}
+        }
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($adherent);
             $manager->flush();
@@ -92,8 +109,12 @@ class AdminAdherentController extends AbstractController
                 'success',
                 "L'adherent {$adherent->getLastName()} {$adherent->getFirstName()} a bien été modifié !"
             );
-
-            return $this->redirectToRoute("adherent");
+     if(isset ($a)){
+            return $this->redirectToRoute("category_adherent",['id' => $a]);}else
+            {
+                return $this->redirectToRoute("adherent");  
+            }
+      
         }
 
 
