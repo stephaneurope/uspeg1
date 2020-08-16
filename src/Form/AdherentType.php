@@ -23,10 +23,12 @@ class AdherentType extends ApplicationType
         $builder
             ->add('lastName',TextType::class,$this->getConfiguration("Nom","Tapez le nom de famille"))
             ->add('firstName',TextType::class,$this->getConfiguration("Prénom","Tapez le prénom "))
-            ->add('born', BirthdayType::class,$this->getConfiguration("Né(e) le","Tapez la date de naissance "),[
-                'widget' => 'single_text',
+            ->add('born', BirthdayType::class,[
+               // 'widget' => 'single_text',
                 // this is actually the default format for single_text
+                'label' =>'Date de Naissance',
                 'format' => 'dd-MM-yyyy',
+    
                 
             ])
             
