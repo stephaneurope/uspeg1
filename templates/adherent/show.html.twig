@@ -279,7 +279,7 @@
 								<th></th>
 								<th>
 									{% for cat in cat %}
-										{% if (cat.title is same as(adherent.subcategory)) %}
+										{% if (cat.title|lower|replace({' ':''}) is same as(adherent.subcategory|lower|replace({' ':''}))) %}
 
 											{% set montant_total =  'cat.montantcot' %}
 											<h3>
