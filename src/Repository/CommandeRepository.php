@@ -18,7 +18,18 @@ class CommandeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commande::class);
     }
-
+    public function Essai($produit)
+    {
+    return $this->createQueryBuilder('r')
+    ->select('SUM(r.qte)')
+    ->LEFTJOIN('r.produit', 'p')
+    ->where('r.produit = :produit AND r.dateattribution IS NULL')
+    ->setParameter('produit', $produit) 
+    ->getQuery()
+    ->getSingleScalarResult();
+    }
+    
+    
     // /**
     //  * @return Commande[] Returns an array of Commande objects
     //  */

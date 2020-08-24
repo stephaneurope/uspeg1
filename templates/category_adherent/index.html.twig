@@ -81,10 +81,39 @@
 
 						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
 							
-							<td class="text-center">
-								<a href="#">{{ad.lastName}} {{ad.firstName}}
-									</a>
-							</td>
+							{% if ad.amounts == false %}<td>{{ad.lastName}} {{ad.firstName}}</td>{% endif %}
+				{% for a in ad.amounts %}
+					
+								
+				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+			<td	class="text-center" style="color:
+			{% for cat in catadherent %}
+										{% if (cat.title is same as(ad.subcategory) and a is defined) %}
+										{% set montant_total = cat.montantcot %}
+
+											
+											{% if total < cat.montantcot  %}
+												red
+											{% endif %}
+											{% if total == cat.montantcot  %}
+												green
+											{% endif %}
+
+											{% if total > cat.montantcot  %}
+												  green
+											{% endif %}
+										
+			                                {% if not a.adherent %}
+											black
+											{% endif %}
+						
+						  
+                            {% endif %}{% else %}black
+							{% endfor %}
+								;">{{ad.lastName}} {{ad.firstName}}</td>
+							{% else %}
+							<td class="text-center">{{ad.lastName}} {{ad.firstName}}</td>	
+							{% endfor %}
 							<td class="text-center">{{ad.email}}</td>
 							<td class="text-center">{{ad.subcategory}}</td>
 							<td class="text-center">

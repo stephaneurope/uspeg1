@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Entity\Amount;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Entity\CategoryAdherent;
@@ -36,11 +37,13 @@ class AdminAdherentController extends AbstractController
         $repo2 = $this->getDoctrine()->getRepository(Team::class);
         $team1 = $repo2->findAll();
 
+        
 
         return $this->render('/admin/adherent/index.html.twig', [
             'pagination' => $pagination,
             'catadherent'  => $catadherent,
-            'team1' => $team1
+            'team1' => $team1,
+            
         ]);
     }
 
