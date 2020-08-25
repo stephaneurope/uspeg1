@@ -17,3 +17,6 @@ $(document).ready(function () {
 	bsCustomFileInput.init()
 });
 
+$('#myModal').on('shown.bs.modal', function () {
+	$('#myInput').trigger('focus')
+  })
