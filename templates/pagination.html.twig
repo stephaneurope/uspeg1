@@ -12,7 +12,7 @@
 				</li>
 			{% endfor %}
 			{% for i in page..page %}
-			{% if page == i and page > 3 %}
+			{% if page == i and page > 3 and page < (pages-3) %}
 			<li class="page-item"><a class="page-link" style="color:white;">...</a></li>
 			<li class="page-item  active"><a class="page-link">{{i}}</a></li>
 			<li class="page-item"><a class="page-link" style="color:white;">...</a></li>
