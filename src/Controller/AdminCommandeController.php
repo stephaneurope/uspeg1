@@ -63,7 +63,7 @@ class AdminCommandeController extends AbstractController
        if ($dateattribution == null) {
           
      
-      var_dump( $produit);  }
+       }
       
       
       

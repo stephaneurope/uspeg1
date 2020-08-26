@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% set name = "Articles à commnander" %}
+{% set name = "Articles à commander" %}
 	{% include "header_title.html.twig" %}
 
 <div class="container mt-3">
@@ -14,7 +14,7 @@
 <thead>
 					<tr>
 						
-						<th class="text-center">Articles manquants</th>
+						<th class="text-center lead">Articles manquants</th>
 						
 
 						<th></th>
@@ -25,7 +25,7 @@
 {% for c in commandes %}
 <tbody>
    {% if c not in newArray %}
- <td class="text-center"> {{c}}</td></br>
+ <td class="text-center lead"> {{c}}</td></br>
    {% set newArray = newArray|merge([c]) %}
    {% endif %}
 
