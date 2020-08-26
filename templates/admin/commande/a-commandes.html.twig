@@ -7,15 +7,34 @@
 {% set name = "Articles à commnander" %}
 	{% include "header_title.html.twig" %}
 
+<div class="container mt-3">
+	
+<table class="table table-hover">
+
+<thead>
+					<tr>
+						
+						<th class="text-center">Articles manquants</th>
+						
+
+						<th></th>
+					</tr>
+				</thead>
+	{% set newArray = [] %}
 
 {% for c in commandes %}
+<tbody>
+   {% if c not in newArray %}
+ <td class="text-center"> {{c}}</td></br>
+   {% set newArray = newArray|merge([c]) %}
+   {% endif %}
 
-   {{c}}</br>
-     
-    {% endfor %}
-		
+</tbody>
+{% endfor %}	
 
-	
+
+
+	</table>
 
 				
 
