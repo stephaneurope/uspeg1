@@ -140,7 +140,7 @@ if (in_array($adherent->getSubCategory(), array($liste))) {
     {
         $manager->remove($adherent);
         $manager->flush();
-
+/*essai*/
         $this->addFlash(
             'success',
             "L'adhérent à bien été supprimé !"
