@@ -1,0 +1,26 @@
+{% block body %}
+
+
+	<div class="text-center">
+
+
+		<h1 class="text-center lead">Articles manquants</h1>
+
+
+		{% set newArray = [] %}
+
+		{% for c in commandes %}
+
+			{% if c not in newArray %}
+				<li class="text-center lead">
+					{{c}}</li>
+			</br>
+			{% set newArray = newArray|merge([c]) %}
+		{% endif %}
+
+
+	{% endfor %}
+
+
+</div>{% endblock %}
+
