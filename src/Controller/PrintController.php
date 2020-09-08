@@ -67,7 +67,7 @@ class PrintController extends AbstractController
     
             ]);
         
-        // Load HTML to Dompdf
+        // Load HTML to Dompdf essai
         $dompdf->loadHtml($html);
         
         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
