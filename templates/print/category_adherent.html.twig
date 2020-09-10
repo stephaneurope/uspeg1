@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Uspeg
+			{% endblock %}
+		</title>
+		
+	</head>
+	<style>
+	     h2 {
+			 color:black;
+			 text-align: center;
+		 }
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: center;
+			background-color: #4CAF50;
+			color: white;
+		}
+		#customers td {
+			
+			text-align: center;
+			
+		}
+	</style>
+	<body>
+		<h2 class="text-center">Liste des adhérents de la catégorie
+			{{categoryadherent.title}}</h2>
+
+
+		<table class="table table-hover" id="customers">
+			<thead>
+				<tr>
+                    
+					<th class="text-center">Nom</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Catégorie</th>
+					<th class="text-center">Licence</th>
+
+
+				</tr>
+			</thead>
+
+
+			<tbody>
+				
+					{% for ad in adherent %}
+
+
+						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
+
+
+							{% for cat in catadherent %}
+							
+								{% if (cat.title is same as(ad.subcategory)) %}
+								
+<tr>
+
+
+  							
+    
+
+                                   
+
+									<td class="text-center">{{ad.lastName}}
+										{{ad.firstName}}</td>
+									<td class="text-center">{{ad.email}}</td>
+									<td class="text-center">{{ad.subcategory}}</td>
+									<td class="text-center">
+										<span class="">{{ad.toNumber}}</span>
+
+									</td>
+									</tr>
+									
+								{% endif %}
+
+							{% endfor %}
+							
+						
+						
+					{% endif %}
+					
+				{% endfor %}
+
+			</tbody>
+
+		</table>
+		
+	</body>
+</html>
+
+</body
+	</html>
+

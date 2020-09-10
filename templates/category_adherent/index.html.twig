@@ -56,7 +56,13 @@
 				<div class="dropdown">
 
 					<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+					<a href="{{path('print_category_adherent',{'id': categoryadherent.id})}}">Imprimer <i class="fas fa-print fa-lg"></i></a>
 				</div>
+		
+
+	
+	
+
 
 			</div>
 
@@ -88,6 +94,7 @@
 				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
 			<td	class="text-center" style="color:
 			{% for cat in catadherent %}
+			 
 										{% if (cat.title is same as(ad.subcategory) and a is defined) %}
 										{% set montant_total = cat.montantcot %}
 
