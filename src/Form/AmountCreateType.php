@@ -20,7 +20,7 @@ class AmountCreateType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount1',IntegerType::class,[ 'data' => '0'])
+            ->add('amount1',IntegerType::class)
             ->add('paymentMethodAmount1',ChoiceType::class, [
                 'choices' => [
                     ' ' => ' ',
@@ -31,7 +31,7 @@ class AmountCreateType extends ApplicationType
                 ],
                 'label' => 'Méthode de paiement',
                 ])
-            ->add('amount2',IntegerType::class,[ 'data' => '0'])
+            ->add('amount2',IntegerType::class)
             ->add('paymentMethodAmount2',ChoiceType::class,[
                 'choices' => [
                     ' ' => ' ',
@@ -42,7 +42,7 @@ class AmountCreateType extends ApplicationType
                 ],
                 'label' => 'Méthode de paiement',
                 ])
-            ->add('amount3',IntegerType::class,[ 'data' => '0'])
+            ->add('amount3',IntegerType::class)
             ->add('paymentMethodAmount3',ChoiceType::class, [
                 'choices' => [
                     ' ' => ' ',

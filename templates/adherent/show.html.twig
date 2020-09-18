@@ -1,367 +1,366 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Fiche de
-	{{adherent.lastName}}
-	{{adherent.firstName}}
+    {{adherent.lastName}}
+    {{adherent.firstName}}
 {% endblock %}
-
 
 {% block body %}
-	{% set name = 'Fiche de '~ adherent.lastName ~' '~ adherent.firstName %}
-	{% include "header_title.html.twig" %}
-	<div class="container">
-		{% if adherent.team != null %}
-			<h4 class="text-center">Attribué à l'équipe
-				{{adherent.team.name}}</h4>
-		{% else %}
-			<h4 class="text-center">Non associé à une équipe</h4>
-		{% endif %}
-		<div class="container mt-3 table-responsive-md">
-
-
-			<div class="container mt-2">
-
-
-				<table class="table mt-5" class="table table-hover">
-					<thead>
-						<tr class="table table-active">
-							<th class="text-center" scope="col">Nom Prénom</th>
-							<th class="text-center" scope="col">Date de naissance</th>
-							<th class="text-center" scope="col">Catégorie</th>
-							<th class="text-center" scope="col">Numéro de licence</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr class="table table-default font-weight-bold">
-							<td class="text-center" scope="row">{{adherent.lastName}}
-								{{adherent.firstName}}</td>
-							<td class="text-center">{{adherent.born|date("d/m/Y")}}</td>
-							<td class="text-center">{{adherent.subCategory}}
-							</td>
-							<td class="text-center">{{adherent.toNumber}}</td>
-						</tr>
-					</tbody>
-
-					<thead>
-						<tr class="table table-active">
-							<th class="text-center" scope="col">Sexe</th>
-							<th class="text-center" scope="col">Adresse</th>
-							<th class="text-center" scope="col">Complément</th>
-							<th class="text-center" scope="col">Code Postal</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr class="table table-default font-weight-bold">
-							<td class="text-center" scope="row">{{adherent.sex}}</td>
-							<td class="text-center">{{adherent.address}}</td>
-							<td class="text-center">{{adherent.complement}}
-							</td>
-							<td class="text-center" scope="row">{{adherent.postalCode}}</td>
-						</tr>
-					</tbody>
-
-					<thead>
-						<tr class="table table-active">
-							
-							<th class="text-center" scope="col">Ville</th>
-							<th class="text-center" scope="col">Enregistrement</th>
-							<th class="text-center" scope="col">Téléphone maison</th>
-							<th class="text-center" scope="col">Téléphone mobile</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr class="table table-default font-weight-bold">
-							
-							<td class="text-center">{{adherent.city}}</td>
-							<td class="text-center">{{adherent.record|date("d/m/Y")}}
-							<td class="text-center" scope="row">{{adherent.homePhone}}</td>
-							<td class="text-center">{{adherent.mobilePhone}}</td>
-							</td>
-							
-						</tr>
-					</tbody>
-
-					<thead>
-						<tr class="table table-active">
-							
-							
-							<th class="text-center" scope="col">Email</th>
-								<th class="text-center" scope="col">Lieu de naissance</th>
-							<th class="text-center" scope="col">Changement de club</th>
-							<th class="text-center" scope="col">Club quitté</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr class="table table-default font-weight-bold">
-							
-							
-							<td class="text-center">{{adherent.email}}</td>
-							<td class="text-center">{{adherent.placeOfBirth}}</td>
-							<td class="text-center">{{adherent.clubChange}}
-							</td>
-							<td class="text-center">{{adherent.clubOut}}</td>
-						</tr>
-					</tbody>
-
-					
-
-
-				</table>
-
-
-			</div>
-
-
-		</div>
-
-		<div class="container mt-3">
-			<div class="row">
-				<div class="col-sm">
-					<h2 class="text-center">Attribution
-						{% include "partials/equipement.html.twig" %}
-						{% include "partials/equipement_goal.html.twig" %}
-					</h2>
-					<div class="container mt-3">
-
-
-						{{ form_start(form) }}
-						{{ form_widget(form) }}
-
-						<button type="submit" class="btn btn-primary">Créer une nouvelle commande</button>
-						{{ form_end(form) }}
-					</div>
-
-					<table class="table table-hover">
-
-						<thead>
-							<tr>
-
-								<th class="text-center">distribué le</th>
-								<th class="text-center">Produit</th>
-								<th class="text-center">Catégorie</th>
-								<th class="text-center">Quantité</th>
-
-								<th></th>
-
-							</tr>
-
-
-						</thead>
-
-						{% for c in adherent.commandes|slice(0, 10) %}
-							{% if (c.adherent.id is same as(adherent.id)) %}
-								{% if c.dateattribution  != null %}
-									<tbody>
-
-
-										<td class="text-center">
-											{{c.datecommande|date("d/m/Y")}}
-
-										</td>
-										<td class="text-center">{{c.produit.title}}</td>
-										<td class="text-center">{{c.produit.categoryproduit.title}}</td>
-										<td class="text-center">
-											<span class="">{{c.qte}}</span>
-
-										</td>
-
-										<td>
-											<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
-												<i class="fas fa-trash-alt"></i>
-											</a>
-										</td>
-
-									</tbody>
-								{% endif %}
-							{% endif %}
-						{% endfor %}
-
-					</tr>
-
-
-				</table>
-
-
-			</div>
-			<div class="col-sm">
-				<h2 class="text-center">Commande en cours
-				</h2>
-
-
-				<table class="table table-hover">
-					<thead>
-						<tr>
-
-							<th class="text-center">Date</th>
-							<th class="text-center">Produit</th>
-							<th class="text-center">Catégorie</th>
-							<th class="text-center">Quantité</th>
-
-							<th></th>
-						</tr>
-					</thead>
-					{% for c in adherent.commandes|slice(0, 10) %}
-						{% if (c.adherent.id is same as(adherent.id)) %}
-							{% if c.dateattribution == null %}
-								<tbody>
-
-
-									<td class="text-center">
-										{{c.datecommande|date("d/m/Y")}}
-
-									</td>
-									<td class="text-center">{{c.produit.title}}</td>
-									<td class="text-center">{{c.produit.categoryproduit.title}}</td>
-									<td class="text-center">
-										<span class="">{{c.qte}}</span>
-
-									</td>
-
-									<td>
-
-
-										<a href="{{ path('commande_validate', {'id': c.id}) }}" class="btn btn-sm btn-primary">
-											<i class="fas fa-angle-down"></i>
-										</a>
-
-
-									</td>
-
-								</tbody>
-							{% endif %}
-						{% endif %}
-					{% endfor %}
-				</tr>
-
-
-			</table>
-
-		</div>
-
-	</div>
-
-
-	<div class="container mt-3 text-center">
-
-		<h2 class="text-center">Cotisation
-		</h2>
-
-		{% if adherent.amounts is empty %}
-
-			{{ form_start(form1, { attr: { novalidate: 'novalidate' } }) }}
-
-
-			{{ form_start(form1) }}
-			<div class="invisible">{{ form_widget(form1) }}</div>
-
-			<button type="submit" class="btn btn-primary">Créer la cotisation</button>
-
-			{{ form_end(form1) }}
-		{% endif %}
-	</div>
-	{% for a in adherent.amounts %}
-
-
-		<div class="container">
-			<div class="row">
-				<div class="table-responsive col-md-12">
-					<table id="sort2" class="grid table table-bordered table-sortable">
-						<thead>
-							<tr>
-								<th>Montant</th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th>
-									{% for cat in cat %}
-										{% if (cat.title|lower|replace({' ':''}) is same as(adherent.subcategory|lower|replace({' ':''}))) %}
-
-											{% set montant_total =  'cat.montantcot' %}
-											<h3>
-												<span class="badge badge-info">{{cat.montantcot}}€</span>
-											</h3>
-										{% endif %}
-									{% endfor %}
-								</th>
-							</tr>
-						</thead>
-						{{ form_start(form1) }}
-						<tbody>
-							<tr>
-								<td data-id="11">1</td>
-								<td>{{ form_widget(form1.paymentMethodAmount1) }}</td>
-								<td>{{ form_widget(form1.amount1) }}</td>
-								<td>{{a.paymentMethodAmount1}}</td>
-								<td>{{a.amount1}}€</td>
-							</tr>
-							<tr>
-								<td data-id="22">2</td>
-								<td>{{ form_widget(form1.paymentMethodAmount2) }}</td>
-								<td>{{ form_widget(form1.amount2) }}</td>
-								<td>{{a.paymentMethodAmount2}}</td>
-								<td>{{a.amount2}}€</td>
-							</tr>
-							<tr>
-								<td data-id="33">3</td>
-								<td>{{ form_widget(form1.paymentMethodAmount3) }}</td>
-								<td>{{ form_widget(form1.amount3) }}</td>
-								<td>{{a.paymentMethodAmount3}}</td>
-								<td>{{a.amount3}}€</td>
-							</tr>
-							<tr>
-								<td data-id="33">4</td>
-								<td>{{ form_widget(form1.paymentMethodAmount4) }}</td>
-								<td>{{ form_widget(form1.amount4) }}</td>
-								<td>{{a.paymentMethodAmount4}}</td>
-								<td>{{a.amount4}}€</td>
-							</tr>
-						</tbody>
-						<thead>
-							<tr>
-								<th>Total
-									{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}</th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th>{{total}}€</th>
-							</tr>
-							<tr>
-								<th>Reste a payer</th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th>
-									{% for cat in cat %}
-										{% if (cat.title is same as(adherent.subcategory)) %}
-											{% set montant_total = cat.montantcot %}
-
-											{% set reste = montant_total - total %}
-											{% if total < cat.montantcot  %}
-												<span class="badge badge-danger badge-pill">{{reste}}€</span>
-											{% endif %}
-											{% if total == cat.montantcot  %}
-												<span class="badge badge-success badge-pill">{{reste}}€</span>
-											{% endif %}
-
-											{% if total > cat.montantcot  %}
-												<p class=" btn btn-warning">Le montant est supérieur a la cotisation</p>
-											{% endif %}
-										{% endif %}
-									{% endfor %}
-								</th>
-							</tr>
-						</thead>
-					</table>
-					<button type="submit" class="btn btn-primary">Modifier la cotisation</button>
-					{{ form_end(form1) }}
-				</div>
-			</div>
-		</div>
-
-	{% endfor %}
+    {% set name = 'Fiche de '~ adherent.lastName ~' '~ adherent.firstName %}
+    {% include "header_title.html.twig" %}
+    <div class="container">
+        {% if adherent.team != null %}
+            <h4 class="text-center">Attribué à l'équipe
+                {{adherent.team.name}}</h4>
+        {% else %}
+            <h4 class="text-center">Non associé à une équipe</h4>
+        {% endif %}
+        <div class="container mt-3 table-responsive-md">
+
+            <div class="container mt-2">
+
+                <table class="table mt-5" class="table table-hover">
+                    <thead>
+                        <tr class="table table-active">
+                            <th class="text-center" scope="col">Nom Prénom</th>
+                            <th class="text-center" scope="col">Date de naissance</th>
+                            <th class="text-center" scope="col">Catégorie</th>
+                            <th class="text-center" scope="col">Numéro de licence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="table table-default font-weight-bold">
+                            <td class="text-center" scope="row">{{adherent.lastName}}
+                                {{adherent.firstName}}</td>
+                            <td class="text-center">{{adherent.born|date("d/m/Y")}}</td>
+                            <td class="text-center">{{adherent.subCategory}}
+                            </td>
+                            <td class="text-center">{{adherent.toNumber}}</td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr class="table table-active">
+                            <th class="text-center" scope="col">Sexe</th>
+                            <th class="text-center" scope="col">Adresse</th>
+                            <th class="text-center" scope="col">Complément</th>
+                            <th class="text-center" scope="col">Code Postal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="table table-default font-weight-bold">
+                            <td class="text-center" scope="row">{{adherent.sex}}</td>
+                            <td class="text-center">{{adherent.address}}</td>
+                            <td class="text-center">{{adherent.complement}}
+                            </td>
+                            <td class="text-center" scope="row">{{adherent.postalCode}}</td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr class="table table-active">
+                            
+                            <th class="text-center" scope="col">Ville</th>
+                            <th class="text-center" scope="col">Enregistrement</th>
+                            <th class="text-center" scope="col">Téléphone maison</th>
+                            <th class="text-center" scope="col">Téléphone mobile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="table table-default font-weight-bold">
+                            
+                            <td class="text-center">{{adherent.city}}</td>
+                            <td class="text-center">{{adherent.record|date("d/m/Y")}}
+                            <td class="text-center" scope="row">{{adherent.homePhone}}</td>
+                            <td class="text-center">{{adherent.mobilePhone}}</td>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr class="table table-active">
+                            
+                            
+                            <th class="text-center" scope="col">Email</th>
+                                <th class="text-center" scope="col">Lieu de naissance</th>
+                            <th class="text-center" scope="col">Changement de club</th>
+                            <th class="text-center" scope="col">Club quitté</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="table table-default font-weight-bold">
+                            
+                            
+                            <td class="text-center">{{adherent.email}}</td>
+                            <td class="text-center">{{adherent.placeOfBirth}}</td>
+                            <td class="text-center">{{adherent.clubChange}}
+                            </td>
+                            <td class="text-center">{{adherent.clubOut}}</td>
+                        </tr>
+                    </tbody>
+
+                    
+
+                </table>
+
+            </div>
+
+        </div>
+
+		<div class="text-center">
+<div class="container"><div class="row">
+        <p>
+		<div class="col-md-12 col-sm-6">
+  <a class="btn btn-info m-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Attribution d'équipements</a>
+  <button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Commandes en cours</button>
+  
+   <button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Cotisation</button>
+  <button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Ouvrir/fermer tous les onglets</button>
+</p></div></div>
+<div class="row mb-2">
+    <div class="col">
+    
+	  <div class="collapse multi-collapse" id="multiCollapseExample1">
+          <div class="card card-body">
+                            <h2 class="d-inline text-center">Attribution
+                      <div class="d-inline">  {% include "partials/equipement.html.twig" %}
+                        {% include "partials/equipement_goal.html.twig" %}</div>
+                    </h2>
+                    <div class="container mt-3">
+
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+
+                        <button type="submit" class="btn btn-primary m-2">Créer une nouvelle commande</button>
+                        {{ form_end(form) }}
+                    </div>
+
+                    <table class="table table-hover">
+
+                        <thead>
+                            <tr>
+
+                                <th class="text-center">distribué le</th>
+                                <th class="text-center">Produit</th>
+                                <th class="text-center">Catégorie</th>
+                                <th class="text-center">Quantité</th>
+
+                                <th></th>
+
+                            </tr>
+
+                        </thead>
+
+                        {% for c in adherent.commandes|slice(0, 10) %}
+                            {% if (c.adherent.id is same as(adherent.id)) %}
+                                {% if c.dateattribution  != null %}
+                                    <tbody>
+
+                                        <td class="text-center">
+                                            {{c.datecommande|date("d/m/Y")}}
+
+                                        </td>
+                                        <td class="text-center">{{c.produit.title}}</td>
+                                        <td class="text-center">{{c.produit.categoryproduit.title}}</td>
+                                        <td class="text-center">
+                                            <span class="">{{c.qte}}</span>
+
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+
+                                    </tbody>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                    </tr>
+
+                </table>
+             </div>
+			
+   
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+       <h2 class="text-center">Commande en cours
+                </h2>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Produit</th>
+                            <th class="text-center">Catégorie</th>
+                            <th class="text-center">Quantité</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    {% for c in adherent.commandes|slice(0, 10) %}
+                        {% if (c.adherent.id is same as(adherent.id)) %}
+                            {% if c.dateattribution == null %}
+                                <tbody>
+
+                                    <td class="text-center">
+                                        {{c.datecommande|date("d/m/Y")}}
+
+                                    </td>
+                                    <td class="text-center">{{c.produit.title}}</td>
+                                    <td class="text-center">{{c.produit.categoryproduit.title}}</td>
+                                    <td class="text-center">
+                                        <span class="">{{c.qte}}</span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ path('commande_validate', {'id': c.id}) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-angle-down"></i>
+                                        </a>
+
+                                    </td>
+
+                                </tbody>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+
+            </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="collapse multi-collapse" id="multiCollapseExample3">
+      <div class="card card-body">
+        <h2 class="text-center">Cotisation
+        </h2>
+
+        {% if adherent.amounts is empty %}
+
+            {{ form_start(form1, { attr: { novalidate: 'novalidate' } }) }}
+
+            {{ form_start(form1) }}
+            <div class="invisible">{{ form_widget(form1) }}</div>
+
+            <button type="submit" class="btn btn-primary">Créer la cotisation</button>
+
+            {{ form_end(form1) }}
+        {% endif %}
+    </div>
+    {% for a in adherent.amounts %}
+
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive col-md-12">
+                    <table id="sort2" class="grid table table-bordered table-sortable">
+                        <thead>
+                            <tr>
+                                <th>Montant</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>
+                                    {% for cat in cat %}
+                                        {% if (cat.title|lower|replace({' ':''}) is same as(adherent.subcategory|lower|replace({' ':''}))) %}
+
+                                            {% set montant_total =  'cat.montantcot' %}
+                                            <h3>
+                                                <span class="badge badge-info">{{cat.montantcot}}€</span>
+                                            </h3>
+                                        {% endif %}
+                                    {% endfor %}
+                                </th>
+                            </tr>
+                        </thead>
+                        {{ form_start(form1) }}
+                        <tbody>
+                            <tr>
+                                <td data-id="11">1</td>
+                                <td>{{ form_widget(form1.paymentMethodAmount1) }}</td>
+                                <td>{{ form_widget(form1.amount1) }}</td>
+                                <td>{{a.paymentMethodAmount1}}</td>
+                                <td>{{a.amount1}}€</td>
+                            </tr>
+                            <tr>
+                                <td data-id="22">2</td>
+                                <td>{{ form_widget(form1.paymentMethodAmount2) }}</td>
+                                <td>{{ form_widget(form1.amount2) }}</td>
+                                <td>{{a.paymentMethodAmount2}}</td>
+                                <td>{{a.amount2}}€</td>
+                            </tr>
+                            <tr>
+                                <td data-id="33">3</td>
+                                <td>{{ form_widget(form1.paymentMethodAmount3) }}</td>
+                                <td>{{ form_widget(form1.amount3) }}</td>
+                                <td>{{a.paymentMethodAmount3}}</td>
+                                <td>{{a.amount3}}€</td>
+                            </tr>
+                            <tr>
+                                <td data-id="33">4</td>
+                                <td>{{ form_widget(form1.paymentMethodAmount4) }}</td>
+                                <td>{{ form_widget(form1.amount4) }}</td>
+                                <td>{{a.paymentMethodAmount4}}</td>
+                                <td>{{a.amount4}}€</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Total
+                                    {% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>{{total}}€</th>
+                            </tr>
+                            <tr>
+                                <th>Reste a payer</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>
+                                    {% for cat in cat %}
+                                        {% if (cat.title is same as(adherent.subcategory)) %}
+                                            {% set montant_total = cat.montantcot %}
+
+                                            {% set reste = montant_total - total %}
+                                            {% if total < cat.montantcot  %}
+                                                <span class="badge badge-danger badge-pill">{{reste}}€</span>
+                                            {% endif %}
+                                            {% if total == cat.montantcot  %}
+                                                <span class="badge badge-success badge-pill">{{reste}}€</span>
+                                            {% endif %}
+
+                                            {% if total > cat.montantcot  %}
+                                                <p class=" btn btn-warning">Le montant est supérieur a la cotisation</p>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button type="submit" class="btn btn-primary">Modifier la cotisation</button>
+                    {{ form_end(form1) }}
+</div>
+      </div>
+    </div>
+
+   {% endfor %}
 {% endblock %}
+
 

@@ -192,7 +192,7 @@ class AdherentController extends AbstractController
     
       $amount = $repo2->find($id_amount);
 
- $form1 = $this->createForm(AmountCreateType::class, $amount);
+ $form1 = $this->createForm(AmountType::class, $amount);
 
  $form1->handleRequest($request);
 
