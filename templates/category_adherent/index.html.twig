@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+ 
 {% block title %}Adhérents par catégorie
 {% endblock %}
 
@@ -61,15 +62,25 @@
 		
 
 	
-	
+	{% block head %}
+	<style>
+	table {
+counter-reset: case;
+}
+#numerotation:before {
+counter-increment: case;
+content: counter(case);
+}
+	</style>
+	{% endblock %}
 
 
 			</div>
 
-			<table class="table table-hover">
+			<table class="table table-hover" border="1">
 				<thead>
 					<tr>
-						
+						<th>#</th>
 						<th class="text-center">Nom</th>
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
@@ -80,18 +91,21 @@
 				</thead>
 				<tbody>
 
-					{% for ad in adherent %}
+					{% for key,ad in adherent %}
 
 					
   
 
 						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
-							
+
+<td id="numerotation"> </td>
+						
 							{% if ad.amounts == false %}<td>{{ad.lastName}} {{ad.firstName}}</td>{% endif %}
 				{% for a in ad.amounts %}
 					
 								
 				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+			
 			<td	class="text-center" style="color:
 			{% for cat in catadherent %}
 			 
@@ -117,6 +131,7 @@
 						  
                             {% endif %}{% else %}black
 							{% endfor %}
+
 								;">{{ad.lastName}} {{ad.firstName}}</td>
 							{% else %}
 							<td class="text-center">{{ad.lastName}} {{ad.firstName}}</td>	
@@ -125,6 +140,7 @@
 							<td class="text-center">{{ad.subcategory}}</td>
 							<td class="text-center">
 								<span class="">{{ad.toNumber}}</span>
+									
 
 							</td>
 							
@@ -142,9 +158,13 @@
 								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
 									<i class="fas fa-trash-alt"></i>
 								</a>
+								
 								{% endif %}
+							
 							</td>
+								
 						</tr>
+						
 					{% endif %}
 				{% endfor %}
 
@@ -153,4 +173,5 @@
 
 
 	</div>
+
 {% endblock %}
