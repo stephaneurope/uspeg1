@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Uspeg
+			{% endblock %}
+		</title>
+
+	</head>
+	<style>
+		h2 {
+			color: black;
+			text-align: center;
+		}
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: center;
+			background-color: #4CAF50;
+			color: white;
+		}
+		#customers td {
+
+			text-align: center;
+
+		}
+	</style>
+	<body>
+		<h2 class="text-center">Liste des adhérents ayant au moins un article en commande
+		</h2>
+
+		<div class="text-center">
+
+
+			<table class="table table-hover" id="customers">
+				<thead>
+					<tr>
+
+						<th class="text-center">Nom</th>
+						<th class="text-center">Email</th>
+						<th class="text-center">Téléphone</th>
+
+
+					
+					</tr>
+				</thead>
+				{% set newArray = [] %}
+				{% for c in commande %}
+					<tbody>
+						{% if c.dateattribution == null %}
+							{% if c.adherent.firstName not in newArray %}
+<tr>
+								<td class="text-center">
+									<p>{{c.adherent.firstName}}
+										{{c.adherent.lastName}}</p>
+								</td>
+								<td class="text-center">
+									<p>{{c.adherent.email}}
+									</p>
+								</td>
+								<td class="text-center">
+									<p>{{c.adherent.mobilephone}}
+									</p>
+								</td>
+                                </tr>
+								{% set newArray = newArray|merge([c.adherent.firstName]) %}
+							{% endif %}
+						{% endif %}
+					</tbody>
+				</br>
+			</tbody>
+
+		{% endfor %}
+	</body>
+</html></tbody></table></div></div></body></html>
+
+
+

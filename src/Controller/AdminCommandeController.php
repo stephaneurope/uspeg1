@@ -93,4 +93,21 @@ class AdminCommandeController extends AbstractController
         ]);
         
     }
+
+     /**
+     * Permet de voir tous adherents ayant une commande
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/commande-par-adherent", name="commande-par-adherent")
+     */
+    public function commandeForAdherent(ObjectManager $manager)
+    {
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+        $commande = $repo->findAll();
+    
+        return $this->render('admin/commande/adherent_for_commande.html.twig', [
+        'commande' => $commande   
+
+        ]);
+        
+    }
 }

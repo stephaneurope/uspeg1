@@ -7,13 +7,13 @@
 			{% block title %}Uspeg
 			{% endblock %}
 		</title>
-		
+
 	</head>
 	<style>
-	     h2 {
-			 color:black;
-			 text-align: center;
-		 }
+		h2 {
+			color: black;
+			text-align: center;
+		}
 		#customers {
 			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 			border-collapse: collapse;
@@ -42,9 +42,9 @@
 			color: white;
 		}
 		#customers td {
-			
+
 			text-align: center;
-			
+
 		}
 	</style>
 	<body>
@@ -55,7 +55,7 @@
 		<table class="table table-hover" id="customers">
 			<thead>
 				<tr>
-                    
+
 					<th class="text-center">Nom</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Portable</th>
@@ -67,24 +67,19 @@
 
 
 			<tbody>
-				
-					{% for ad in adherent %}
+
+				{% for ad in adherent %}
 
 
-						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
+					{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
 
 
-							{% for cat in catadherent %}
-							
-								{% if (cat.title is same as(ad.subcategory)) %}
-								
-<tr>
+						{% for cat in catadherent %}
 
+							{% if (cat.title is same as(ad.subcategory)) %}
 
-  							
-    
+								<tr>
 
-                                   
 
 									<td class="text-center">{{ad.lastName}}
 										{{ad.firstName}}</td>
@@ -94,25 +89,24 @@
 										<span class="">{{ad.toNumber}}</span>
 
 									</td>
-									</tr>
-									
-								{% endif %}
+								</tr>
 
-							{% endfor %}
-							
-						
-						
+							{% endif %}
+
+						{% endfor %}
+
+
 					{% endif %}
-					
+
 				{% endfor %}
 
 			</tbody>
 
 		</table>
-		
+
 	</body>
 </html>
 
-</body
-	</html>
+
+
 

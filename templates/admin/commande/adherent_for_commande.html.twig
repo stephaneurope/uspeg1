@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+{% set name = "liste d'adhérents avec un article manquant" %}
+	{% include "header_title.html.twig" %}
+
+
+
+	
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						
+						<th class="text-center">Nom</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Téléphone</th>
+					
+
+						<th>
+						<a href="{{path('print-commande-par-adherent')}}">Imprimer
+							<i class="fas fa-print fa-lg"></i>
+						</a>
+					</th>
+				
+				</thead>
+                {% set newArray = [] %}
+				{% for c in commande %}
+				<tbody>
+					{% if c.dateattribution == null %}
+					{% if c.adherent.firstName not in newArray %}
+
+						<td class="text-center">	<p >{{c.adherent.firstName}}
+							{{c.adherent.lastName}}</p></td>
+                            <td class="text-center">	<p >{{c.adherent.email}}
+							</p></td>
+                            <td class="text-center">	<p >{{c.adherent.mobilephone}}
+							</p></td>
+					{% set newArray = newArray|merge([c.adherent.firstName]) %}
+				{% endif %}
+					
+		{% endif %}
+					
+				</tbody>
+			
+		{% endfor %}
+
+	</tbody>
+</table></div>{% endblock %}

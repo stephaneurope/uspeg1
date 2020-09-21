@@ -94,26 +94,24 @@
 						</td>
 
 					</tr>
-					<tr class="text-light">
-						<td>Commande en cours</td>
-						<td>
+					<tr >
+					<td>
+					<div class="btn-group">
+						<button class="btn  btn-primary dropdown-toggle" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Commandes</button>
+						
 
-							<a href="{{ path('commande-en-cours')}}" class="btn btn-sm btn-primary">
-								<i class="fas fa-pen"></i>
-							</a>
-						</td>
+							<div class="dropdown-menu bg-primary">
+    <a class="dropdown-item" href="{{ path('commande-en-cours')}}">Commande en cours</a>
+    <a class="dropdown-item" href="{{ path('a-commande')}}">Articles Manquants</a>
+    <a class="dropdown-item" href="{{ path('commande-par-adherent')}}">Adhérents avec un article manquant</a>
+   
+  </div>
+		
+			</div>	
+			</td>	
+<td></td>
 
-					</tr>
-					<tr class="text-light">
-						<td>Articles Manquants</td>
-						<td>
-
-							<a href="{{ path('a-commande')}}" class="btn btn-sm btn-primary">
-								<i class="fas fa-pen"></i>
-							</a>
-						</td>
-
-					</tr>
+					
 					<tr class="text-light">
 						<td>Equipes</td>
 						<td>
