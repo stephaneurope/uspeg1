@@ -172,10 +172,49 @@ class PrintController extends AbstractController
             "Attachment" => true
         ]);
   
-
-      
-        
     }
+      /**
+     * Permet d'imprimer toutes les commandes
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("print/toutes-les-commandes", name="print-commande-en-cours")
+     */
+    public function commandes()
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+        $commande = $repo->findAll();
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('print/toutes_les_commandes.html.twig', [
+            'commande' => $commande,
+            
+        ]);
+        // Load HTML to Dompdf essai
+        $dompdf->loadHtml($html);
+     
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+      
+     
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Commandes en cours.pdf", [
+            "Attachment" => true
+        ]);
+    }
+
+        
+   
 
 }
 

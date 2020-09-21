@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Uspeg
+			{% endblock %}
+		</title>
+
+	</head>
+	<style>
+		h2 {
+			color: black;
+			text-align: center;
+		}
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: center;
+			background-color: #4CAF50;
+			color: white;
+		}
+		#customers td {
+
+			text-align: center;
+
+		}
+	</style>
+	<body>
+		<h2 class="text-center">Toutes les commandes
+		</h2>
+
+		<table class="table table-hover" id="customers">
+				<thead>
+					<tr>
+						
+						<th class="text-center">Nom</th>
+						<th class="text-center">Produit</th>
+						<th class="text-center">code Barre</th>
+						<th class="text-center">Catégorie</th>
+						<th class="text-center">Commandé le</th>
+						<th class="text-center">Quantité</th>
+
+					
+					</tr>
+				</thead>
+				{% for c in commande %}
+				<tbody>
+					{% if c.dateattribution == null %}
+				
+<tr>
+						<td class="text-center">	<p>{{c.adherent.firstName}}
+							{{c.adherent.lastName}}</p></td>
+					
+					<td class="text-center">{{c.produit.title}}</td>
+					<td class="text-center">{{c.produit.code}}</td>
+					<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+					<td class="text-center">{{c.datecommande|date('d/m/yy')}}</td>
+					
+						
+			
+					
+				
+					
+						
+					<td class="text-center">
+						<span class="">{{c.qte}}</span>
+
+					</td>
+		{% endif %}
+				</tr>	
+				</tbody>
+			
+		{% endfor %}
+
+	</tbody>
+</table></div>
+	</body>
+</html></tbody></table></div></div></body></html>
+
+
+

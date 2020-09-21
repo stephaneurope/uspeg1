@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande
+{% block title %}Commandes
 {% endblock %}
 
 {% block body %}
@@ -9,10 +9,6 @@
 
 	<div class="container mt-3">
 		
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Rechercher ..."/>
-
-		</div>
 
 		<div class="container">
 			<div class="row">
@@ -33,14 +29,18 @@
 						<th class="text-center">Commandé le</th>
 						<th class="text-center">Quantité</th>
 
-						<th></th>
+						<th>
+						<a href="{{path('print-commande-en-cours')}}">Imprimer
+							<i class="fas fa-print fa-lg"></i>
+						</a>
+					</th>
 					</tr>
 				</thead>
 				{% for c in commande %}
 				<tbody>
 					{% if c.dateattribution == null %}
 				
-
+<tr>
 						<td class="text-center">	<a href="#">{{c.adherent.firstName}}
 							{{c.adherent.lastName}}</a></td>
 					
@@ -59,10 +59,11 @@
 						<span class="">{{c.qte}}</span>
 
 					</td>
+					</tr>
 		{% endif %}
 					
 				</tbody>
-			</tr>
+			
 		{% endfor %}
 
 	</tbody>
