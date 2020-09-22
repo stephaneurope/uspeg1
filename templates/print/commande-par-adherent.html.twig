@@ -59,8 +59,10 @@
 					<tr>
 
 						<th class="text-center">Nom</th>
-						<th class="text-center">Email</th>
-						<th class="text-center">Téléphone</th>
+                        <th class="text-center">Categorie</th>
+                        <th class="text-center">Produit</th>
+						<th class="text-center">Code barre</th>
+					    <th class="text-center">Quantité</th>
 
 
 					
@@ -72,18 +74,16 @@
 						{% if c.dateattribution == null %}
 							{% if c.adherent.firstName not in newArray %}
 <tr>
-								<td class="text-center">
-									<p>{{c.adherent.firstName}}
-										{{c.adherent.lastName}}</p>
-								</td>
-								<td class="text-center">
-									<p>{{c.adherent.email}}
-									</p>
-								</td>
-								<td class="text-center">
-									<p>{{c.adherent.mobilephone}}
-									</p>
-								</td>
+								<td class="text-center">	<p >{{c.adherent.firstName}}
+							{{c.adherent.lastName}}</p></td>
+                            <td class="text-center">	<p >{{c.adherent.subcategory}}
+							</p></td>
+                            <td class="text-center">	<p >{{c.produit.title}}
+							</p></td>
+							<td class="text-center">	<p >{{c.produit.code}}
+							</p></td>
+							 <td class="text-center">	<p >{{c.qte}}
+							</p></td>
                                 </tr>
 								{% set newArray = newArray|merge([c.adherent.firstName]) %}
 							{% endif %}
