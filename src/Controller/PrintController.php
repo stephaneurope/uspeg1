@@ -213,7 +213,53 @@ class PrintController extends AbstractController
         ]);
     }
 
-        
+       
+    /**
+     * Imprime la liste des adhérents qui n'ont pas payé leur cotisation
+     * 
+     * 
+     * @Route("print/adherent/cotisation", name="adherent_cotisation")
+     */
+    public function cotisation()
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
+        $catadherent = $repo->findAll();
+        $repo1 = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent =$repo1->findBy([],['lastName' => 'ASC']);
+       
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('print/cotisation.html.twig', [
+            'adherent' => $adherent,
+            'catadherent' => $catadherent,
+           
+           
+        ]);
+
+        $dompdf->loadHtml($html);
+     
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+      
+     
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Liste des adhérents n'ayant pas completement reglé leur cotisation", [
+            "Attachment" => true
+        ]);
+    } 
    
 
 }

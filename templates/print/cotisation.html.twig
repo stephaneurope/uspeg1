@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Uspeg
+			{% endblock %}
+		</title>
+
+	</head>
+	<style>
+		h2 {
+			color: black;
+			text-align: center;
+		}
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: center;
+			background-color: #4CAF50;
+			color: white;
+		}
+		#customers td {
+
+			text-align: center;
+
+		}
+	</style>
+	<h2 class="text-center">Liste des adhérents n'ayant pas completement reglé leur cotisation
+	</h2>
+
+
+	<table class="table table-hover" border="1" id="customers">
+		<thead>
+			<tr>
+
+				<th class="text-center">Nom</th>
+				<th class="text-center">Catégorie</th>
+                <th class="text-center">Mail</th>
+                <th class="text-center">Téléphone</th>
+				<th class="text-center">Reste dû</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for key,ad in adherent %}
+
+
+				
+				{% for a in ad.amounts %}
+
+
+					{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+
+
+					{% for cat in catadherent %}
+                      {% set montant_total = cat.montantcot %}
+                      {% set reste_du = cat.montantcot - total %}
+						{% if (cat.title is same as(ad.subcategory) and a is defined and total < cat.montantcot) %}
+							
+
+<tr>
+							
+								<td class="text-center" style="color:red">{{ad.lastName}}
+									{{ad.firstName}}</td>
+							
+
+
+						
+
+						<td class="text-center">{{ad.subcategory}}</td>
+                        <td class="text-center">{{ad.email}}</td>
+                        <td class="text-center">{{ad.mobilephone}}</td>
+						<td class="text-center">{{reste_du}} €</td>
+
+
+					</tr>
+				
+			{% endif %}
+            {% endfor %}
+		{% endfor %}
+        {% endfor %}
+	</tbody>
+</html></table>
