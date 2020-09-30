@@ -12,18 +12,18 @@
 		<div class="container mt-2 mb-2">
 
 			<div class="row ">
-				
+
 
 				<table class="table table-hover">
 					<thead>
 						<tr>
-						
+
+							<th class="text-center">Supprimer</th>
 							<th class="text-center">Nom</th>
 							<th class="text-center">Email</th>
-                            <th class="text-center">Role</th>
-				
-							
-							
+							<th class="text-center">Role</th>
+
+
 							<th></th>
 						</tr>
 					</thead>
@@ -31,27 +31,32 @@
 
 						{% for user in user %}
 
-							
+							<td class="text-center">
+								<a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet utilisateur. En êtes vous certains ?">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</td>
 							<td class="text-center">
 								<a href="#">{{user.firstName}}
 									{{user.lastName}}</a>
 							</td>
 							<td class="text-center">{{user.email}}</td>
-                            {% for role in user.roles %}
-                              {% if role == "ROLE_ADMIN" and "ROLE_USER"%}
-                                <td class="text-center"> Administrateur</td>
-                              {% elseif role == "ROLE_USER" %}
-                                <td class="text-center"> Utilisateur</td>
-                
-                          
-                            {% endif %}
-                         
-							 {% endfor %}
-							
-							
-							
-					
+							{% for role in user.roles %}
+								{% if role == "ROLE_ADMIN" and "ROLE_USER"%}
+									<td class="text-center">
+										Administrateur</td>
+								{% elseif role == "ROLE_USER" %}
+									<td class="text-center">
+										Utilisateur</td>
+
+
+								{% endif %}
+
+							{% endfor %}
+
+
 						</tr>
+
 					{% endfor %}
 
 				</tbody>
@@ -63,8 +68,4 @@
 
 
 {% endblock %}
-
-
-
-
 
