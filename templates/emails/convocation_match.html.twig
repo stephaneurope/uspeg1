@@ -1,0 +1,17 @@
+{# '@images/' refers to the Twig namespace defined earlier #}
+<center><img src="{{ email.image('@images/logo/uspeg-tr.gif') }}" width="200" height="200" alt="Logo">
+<h1>Convocation</h1>
+<p>De : {{ mail }}</p>
+<div>
+Equipe:{{team}}				
+</div>
+<div>
+<p>Tu es convoqué le <strong>{{convocation_date|date("d/m/Y") }}</strong>  pour le match contre <strong>{{club_adverse}}</strong> ».</p><br>
+
+<p>Le rendez-vous est fixé le <strong>{{rendez_vous_date|date("d/m/Y \\à G:i") }}</strong> au <strong>{{ lieu }}</strong>.</p><br>
+
+<p>Le match se déroulera le <strong>{{ match_date|date("d/m/Y \\à G:i") }}</strong>  précise au stade <strong>{{ stade }}</strong>.
+</p>
+<br>
+<p style="color:red;"><strong> Prévenir impérativement l’éducateur en cas d’empêchement le plus tôt possible.</strong></p>
+</div></center>

@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block body %}
+
 	{% set name = 'Fiche de '~ adherent.lastName ~' '~ adherent.firstName %}
+	
 	{% include "header_title.html.twig" %}
 	<div class="container">
 		{% if adherent.team != null %}
@@ -15,6 +17,45 @@
 		{% else %}
 			<h4 class="text-center">Non associé à une équipe</h4>
 		{% endif %}
+		<!-- Button trigger modal Contact-->
+		{% if adherent.email == true %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Contact
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contacter {{adherent.lastName}}
+								{{adherent.firstName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+	  {{ form_start(formcontact)}}
+      <div class="modal-body">
+       {{form_row(formcontact.title)}}
+	   {{form_row(formcontact.email)}}
+	   {{form_row(formcontact.message)}}
+
+      </div>
+      <div class="modal-footer">
+	  <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        
+      </div>
+    </div>
+  </div>
+  {{ form_end(formcontact) }}
+  
+</div>
+{% else %}
+	
+<button type="button" class="btn btn-danger">
+  Pas de Mail
+</button>{% endif %}
 		<div class="container mt-3 table-responsive-md">
 
 			<div class="container mt-2">

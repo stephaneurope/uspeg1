@@ -14,6 +14,7 @@ use App\Form\CommandeType;
 use App\Entity\PropertySearch;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
+use App\Form\AdherentContactType;
 use App\Form\PropertySearchType;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
@@ -24,8 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
-
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -90,13 +91,35 @@ class AdherentController extends AbstractController
      * 
      * @return Response
      */
-    public function show($id,Request $request, ObjectManager $manager)
+    public function show($id,Request $request, ObjectManager $manager, MailerInterface $mailer)
     {
         
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
+        /***formulaire de contact*******/
+        $formcontact = $this->createForm(AdherentContactType::class);
+        $contact = $formcontact->handleRequest($request);
+        if($formcontact->isSubmitted() && $formcontact->isValid()){
+            $email = (new TemplatedEmail())
+            ->from($contact->get('email')->getData())
+            ->to($adherent->getEmail())
+            ->subject('contact')
+            ->htmlTemplate('emails/contact_adherent.html.twig')
+            ->context([
+                'adherent' =>$adherent,
+                'mail' => $contact->get('email')->getData(),
+                'message'=> $contact->get('message')->getData()
+            ]);
+            $mailer->send($email);
+            $this->AddFlash(
+                'success',
+                "Votre email a bien été envoyé !"
+            );
+            return $this->redirectToRoute('adherent_show',['id' => $adherent->getId()]);
+        }
+        /**************************************************************/
         /************commande directement dans la page de l'adherent**************/
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
@@ -223,7 +246,8 @@ class AdherentController extends AbstractController
             'commande' => $commande,
             'form' => $form->createView(),
             'form1' => $form1->createView(),    
-            'amount' => $amount
+            'amount' => $amount,
+            'formcontact' =>$formcontact->createView()
         ]);
     }
 

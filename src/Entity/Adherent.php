@@ -485,4 +485,9 @@ class Adherent
 
         return $this;
     }
+
+    public function getLNAndFn()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
 }
