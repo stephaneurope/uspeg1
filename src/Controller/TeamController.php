@@ -13,6 +13,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class TeamController extends AbstractController
 {
     /**
@@ -29,22 +30,41 @@ class TeamController extends AbstractController
         $repo2 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo2->findBy([],['lastName' => 'ASC']);
         
-      
+        
+         if($team->getAdherents()!= null) {
+        foreach ($team->getAdherents() as $c) {
+            if($c->getEmail() != null){
+                $mails[] = $c->getEmail();
+            }
+            
+        }
+    }
+        if (isset($mails)) {
+            $mails = array_combine($mails , $mails);
+        }
+       
+      //var_dump($mails);exit();
   
     
            /***formulaire de contact*******/
-           $formcontact = $this->createForm(ConvocationType::class);
+           if (isset($mails)) {
+           $formcontact = $this->createForm(ConvocationType::class,$mails,[
+            'mails' => $mails,
+        ]);
+           
            $contact = $formcontact->handleRequest($request);
            if($formcontact->isSubmitted() && $formcontact->isValid()){
+
+            
             
             foreach ($contact->get('emailTo')->getData() as $c) {
-                if($c->getEmail() != NULL){
-                $emails[]= $c->getEmail(); // Ou autre selon la fonction de ta class Adhérent
-     
-    }
-}
+                if($c != NULL){
+                $emails[]= $c;} // Ou autre selon la fonction de ta class Adhérent    
+                else {
+                $emails[]= null;}
+                }
    // dump($emails);exit;
-             if(isset($emails)){
+             if(isset($mails) and isset($emails)){
                $email = (new TemplatedEmail())
                ->from($contact->get('email')->getData())
                ->to(...$emails)
@@ -77,16 +97,28 @@ class TeamController extends AbstractController
                 );
               }
             }
+        }
            /**************************************************************/
-      
-      
+    
+           if(isset($mails)){
         return $this->render('team/index.html.twig', [
             'team' => $team,
             'team1' =>$team1,
             'catadherent' => $catadherent,
             'adherent' => $adherent,
+            'mails' => $mails,
             'formcontact' =>$formcontact->createView()
            
-        ]);
+        ]);} else {
+            return $this->render('team/index.html.twig', [
+                'team' => $team,
+                'team1' =>$team1,
+                'catadherent' => $catadherent,
+                'adherent' => $adherent,
+                //'mails' => $mails,
+                //'formcontact' =>$formcontact->createView()
+               
+            ]);
+        }
     }
 }

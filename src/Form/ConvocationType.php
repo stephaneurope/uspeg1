@@ -3,8 +3,8 @@
 namespace App\Form;
 
 
-use App\Entity\Adherent;
 use App\Entity\Team;
+use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,13 +13,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ConvocationType extends AbstractType
 {
+   
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $mails= $options['mails'];
+       
+   //var_dump($mails);exit();
+
         $builder
         ->add('title', TextType::class, [
             'label' => 'Titre',
@@ -29,7 +36,19 @@ class ConvocationType extends AbstractType
                 'class'=> 'form-control'
             ]
         ])
-        ->add('emailTo',EntityType::class, [
+       
+        ->add('emailTo', ChoiceType::class, [
+            'choices'  => $mails,
+            'multiple' => true,
+            'expanded'=>true,
+            'mapped'=>true,
+            'label'=> 'Emails sélectionnées',
+            'choice_attr' => function() {
+                return ['checked' => 'checked'];
+            },
+            ])
+        
+       /* ->add('emailTo',EntityType::class, [
             'label' => 'Emails sélectionnés',
             // Multiple selection allowed
             'multiple' => true,
@@ -44,7 +63,7 @@ class ConvocationType extends AbstractType
             },
         
             
-            ])
+            ])*/
         ->add('email', EmailType::class,[
             'label' => 'Votre e-mail',
             'attr' => [
@@ -91,10 +110,16 @@ class ConvocationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             // Configure your form options here
+            'mails' => null,
         ]);
+
+ 
     }
+
+
+    
 }

@@ -88,4 +88,11 @@ class Team
   
         return $this;
     }
+
+    public function getLNAndFn()
+    {
+        foreach ($this->getAdherents()as $c) {
+        return $c->getFirstName(). ' '.$c->getFirstName() ;
+        }
+    }
 }

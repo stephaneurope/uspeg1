@@ -78,13 +78,19 @@ content: counter(case);
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
 						<th class="text-center">Licence</th>
+	
 
-						<th><!-- Button trigger modal Contact-->
+						<th>
+						{% if mails is defined %}
+						<!-- Button trigger modal Contact-->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Convocations
-</button>
-
+  Convocations</th>
+  {% else %}
+	  <button type="button" class="btn btn-danger">
+  Convocations</th>
+{% endif %}
 <!-- Modal -->
+{% if mails is defined %}
 <div style="overflow:y;height:600px;"class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -96,9 +102,14 @@ content: counter(case);
       </div>
 	 {{ form_start(formcontact)}}
       <div class="modal-body">
+	
        {{form_row(formcontact.title)}}
+	  
 	   <div style="overflow:auto;height:100px;">
-	    {{form_row(formcontact.emailTo)}}</div>
+	   
+	    {{form_row(formcontact.emailTo)}}
+	
+		</div>
 	   {{form_row(formcontact.email)}}
 	   
 	   {{form_row(formcontact.convocation_date)}}
@@ -121,7 +132,9 @@ content: counter(case);
 	 {{ form_end(formcontact) }}
   </div>
   
-</div></th>
+</div>
+{% endif %}
+</th>
 					</tr>
 				</thead>
 				<tbody>
