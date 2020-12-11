@@ -20,12 +20,12 @@ class AdherentContactType extends AbstractType
                     'class'=> 'form-control'
                 ]
             ])
-            ->add('email', EmailType::class,[
+            /*->add('email', EmailType::class,[
                 'label' => 'Votre e-mail',
                 'attr' => [
                     'class' => 'form-control'
                 ]
-            ])
+            ])*/
             ->add('message',TextareaType::class,[
                 'label' => 'Votre message'
             ])

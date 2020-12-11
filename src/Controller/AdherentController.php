@@ -103,13 +103,14 @@ class AdherentController extends AbstractController
         $contact = $formcontact->handleRequest($request);
         if($formcontact->isSubmitted() && $formcontact->isValid()){
             $email = (new TemplatedEmail())
-            ->from($contact->get('email')->getData())
+            //->from($contact->get('email')->getData())
+            ->from('uspegfoot@orange.fr')
             ->to($adherent->getEmail())
             ->subject('contact')
             ->htmlTemplate('emails/contact_adherent.html.twig')
             ->context([
                 'adherent' =>$adherent,
-                'mail' => $contact->get('email')->getData(),
+                'mail' => ('uspegfoot@orange.fr'),
                 'message'=> $contact->get('message')->getData()
             ]);
             $mailer->send($email);
