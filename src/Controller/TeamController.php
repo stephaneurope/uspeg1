@@ -66,13 +66,14 @@ class TeamController extends AbstractController
    // dump($emails);exit;
              if(isset($mails) and isset($emails)){
                $email = (new TemplatedEmail())
-               ->from($contact->get('email')->getData())
+               //->from($contact->get('email')->getData())
+               ->from('contact@uspeg-gestion.com')
                ->to(...$emails)
                ->subject('contact')
                ->htmlTemplate('emails/convocation_match.html.twig')
                ->context([
                   'catadherent' =>$catadherent,
-                  'mail' => $contact->get('email')->getData(),
+                  'mail' => ('contact@uspeg-gestion.com'),
                   'mailTo'=>$contact->get('emailTo')->getData(),
                   'team'=> $team->getName(),
                   'convocation_date'=>$contact->get('convocation_date')->getData(),

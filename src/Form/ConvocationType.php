@@ -64,12 +64,12 @@ class ConvocationType extends AbstractType
         
             
             ])*/
-        ->add('email', EmailType::class,[
+       /* ->add('email', EmailType::class,[
             'label' => 'Votre e-mail',
             'attr' => [
                 'class' => 'form-control'
             ]
-        ])
+        ])*/
         ->add('convocation_date', DateType::class,[
             'label' => 'Date de la convocation',
             'html5'  => false,
