@@ -74,7 +74,9 @@ class AmountType extends ApplicationType
     {
         $resolver->setDefaults([
             'data_class' => Amount::class,
-            
+            'attr' => [
+                'novalidate' => 'novalidate', // comment me to reactivate the html5 validation!  🚥
+            ]
         ]);
      
     }

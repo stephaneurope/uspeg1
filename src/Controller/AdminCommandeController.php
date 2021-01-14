@@ -2,9 +2,12 @@
 namespace App\Controller;
 
 
+use App\Entity\Adherent;
 use App\Entity\Commande;
+use App\Form\CommandeclientType;
 use App\Repository\CommandeRepository;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -109,5 +112,44 @@ class AdminCommandeController extends AbstractController
 
         ]);
         
+    }
+
+    /**
+     * Permet de créer une commande pour un client boutique
+     * 
+     * @Route("commande-client/{id}/new", name="commande_client")
+     * @param ObjectManager $manager
+     * @param AdherentRepository $repo
+     * 
+     * @return Response
+     */
+    public function client($id,Request $request, ObjectManager $manager,Adherent $adherent)
+    {
+        
+        $commande = new Commande();
+        $repo = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repo->find($id);
+      
+        $commande->setDateattribution(new \DateTime('now'));
+        $commande->setDatecommande(new \DateTime('now'));
+    
+    $formclient = $this->createForm(CommandeclientType::class, $commande);
+        $formclient->handleRequest($request);
+
+        if ($formclient->isSubmitted() && $formclient->isValid()) {
+            //$manager =$this->getDoctrine()->getManager();
+            $commande->setAdherent($adherent);
+            $manager->persist($commande);
+            $manager->flush();
+            $this->AddFlash(
+                'success',
+                "Le produit a bien été enregistré  !"
+            );
+         
+        }
+        return $this->render('admin/commande/client_for_commande.html.twig', [
+            'formclient' => $formclient->createView()  
+    
+            ]);
     }
 }

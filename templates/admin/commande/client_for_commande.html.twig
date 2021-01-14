@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+{% set name = "Commande client boutique" %}
+	{% include "header_title.html.twig" %}
+{% if is_granted('ROLE_ADMIN') %}
+					<div class="container mt-3">
+
+						{{ form_start(formclient) }}
+						{{ form_widget(formclient) }}
+
+						<button type="submit" class="btn btn-primary m-2">Créer une nouvelle commande</button>
+						{{ form_end(formclient) }}
+					</div>
+				{% endif %}
+
+    {% endblock %}

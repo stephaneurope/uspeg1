@@ -8,10 +8,13 @@
 
 	<div class="container mt-3">
 
-		<div class="container my-3 text-center"><h1 class="text-center">Commande de {{commande.adherent.firstName}} {{commande.adherent.lastName}}
-		</h1></div>
+		<div class="container my-3 text-center">
+			<h1 class="text-center">Commande de
+				{{commande.adherent.firstName}}
+				{{commande.adherent.lastName}}
+			</h1>
+		</div>
 
-		
 
 		<div class="container">
 			<div class="row">
@@ -24,7 +27,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					
+
 					<th class="text-center">Nom</th>
 					<th class="text-center">Produit</th>
 					<th class="text-center">Catégorie</th>
@@ -37,10 +40,9 @@
 			<tbody>
 
 
-			
 				<td class="text-center">
-				{{commande.adherent.firstName}}
-						{{commande.adherent.lastName}}
+					{{commande.adherent.firstName}}
+					{{commande.adherent.lastName}}
 				</td>
 				<td class="text-center">{{commande.produit.title}}</td>
 				<td class="text-center">{{commande.produit.categoryproduit.title}}</td>
@@ -56,9 +58,9 @@
 				<td>
 
 
-					
-
-					<a href="{{ path('commande_delete', {'id': commande.id}) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+					<a href="{{ path('commande_delete', {'id': commande.id}) }}" class="btn btn-sm btn-danger">
+						<i class="fas fa-trash-alt"></i>
+					</a>
 				</td>
 			</tbody>
 		</tr>

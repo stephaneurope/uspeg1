@@ -236,11 +236,11 @@ class AdherentController extends AbstractController
  }
  
  /*************************************************************************/ 
+  
+        
        }
     
     
-         
-      
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
             'cat' => $cat,
@@ -248,7 +248,8 @@ class AdherentController extends AbstractController
             'form' => $form->createView(),
             'form1' => $form1->createView(),    
             'amount' => $amount,
-            'formcontact' =>$formcontact->createView()
+            'formcontact' => $formcontact->createView(),
+            
         ]);
     }
 
@@ -291,6 +292,4 @@ class AdherentController extends AbstractController
         ]);
     }
 
-    
-   
 }
