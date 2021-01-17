@@ -145,6 +145,9 @@ class AdminCommandeController extends AbstractController
                 'success',
                 "Le produit a bien été enregistré  !"
             );
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $adherent->getId(),
+            ]);
          
         }
         return $this->render('admin/commande/client_for_commande.html.twig', [
