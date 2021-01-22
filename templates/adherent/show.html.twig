@@ -431,6 +431,8 @@
 	</div>
 
 {% endfor %}</div>{% endif %}
+
+
 {% if (adherent.subCategory|lower|replace({' ':''}) is same as('clientsboutique')) %}<div class="container mt-3 table-responsive-md">
 
 <div class="container mt-2">
@@ -555,7 +557,7 @@
 		{% endif %}
 	</td>
 </tr></tbody></table></div></div><div class="container my-3"><h2 class="text-center">Ajouter un article<a class="ml-1" href="{{ path('commande_client', {id: adherent.id}) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h2></div><div><table class="table table-hover"><thead><tr>
-
+<th class="text-center">commandé le</th>
 <th class="text-center">distribué le</th>
 <th class="text-center">Produit</th>
 <th class="text-center">Catégorie</th>
@@ -563,11 +565,47 @@
 <th class="text-center">Prix</th>
 <th class="text-center">commentaire</th>
 <th></th></tr></thead>{% for c in adherent.commandes|slice(0, 10) %}{% if (c.adherent.id is same as(adherent.id)) %}
-{% if c.dateattribution  != null %}
+{% if c.dateattribution  == null %}
 	<tbody>
+	    <td class="text-center">
+			{{c.datecommande|date("d/m/Y")}}
+
+		</td>
 
 		<td class="text-center">
-			{{c.dateattribution|date("d/m/Y")}}
+			Pas encore attribué
+
+		</td>
+		<td class="text-center">{{c.produit.title}}</td>
+		<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+		<td class="text-center">
+			<span class="">{{c.qte}}</span>
+
+		</td>
+		<td class="text-center">{{c.produit.price}} €</td>
+		<td class="text-center">{{c.comment}}</td>
+		<td>
+		<a href="{{ path('admin/commande_client_validate', {'id': c.id}) }}" class="btn btn-sm btn-success" data-confirm="Etes-vous certain de vouloir valider?" data-bs-toggle="tooltip" data-bs-placement="right" title="Validez la commande">
+					<i class="fa fa-check"></i>
+				</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+					<i class="fas fa-trash-alt"></i>
+				</a>
+			{% endif %}
+			
+		</td>
+
+	</tbody>
+	{% else %}
+	<tbody>
+	    <td class="text-center">
+			{{c.datecommande|date("d/m/Y")}}
+
+		</td>
+
+		<td class="text-center">
+		{{c.dateattribution|date("d/m/Y")}}
 
 		</td>
 		<td class="text-center">{{c.produit.title}}</td>
@@ -586,5 +624,9 @@
 			{% endif %}
 		</td>
 
-	</tbody>
-{% endif %}{% endif %}{% endfor %}</tr></table></div>{% endif %}{% endblock %}
+	</tbody>	
+{% endif %}
+
+{% endif %}
+
+{% endfor %}</tr></table></div>{% endif %}{% endblock %}

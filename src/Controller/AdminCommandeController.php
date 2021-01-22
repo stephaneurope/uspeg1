@@ -130,7 +130,7 @@ class AdminCommandeController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo->find($id);
       
-        $commande->setDateattribution(new \DateTime('now'));
+        //$commande->setDateattribution(new \DateTime('now'));
         $commande->setDatecommande(new \DateTime('now'));
     
     $formclient = $this->createForm(CommandeclientType::class, $commande);
@@ -155,4 +155,32 @@ class AdminCommandeController extends AbstractController
     
             ]);
     }
+
+/**
+     * Permet de valider une commande client
+     * 
+     * @Route("commande/{id}/validate", name="admin/commande_client_validate")
+     *
+     * @param Commande $commande
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function delete(Commande $commande, ObjectManager $manager)
+    {
+        $commande->setDateattribution(new \DateTime('now'));
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "La commande a bien été validée !"
+        );
+        return $this->redirectToRoute('adherent_show', [
+            'id' => $commande->getAdherent()->getId(),
+        ]);
+        //return $this->redirectToRoute("adherent");
+    }
+
+
+
+
 }
