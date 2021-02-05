@@ -260,6 +260,61 @@ class PrintController extends AbstractController
             "Attachment" => true
         ]);
     } 
+
+    /**
+     * Imprime les factures des clients boutique
+     * 
+     * 
+     * @Route("print/facture/{id}/boutique", name="facture_boutique")
+     */
+    public function facture($id)
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+    
+        $repo1 = $this->getDoctrine()->getRepository(Commande::class);
+        $commande = $repo1->findBy(
+            ['adherent' => $id,
+             'dateattribution' => NULL
+            ]           
+        );
+  
+       
+
+        $repo = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repo->find($id);
+       
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('print/facture_boutique.html.twig', [
+            'adherent' => $adherent,
+            'commande' => $commande,
+            
+           
+           
+        ]);
+
+        $dompdf->loadHtml($html);
+     
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+      
+     
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Facture", [
+            "Attachment" => true
+        ]);
+    } 
    
 
 }

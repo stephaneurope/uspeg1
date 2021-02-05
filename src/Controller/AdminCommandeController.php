@@ -49,7 +49,7 @@ class AdminCommandeController extends AbstractController
     }
 
     /**
-     * Permet d'afficher toutes les produits en commande à commander
+     * Permet d'afficher tous les produits en commande à commander
      * @IsGranted("ROLE_ADMIN")
      * @Route("/a-commande", name="a-commande")
      */
@@ -136,7 +136,7 @@ class AdminCommandeController extends AbstractController
     $formclient = $this->createForm(CommandeclientType::class, $commande);
         $formclient->handleRequest($request);
 
-        if ($formclient->isSubmitted() && $formclient->isValid()) {
+        if ($formclient->isSubmitted() && $formclient->isValid() && $commande->getQte()!= NULL) {
             //$manager =$this->getDoctrine()->getManager();
             $commande->setAdherent($adherent);
             $manager->persist($commande);

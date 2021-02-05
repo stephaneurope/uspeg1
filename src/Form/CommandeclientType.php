@@ -8,6 +8,8 @@ use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -17,7 +19,8 @@ class CommandeclientType extends ApplicationType
     {
         $builder
             //->add('datecommande', DateType::class, $this->getConfiguration("Date de la commande", "Inserez la date de la commande"))
-            ->add('qte', IntegerType::class, $this->getConfiguration("Quantité à distribuer", "Tapez la quantité à distribuer"))
+            ->add('qte', IntegerType::class, $this->getConfiguration("Quantité à distribuer", "Tapez la quantité à distribuer"), array('required'  => true)
+            )
             ->add(
                 'produit',
                 EntityType::class,
@@ -27,9 +30,20 @@ class CommandeclientType extends ApplicationType
                     
                 ]
             )
-            ->add('comment', TextareaType::class, $this->getConfiguration("Commentaire", "Tapez votre commentaire")
+            ->add('payment',ChoiceType::class,[
+                'choices' => [
+                    ' ' => ' ',
+                    'CB' => 'CB',
+                    'Cheque' => 'Chèque',
+                    'Espece' => 'Espèce',
+                    'Chequier Jeunes' => 'Chequier Jeunes'
+                ],
+                'label' => 'Méthode de paiement',
+                ])
+            ->add('comment', TextareaType::class, $this->getConfiguration("Commentaire", "Tapez votre commentaire"))
             
-            )
+            
+            
             
         ;
     }

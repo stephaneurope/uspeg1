@@ -12,12 +12,13 @@ class Commande
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer") 
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     *
      */
     private $datecommande;
 
@@ -45,6 +46,11 @@ class Commande
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $comment;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $payment;
 
     public function getId(): ?int
     {
@@ -119,6 +125,18 @@ class Commande
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPayment(): ?string
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?string $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
