@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Team;
+use App\Entity\Facture;
 use App\Entity\Adherent;
 use App\Entity\Commande;
 use App\Entity\CategoryAdherent;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -262,13 +266,14 @@ class PrintController extends AbstractController
     } 
 
     /**
-     * Imprime les factures des clients boutique
+     * génère les factures des clients boutique en pdf et les enregistrent dans un dossier
      * 
      * 
      * @Route("print/facture/{id}/boutique", name="facture_boutique")
      */
-    public function facture($id)
+    public function facture(ObjectManager $manager,$id)
     {
+       
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -311,9 +316,36 @@ class PrintController extends AbstractController
         $dompdf->render();
 
         // Output the generated PDF to Browser (force download)
-        $dompdf->stream("Facture", [
+        $dompdf->stream("Facture"."-".$adherent->getFirstname()."-".$adherent->getLastname()."-".date("d-m-Y H:i:s"), [
             "Attachment" => true
         ]);
+       $pdf_name ="Facture"."-".$adherent->getFirstname()."-".$adherent->getLastname()."-".date("d-m-Y H:i:s");
+        //enregistre dans la base de donnée le chemin du pdf
+       
+       // Store PDF Binary Data
+       $output = $dompdf->output();
+       
+       // In this case, we want to write the file in the public directory
+       $publicDirectory = $this->getParameter('kernel.project_dir') . '/public';
+       // e.g /var/www/project/public/mypdf.pdf
+       $pdfFilepath =  $publicDirectory . '/pdf/factures/facture-'.$adherent->getFirstname()."-".$adherent->getLastname()."-".date('d-m-Y-H-i-s').'.pdf';
+       $name = 'facture-'.$adherent->getFirstname()."-".$adherent->getLastname()."-".date('d-m-Y-H-i-s').'.pdf';
+       // Write file to the desired path
+       file_put_contents($pdfFilepath, $output);
+       
+       // Send some text response
+       //return new Response("The PDF file has been succesfully generated !");
+       $repo = $this->getDoctrine()->getRepository(Adherent::class);
+       $adherent = $repo->find($id);
+       $facture = new facture();
+       //$form = $this->createForm(FactureType::class, $facture);
+       //$form->handleRequest($request);
+       $facture->setAdherent($adherent);
+       $facture->setDatefacture(new \DateTime('now'));
+       $facture->setPdf($name);
+       $manager->persist($facture);
+       $manager->flush();
+
     } 
    
 

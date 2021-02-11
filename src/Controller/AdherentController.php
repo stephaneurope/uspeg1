@@ -98,6 +98,7 @@ class AdherentController extends AbstractController
         $adherent = $repo->find($id);
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
+        
         /***formulaire de contact*******/
         $formcontact = $this->createForm(AdherentContactType::class);
         $contact = $formcontact->handleRequest($request);

@@ -141,10 +141,16 @@ class Adherent
      */
     private $team;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="adherent", orphanRemoval=true)
+     */
+    private $factures;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->amounts = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -489,5 +495,36 @@ class Adherent
     public function getLNAndFn()
     {
         return $this->firstName.' '.$this->lastName;
+    }
+
+    /**
+     * @return Collection|Facture[]
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures[] = $facture;
+            $facture->setAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->factures->contains($facture)) {
+            $this->factures->removeElement($facture);
+            // set the owning side to null (unless already changed)
+            if ($facture->getAdherent() === $this) {
+                $facture->setAdherent(null);
+            }
+        }
+
+        return $this;
     }
 }
