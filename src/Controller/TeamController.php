@@ -26,7 +26,7 @@ class TeamController extends AbstractController
         $team = $repo->find($id);
         $team1 = $repo->findAll();
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
-        $catadherent = $repo1->findAll();
+        $catadherent = $repo1->findBy([], ['list' => 'ASC']);
         $repo2 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo2->findBy([],['lastName' => 'ASC']);
         

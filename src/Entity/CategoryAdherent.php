@@ -33,6 +33,11 @@ class CategoryAdherent
      */
     private $pack;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $list;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +84,18 @@ class CategoryAdherent
     public function setPack(?Pack $pack): self
     {
         $this->pack = $pack;
+
+        return $this;
+    }
+
+    public function getList(): ?int
+    {
+        return $this->list;
+    }
+
+    public function setList(?int $list): self
+    {
+        $this->list = $list;
 
         return $this;
     }

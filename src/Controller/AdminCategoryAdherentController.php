@@ -37,7 +37,7 @@ class AdminCategoryAdherentController extends AbstractController
     public function dashboard()
     {
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
-        $catadherent = $repo->findAll();
+        $catadherent = $repo->findBy([], ['list' => 'ASC']);
 
         return $this->render('admin/category_adherent/dashboard.html.twig', [
             'catadherent' => $catadherent

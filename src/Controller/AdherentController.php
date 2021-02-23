@@ -66,7 +66,7 @@ class AdherentController extends AbstractController
         $pagination->setEntityClass(Adherent::class) 
         ->setPage($page);   
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
-        $catadherent = $repo->findAll();
+        $catadherent = $repo->findBy([], ['list' => 'ASC']);
         $repo = $this->getDoctrine()->getRepository(Team::class);
         $team1 = $repo->findAll();
     

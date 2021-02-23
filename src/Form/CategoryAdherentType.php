@@ -20,6 +20,7 @@ class CategoryAdherentType extends ApplicationType
         $builder
             ->add('title',TextType::class,$this->getConfiguration("Catégorie","Tapez la nouvelle catégorie d'adhérent"))
             ->add('montantcot',IntegerType::class,$this->getConfiguration("Montant de la cotisation","Tapez le montant de la cotisation"))
+            ->add('list',IntegerType::class,$this->getConfiguration("Ordre dans la liste des catégories","Tapez le nombre pour définir l'ordre de la catégorie"))
             ->add('pack',EntityType::class,
             [
                 'class' => Pack::class,
