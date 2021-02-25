@@ -8,6 +8,7 @@
 
 	<!--Intro Section-->
 	<section class="view intro-2">
+		
 
 		<div class="mask rgba-stylish-strong h-100 d-flex justify-content-center align-items-center">
 			<div class="container">
@@ -15,6 +16,15 @@
 				<div class="row">
 
 					<div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
+					{% for label, messages in app.flashes %}
+				<div  class="container mt-2">
+					<div class="alert alert-{{ label }}">
+						{% for message in messages %}
+							<p>{{ message | raw }}</p>
+						{% endfor %}
+					</div>
+				</div>
+			{% endfor %}
 						{% if hasError %}
 							<div class="alert alert-danger">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide!</div>
 						{% endif %}
@@ -48,7 +58,7 @@
 										<button class="btn btn-success btn-lg text-light">Connexion</button>
 										<hr>
 										<div style="color:white;font:bold;">
-											<p>Si vous avez oubliez votre mot de passe , merci de contacter l'administarteur du site.</p>
+											<a href="{{ path('app_forgotten_password') }}" style="color:white;font:bold;">Mot de passe oublié ?</a>
 										</div>
 
 									</div>
