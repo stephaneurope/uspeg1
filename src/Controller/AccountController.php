@@ -285,7 +285,7 @@ class AccountController extends AbstractController
         $mailer->send($message);
 
         // On crée le message flash de confirmation
-        $this->addFlash('message', 'E-mail de réinitialisation du mot de passe envoyé !');
+        $this->addFlash('info', 'E-mail de réinitialisation du mot de passe envoyé !');
 
         // On redirige vers la page de login
         return $this->redirectToRoute('account_login');
@@ -325,7 +325,7 @@ class AccountController extends AbstractController
             $entityManager->flush();
 
             // On crée le message flash
-            $this->addFlash('message', 'Mot de passe mis à jour');
+            $this->addFlash('success', 'Mot de passe mis à jour');
 
             // On redirige vers la page de connexion
             return $this->redirectToRoute('account_login');
