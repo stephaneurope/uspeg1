@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cotisations Impayées de l'année précédente
+{% endblock %}
+
+{% block body %}
+	{% set name = 'Cotisations impayées de l\'année précédente' %}
+	{% include "header_title.html.twig" %}
+	<div class="container mt-3">
+
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">Nom</th>
+					<th class="text-center">Catégorie</th>
+					<th class="text-center">Mail</th>
+					<th class="text-center">Telephone</th>
+					<th class="text-center">Reste du</th>
+                    <th class="text-center"><a href="{{path('default_payment_last')}}"><i class="fas fa-print fa-2x"></i></a></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for debt in debt %}
+					<tr>
+						<td class="text-center">{{debt.name}}
+							{{debt.prenom}}</td>
+						<td class="text-center">{{debt.category}}</td>
+						<td class="text-center">{{debt.mail}}</td>
+						<td class="text-center">{{debt.tel}}</td>
+						<td class="text-center">{{debt.amount}}€
+						</td>
+					</tr>
+				{% endfor %}
+
+
+			</tbody>
+
+
+		</table>
+	</div>
+{% endblock %}
+
+
+
+
+
+

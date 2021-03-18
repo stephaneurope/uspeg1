@@ -225,7 +225,7 @@
 
 		<tr>
 		
-			<td>Inscription</td>
+			<td>Inscriptions</td>
 			<td>
 
 				<a href="{{ path('account_register')}}" class="btn btn-sm btn-info text-primary">
@@ -236,12 +236,27 @@
 
 		</tr>
 		<tr>
-			<td>Cotisation</td>
+			<td>Cotisations Impayées</td>
 			<td>
-
-				<a href="#" class="btn btn-sm btn-info text-primary">
-					<i class="fas fa-undo" data-confirm="Etes vous sûr de vouloir supprimer cette commande ?"></i>
+                 <a href="{{ path('copy_cotisation')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sur de vouloir sauvegarder les adhérents n'ayant pas totalement payé leur cotisation ?">
+					<i class="fas fa-save fa-lg"></i>
 				</a>
+				<a href="{{ path('debt')}}" class="btn btn-sm btn-info text-primary">
+					<i class="far fa-eye fa-lg "></i>
+				</a>
+
+			</td>
+
+		</tr>
+
+		<tr>
+			<td>Réinitialisation Cotisations</td>
+			<td>
+                 
+				<a href="{{ path('amount_delete')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sûr de vouloir réinitialiser toutes les cotisations ?">
+					<i class="fas fa-undo"></i>
+				</a>
+
 			</td>
 
 		</tr>

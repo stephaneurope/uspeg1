@@ -47,7 +47,7 @@
 
 		}
 	</style>
-	<h2 class="text-center">Liste des adhérents n'ayant pas completement reglé leur cotisation
+	<h2 class="text-center">Liste des adhérents n'ayant pas completement reglé leur cotisation l'année précédente
 	</h2>
 
 
@@ -66,40 +66,31 @@
 		</thead>
 		<tbody>
 
-			{% for key,ad in adherent %}
+		
 
 
-				{% for a in ad.amounts %}
+				{% for debt in debt %}
 
 
-					{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
-
-
-					{% for cat in catadherent %}
-						{% set montant_total = cat.montantcot %}
-						{% set reste_du = cat.montantcot - total %}
-						{% if (cat.title is same as(ad.subcategory) and a is defined and total < cat.montantcot) %}
 
 
 							<tr>
 
-								<td class="text-center" style="color:red">{{ad.lastName}}
-									{{ad.firstName}}
+								<td class="text-center" style="color:red">{{debt.name}}
+									{{debt.prenom}}
 
 
 
-								<td class="text-center">{{ad.subcategory}}</td>
-								<td class="text-center">{{ad.email}}</td>
-								<td class="text-center">{{ad.mobilephone}}</td>
-								<td class="text-center">{{reste_du}}
+								<td class="text-center">{{debt.category}}</td>
+								<td class="text-center">{{debt.mail}}</td>
+								<td class="text-center">{{debt.tel}}</td>
+								<td class="text-center">{{debt.amount}}
 									€</td>
 
 
 							</tr>
 
-						{% endif %}
-					{% endfor %}
-				{% endfor %}
+						
 			{% endfor %}
 		</tbody>
 	</html>

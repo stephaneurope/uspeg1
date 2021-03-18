@@ -10,6 +10,7 @@ use App\Entity\Facture;
 use App\Entity\Adherent;
 use App\Entity\Commande;
 use App\Entity\CategoryAdherent;
+use App\Entity\Debt;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -347,6 +348,58 @@ class PrintController extends AbstractController
        $manager->flush();
 
     } 
+
+
+     
+
+       
+    /**
+     * Imprime la liste des adhérents qui n'ont pas payé leur cotisation de l'année precedente table debt
+     * 
+     * 
+     * @Route("print/amount/default_payment", name="default_payment_last")
+     */
+    public function default_payment()
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $repo = $this->getDoctrine()->getRepository(Debt::class);
+        $debt = $repo->findAll();
+        
+       
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('print/default_payment.html.twig', [
+            'debt' => $debt,
+            
+           
+           
+        ]);
+
+        $dompdf->loadHtml($html);
+     
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+      
+     
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Liste des adhérents n'ayant pas completement reglé leur cotisation l'année précédente", [
+            "Attachment" => true
+        ]);
+    } 
+
+
    
 
 }
