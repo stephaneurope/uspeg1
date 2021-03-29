@@ -32,11 +32,13 @@ class CommandeclientType extends ApplicationType
             )
             ->add('payment',ChoiceType::class,[
                 'choices' => [
-                    ' ' => ' ',
-                    'CB' => 'CB',
-                    'Cheque' => 'Chèque',
-                    'Espece' => 'Espèce',
-                    'Chequier Jeunes' => 'Chequier Jeunes'
+                    ' '                => ' ',
+                    'CB'               => 'CB',
+                    'Cheque'           => 'Chèque',
+                    'Espece'           => 'Espèce',
+                    'Carte Collégiens' => 'Carte Collégiens',
+                    'Carte lycéens'    => 'Carte lycéens',
+                    'ANCV'             => 'ANCV'
                 ],
                 'label' => 'Méthode de paiement',
                 ])

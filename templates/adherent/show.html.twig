@@ -11,7 +11,7 @@
 
 {% include "header_title.html.twig" %}
 <div class="container">
-
+{% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
 	{% if (adherent.subCategory|lower|replace({' ':''}) != ('clientsboutique')) %}
 		{% if adherent.team != null %}
 			<h4 class="text-center">Attribué à l'équipe
@@ -62,7 +62,7 @@
 			</button>
 		{% endif %}
 	{% endif %}
-	{% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
+	
 		<div class="container mt-3 table-responsive-md">
 
 			<div class="container mt-2">
@@ -261,7 +261,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					{% for c in adherent.commandes|slice(0, 10) %}
+					{% for c in adherent.commandes|slice(0, 15) %}
 						{% if (c.adherent.id is same as(adherent.id)) %}
 							{% if c.dateattribution == null %}
 								<tbody>
@@ -441,10 +441,9 @@
 	<table class="table mt-5" class="table table-hover">
 		<thead>
 			<tr class="table table-active">
-				<th class="text-center" scope="col">Nom Prénom</th>
-				<th class="text-center" scope="col">Date de naissance</th>
+				<th class="text-center" scope="col">Nom Prénom</th>			
 				<th class="text-center" scope="col">Catégorie</th>
-
+               <th class="text-center" scope="col">Enregistrement</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -452,10 +451,10 @@
 			<tr class="table table-default font-weight-bold">
 				<td class="text-center" scope="row">{{adherent.lastName}}
 					{{adherent.firstName}}</td>
-				<td class="text-center">{{adherent.born|date("d/m/Y")}}</td>
+				
 				<td class="text-center">{{adherent.subCategory}}
 				</td>
-
+<td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
 			</tr>
 		</tbody>
 
@@ -464,9 +463,11 @@
 		<thead>
 			<tr class="table table-active">
 
-				<th class="text-center" scope="col">Ville</th>
-				<th class="text-center" scope="col">Enregistrement</th>
+				
+				
 				<th class="text-center" scope="col">Téléphone maison</th>
+				<th class="text-center" scope="col">Email</th>
+	<th class="text-center" scope="col">Téléphone mobile</th>
 
 			</tr>
 		</thead>
@@ -474,10 +475,11 @@
 
 			<tr class="table table-default font-weight-bold">
 
-				<td class="text-center">{{adherent.city}}</td>
-				<td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
+				
+				
 				<td class="text-center" scope="row">{{adherent.homePhone}}</td>
-
+<td class="text-center">{{adherent.email}}</td>
+	<td class="text-center">{{adherent.mobilePhone}}</td>
 			</tr>
 		</tbody>
 	</td>
@@ -486,16 +488,14 @@
 <tr class="table table-active">
 
 
-	<th class="text-center" scope="col">Email</th>
-	<th class="text-center" scope="col">Téléphone mobile</th>
+	
 	<th class="text-center" scope="col">Contact</th>
 </tr></thead><tbody>
 
 <tr class="table table-default font-weight-bold">
 
 
-	<td class="text-center">{{adherent.email}}</td>
-	<td class="text-center">{{adherent.mobilePhone}}</td>
+	
 	<td
 		class="text-center">
 		<!-- Button trigger modal Contact-->
