@@ -36,33 +36,39 @@ class AmountType extends ApplicationType
             ->add('amount2',IntegerType::class,$this->getConfiguration("Montant 2"," "))
             ->add('paymentMethodAmount2',ChoiceType::class, [
                 'choices' => [
-                    ' ' => ' ',
-                    'CB' => 'CB',
-                    'Cheque' => 'Chèque',
-                    'Espece' => 'Espèce',
-                    'Chequier Jeunes' => 'Chequier Jeunes'
+                    ' '                => ' ',
+                    'CB'               => 'CB',
+                    'Cheque'           => 'Chèque',
+                    'Espece'           => 'Espèce',
+                    'Carte Collégiens' => 'Carte Collégiens',
+                    'Carte lycéens'    => 'Carte lycéens',
+                    'ANCV'             => 'ANCV'
                 ],
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount3',IntegerType::class,$this->getConfiguration("Montant 3"," "))
             ->add('paymentMethodAmount3',ChoiceType::class, [
                 'choices' => [
-                    ' ' => ' ',
-                    'CB' => 'CB',
-                    'Cheque' => 'Chèque',
-                    'Espece' => 'Espèce',
-                    'Chequier Jeunes' => 'Chequier Jeunes'
+                    ' '                => ' ',
+                    'CB'               => 'CB',
+                    'Cheque'           => 'Chèque',
+                    'Espece'           => 'Espèce',
+                    'Carte Collégiens' => 'Carte Collégiens',
+                    'Carte lycéens'    => 'Carte lycéens',
+                    'ANCV'             => 'ANCV'
                 ],
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount4',IntegerType::class,$this->getConfiguration("Montant 4"," "))
             ->add('paymentMethodAmount4',ChoiceType::class, [
                 'choices' => [
-                    ' ' => ' ',
-                    'CB' => 'CB',
-                    'Cheque' => 'Chèque',
-                    'Espece' => 'Espèce',
-                    'Chequier Jeunes' => 'Chequier Jeunes'
+                    ' '                => ' ',
+                    'CB'               => 'CB',
+                    'Cheque'           => 'Chèque',
+                    'Espece'           => 'Espèce',
+                    'Carte Collégiens' => 'Carte Collégiens',
+                    'Carte lycéens'    => 'Carte lycéens',
+                    'ANCV'             => 'ANCV'
                 ],
                 'label' => 'Méthode de paiement',
                 ])
