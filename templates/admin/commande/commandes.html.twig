@@ -41,7 +41,7 @@
 					{% if c.dateattribution == null %}
 				
 <tr>
-						<td class="text-center">	<a href="#">{{c.adherent.firstName}}
+						<td class="text-center">	<a href="{{path('adherent_show', { 'id': c.adherent.id})}}">{{c.adherent.firstName}}
 							{{c.adherent.lastName}}</a></td>
 					
 					<td class="text-center">{{c.produit.title}}</td>

@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% set name = "liste d'adhérents avec un article manquant" %}
+{% set name = "Adhérents avec un article manquant" %}
 	{% include "header_title.html.twig" %}
 
 
@@ -33,8 +33,8 @@
 					{% if c.dateattribution == null %}
 					{% if c.adherent.firstName not in newArray %}
 
-						<td class="text-center">	<p >{{c.adherent.firstName}}
-							{{c.adherent.lastName}}</p></td>
+						<td class="text-center">	<a href="{{path('adherent_show', { 'id': c.adherent.id})}}">{{c.adherent.firstName}}
+							{{c.adherent.lastName}}</a></td>
                             <td class="text-center">	<p >{{c.adherent.subcategory}}
 							</p></td>
                             <td class="text-center">	<p >{{c.produit.title}}

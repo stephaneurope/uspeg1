@@ -160,7 +160,12 @@ class AmountController extends AbstractController
         $manager->remove($amount);
         $manager->flush();
 
-        return $this->redirectToRoute("amount");
+        return $this->redirectToRoute(
+            "adherent_show",
+            [
+                'id' => $amount->getAdherent()->getId()
+            ]
+        );
     }
 
     /**

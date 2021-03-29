@@ -217,6 +217,12 @@ class CommandeController extends AbstractController
             "L'équipement a bien été supprimé !"
         );
 
-        return $this->redirectToRoute("commande");
+       // return $this->redirectToRoute("commande");
+        return $this->redirectToRoute(
+            "adherent_show",
+            array(
+                'id' => $commande->getAdherent()->getId()
+            )
+        );
     }
 }
