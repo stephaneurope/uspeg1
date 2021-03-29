@@ -246,7 +246,7 @@ class AccountController extends AbstractController
             // Si l'utilisateur n'existe pas
             if ($user === null) {
                 // On envoie une alerte disant que l'adresse e-mail est inconnue
-                $this->addFlash('danger', 'Cette adresse e-mail est inconnue');
+                $this->addFlash('info', 'E-mail de réinitialisation du mot de passe envoyé !');
                 
                 // On retourne sur la page de connexion
                 return $this->redirectToRoute('account_login');
