@@ -17,7 +17,8 @@
 								<i class="fas fa-users fa-3x"></i>
 							</div>
 							<div class="col-8">
-								<h4 class="card-title">{{stats.adherents ~ ' '}} Adherents</h4>
+								<h4 class="card-title">{{stats.adherents ~ ' '}}
+									Adherents</h4>
 							</div>
 						</div>
 					</div>
@@ -31,7 +32,8 @@
 								<i class="fas fa-futbol fa-3x"></i>
 							</div>
 							<div class="col-8">
-								<h4 class="card-title">{{stats.produits ~ ' '}} produits</h4>
+								<h4 class="card-title">{{stats.produits ~ ' '}}
+									produits</h4>
 							</div>
 						</div>
 					</div>
@@ -94,24 +96,23 @@
 						</td>
 
 					</tr>
-					<tr >
-					<td>
-					<div class="btn-group">
-						<button class="btn  btn-primary dropdown-toggle" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Commandes</button>
-						
+					<tr>
+						<td>
+							<div class="btn-group">
+								<button class="btn  btn-primary dropdown-toggle" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Commandes</button>
 
-							<div class="dropdown-menu bg-primary">
-    <a class="dropdown-item" href="{{ path('commande-en-cours')}}">Commande en cours</a>
-    <a class="dropdown-item" href="{{ path('a-commande')}}">Articles Manquants</a>
-    <a class="dropdown-item" href="{{ path('commande-par-adherent')}}">Adhérents avec un article manquant</a>
-   
-  </div>
-		
-			</div>	
-			</td>	
-<td></td>
 
-					
+								<div class="dropdown-menu bg-primary">
+									<a class="dropdown-item" href="{{ path('commande-en-cours')}}">Commande en cours</a>
+									<a class="dropdown-item" href="{{ path('a-commande')}}">Articles Manquants</a>
+									<a class="dropdown-item" href="{{ path('commande-par-adherent')}}">Adhérents avec un article manquant</a>
+
+								</div>
+
+							</div>
+						</td>
+						<td></td>
+					</tr>
 					<tr class="text-light">
 						<td>Equipes</td>
 						<td>
@@ -133,7 +134,7 @@
 							<a href="{{ path('adherent_cotisation')}}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Imprimer la liste des adhérents n'ayant pas completement reglé leur cotisation ">
 								<i class="fas fa-print fa-lg"></i>
 							</a>
-							
+
 						</td>
 
 					</tr>
@@ -190,9 +191,9 @@
 				<a href="{{ path('admin_pack')}}" class="btn btn-sm btn-success text-primary">
 					<i class="fas fa-pen"></i>
 				</a>
-                <a href="{{ path('pack_create')}}" class="btn btn-sm btn-success text-primary">
-								<i class="fas fa-plus"></i>
-							</a>
+				<a href="{{ path('pack_create')}}" class="btn btn-sm btn-success text-primary">
+					<i class="fas fa-plus"></i>
+				</a>
 			</td>
 		</tr>
 	</tbody>
@@ -210,8 +211,8 @@
 		</tr>
 	</thead>
 	<tbody class="text-primary">
-	<tr>
-		
+		<tr>
+
 			<td>Utilisateurs</td>
 			<td>
 
@@ -224,7 +225,7 @@
 		</tr>
 
 		<tr>
-		
+
 			<td>Inscriptions</td>
 			<td>
 
@@ -238,7 +239,7 @@
 		<tr>
 			<td>Cotisations Impayées</td>
 			<td>
-                 <a href="{{ path('copy_cotisation')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sur de vouloir sauvegarder les adhérents n'ayant pas totalement payé leur cotisation ?">
+				<a href="{{ path('copy_cotisation')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sur de vouloir sauvegarder les adhérents n'ayant pas totalement payé leur cotisation ?">
 					<i class="fas fa-save fa-lg"></i>
 				</a>
 				<a href="{{ path('debt')}}" class="btn btn-sm btn-info text-primary">
@@ -252,7 +253,7 @@
 		<tr>
 			<td>Réinitialisation Cotisations</td>
 			<td>
-                 
+
 				<a href="{{ path('amount_delete')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sûr de vouloir réinitialiser toutes les cotisations ?">
 					<i class="fas fa-undo"></i>
 				</a>
@@ -260,10 +261,15 @@
 			</td>
 
 		</tr>
+		<tr>
+			<td>Mises à jour</td>
+			<td>
+				<a href="{{ path('misajour')}}" class="btn btn-sm btn-info text-primary">
+					<i class="far fa-eye fa-lg "></i>
+				</a>
+			</td>
+		</tr>
 
 
 	</tbody>
 </table></div></div></div></div>{% endblock %}
-
-
-

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+{% set name = "Historique des mises à jour" %}
+	{% include "header_title.html.twig" %}
+    <div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Mise à jour</th>
+    
+      
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td>19/03/2021</td>
+      <td><p>Mis en place d'une page de mis à jour.</p>
+         
+      
+      </td>
+    
+      
+    </tr>
+   <tr>
+      <td>20/03/2021</td>
+      <td><p>Mis en place du système de mot de passe oublié.</p>
+         
+      
+      </td>
+     
+      
+    </tr>
+    <tr>
+      <td>29/03/2021</td>
+      <td><p>Supression dans l'adhérent boutique de la date de naissance et de la ville.</p>
+          <p>Retour sur l'adhérent lors d'une supression d'une de ses commandes.</p>
+          <p>Permission d'afficher jusqu'à 15 commandes par adherent.</p>
+          <p>Ajouts et modifications des moyens de paiements pour la cotisation.</p>
+          <p>Possibilité d'accéder directement a l'adherent en cliquant sur son nom.</p>
+          
+      
+      </td>
+      
+      
+    </tr>
+
+   
+    
+  </tbody>
+
+</div>
+{% endblock %}
