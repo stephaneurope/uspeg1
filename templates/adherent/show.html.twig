@@ -327,6 +327,8 @@
 							{% if is_granted('ROLE_ADMIN') %}
 								<th></th>
 								<th></th>
+								<th>Numéro Chèque</th>
+								<th>Nom Titulaire</th>
 							{% endif %}
 							<th></th>
 							<th>
@@ -351,6 +353,8 @@
 							{% if is_granted('ROLE_ADMIN') %}
 								<td>{{ form_widget(form1.paymentMethodAmount1) }}</td>
 								<td>{{ form_widget(form1.amount1) }}</td>
+								<td>{{ form_widget(form1.numcheque) }}</td>
+								<td>{{ form_widget(form1.name) }}</td>
 							{% endif %}
 							<td>{{a.paymentMethodAmount1}}</td>
 							<td>{{a.amount1}}€</td>
@@ -360,6 +364,8 @@
 							{% if is_granted('ROLE_ADMIN') %}
 								<td>{{ form_widget(form1.paymentMethodAmount2) }}</td>
 								<td>{{ form_widget(form1.amount2) }}</td>
+								<td>{{ form_widget(form1.numcheque) }}</td>
+								<td>{{ form_widget(form1.name) }}</td>
 							{% endif %}
 							<td>{{a.paymentMethodAmount2}}</td>
 							<td>{{a.amount2}}€</td>
@@ -369,15 +375,20 @@
 							{% if is_granted('ROLE_ADMIN') %}
 								<td>{{ form_widget(form1.paymentMethodAmount3) }}</td>
 								<td>{{ form_widget(form1.amount3) }}</td>
+								<td>{{ form_widget(form1.numcheque) }}</td>
+								<td>{{ form_widget(form1.name) }}</td>
 							{% endif %}
 							<td>{{a.paymentMethodAmount3}}</td>
 							<td>{{a.amount3}}€</td>
+							
 						</tr>
 						<tr>
 							<td data-id="33">4</td>
 							{% if is_granted('ROLE_ADMIN') %}
 								<td>{{ form_widget(form1.paymentMethodAmount4) }}</td>
 								<td>{{ form_widget(form1.amount4) }}</td>
+								<td>{{ form_widget(form1.numcheque) }}</td>
+								<td>{{ form_widget(form1.name) }}</td>
 							{% endif %}
 							<td>{{a.paymentMethodAmount4}}</td>
 							<td>{{a.amount4}}€</td>
@@ -390,13 +401,18 @@
 							{% if is_granted('ROLE_ADMIN') %}
 								<th></th>
 								<th></th>
+								<th></th>
+								<th></th>
 							{% endif %}
 							<th></th>
+						
 							<th>{{total}}€</th>
 						</tr>
 						<tr>
 							<th>Reste a payer</th>
 							{% if is_granted('ROLE_ADMIN') %}
+								<th></th>
+								<th></th>
 								<th></th>
 								<th></th>
 							{% endif %}

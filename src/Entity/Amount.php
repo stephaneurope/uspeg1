@@ -68,6 +68,16 @@ class Amount
      */
     private $adherent;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numcheque;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
   /*  public function __construct()
     {
         $this->adherent = new ArrayCollection();
@@ -196,6 +206,30 @@ class Amount
     public function setAdherent(?Adherent $adherent): self
     {
         $this->adherent = $adherent;
+
+        return $this;
+    }
+
+    public function getNumcheque(): ?string
+    {
+        return $this->numcheque;
+    }
+
+    public function setNumcheque(?string $numcheque): self
+    {
+        $this->numcheque = $numcheque;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

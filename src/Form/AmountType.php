@@ -6,9 +6,10 @@ use App\Entity\Amount;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class AmountType extends ApplicationType
 {
@@ -21,6 +22,8 @@ class AmountType extends ApplicationType
 
         $builder
             ->add('amount1',IntegerType::class,$this->getConfiguration("Montant 1"," "))
+            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount1',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
@@ -34,6 +37,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount2',IntegerType::class,$this->getConfiguration("Montant 2"," "))
+            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount2',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
@@ -47,6 +52,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount3',IntegerType::class,$this->getConfiguration("Montant 3"," "))
+            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount3',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
@@ -60,6 +67,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount4',IntegerType::class,$this->getConfiguration("Montant 4"," "))
+            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount4',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
