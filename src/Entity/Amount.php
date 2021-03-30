@@ -78,6 +78,36 @@ class Amount
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numcheque2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numcheque3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $numcheque4;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name4;
+
   /*  public function __construct()
     {
         $this->adherent = new ArrayCollection();
@@ -230,6 +260,78 @@ class Amount
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getNumcheque2(): ?string
+    {
+        return $this->numcheque2;
+    }
+
+    public function setNumcheque2(?string $numcheque2): self
+    {
+        $this->numcheque2 = $numcheque2;
+
+        return $this;
+    }
+
+    public function getName2(): ?string
+    {
+        return $this->name2;
+    }
+
+    public function setName2(?string $name2): self
+    {
+        $this->name2 = $name2;
+
+        return $this;
+    }
+
+    public function getNumcheque3(): ?string
+    {
+        return $this->numcheque3;
+    }
+
+    public function setNumcheque3(?string $numcheque3): self
+    {
+        $this->numcheque3 = $numcheque3;
+
+        return $this;
+    }
+
+    public function getName3(): ?string
+    {
+        return $this->name3;
+    }
+
+    public function setName3(?string $name3): self
+    {
+        $this->name3 = $name3;
+
+        return $this;
+    }
+
+    public function getNumcheque4(): ?string
+    {
+        return $this->numcheque4;
+    }
+
+    public function setNumcheque4(?string $numcheque4): self
+    {
+        $this->numcheque4 = $numcheque4;
+
+        return $this;
+    }
+
+    public function getName4(): ?string
+    {
+        return $this->name4;
+    }
+
+    public function setName4(?string $name4): self
+    {
+        $this->name4 = $name4;
 
         return $this;
     }

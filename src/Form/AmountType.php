@@ -37,8 +37,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount2',IntegerType::class,$this->getConfiguration("Montant 2"," "))
-            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
-            ->add('name',TextType::class,$this->getConfiguration("name"," "))
+            ->add('numcheque2',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name2',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount2',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
@@ -52,8 +52,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount3',IntegerType::class,$this->getConfiguration("Montant 3"," "))
-            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
-            ->add('name',TextType::class,$this->getConfiguration("name"," "))
+            ->add('numcheque3',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name3',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount3',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
@@ -67,8 +67,8 @@ class AmountType extends ApplicationType
                 'label' => 'Méthode de paiement',
                 ])
             ->add('amount4',IntegerType::class,$this->getConfiguration("Montant 4"," "))
-            ->add('numcheque',TextType::class,$this->getConfiguration("numero cheque"," "))
-            ->add('name',TextType::class,$this->getConfiguration("name"," "))
+            ->add('numcheque4',TextType::class,$this->getConfiguration("numero cheque"," "))
+            ->add('name4',TextType::class,$this->getConfiguration("name"," "))
             ->add('paymentMethodAmount4',ChoiceType::class, [
                 'choices' => [
                     ' '                => ' ',
