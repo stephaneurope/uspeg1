@@ -265,13 +265,10 @@ class AdherentController extends AbstractController
     {
         $adherent = new adherent();
         $adherent->setRecord(new \DateTime('now'));
-        
-
-
+     
         $form = $this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);
 
-       
 
 
         if ($form->isSubmitted() && $form->isValid()) {

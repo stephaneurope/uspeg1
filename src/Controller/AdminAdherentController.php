@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Entity\Amount;
 use App\Entity\Adherent;
-use App\Form\AdherentType;
+use App\Form\AdherentModifType;
 use App\Entity\CategoryAdherent;
 use App\Service\PaginationService;
 use Doctrine\Persistence\ObjectManager;
@@ -81,10 +81,11 @@ class AdminAdherentController extends AbstractController
      * 
      * @return Response
      */
-    public function modif(Adherent $adherent, Request $request, ObjectManager $manager)
+    public function modif(Adherent $adherent, Request $request, ObjectManager $manager,$id)
     {
+  
 
-        $form = $this->createForm(AdherentType::class, $adherent);
+        $form = $this->createForm(AdherentModifType::class, $adherent);
 
         $form->handleRequest($request);
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);;

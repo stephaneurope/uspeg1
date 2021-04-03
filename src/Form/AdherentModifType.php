@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Team;
 use App\Entity\Adherent;
 use App\Form\ApplicationType;
-use App\Form\AdherentModifType;
-use App\Entity\CategoryAdherent;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 
 
-class AdherentType extends ApplicationType
+class AdherentModifType extends ApplicationType
 
 {
 
@@ -31,19 +29,11 @@ class AdherentType extends ApplicationType
             ->add('lastName', TextType::class, $this->getConfiguration("Nom", "Tapez le nom de famille"))
             ->add('firstName', TextType::class, $this->getConfiguration("Prénom", "Tapez le prénom "))
             ->add('born', BirthdayType::class, [
-                // 'widget' => 'single_text',
-                // this is actually the default format for single_text
                 'label' => 'Date de Naissance',
                 'format' => 'dd-MM-yyyy',
-
-
             ])
-            ->add('subCategory', EntityType::class, [
-                'label' => 'Catégorie',
-                'choice_label' => 'title',
-                'class' => CategoryAdherent::class,
+            ->add('subCategory', TextType::class, $this->getConfiguration("Catégorie", "Tapez la catégorie "))
 
-            ])
             ->add('toNumber', IntegerType::class, $this->getConfiguration("Numéro de licence", "Tapez le numéro d'adhérent"))
             ->add('sex', ChoiceType::class, [
                 'choices' => [
@@ -56,7 +46,6 @@ class AdherentType extends ApplicationType
             ->add('lieut', TextType::class, $this->getConfiguration("Lieu", "Tapez le lieut"))
             ->add('postalCode', IntegerType::class, $this->getConfiguration("Code Postal", "Tapez le code postal"))
             ->add('city', TextType::class, $this->getConfiguration("Ville", "Tapez la ville de naissance"))
-            //->add('record',DateTimeType::class,$this->getConfiguration("Date d'enregistrement","Tapez la date d'enregistrement"))
             ->add('licenceType', TextType::class, $this->getConfiguration("Type de licence", "Tapez le type de licence"))
             ->add('homePhone', TextType::class, $this->getConfiguration("Téléphone maison", "Tapez le téléphone du domicile"))
             ->add('mobilePhone', TextType::class, $this->getConfiguration("Téléphone mobile", "Tapez le téléphone mobile"))
