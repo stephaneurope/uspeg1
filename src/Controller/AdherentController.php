@@ -226,10 +226,7 @@ class AdherentController extends AbstractController
              
         }
      }
-	var_dump($reste);	
-      
-      
-    
+	
  $form1 = $this->createForm(AmountType::class, $amount);
  
  $form1->handleRequest($request);
