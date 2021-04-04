@@ -217,10 +217,27 @@ class AdherentController extends AbstractController
     
       $amount = $repo2->find($id_amount);
 
+      foreach($cat as $cat) { 
+        if ($cat->getTitle() == $adherent->getSubcategory()){
+
+            $montantcot = $cat->getMontantcot();
+          
+             $reste = $montantcot - $amount->getAmountTotal();
+             
+        }
+     }
+	var_dump($reste);	
+      
+      
+    
  $form1 = $this->createForm(AmountType::class, $amount);
-
+ 
  $form1->handleRequest($request);
-
+ $amount->setReste($montantcot - $reste);
+ $amount_total = $form1['amount1']->getData() + $form1['amount2']->getData() + $form1['amount3']->getData() + $form1['amount4']->getData();
+ $amount->setAmountTotal($amount_total);
+ $restebasededonnee = $montantcot - $amount_total;
+ $amount->setReste($restebasededonnee);
  if ($form1->isSubmitted() && $form1->isValid()) {
      $manager->persist($amount);
      $manager->flush();
@@ -250,6 +267,8 @@ class AdherentController extends AbstractController
             'form1' => $form1->createView(),    
             'amount' => $amount,
             'formcontact' => $formcontact->createView(),
+            'montantcot' => $montantcot,
+            'reste' => $reste,
             
         ]);
     }

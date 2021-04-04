@@ -332,15 +332,13 @@
 							{% endif %}
 							<th></th>
 							<th>
-								{% for cat in cat %}
-									{% if (cat.title|lower|replace({' ':''}) is same as(adherent.subcategory|lower|replace({' ':''}))) %}
-
-										{% set montant_total =  'cat.montantcot' %}
+								
+									
 										<h3>
-											<span class="badge badge-info">{{cat.montantcot}}€</span>
+											<span class="badge badge-info">{{montantcot}}€</span>
 										</h3>
-									{% endif %}
-								{% endfor %}
+									
+								
 							</th>
 						</tr>
 					</thead>
@@ -406,7 +404,7 @@
 							{% endif %}
 							<th></th>
 						
-							<th>{{total}}€</th>
+							<th>{{a.amountTotal}}€</th>
 						</tr>
 						<tr>
 							<th>Reste a payer</th>
@@ -418,23 +416,23 @@
 							{% endif %}
 							<th></th>
 							<th>
-								{% for cat in cat %}
-									{% if (cat.title is same as(adherent.subcategory)) %}
-										{% set montant_total = cat.montantcot %}
+								
+									
+									
 
-										{% set reste = montant_total - total %}
-										{% if total < cat.montantcot  %}
+										
+										{% if a.amountTotal < montantcot  %}
 											<span class="badge badge-danger badge-pill">{{reste}}€</span>
 										{% endif %}
-										{% if total == cat.montantcot  %}
+										{% if a.amountTotal == montantcot  %}
 											<span class="badge badge-success badge-pill">{{reste}}€</span>
 										{% endif %}
 
-										{% if total > cat.montantcot  %}
+										{% if a.amountTotal > montantcot  %}
 											<p class=" btn btn-warning">Le montant est supérieur a la cotisation</p>
 										{% endif %}
-									{% endif %}
-								{% endfor %}
+									
+								
 							</th>
 						</tr>
 					</thead>

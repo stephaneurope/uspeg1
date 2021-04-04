@@ -108,6 +108,11 @@ class Amount
      */
     private $name4;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $reste;
+
   /*  public function __construct()
     {
         $this->adherent = new ArrayCollection();
@@ -332,6 +337,18 @@ class Amount
     public function setName4(?string $name4): self
     {
         $this->name4 = $name4;
+
+        return $this;
+    }
+
+    public function getReste(): ?int
+    {
+        return $this->reste;
+    }
+
+    public function setReste(?int $reste): self
+    {
+        $this->reste = $reste;
 
         return $this;
     }
