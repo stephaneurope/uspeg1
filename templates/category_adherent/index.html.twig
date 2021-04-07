@@ -85,6 +85,7 @@ content: counter(case);
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
 						<th class="text-center">Licence</th>
+						<th class="text-center">Article(s) en commande</th>
 						
 						<th><a href="{{path('print_category_adherent',{'id': categoryadherent.id})}}">Imprimer <i class="fas fa-print fa-lg"></i></a></th>
 					</tr>
@@ -142,7 +143,19 @@ content: counter(case);
 								<span class="">{{ad.toNumber}}</span>
 									
 
+							
+					
+						<td class="text-center">
+							{% for a in ad.commandes %}
+                            {% if a.datecommande != null and a.dateattribution == null %}
+							
+							 <div style="display: inline-block;border:none;color:orange;"><i class="fas fa-shopping-bag "></i></div>
+							{% endif %}
+							{% endfor %}
 							</td>
+								
+								
+							
 							
 							<td>
 

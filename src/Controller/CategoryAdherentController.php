@@ -35,7 +35,15 @@ class CategoryAdherentController extends AbstractController
         $adherent =$repo1->findBy([],['lastName' => 'ASC']);
         $repo2 = $this->getDoctrine()->getRepository(Team::class);
         $team1 = $repo2->findAll();
-
+        /*foreach ($adherent as $adherent) {
+           foreach ($adherent->getCommandes() as $a ) {
+            var_dump($a->getQte().' '.'<br>');
+           }
+                
+              
+        }*/
+        
+       
 
         return $this->render('category_adherent/index.html.twig', [
             'adherent' => $adherent,

@@ -254,8 +254,19 @@ class AdherentController extends AbstractController
   
         
        }
-    
-    
+    if (empty($montantcot) and empty($reste)) {
+        return $this->render('adherent/show.html.twig', [
+            'adherent' => $adherent,
+            'cat' => $cat,
+            'commande' => $commande,
+            'form' => $form->createView(),
+            'form1' => $form1->createView(),    
+            'amount' => $amount,
+            'formcontact' => $formcontact->createView(),
+            
+            
+        ]);
+    }
         return $this->render('adherent/show.html.twig', [
             'adherent' => $adherent,
             'cat' => $cat,

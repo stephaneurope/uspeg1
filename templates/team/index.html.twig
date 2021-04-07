@@ -78,6 +78,7 @@ content: counter(case);
 						<th class="text-center">Email</th>
 						<th class="text-center">Catégorie</th>
 						<th class="text-center">Licence</th>
+						<th class="text-center">Article(s) en commande</th>
 	
 
 						<th>
@@ -154,7 +155,19 @@ content: counter(case);
 									<span class="">{{ad.toNumber}}</span>
 
 								</td>
-
+                                   <td class="text-center">
+							{% for a in ad.commandes %}
+                            {% if a.datecommande != null and a.dateattribution == null %}
+							
+							<i class="fas fa-shopping-bag" style="display: inline-block;border:none;color:orange;"></i>
+							{% endif %}
+							{% endfor %}
+							</td>
+								
+								
+							
+							
+							<td>
 								<td>
 
 
