@@ -1,0 +1,23 @@
+{# '@images/' refers to the Twig namespace defined earlier #}
+<img src="{{ email.image('@images/logo/uspeg-tr.gif') }}" width="200" height="200" alt="Logo">
+<h2>Votre équipement est prêt !</h2>
+<p>De : {{ mail }}</p>
+<div>
+Bonjour {{name}}				
+</div>
+<div>
+<p>Votre commande est désormais prête.</p>
+<p>Elle se compose de:</p>
+<ul>
+{% for p in adherent.commandes %}
+{% if p.dateattribution == null %}
+    <li><strong>{{p.qte}} {{p.produit.title}}</strong></li> 
+{% endif %}
+   
+{% endfor %}
+
+</ul>
+<p>Merci de venir chercher votre équipement au Complexe sportif Ledeuc, 282 Boulevard Mireille Lauze, 13010 Marseille</p>
+<p>Cordialement,</p>
+<p>USPEG</p>
+</div>

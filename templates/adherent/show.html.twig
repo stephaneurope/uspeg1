@@ -246,7 +246,9 @@
 	<div class="col">
 		<div class="collapse  multi-collapse" id="multiCollapseExample2">
 			<div class="card card-body">
-				<h2 class="text-center">Commande en cours
+				<h2 class="text-center">Commande en cours 
+				
+		
 				</h2>
 
 				<table class="table table-hover">
@@ -258,7 +260,16 @@
 							<th class="text-center">Catégorie</th>
 							<th class="text-center">Quantité</th>
 
-							<th></th>
+							<th>{{ form_start(formcontact_manquant) }}
+		         {% if adherent.email == true %}
+				<button type="submit" class="btn btn-primary">notif</button>
+{% else %}
+	
+	<button type="submit" class="btn btn-primary disabled" disabled="disabled">notif</button>	{% endif %}
+	{{ form_end(formcontact_manquant) }}
+
+	
+	</th>
 						</tr>
 					</thead>
 					{% for c in adherent.commandes|slice(0, 15) %}

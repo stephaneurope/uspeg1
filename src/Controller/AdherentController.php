@@ -14,19 +14,20 @@ use App\Form\CommandeType;
 use App\Entity\PropertySearch;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
-use App\Form\AdherentContactType;
 use App\Form\PropertySearchType;
+use App\Form\AdherentContactType;
 use App\Service\PaginationService;
 use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
+use App\Form\Contact_article_manquantType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use App\Repository\CategoryAdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -113,6 +114,32 @@ class AdherentController extends AbstractController
                 'adherent' =>$adherent,
                 'mail' => ('contact@uspeg-gestion.com'),
                 'message'=> $contact->get('message')->getData()
+            ]);
+            $mailer->send($email);
+            $this->AddFlash(
+                'success',
+                "Votre email a bien été envoyé !"
+            );
+            return $this->redirectToRoute('adherent_show',['id' => $adherent->getId()]);
+        }
+        /***formulaire de contact article manquant*******/
+        $formcontact_manquant = $this->createForm(Contact_article_manquantType::class);
+        $contact_manquant = $formcontact_manquant->handleRequest($request);
+        $name = $adherent->getLastName().' '.$adherent->getFirstName() ;
+        $produit_manquant = $adherent;//->getCommandes()->getProduits()->getTitle();
+        if($formcontact_manquant->isSubmitted() && $formcontact_manquant->isValid()){
+            $email = (new TemplatedEmail())
+            //->from($contact->get('email')->getData())
+            ->from('contact@uspeg-gestion.com')
+            ->to($adherent->getEmail())
+            ->subject('contact')
+            ->htmlTemplate('emails/contact_article_manquant.html.twig')
+            ->context([
+                'adherent' =>$adherent,
+                'name' =>$name,
+                'mail' => ('contact@uspeg-gestion.com'),
+                'produit_manquant' => $produit_manquant,
+                //'message'=> $contact_manquant->get('message')->getData()
             ]);
             $mailer->send($email);
             $this->AddFlash(
@@ -263,7 +290,7 @@ class AdherentController extends AbstractController
             'form1' => $form1->createView(),    
             'amount' => $amount,
             'formcontact' => $formcontact->createView(),
-            
+            'formcontact_manquant' => $formcontact_manquant->createView(),
             
         ]);
     }
@@ -277,6 +304,7 @@ class AdherentController extends AbstractController
             'formcontact' => $formcontact->createView(),
             'montantcot' => $montantcot,
             'reste' => $reste,
+            'formcontact_manquant' => $formcontact_manquant->createView(),
             
         ]);
     }
