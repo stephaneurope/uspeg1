@@ -107,7 +107,7 @@ content: counter(case);
 								
 				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
 			
-			<td	class="text-center" style="color:
+			<td	class="text-center" style="font-weight:bold;color:
 			{% for cat in catadherent %}
 			 
 										{% if (cat.title is same as(ad.subcategory) and a is defined) %}
@@ -135,7 +135,7 @@ content: counter(case);
 
 								;">{{ad.lastName}} {{ad.firstName}}</td>
 							{% else %}
-							<td class="text-center">{{ad.lastName}} {{ad.firstName}}</td>	
+							<td class="text-center" style="font-weight:bold;color:orange;">{{ad.lastName}} {{ad.firstName}}</td>	
 							{% endfor %}
 							<td class="text-center">{{ad.email}}</td>
 							<td class="text-center">{{ad.subcategory}}</td>
