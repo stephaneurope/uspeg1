@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Adherent;
 use App\Entity\Commande;
+use App\Entity\DateCommandes;
+use App\Form\DateCommandesType;
 use App\Form\CommandeclientType;
 use App\Repository\CommandeRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -180,7 +182,31 @@ class AdminCommandeController extends AbstractController
         //return $this->redirectToRoute("adherent");
     }
 
+/**
+     * Permet de modifier les dates de début et de fin des commandes dans les fiches adhérents
+     * 
+     * @Route("commande/date_commande/{id}/edit", name="admin/date_commande_edit")
+     *
+     */
+    public function edit(DateCommandes $dateCommandes, Request $request,ObjectManager $manager) {
+        $form = $this->createForm(DateCommandesType::class, $dateCommandes);
 
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($dateCommandes);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "Les dates ont bien étés modifiées !"
+            );
+            return $this->redirectToRoute("dashboard");
+        }
+        return $this->render('admin/date_commandes/edit.html.twig',[
+            'dateCommandes' => $dateCommandes,
+            'form' => $form->createView()
+    ]);
 
+    }
+    
 
 }

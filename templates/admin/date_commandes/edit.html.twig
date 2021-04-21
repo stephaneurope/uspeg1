@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les dates d'apparition des commandes
+	
+{% endblock %}
+
+{% block body %}
+
+	{% set name = "Modifier les dates d'apparition des commandes" %}
+	{% include "header_title.html.twig" %}
+    
+	<div class="container">
+
+
+		{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+		{{ form_widget(form) }}
+
+		<button class="btn btn-primary" type="submit">
+			<i class="fas fa-check"></i>
+			Enregistrer les modifications
+		</button>
+
+		{{ form_end(form) }}
+
+
+	</div>
+
+</div>
+
+{% endblock %}
+

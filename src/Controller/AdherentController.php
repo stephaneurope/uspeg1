@@ -14,6 +14,7 @@ use App\Form\CommandeType;
 use App\Entity\PropertySearch;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
+use App\Entity\DateCommandes;
 use App\Form\PropertySearchType;
 use App\Form\AdherentContactType;
 use App\Service\PaginationService;
@@ -99,6 +100,8 @@ class AdherentController extends AbstractController
         $adherent = $repo->find($id);
         $repo1 = $this->getDoctrine()->getRepository(CategoryAdherent::class);
         $cat = $repo1->findAll();
+        $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
+        $dateCommandes= $repodc->find(1);
         
         /***formulaire de contact*******/
         $formcontact = $this->createForm(AdherentContactType::class);
@@ -283,28 +286,30 @@ class AdherentController extends AbstractController
        }
     if (empty($montantcot) and empty($reste)) {
         return $this->render('adherent/show.html.twig', [
-            'adherent' => $adherent,
-            'cat' => $cat,
-            'commande' => $commande,
-            'form' => $form->createView(),
-            'form1' => $form1->createView(),    
-            'amount' => $amount,
-            'formcontact' => $formcontact->createView(),
+            'adherent'             => $adherent,
+            'cat'                  => $cat,
+            'commande'             => $commande,
+            'form'                 => $form->createView(),
+            'form1'                => $form1->createView(),    
+            'amount'               => $amount,
+            'formcontact'          => $formcontact->createView(),
             'formcontact_manquant' => $formcontact_manquant->createView(),
+            'dateCommandes'        => $dateCommandes,
             
         ]);
     }
         return $this->render('adherent/show.html.twig', [
-            'adherent' => $adherent,
-            'cat' => $cat,
-            'commande' => $commande,
-            'form' => $form->createView(),
-            'form1' => $form1->createView(),    
-            'amount' => $amount,
-            'formcontact' => $formcontact->createView(),
-            'montantcot' => $montantcot,
-            'reste' => $reste,
+            'adherent'             => $adherent,
+            'cat'                  => $cat,
+            'commande'             => $commande,
+            'form'                 => $form->createView(),
+            'form1'                => $form1->createView(),    
+            'amount'               => $amount,
+            'formcontact'          => $formcontact->createView(),
+            'montantcot'           => $montantcot,
+            'reste'                => $reste,
             'formcontact_manquant' => $formcontact_manquant->createView(),
+            'dateCommandes'        => $dateCommandes,
             
         ]);
     }

@@ -195,11 +195,12 @@
 
 					<thead>
 						<tr>
-
-							<th class="text-center">distribué le</th>
+	
+							<th class="text-center">distribué le  </th>
 							<th class="text-center">Produit</th>
 							<th class="text-center">Catégorie</th>
 							<th class="text-center">Quantité</th>
+
 
 							<th></th>
 
@@ -207,9 +208,16 @@
 
 					</thead>
 
+
 					{% for c in adherent.commandes|slice(0, 10) %}
 						{% if (c.adherent.id is same as(adherent.id)) %}
-							{% if c.dateattribution  != null %}
+						
+							{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+							{% set dateTo = date(dateCommandes.dateTo).format('U') %}
+                          
+							{% if c.dateattribution  != null and date(c.dateattribution).format('U') > dateFrom and date(c.dateattribution).format('U') < dateTo  %}
+							
+							
 								<tbody>
 
 									<td class="text-center">
@@ -272,9 +280,12 @@
 	</th>
 						</tr>
 					</thead>
+					
 					{% for c in adherent.commandes|slice(0, 15) %}
 						{% if (c.adherent.id is same as(adherent.id)) %}
 							{% if c.dateattribution == null %}
+							
+							
 								<tbody>
 
 									<td class="text-center">
