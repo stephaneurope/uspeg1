@@ -7,6 +7,7 @@ use App\Entity\Adherent;
 use App\Form\ConvocationType;
 use App\Entity\CategoryAdherent;
 use App\Form\AdherentContactType;
+use App\Entity\DateCommandes;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -29,6 +30,8 @@ class TeamController extends AbstractController
         $catadherent = $repo1->findBy([], ['list' => 'ASC']);
         $repo2 = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repo2->findBy([],['lastName' => 'ASC']);
+        $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
+        $dateCommandes = $repodc->find(1);
         
         
          if($team->getAdherents()!= null) {
@@ -108,7 +111,8 @@ class TeamController extends AbstractController
             'catadherent' => $catadherent,
             'adherent' => $adherent,
             'mails' => $mails,
-            'formcontact' =>$formcontact->createView()
+            'formcontact' =>$formcontact->createView(),
+            'dateCommandes' => $dateCommandes
            
         ]);} else {
             return $this->render('team/index.html.twig', [
@@ -116,8 +120,7 @@ class TeamController extends AbstractController
                 'team1' =>$team1,
                 'catadherent' => $catadherent,
                 'adherent' => $adherent,
-                //'mails' => $mails,
-                //'formcontact' =>$formcontact->createView()
+                'dateCommandes' => $dateCommandes
                
             ]);
         }

@@ -156,12 +156,7 @@ content: counter(case);
 
 								</td>
                                    <td class="text-center">
-							{% for a in ad.commandes %}
-                            {% if a.datecommande != null and a.dateattribution == null %}
-							
-							<i class="fas fa-shopping-bag" style="display: inline-block;border:none;color:orange;"></i>
-							{% endif %}
-							{% endfor %}
+							{% include 'list_adherent_partials/paniers_adherent.html.twig'%}
 							</td>
 								
 								

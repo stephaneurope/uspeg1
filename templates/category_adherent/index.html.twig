@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
- 
+
 {% block title %}Adhérents par catégorie
 {% endblock %}
 
@@ -12,7 +12,6 @@
 		<h1 class="text-center">Liste des adhérents de la catégorie
 			{{categoryadherent.title}}</h1>
 
-		
 
 		<div class="row ">
 			<div class="col-sm mt-1 mb-3">
@@ -56,133 +55,28 @@
 			<div class="col-sm mt-1 mb-3">
 				<div class="dropdown">
 
-				{% if is_granted('ROLE_ADMIN') %}	<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>{% endif %}
-					
-				</div>
-		
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+					{% endif %}
 
-	
-	{% block head %}
-	<style>
-	table {
-counter-reset: case;
-}
-#numerotation:before {
-counter-increment: case;
-content: counter(case);
-}
-	</style>
-	{% endblock %}
+				</div>
+
+
+				{% block head %}
+					<style>
+						table {
+							counter-reset: case;
+						}
+						#numerotation:before {
+							counter-increment: case;
+							content: counter(case);
+						}
+					</style>
+				{% endblock %}
 
 
 			</div>
-
-			<table class="table table-hover" border="1">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th class="text-center">Nom</th>
-						<th class="text-center">Email</th>
-						<th class="text-center">Catégorie</th>
-						<th class="text-center">Licence</th>
-						<th class="text-center">Article(s) en commande</th>
-						
-						<th><a href="{{path('print_category_adherent',{'id': categoryadherent.id})}}">Imprimer <i class="fas fa-print fa-lg"></i></a></th>
-					</tr>
-				</thead>
-				<tbody>
-
-					{% for key,ad in adherent %}
-
-					
-  
-
-						{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
-
-<td id="numerotation"> </td>
-						
-							{% if ad.amounts == false %}<td>{{ad.lastName}} {{ad.firstName}}</td>{% endif %}
-				{% for a in ad.amounts %}
-					
-								
-				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
-			
-			<td	class="text-center" style="font-weight:bold;color:
-			{% for cat in catadherent %}
-			 
-										{% if (cat.title is same as(ad.subcategory) and a is defined) %}
-										{% set montant_total = cat.montantcot %}
-
-											
-											{% if total < cat.montantcot  %}
-												red
-											{% endif %}
-											{% if total == cat.montantcot  %}
-												green
-											{% endif %}
-
-											{% if total > cat.montantcot  %}
-												  green
-											{% endif %}
-										
-			                                {% if not a.adherent %}
-											black
-											{% endif %}
-						
-						  
-                            {% endif %}{% else %}black
-							{% endfor %}
-
-								;">{{ad.lastName}} {{ad.firstName}}</td>
-							{% else %}
-							<td class="text-center" style="font-weight:bold;color:orange;">{{ad.lastName}} {{ad.firstName}}</td>	
-							{% endfor %}
-							<td class="text-center">{{ad.email}}</td>
-							<td class="text-center">{{ad.subcategory}}</td>
-							<td class="text-center">
-								<span class="">{{ad.toNumber}}</span>
-									
-
-							
-					
-						<td class="text-center">
-							{% for a in ad.commandes %}
-                            {% if a.datecommande != null and a.dateattribution == null %}
-							
-							 <div style="display: inline-block;border:none;color:orange;"><i class="fas fa-shopping-bag "></i></div>
-							{% endif %}
-							{% endfor %}
-							</td>
-								
-								
-							
-							
-							<td>
-
-
-								<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
-									<i class="fas fa-eye"></i>
-								</a>
-								{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
-									<i class="fas fa-pen"></i>
-								</a>
-
-								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
-									<i class="fas fa-trash-alt"></i>
-								</a>
-								
-								{% endif %}
-							
-							</td>
-								
-						</tr>
-						
-					{% endif %}
-				{% endfor %}
-
-			</tbody>
-		</table>
+{% include "list_adherent_partials/list_adherents.html.twig" %}
 
 
 	</div>

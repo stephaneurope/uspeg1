@@ -1,0 +1,32 @@
+{% if ad.commandes is not empty %}
+		{% for a in ad.commandes|reverse(true)|slice(0, 01) %}
+
+
+			{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+			{% set dateTo = date(dateCommandes.dateTo).format('U') %}
+			{% if date(a.dateattribution).format('U') > dateFrom  %}
+				{% if a.datecommande != null and a.dateattribution == null  %}
+
+					<div style="display: inline-block;border:none;color:orange;">
+						<i class="fas fa-shopping-bag "></i>
+					</div>{% endif %}
+
+
+			{% elseif date(a.dateattribution).format('U') > dateFrom and date(a.dateattribution).format('U') < dateTo %}
+			
+			{% else %}
+			<div style="display: inline-block;border:none;color:red;">
+			<i class="fas fa-shopping-bag"></i>
+		</div>
+			{% endif %}
+
+
+		{% endfor %}
+
+
+	{% else %}
+		<div style="display: inline-block;border:none;color:red;">
+			<i class="fas fa-shopping-bag"></i>
+		</div>
+
+	{% endif %}

@@ -64,7 +64,8 @@ class AdherentController extends AbstractController
   
     } 
         
-       
+        $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
+        $dateCommandes = $repodc->find(1);
         $pagination->setEntityClass(Adherent::class) 
         ->setPage($page);   
         $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
@@ -73,11 +74,13 @@ class AdherentController extends AbstractController
         $team1 = $repo->findAll();
     
         return $this->render('adherent/index.html.twig', [
-            'form' =>$form->createView(),
-            'adherent'=>$adherent,
-            'pagination' => $pagination,
-            'catadherent' => $catadherent,
-            'team1' => $team1
+            'form'          => $form->createView(),
+            'adherent'      => $adherent,
+            'pagination'    => $pagination,
+            'catadherent'   => $catadherent,
+            'team1'         => $team1,
+            'dateCommandes' => $dateCommandes
+
         ]);
     }
 
