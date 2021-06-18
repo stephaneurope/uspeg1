@@ -6,88 +6,41 @@
 {% block body %}
 
 
-
 	{% set name = 'Adhérents' %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-	{{ form_start(form) }}
 
-<div class="form-row align-items-end" >
- <div class="col">
-   {{ form_row(form.nom) }}
- </div>
+		{% include 'list_adherent_partials/rechercher.html.twig' %}
 
-  <div class="col">
-   <div class="form-group">
-      <button type="submit" class="btn btn-success">Rechercher</button>
-    </div>
- </div>
-</div>
- {{ form_end(form) }}
-{% for a in adherent %}
-<table class="table ">
-					
-					<tbody>
-
-						
-
-						<tr class="bg-success">
-							<td class="text-center">
-								{{a.lastName}} {{a.firstName}}
-									
-							</td>
-							<td class="text-center">{{a.email}}</td>
-							<td class="text-center">{{a.subcategory}}</td>
-							<td class="text-center">
-								<span class="">{{a.toNumber}}</span>
-
-							</td>
-							
-							<td>
-
-								<a href="{{ path('adherent_show', {'id': a.id}) }}" class="btn btn-sm btn-primary">
-									<i class="fas fa-eye"></i>
-								</a>
-								{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('admin/adherent_modif', {'id': a.id}) }}" class="btn btn-sm btn-secondary">
-									<i class="fas fa-pen"></i>
-								</a>
-
-								<a href="{{ path('admin/adherent_delete', {'id': a.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adhérent. En êtes vous certains ?">
-									<i class="fas fa-trash-alt"></i>
-								</a>
-							</td>
-							{% endif %}
-						</tr>
-					
-
-				</tbody>
-			</table>
-{% endfor %}
 		<div class="container mt-2 mb-2">
 
 			<div class="row ">
 				<div class="col-sm mt-1 mb-3">
-				<div class="row"><div class="col-6"><div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							Catégories d'adhérents
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							{% for c in catadherent %}
-								<li class="text-center">
-									<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-								</li>
+					<div class="row">
+						<div class="col-6">
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									Catégories d'adhérents
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									{% for c in catadherent %}
+										<li class="text-center">
+											<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+										</li>
 
-								<li role="separator" class="divider"></li>
-							{% endfor %}
-						</ul>
+										<li role="separator" class="divider"></li>
+									{% endfor %}
+								</ul>
 
+							</div>
+
+						</div>
 					</div>
+					<div class="col-6"></div>
+				</div>
 
-				</div></div><div class="col-6"></div></div>
-					
 
 				<div class="col-sm mt-1 mb-3">
 					<div class="dropdown">
@@ -96,90 +49,91 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						{% for t in team1 %}
-							<li class="text-center">
-								<a href="{{ path('team_adherent', {'id': t.id}) }}" title="{{t.name}}">{{t.name}}</a>
-							</li>
+							{% for t in team1 %}
+								<li class="text-center">
+									<a href="{{ path('team_adherent', {'id': t.id}) }}" title="{{t.name}}">{{t.name}}</a>
+								</li>
 
-							<li role="separator" class="divider"></li>
-						{% endfor %}
-					</ul>
+								<li role="separator" class="divider"></li>
+							{% endfor %}
+						</ul>
 
 					</div>
 				</div>
 				<div class="col-sm mt-1 mb-3">
-					{% if is_granted('ROLE_ADMIN') %}<div class="dropdown">
+					{% if is_granted('ROLE_ADMIN') %}
+						<div class="dropdown">
 
-						<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
-					</div>
-{% endif %}
+							<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+						</div>
+					{% endif %}
 				</div>
 
 				<table class="table table-hover" border="1">
 					<thead>
 						<tr>
-							
+
 							<th class="text-center">Nom</th>
 							<th class="text-center">Email</th>
 							<th class="text-center">Catégorie</th>
 							<th class="text-center">Licence</th>
 							<th class="text-center">Commande(s)</th>
-							
-							
+
+
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-					
-	                            {% for ad in pagination.data %}
-								{% if ad.amounts == false %}<td class="text-center" style="color:orange;">{{ad.lastName}} {{ad.firstName}}</td>{% endif %}
-				{% for a in ad.amounts %}
-					
-								
-				{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
-			<td	class="text-center" style="font-weight:bold;color:
-			{% for cat in catadherent %}
-										{% if (cat.title is same as(ad.subcategory) and a is defined) %}
-										{% set montant_total = cat.montantcot %}
 
-											
-											{% if total < cat.montantcot  %}
-												red
-											{% endif %}
-											{% if total == cat.montantcot  %}
-												green
-											{% endif %}
+						{% for ad in pagination.data %}
+							{% if ad.amounts == false %}
+								<td class="text-center" style="color:orange;">{{ad.lastName}}
+									{{ad.firstName}}</td>
+							{% endif %}
+							{% for a in ad.amounts %}
 
-											{% if total > cat.montantcot  %}
-												  green
-											{% endif %}
-										
-			                                {% if not a.adherent %}
-											black
-											{% endif %}
-						
-						
-                            {% endif %}{% else %} orange
-							{% endfor %}
-								;">{{ad.lastName}} {{ad.firstName}}</td>
+
+								{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+								<td class="text-center" style="font-weight:bold;color:
+																					{% for cat in catadherent %}
+																												{% if (cat.title is same as(ad.subcategory) and a is defined) %}
+																												{% set montant_total = cat.montantcot %}
+									
+									
+																													{% if total < cat.montantcot  %}
+																														red
+																													{% endif %}
+																													{% if total == cat.montantcot  %}
+																														green
+																													{% endif %}
+									
+																													{% if total > cat.montantcot  %}
+																														  green
+																													{% endif %}
+									
+																					                                {% if not a.adherent %}
+																													black
+																													{% endif %}
+									
+									
+																		                            {% endif %}{% else %} black
+																									{% endfor %}
+																										;">{{ad.lastName}}
+									{{ad.firstName}}</td>
 							{% else %}
-							<td class="text-center" style="color:orange;font-weight:bold;">{{ad.lastName}} {{ad.firstName}}</td>	
+								<td class="text-center" style="color:black;font-weight:bold;">{{ad.lastName}}
+									{{ad.firstName}}</td>
 							{% endfor %}
-							
+
 							<td class="text-center">{{ad.email}}</td>
 							<td class="text-center">{{ad.subcategory}}</td>
 							<td class="text-center">
 								<span class="">{{ad.toNumber}}</span>
 
 							</td>
-							<td class="text-center">
-							{% include 'list_adherent_partials/paniers_adherent.html.twig'%}
-
-								
-								
-							
-							
-							<td>
+							<td class="text-center">{% include 'list_adherent_partials/paniers_adherent.html.twig'%}
+							</td>
+							<td></td>
 							<td>
 
 
@@ -187,32 +141,36 @@
 									<i class="fas fa-eye"></i>
 								</a>
 								{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
-									<i class="fas fa-pen"></i>
-								</a>
+									<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
+										<i class="fas fa-pen"></i>
+									</a>
 
-								<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
-									<i class="fas fa-trash-alt"></i>
-								</a>
-							</td>
-						{% endif %}
+									<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							{% endif %}
 						</tr>
-						
-	{% endfor %}
+
+					{% endfor %}
 
 				</tbody>
 			</table>
 		</div>
-	
-								
-							
-							
+<div class="container">
+<ul style="list-style-type: none;">
+<li><i style="display: inline-block;border:none;color:orange;" class="fas fa-shopping-bag "></i>: Adhérent ayant au moins une commande en cours</li>
+<li><i style="display: inline-block;border:none;color:red;" class="fas fa-shopping-bag "></i>: Cotisation non réglée ou incomplète</li>
+</ul>
+</div>
+
 		{{pagination.display()}}
 
 	</div>
 
 
 {% endblock %}
+
 
 
 

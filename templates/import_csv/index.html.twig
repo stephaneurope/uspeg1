@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+						table {
+							counter-reset: case;
+						}
+						#numerotation:before {
+							counter-increment: case;
+							content: counter(case);
+						}
+					</style>
+	{% set name = "Import Csv" %}
+	{% include "header_title.html.twig" %}
+	<div class="container">
+		{{ form_start(form2)}}
+
+
+		{{ form_widget(form2) }}
+		<button type="submit" class="btn btn-success">Ajouter</button>
+
+		{{ form_end(form2)}}
+	</div>
+	<div class="container">
+		<hr class="my-4">
+		<div class="row">
+
+			<div class="col-md-4">
+				<a href="{{ path('import_insert') }}" class="btn btn-sm btn-info">
+					<i class="fas fa-user-plus"></i>
+					Ajouter les nouveaux adhérents du fivhier CSV
+				</a>
+			</div>
+			<div class="col-md-4">
+				<a href="{{ path('import_update') }}" class="btn btn-sm btn-success">
+					<i class="fas fa-user-edit"></i>
+					Mettre à jour la liste d'adhérent du fichier CSV
+				</a>
+			</div>
+			<div class="col-md-4">
+				<a href="{{ path('import_csv_delete') }}" class="btn btn-sm btn-danger">
+					<i class="fas fa-trash"></i>
+					Supprimer le fichier CSV
+				</a>
+			</div>
+		</div>
+		<hr class="my-4">
+	</div>
+	<div class="container mt3 overflow-auto table-wrapper-scroll-y my-custom-scrollbar">
+		<div class="col-sm mt-1 mb-3">
+
+
+			<table class="table table-hover" border="1">
+				<thead>
+					<tr>
+                        <th>#</th>
+						<th class="text-center">Prénom</th>
+						<th class="text-center">Nom</th>
+						<th class="text-center">Licence</th>
+						<th class="text-center">naissance</th>
+                        <th class="text-center">catégorie</th>
+                        <th class="text-center">sexe</th>
+                        <th class="text-center">complement</th>
+                        <th class="text-center">adresse</th>
+                        <th class="text-center">code postal</th>
+                        <th class="text-center">ville</th>
+                        <th class="text-center">enregistré le</th>
+                        <th class="text-center">téléphone fixe</th>
+                        <th class="text-center">Mobile</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">lieu de naissance</th>
+                        <th class="text-center">changement de club</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for csv in import_csv %}
+						<tr>
+
+                            <td id="numerotation"></td>
+							<td class="text-center" style="color:black;font-weight:bold;">{{csv.lastName}}
+							</td>
+							<td class="text-center" style="color:black;font-weight:bold;">
+								{{csv.firstName}}</td>
+
+							<td class="text-center">{{csv.toNumber}}</td>
+							<td class="text-center">{{csv.born|date('d/m/Y')}}</td>
+                            <td class="text-center">{{csv.subCategory}}</td>
+                            <td class="text-center">{{csv.sex}}</td>
+                            <td class="text-center">{{csv.complement}}</td>
+                            <td class="text-center">{{csv.address}}</td>
+                            <td class="text-center">{{csv.postalCode}}</td>
+                            <td class="text-center">{{csv.city}}</td>
+                            <td class="text-center">{{csv.record|date('d/m/Y')}}</td>
+                            <td class="text-center">{{csv.homePhone}}</td>
+                            <td class="text-center">{{csv.mobilePhone}}</td>
+                            <td class="text-center">{{csv.email}}</td>
+                            <td class="text-center">{{csv.placeOfBirth}}</td>
+                            <td class="text-center">{{csv.clubChange}}</td>
+
+
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+
+</div></div>
+ 
+{% endblock %}

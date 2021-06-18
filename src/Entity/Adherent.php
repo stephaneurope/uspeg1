@@ -42,7 +42,7 @@ class Adherent
     private $subCategory;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $toNumber;
 

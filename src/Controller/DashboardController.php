@@ -18,6 +18,7 @@ class DashboardController extends AbstractController
      */
     public function index(ObjectManager $manager)
     {
+        
         $adherents = $manager->createQuery('SELECT COUNT(a) FROM App\Entity\Adherent a')->getSingleScalarResult();
         $produits = $manager->createQuery('SELECT COUNT(p) FROM App\Entity\Produit p')->getSingleScalarResult();
         return $this->render('admin/dashboard/index.html.twig', [
