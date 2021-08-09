@@ -2,7 +2,7 @@
 {% for cat in cat %}
 	{% if (cat.title is same as(adherent.subcategory)) %}
 	{% if cat.pack.name is defined %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">{{cat.pack.name}}</button>
+<button  data-toggle="modal" data-target="#modalCart">{{cat.pack.name}}</button>
 {% else %}
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">Pas de Pack</button>
 {% endif %}
