@@ -27,9 +27,12 @@ class AdminCommandeController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Commande::class);
         $commande = $repo->findAll();
+        $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
+        $datecommandes= $repodc->find(1);
 
         return $this->render('admin/commande/index.html.twig', [
-            'commande' => $commande
+            'commande'      => $commande,
+            'datecommandes' => $datecommandes
 
         ]);
     }

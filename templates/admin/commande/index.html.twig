@@ -38,7 +38,9 @@
 				</thead>
 				{% for c in commande %}
 				<tbody>
-					{% if c.datecommande == null %}
+				{% set dateFrom = date(datecommandes.dateFrom).format('U') %}
+							{% set dateTo = date(datecommandes.dateTo).format('U') %}
+					{% if c.datecommande == null and date(c.dateattribution).format('U') > dateFrom %}
 					<td class="text-center">
 						<a href="#">{{c.adherent.firstName}}
 							{{c.adherent.lastName}}</a>
@@ -47,7 +49,7 @@
 					<td class="text-center">{{c.produit.code}}</td>
 					<td class="text-center">{{c.produit.categoryproduit.title}}</td>
 					
-					<td class="text-center">{{c.dateattribution|date('d/m/yy')}}</td>
+					<td class="text-center">{{c.dateattribution|date('d/m/y')}}</td>
 					
 				
 				

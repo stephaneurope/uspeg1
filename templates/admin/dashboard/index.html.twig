@@ -264,11 +264,11 @@
 		<tr>
 			<td>Réinitialisation Cotisations</td>
 			<td>
-
-				<a href="{{ path('amount_delete')}}" class="btn btn-sm btn-info text-primary" data-confirm="Etes vous sûr de vouloir réinitialiser toutes les cotisations ?">
+<form>
+				<a class="btn btn-sm btn-info text-primary"  onClick="passWord()">
 					<i class="fas fa-undo"></i>
 				</a>
-
+</form>
 			</td>
 
 		</tr>
@@ -294,6 +294,27 @@
 			</td>
 		</tr>
 
+<SCRIPT>
+function passWord() {
+var testV = 1;
+var pass1 = prompt('Veuillez entrer le mot de passe pour valider la réinitialisation de toutes les cotisations',' ');
+while (testV < 3) {
+if (!pass1)
+history.go(-1);
+if (pass1.toLowerCase() == "uspeg") {
+window.open('/amount/delete');
+
+break ;
+}
+testV+=1;
+var pass1 =
+prompt('Erreur','Mot de passe');
+}
+if (pass1.toLowerCase()!="sesame" & testV ==3)
+history.go(-1);
+return " ";
+}
+</SCRIPT>
 
 	</tbody>
 </table></div></div></div></div>{% endblock %}
