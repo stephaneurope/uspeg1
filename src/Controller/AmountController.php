@@ -9,6 +9,14 @@ use App\Entity\Adherent;
 use App\Form\AmountType;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
+use App\Entity\PropertySearchNum;
+use App\Entity\PropertySearchNum2;
+use App\Entity\PropertySearchNum3;
+use App\Entity\PropertySearchNum4;
+use App\Form\PropertySearchNumType;
+use App\Form\PropertySearchNum2Type;
+use App\Form\PropertySearchNum3Type;
+use App\Form\PropertySearchNum4Type;
 use App\Repository\AdherentRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -264,5 +272,108 @@ class AmountController extends AbstractController
       'debt' => $debt
       ]);
      }
+
+     /**
+      * Permet de rechercher un chèque par son numéro
+      * @Route("amount/searchcheque", name="searchcheque")
+      */
+      public function search_cheque(Request $request)
+     {
+       $search = new PropertySearchNum();
+       $search2 = new PropertySearchNum2();
+       $search3 = new PropertySearchNum3();
+       $search4 = new PropertySearchNum4();
+       $form = $this->createForm(PropertySearchNumType::class,$search);
+       $form->handleRequest($request);
+       $form2 = $this->createForm(PropertySearchNum2Type::class,$search2);
+       $form2->handleRequest($request);
+       $form3 = $this->createForm(PropertySearchNum3Type::class,$search3);
+       $form3->handleRequest($request);
+       $form4 = $this->createForm(PropertySearchNum4Type::class,$search4);
+       $form4->handleRequest($request);
+
+//initialement le tableau des articles est vide, 
+     //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
+     $amount= [];
+     $amount2= [];
+     $amount3= [];
+     $amount4= [];
+     if($form->isSubmitted() && $form->isValid()) {
+     //on récupère le nom d'article tapé dans le formulaire
+      $numcheque = $search->getnumcheque(); 
+     
+      if ($numcheque!="") {
+        //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+        $amount = $this->getDoctrine()->getRepository(Amount::class)->findBy(['numcheque' => $numcheque] );
+        
+      }
+      
+      else{
+    $this->addFlash(
+        'warning',
+       "Le champ est vide"
+    );
+      
+}
+  
+
+    }
+        //amount 2
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            //on récupère le nom d'article tapé dans le formulaire
+            $numcheque2 = $search2->getNumcheque2();
+
+            if ($numcheque2 !="") {
+                //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+                $amount2 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['numcheque2' => $numcheque2]);
+            } else {
+                $this->addFlash(
+                    'warning',
+                    "Le champ est vide !"
+                );
+            }
+        }
+         //amount 3
+         if ($form3->isSubmitted() && $form3->isValid()) {
+            //on récupère le nom d'article tapé dans le formulaire
+            $numcheque3 = $search3->getNumcheque3();
+
+            if ($numcheque3 !="") {
+                //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+                $amount3 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['numcheque3' => $numcheque3]);
+            } else {
+                $this->addFlash(
+                    'warning',
+                    "Le champ est vide !"
+                );
+            }
+        }
+        //amount 4
+        if ($form4->isSubmitted() && $form4->isValid()) {
+            //on récupère le nom d'article tapé dans le formulaire
+            $numcheque4 = $search4->getNumcheque4();
+
+            if ($numcheque4 !="") {
+                //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+                $amount4 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['numcheque4' => $numcheque4]);
+            } else {
+                $this->addFlash(
+                    'warning',
+                    "Le champ est vide !"
+                );
+            }
+        }
+            return $this->render('amount/recherche_cheque.html.twig', [
+                'form' => $form->createView(),
+                'form2' => $form2->createView(),
+                'form3' => $form3->createView(),
+                'form4' => $form4->createView(),
+                'amount' => $amount,
+                'amount2' => $amount2,
+                'amount3' => $amount3,
+                'amount4' => $amount4,
+            ]);
+        
+    }
 
 }
