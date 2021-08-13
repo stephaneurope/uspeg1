@@ -1,0 +1,166 @@
+<div ><h2 class="text-center pb-2">recherche de chèques par nom</h2></div>
+{{ form_start(formName) }}
+
+<div class="form-row align-items-end">
+	<div class="col">
+		{{ form_row(formName.name) }}
+
+	</div>
+
+	<div class="col">
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Rechercher</button>
+		</div>
+	</div>
+</div>
+{{ form_end(formName) }}
+{% for a in amountName %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Nom</th>
+				<th class="text-center">Prénom</th>
+				<th class="text-center">Numéro de chèque</th>
+				<th class="text-center">Nom sur le chèque</th>
+				<th class="text-center">Montant</th>
+				<th class="text-center">Action</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-center">{{ a.adherent.lastName }}</td>
+				<td class="text-center">{{ a.adherent.firstName }}</td>
+				<td class="text-center">{{ a.numcheque }}</td>
+				<td class="text-center">{{ a.name }}</td>
+				<td class="text-center">{{a.amount1}}</td>
+				<td class="text-center"><a href="{{path('adherent_show', { 'id': a.adherent.id})}}"><i class="fa fa-eye"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+{% endfor %}
+
+<!-- 2 -->
+{{ form_start(formName2) }}
+
+<div class="form-row align-items-end">
+	<div class="col">
+		{{ form_row(formName2.name2) }}
+
+	</div>
+
+	<div class="col">
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Rechercher</button>
+		</div>
+	</div>
+</div>
+{{ form_end(formName2) }}
+{% for a in amountName2 %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Nom</th>
+				<th class="text-center">Prénom</th>
+				<th class="text-center">Numéro de chèque</th>
+				<th class="text-center">Nom sur le chèque</th>
+				<th class="text-center">Montant</th>
+				<th class="text-center">Action</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-center">{{ a.adherent.lastName }}</td>
+				<td class="text-center">{{ a.adherent.firstName }}</td>
+				<td class="text-center">{{ a.numcheque }}</td>
+				<td class="text-center">{{ a.name }}</td>
+				<td class="text-center">{{a.amount2}}</td>
+				<td class="text-center"><a href="{{path('adherent_show', { 'id': a.adherent.id})}}"><i class="fa fa-eye"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+{% endfor %}
+<!-- 3    -->
+{{ form_start(formName3) }}
+
+<div class="form-row align-items-end">
+	<div class="col">
+		{{ form_row(formName3.name3) }}
+
+	</div>
+
+	<div class="col">
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Rechercher</button>
+		</div>
+	</div>
+</div>
+{{ form_end(formName3) }}
+{% for a in amountName3 %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Nom</th>
+				<th class="text-center">Prénom</th>
+				<th class="text-center">Numéro de chèque</th>
+				<th class="text-center">Nom sur le chèque</th>
+				<th class="text-center">Montant</th>
+				<th class="text-center">Action</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-center">{{ a.adherent.lastName }}</td>
+				<td class="text-center">{{ a.adherent.firstName }}</td>
+				<td class="text-center">{{ a.numcheque }}</td>
+				<td class="text-center">{{ a.name }}</td>
+				<td class="text-center">{{a.amount3}}</td>
+				<td class="text-center"><a href="{{path('adherent_show', { 'id': a.adherent.id})}}"><i class="fa fa-eye"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+{% endfor %}
+<!-- 4   -->
+{{ form_start(formName4) }}
+
+<div class="form-row align-items-end">
+	<div class="col">
+		{{ form_row(formName4.name4) }}
+
+	</div>
+
+	<div class="col">
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Rechercher</button>
+		</div>
+	</div>
+</div>
+{{ form_end(formName4) }}
+{% for a in amountName4 %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Nom</th>
+				<th class="text-center">Prénom</th>
+				<th class="text-center">Numéro de chèque</th>
+				<th class="text-center">Nom sur le chèque</th>
+				<th class="text-center">Montant</th>
+				<th class="text-center">Action</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-center">{{ a.adherent.lastName }}</td>
+				<td class="text-center">{{ a.adherent.firstName }}</td>
+				<td class="text-center">{{ a.numcheque }}</td>
+				<td class="text-center">{{ a.name }}</td>
+				<td class="text-center">{{a.amount4}}</td>
+				<td class="text-center"><a href="{{path('adherent_show', { 'id': a.adherent.id})}}"><i class="fa fa-eye"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+{% endfor %}

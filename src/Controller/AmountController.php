@@ -9,10 +9,18 @@ use App\Entity\Adherent;
 use App\Form\AmountType;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
+use App\Entity\PropertySearchNameCheque;
+use App\Entity\PropertySearchNameCheque2;
+use App\Entity\PropertySearchNameCheque3;
+use App\Entity\PropertySearchNameCheque4;
 use App\Entity\PropertySearchNum;
 use App\Entity\PropertySearchNum2;
 use App\Entity\PropertySearchNum3;
 use App\Entity\PropertySearchNum4;
+use App\Form\PropertySearchNameCheque2Type;
+use App\Form\PropertySearchNameCheque3Type;
+use App\Form\PropertySearchNameCheque4Type;
+use App\Form\PropertySearchNameChequeType;
 use App\Form\PropertySearchNumType;
 use App\Form\PropertySearchNum2Type;
 use App\Form\PropertySearchNum3Type;
@@ -279,6 +287,7 @@ class AmountController extends AbstractController
       */
       public function search_cheque(Request $request)
      {
+//recherche par numero//////////////////
        $search = new PropertySearchNum();
        $search2 = new PropertySearchNum2();
        $search3 = new PropertySearchNum3();
@@ -298,6 +307,7 @@ class AmountController extends AbstractController
      $amount2= [];
      $amount3= [];
      $amount4= [];
+
      if($form->isSubmitted() && $form->isValid()) {
      //on récupère le nom d'article tapé dans le formulaire
       $numcheque = $search->getnumcheque(); 
@@ -363,15 +373,131 @@ class AmountController extends AbstractController
                 );
             }
         }
+
+        //Fin de recherche par numero//////////////////
+
+        //recherche par nom//////////////////
+       $searchName  = new PropertySearchNameCheque();
+       $searchName2 = new PropertySearchNameCheque2();
+       $searchName3 = new PropertySearchNameCheque3();
+       $searchName4 = new PropertySearchNameCheque4();
+       $formName = $this->createForm(PropertySearchNameChequeType::class,$searchName);
+       $formName->handleRequest($request);
+       $formName2 = $this->createForm(PropertySearchNameCheque2Type::class,$searchName2);
+       $formName2->handleRequest($request);
+       $formName3 = $this->createForm(PropertySearchNameCheque3Type::class,$searchName3);
+       $formName3->handleRequest($request);
+       $formName4 = $this->createForm(PropertySearchNameCheque4Type::class,$searchName4);
+       $formName4->handleRequest($request);
+
+       //initialement le tableau des articles est vide, 
+     //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
+     $amountName= [];
+     $amountName2= [];
+     $amountName3= [];
+     $amountName4= [];
+
+     if($formName->isSubmitted() && $formName->isValid()) {
+        //on récupère le nom d'article tapé dans le formulaire
+         $name = $searchName->getName(); 
+        
+         if ($name!="") {
+           //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+           $amountName = $this->getDoctrine()->getRepository(Amount::class)->findBy(['name' => $name] );
+           
+         }
+         
+         else{
+       $this->addFlash(
+           'warning',
+          "Le champ est vide"
+       );
+         
+   }
+       
+       }
+       //AmountName2//
+       if($formName2->isSubmitted() && $formName2->isValid()) {
+        //on récupère le nom d'article tapé dans le formulaire
+         $name2 = $searchName2->getName2(); 
+        
+         if ($name2!="") {
+           //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+           $amountName2 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['name2' => $name2] );
+           
+         }
+         
+         else{
+       $this->addFlash(
+           'warning',
+          "Le champ est vide"
+       );
+         
+   }
+       
+       }
+
+       //AmountName3//
+       if($formName3->isSubmitted() && $formName3->isValid()) {
+        //on récupère le nom d'article tapé dans le formulaire
+         $name3 = $searchName3->getName3(); 
+        
+         if ($name3!="") {
+           //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+           $amountName3 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['name3' => $name3] );
+           
+         }
+         
+         else{
+       $this->addFlash(
+           'warning',
+          "Le champ est vide"
+       );
+         
+   }
+       
+       }
+
+       //AmountName4//
+       if($formName4->isSubmitted() && $formName4->isValid()) {
+        //on récupère le nom d'article tapé dans le formulaire
+         $name4 = $searchName4->getName4(); 
+        
+         if ($name4!="") {
+           //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+           $amountName4 = $this->getDoctrine()->getRepository(Amount::class)->findBy(['name4' => $name4] );
+           
+         }
+         
+         else{
+       $this->addFlash(
+           'warning',
+          "Le champ est vide"
+       );
+         
+   }
+       
+       }
+
+        //Fin de recherche par nom//////////////////
+
             return $this->render('amount/recherche_cheque.html.twig', [
                 'form' => $form->createView(),
                 'form2' => $form2->createView(),
                 'form3' => $form3->createView(),
                 'form4' => $form4->createView(),
+                'formName' => $formName->createView(),
+                'formName2' => $formName2->createView(),
+                'formName3' => $formName3->createView(),
+                'formName4' => $formName4->createView(),
                 'amount' => $amount,
                 'amount2' => $amount2,
                 'amount3' => $amount3,
                 'amount4' => $amount4,
+                'amountName' => $amountName,
+                'amountName2' => $amountName2,
+                'amountName3' => $amountName3,
+                'amountName4' => $amountName4,
             ]);
         
     }
