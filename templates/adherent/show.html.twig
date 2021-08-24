@@ -178,10 +178,13 @@
 			<div class="card card-body">
 				<h2 class="d-inline text-center">Attribution
 					<div class="d-inline">
-<!--bouton pack -->
+					
+						{% include "partials/equipement_goal.html.twig" %}
+						<!--bouton pack -->
 				{% include "partials/equipement.html.twig" %}		
-<!--fin bouton pack -->						
-						{% include "partials/equipement_goal.html.twig" %}</div>
+<!--fin bouton pack -->	
+						
+						</div>
 				</h2>
 				{% if is_granted('ROLE_ADMIN') %}
 					<div class="container mt-3">
