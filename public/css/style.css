@@ -545,14 +545,16 @@ html,
 }
 
 /***scroll importcsv**/
-.my-custom-scrollbar {
+@media only screen and (max-width: 767px) {
+.my-custom-scrollbar-adherent {
   position: relative;
   height: 500px;
   overflow: auto;
   }
-  .table-wrapper-scroll-y {
+  .table-wrapper-scroll-y-y {
   display: block;
   }
+}
 /**********/
 
 @media only screen and (max-width: 767px) {
@@ -566,17 +568,30 @@ html,
     font-size: 141px;
   }
 }
+/*************scroll adherent**************/
+
+.my-custom-scrollbar {
+  position: relative;
+  width: 500px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
 
 /*************titre**************/
+.titre  {
+  font-size: 52px;
+}
 @media only screen and (max-width: 767px) {
   .titre  {
-    font-size: 40px;
+    font-size: 35px;
   }
 }
 
 @media only screen and (max-width: 480px) {
   .titre {
-    font-size: 35px;
+    font-size: 30px;
   }
 }
 /***********navbar**************/
