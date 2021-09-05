@@ -8,10 +8,7 @@
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		<h1 class="text-center">Liste des adhérents de l'équipe
-			{{team.name}}</h1>
-
-
+		
 		<div class="row ">
 			<div class="col-sm mt-1 mb-3">
 				<div class="dropdown">
@@ -70,7 +67,8 @@ content: counter(case);
 	</style>
 	{% endblock %}
 
-			<table class="table table-hover" border="1">
+			<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+			<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 				<thead>
 					<tr>
                         <th>#</th>
@@ -187,6 +185,14 @@ content: counter(case);
 			</tbody>
 		</table>
 	</div>
-	
+	<div class="container">
+	<ul style="list-style-type: none;">
+		<li>
+			<i style="display: inline-block;border:none;color:orange;" class="fas fa-shopping-bag "></i>
+			: Adhérent ayant au moins une commande en cours</li>
+		
+	</ul>
+</div>
+	</div>
 {% endblock %}
 
