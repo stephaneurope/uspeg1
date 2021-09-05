@@ -41,7 +41,11 @@ html,
             background: url("/image/login/grass.jpg")no-repeat center center;
             background-size: cover;
         }
-        
+        @media (max-width: 740px) {
+          #header4{
+           
+          }
+        }
       
 
         .cardlogin {
@@ -597,7 +601,8 @@ html,
 /***********navbar**************/
 @media only screen and (max-width: 990px) {
 #navbarColor01{
-  background-color: rgb(197,197,197,0.6);
+  background-color: rgb(197,197,197,1);
+  
 }
 /*************bouton menu cat equipe et recherche***************/
 @media only screen and (max-width: 990px) {
