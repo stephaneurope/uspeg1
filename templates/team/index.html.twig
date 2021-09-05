@@ -9,52 +9,58 @@
 
 	<div class="container mt-3">
 		
-		<div class="row ">
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						Catégories d'adhérents
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						{% for c in catadherent %}
-							<li class="text-center">
-								<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
-							</li>
+		
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-							<li role="separator" class="divider"></li>
-						{% endfor %}
-					</ul>
 
-				</div>
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<div class="dropright">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Catégories d'adhérents
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropd1">
+								{% for c in catadherent %}
+									<li class="text-center">
+										<a href="{{ path('category_adherent', {'id': c.id}) }}" title="{{c.title}}">{{c.title}}</a>
+									</li>
 
+									<li role="separator" class="divider"></li>
+								{% endfor %}
+							</ul>
+
+						</div>
+					</li>
+					<li class="nav-item">
+						<div class="dropright">
+							<button class="btn btn-secondary dropdown-toggle ml-2" type="button" id="dropd2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Equipes
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropd2">
+								{% for t in team1 %}
+									<li class="text-center">
+										<a href="{{ path('team_adherent', {'id': t.id}) }}" title="{{t.name}}">{{t.name}}</a>
+									</li>
+
+									<li role="separator" class="divider"></li>
+								{% endfor %}
+							</ul>
+
+						</div>
+					</li>
+
+				</ul>
+				<div class="my-2 my-sm-0">{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>
+					{% endif %}</div>
 			</div>
-
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						Equipes
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						{% for t in team1 %}
-							<li class="text-center">
-								<a href="{{ path('team_adherent', {'id': t.id}) }}" title="{{t.name}}">{{t.name}}</a>
-							</li>
-
-							<li role="separator" class="divider"></li>
-						{% endfor %}
-					</ul>
-
-				</div>
-			</div>
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-
-					{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('adherent_create') }}" class="btn btn-sm btn-primary">+ Ajouter un Adhérent</a>{% endif %}
-				</div>
-
-			</div>
+		</nav>
 			{% block head %}
 	<style>
 	table {
