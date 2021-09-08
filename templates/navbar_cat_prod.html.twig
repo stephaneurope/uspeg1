@@ -1,11 +1,19 @@
-<div class="row ">
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+			<li class="nav-item active">
+				<div class="dropright">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						Familles d'articles
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<ul class="dropdown-menu" aria-labelledby="dropd1">
 						<li class="text-center">
 							<a href="{{ path('admin/produit_edit') }}">Tous les produits</a>
 						</li>
@@ -19,17 +27,15 @@
 					</ul>
 
 				</div>
-
-			</div>
-
-			
-			<div class="col-sm mt-1 mb-3">
-				<div class="dropdown">
-
-					<a href="{{path('produit_create')}}" class="btn btn-sm btn-primary">+ Ajouter un Produit</a>
-				</div>
-
-			</div>
+			  </li>
+		  
+	 </ul>
 
 
-		</div>
+	 <div class="my-2 my-sm-0">{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{path('produit_create')}}" class="btn btn-sm btn-primary">+ Ajouter un Produit</a>{% endif %}
+	 </div>
+
+	</div>
+</nav>
+
