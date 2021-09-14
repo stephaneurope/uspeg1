@@ -9,7 +9,8 @@
 
 	<div class="container">
 
-		<table class="table table-hover">
+		<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+			<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 
 			<thead>
 				<tr>
@@ -34,13 +35,13 @@
 					
 					{% set newArray = newArray|merge([c]) %}
 				{% endif %}
-
-			</tbody>
+</tbody>
 		{% endfor %}
 
+			
 
 	</table>
 
 
-</div>{% endblock %}
+</div></div>{% endblock %}
 

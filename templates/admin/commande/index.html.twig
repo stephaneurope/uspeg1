@@ -1,31 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande
+{% block title %}Equipements attribués
 {% endblock %}
 
 {% block body %}
-{% set name = "Equipements attribués" %}
+	{% set name = "Equipements attribués" %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Rechercher ..."/>
 
-		</div>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-sm"></div>
-				<div class="col-sm"></div>
-				<div class="col-sm-3 mb-2"></div>
-			</div>
-		</div>
-		
-			<table class="table table-hover">
+
+		<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+			<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						
+
 						<th class="text-center">Nom</th>
 						<th class="text-center">Produit</th>
 						<th class="text-center">Produit</th>
@@ -33,40 +23,42 @@
 						<th class="text-center">Attribué le</th>
 						<th class="text-center">Quantité</th>
 
-						<th></th>
 					</tr>
 				</thead>
-				{% for c in commande %}
 				<tbody>
-				{% set dateFrom = date(datecommandes.dateFrom).format('U') %}
-							{% set dateTo = date(datecommandes.dateTo).format('U') %}
-					{% if c.datecommande == null and date(c.dateattribution).format('U') > dateFrom %}
-					<td class="text-center">
-						<a href="#">{{c.adherent.firstName}}
-							{{c.adherent.lastName}}</a>
-					</td>
-					<td class="text-center">{{c.produit.title}}</td>
-					<td class="text-center">{{c.produit.code}}</td>
-					<td class="text-center">{{c.produit.categoryproduit.title}}</td>
-					
-					<td class="text-center">{{c.dateattribution|date('d/m/y')}}</td>
-					
+				{% for c in commande %}
 				
+					
+					<tr>
+						{% set dateFrom = date(datecommandes.dateFrom).format('U') %}
+						{% set dateTo = date(datecommandes.dateTo).format('U') %}
+						{% if c.datecommande == null and date(c.dateattribution).format('U') > dateFrom %}
+							<td class="text-center">
+								<a href="#">{{c.adherent.firstName}}
+									{{c.adherent.lastName}}</a>
+							</td>
+							<td class="text-center">{{c.produit.title}}</td>
+							<td class="text-center">{{c.produit.code}}</td>
+							<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+
+							<td class="text-center">{{c.dateattribution|date('d/m/y')}}</td>
+
+
+							<td class="text-center">
+								<span class="">{{c.qte}}</span>
+
+							</td>
+
+							
+						{% endif %}
+						
+					     </tr>
+		             
 				
-						
-					<td class="text-center">
-						<span class="">{{c.qte}}</span>
+			{% endfor %}
+           </tbody>
+	  </table>
+     </div>
+    </div>{% endblock %}
 
-					</td>
-	
-					<td>
-						
-					</td>
-					{% endif %}
-				</tbody>
-			</tr>
-		{% endfor %}
-
-	</tbody>
-</table></div>{% endblock %}
 
