@@ -13,14 +13,14 @@
 {% include "header_title.html.twig" %}
 
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+ <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
-{% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
+ {% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
 	{% if (adherent.subCategory|lower|replace({' ':''}) != ('clientsboutique')) %}
 		{% if adherent.team != null %}
 			<h4 class="text-center">Attribué à l'équipe
@@ -28,8 +28,8 @@
 		{% else %}
 			<h4 class="text-center">Non associé à une équipe</h4>
 		{% endif %}
-</li>
-</ul>
+ </li>
+ </ul>
 		<!-- Button trigger modal Contact-->
 		{% if adherent.email == true %}
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -169,21 +169,27 @@
 
 	</table>
 
-</div></div><div class="text-center">
-<div class="container">
-	<div class="row">
-		<p>
-			<div class="col-md-12 col-sm-6">
+</div></div>
+
+<div class="container" style="background:#F4F5FA;">
+
+    <div class="text-center">
+      
+	   <div class="row">
+	   <div class="col-md-12 col-sm-6">
+		   <p>
+			 
 				<a class="btn btn-info m-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Attribution d'équipements</a>
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Commandes en cours</button>
 
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Cotisation</button>
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Ouvrir/fermer tous les onglets</button>
 			</p>
-		</p>
-	</div>
-</div>
-<div class="row mb-2">
+		
+	    </div>
+      
+    </div>
+ <div class="row mb-2">
 	<div class="col">
 
 		<div class="collapse multi-collapse show contour" id="multiCollapseExample1">
@@ -194,7 +200,7 @@
 						{% include "partials/equipement_goal.html.twig" %}
 						<!--bouton pack -->
 				{% include "partials/equipement.html.twig" %}		
-<!--fin bouton pack -->	
+ <!--fin bouton pack -->	
 						
 						</div>
 				</h2>
@@ -271,13 +277,13 @@
 
 	</div>
 	<div class="col">
-		<div class="collapse  multi-collapse" id="multiCollapseExample2">
+		<div class="collapse  multi-collapse mt-2" id="multiCollapseExample2">
 			<div class="card card-body">
 				<h2 class="text-center">Commande en cours 
 				
 		
 				</h2>
-<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+ <div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -290,7 +296,7 @@
 							<th>{{ form_start(formcontact_manquant) }}
 		         {% if adherent.email == true %}
 				<button type="submit" class="btn btn-primary">notif</button>
-{% else %}
+ {% else %}
 	
 	<button type="submit" class="btn btn-primary disabled" disabled="disabled">notif</button>	{% endif %}
 	{{ form_end(formcontact_manquant) }}
@@ -338,12 +344,14 @@
 
 		</div>
 	</div>
-</div></div><div class="collapse multi-collapse" id="multiCollapseExample3">
-<div class="card card-body">
-	<h2 class="text-center">Cotisation
-	</h2>
+ </div></div>
+ 
+ <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
+  <div class="card card-body">
+	 <h2 class="text-center">Cotisation</h2>
+	
 
-	{% if adherent.amounts is empty %}
+	 {% if adherent.amounts is empty %}
 
 		{{ form_start(form1, { attr: { novalidate: 'novalidate' } }) }}
 
@@ -354,9 +362,9 @@
 			<button type="submit" class="btn btn-primary">Créer la cotisation</button>
 		{% endif %}
 		{{ form_end(form1) }}
-	{% endif %}
-</div>
-{% for a in adherent.amounts %}
+	 {% endif %}
+ 
+ {% for a in adherent.amounts %}
 
 	<div class="container">
 		<div class="row">
@@ -486,12 +494,12 @@
 		</div>
 	</div>
 
-{% endfor %}</div>{% endif %}
+ {% endfor %}</div>{% endif %}
+</div>
 
+ {% if (adherent.subCategory|lower|replace({' ':''}) is same as('boutique')) %}<div class="container mt-3 table-responsive-md">
 
-{% if (adherent.subCategory|lower|replace({' ':''}) is same as('boutique')) %}<div class="container mt-3 table-responsive-md">
-
-<div class="container mt-2">
+ <div class="container mt-2">
 
 	<table class="table mt-5" class="table table-hover">
 		<thead>
@@ -509,7 +517,7 @@
 				
 				<td class="text-center">{{adherent.subCategory}}
 				</td>
-<td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
+ <td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
 			</tr>
 		</tbody>
 
@@ -533,21 +541,21 @@
 				
 				
 				<td class="text-center" scope="row">{{adherent.homePhone}}</td>
-<td class="text-center">{{adherent.email}}</td>
+ <td class="text-center">{{adherent.email}}</td>
 	<td class="text-center">{{adherent.mobilePhone}}</td>
 			</tr>
 		</tbody>
 	</td>
 
-</tr></tbody><thead>
-<tr class="table table-active">
+ </tr></tbody><thead>
+ <tr class="table table-active">
 
 
 	
 	<th class="text-center" scope="col">Contact</th>
-</tr></thead><tbody>
+ </tr></thead><tbody>
 
-<tr class="table table-default font-weight-bold">
+ <tr class="table table-default font-weight-bold">
 
 
 	
@@ -595,7 +603,7 @@
 			</button>
 		{% endif %}
 	</td>
-</tr></tbody></table></div></div><div class="container my-3"><h2 class="text-center">Ajouter un article<a class="ml-1" href="{{ path('commande_client', {id: adherent.id}) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h2></div><div><table class="table table-hover"><thead>
+ </tr></tbody></table></div></div><div class="container my-3"><h2 class="text-center">Ajouter un article<a class="ml-1" href="{{ path('commande_client', {id: adherent.id}) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h2></div><div><table class="table table-hover"><thead>
  <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Factures
@@ -607,18 +615,18 @@
 
 	{% endfor %}
   </div>
-</div><tr>
+ </div><tr>
 
-<th class="text-center">commandé le</th>
-<th class="text-center">distribué le</th>
-<th class="text-center">Produit</th>
-<th class="text-center">Mode de paiement</th>
-<th class="text-center">Quantité</th>
-<th class="text-center">Prix</th>
-<th class="text-center">commentaire</th>
-<th><a href="{{ path('facture_boutique', {'id': adherent.id}) }}" class="btn btn-sm btn-danger" >
+ <th class="text-center">commandé le</th>
+ <th class="text-center">distribué le</th>
+ <th class="text-center">Produit</th>
+ <th class="text-center">Mode de paiement</th>
+ <th class="text-center">Quantité</th>
+ <th class="text-center">Prix</th>
+ <th class="text-center">commentaire</th>
+ <th><a href="{{ path('facture_boutique', {'id': adherent.id}) }}" class="btn btn-sm btn-danger" >
 					<i class="fa fa-file-pdf fa-2x"></i></a></th></tr></thead>{% for c in adherent.commandes|slice(0, 10) %}{% if (c.adherent.id is same as(adherent.id)) %}
-{% if c.dateattribution  == null %}
+ {% if c.dateattribution  == null %}
 	<tbody>
 
 	
@@ -683,14 +691,16 @@
 		</td>
 
 	</tbody>	
-{% endif %}
+ {% endif %}
 
-{% endif %}
+ {% endif %}
 
 				
-{% endfor %}</tr></table>
+ {% endfor %}</tr></table>
 
-</div>{% endif %}
+ {% endif %}
+ 
+</div>
 
 
 
