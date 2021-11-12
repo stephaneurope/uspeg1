@@ -3,7 +3,7 @@
 
   <head>
   <meta charset="UTF-8"/>
-  <title>Facture José Roux</title>
+  <title>Facture</title>
   <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -40,10 +40,12 @@
 
   
       <tr>
+      {% set price_total = commande.produit.price * commande.qte %}
+					
         <td>{{commande.datecommande|date("d/m/y")}}</td>
         <td>{{commande.produit.title}}</td>
         <td>{{commande.qte}}</td>
-        <td>{{commande.produit.price}}&#8202;€</td>
+        <td>{{price_total}}&#8202;€</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -55,7 +57,8 @@
         <td>Total:</td>
       {% set total = 0 %}
 {% for c in commande %}
-    {% set total = total + c.produit.price %}
+{% set price_total = c.produit.price * c.qte %}
+    {% set total = total + price_total %}
 {% endfor %}
         <td>{{total}}&#8202;€</td> 
       </tr>

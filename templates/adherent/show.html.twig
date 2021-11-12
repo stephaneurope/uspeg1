@@ -13,67 +13,67 @@
 {% include "header_title.html.twig" %}
 
 <div class="container">
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active">
- {% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
-	{% if (adherent.subCategory|lower|replace({' ':''}) != ('clientsboutique')) %}
-		{% if adherent.team != null %}
-			<h4 class="text-center">Attribué à l'équipe
-				{{adherent.team.name}}</h4>
-		{% else %}
-			<h4 class="text-center">Non associé à une équipe</h4>
-		{% endif %}
- </li>
- </ul>
-		<!-- Button trigger modal Contact-->
-		{% if adherent.email == true %}
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-				Contact
-			</button>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					{% if (adherent.subCategory|lower|replace({' ':''}) != ('boutique')) %}
+						{% if (adherent.subCategory|lower|replace({' ':''}) != ('clientsboutique')) %}
+							{% if adherent.team != null %}
+								<h4 class="text-center">Attribué à l'équipe
+									{{adherent.team.name}}</h4>
+							{% else %}
+								<h4 class="text-center">Non associé à une équipe</h4>
+							{% endif %}
+						</li>
+					</ul>
+					<!-- Button trigger modal Contact-->
+					{% if adherent.email == true %}
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+							Contact
+						</button>
 
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Contacter
-								{{adherent.lastName}}
-								{{adherent.firstName}}</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Contacter
+											{{adherent.lastName}}
+											{{adherent.firstName}}</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									{{ form_start(formcontact)}}
+									<div class="modal-body">
+										{{form_row(formcontact.title)}}
+
+										{{form_row(formcontact.message)}}
+
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-primary">Envoyer</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+									</div>
+								</div>
+							</div>
+							{{ form_end(formcontact) }}
+
 						</div>
-						{{ form_start(formcontact)}}
-						<div class="modal-body">
-							{{form_row(formcontact.title)}}
+					{% else %}
 
-							{{form_row(formcontact.message)}}
-
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Envoyer</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-
-						</div>
-					</div>
-				</div>
-				{{ form_end(formcontact) }}
-
+						<button type="button" class="btn btn-danger">
+							Pas de Mail
+						</button>
+					{% endif %}
+				{% endif %}
 			</div>
-		{% else %}
-
-			<button type="button" class="btn btn-danger">
-				Pas de Mail
-			</button>
-		{% endif %}
-	{% endif %}
-	</div>
-	</nav>
+		</nav>
 
 		<div class="container mt-3 table-responsive-md">
 
@@ -145,8 +145,6 @@
 
 		<thead>
 			<tr class="table table-active">
-
-
 				<th class="text-center" scope="col">Email</th>
 				<th class="text-center" scope="col">Lieu de naissance</th>
 				<th class="text-center" scope="col">Changement de club</th>
@@ -154,562 +152,568 @@
 			</tr>
 		</thead>
 		<tbody>
-
 			<tr class="table table-default font-weight-bold">
-
-
 				<td class="text-center">{{adherent.email}}</td>
 				<td class="text-center">{{adherent.placeOfBirth}}</td>
-				<td class="text-center">{{adherent.clubChange}}
-				</td>
+				<td class="text-center">{{adherent.clubChange}}</td>
 				<td class="text-center">{{adherent.clubOut}}</td>
 			</tr>
 		</tbody>
-
-
 	</table>
+</div></div><div class="container" style="background:#F4F5FA;">
 
-</div></div>
+<div class="text-center">
 
-<div class="container" style="background:#F4F5FA;">
+	<div class="row">
+		<div class="col-md-12 col-sm-6">
+			<p>
 
-    <div class="text-center">
-      
-	   <div class="row">
-	   <div class="col-md-12 col-sm-6">
-		   <p>
-			 
 				<a class="btn btn-info m-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Attribution d'équipements</a>
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Commandes en cours</button>
-
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Cotisation</button>
 				<button class="btn btn-info m-2" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Ouvrir/fermer tous les onglets</button>
 			</p>
-		
-	    </div>
-      
-    </div>
- <div class="row mb-2">
-	<div class="col">
 
-		<div class="collapse multi-collapse show contour" id="multiCollapseExample1">
-			<div class="card card-body">
-				<h2 class="d-inline text-center">Attribution
-					<div class="d-inline">
-					
-						{% include "partials/equipement_goal.html.twig" %}
-						<!--bouton pack -->
-				{% include "partials/equipement.html.twig" %}		
- <!--fin bouton pack -->	
-						
+		</div>
+	</div>
+
+	<div class="row mb-2">
+		<div class="col">
+
+			<div class="collapse multi-collapse show contour" id="multiCollapseExample1">
+				<div class="card card-body">
+					<h2 class="d-inline text-center">Attribution
+						<div class="d-inline">
+
+							{% include "partials/equipement_goal.html.twig" %}
+							<!--bouton pack -->
+							{% include "partials/equipement.html.twig" %}
+							<!--fin bouton pack -->
+
 						</div>
-				</h2>
-				{% if is_granted('ROLE_ADMIN') %}
-					<div class="container mt-3">
-
-						{{ form_start(form) }}
-						{{ form_widget(form) }}
-
-						<button type="submit" class="btn btn-primary m-2">Créer une nouvelle commande</button>
-						{{ form_end(form) }}
-					</div>
-				{% endif %}
-				<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
-				<table class="table table-hover">
-
-					<thead>
-						<tr>
-	
-							<th class="text-center">distribué le  </th>
-							<th class="text-center">Produit</th>
-							<th class="text-center">Catégorie</th>
-							<th class="text-center">Quantité</th>
-
-
-							<th></th>
-
-						</tr>
-
-					</thead>
-
-
-					{% for c in adherent.commandes|slice(0, 10) %}
-						{% if (c.adherent.id is same as(adherent.id)) %}
-						
-							{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
-							{% set dateTo = date(dateCommandes.dateTo).format('U') %}
-                          
-							{% if c.dateattribution  != null and date(c.dateattribution).format('U') > dateFrom and date(c.dateattribution).format('U') < dateTo  %}
-							
-							
-								<tbody>
-
-									<td class="text-center">
-										{{c.dateattribution|date("d/m/Y")}}
-
-									</td>
-									<td class="text-center">{{c.produit.title}}</td>
-									<td class="text-center">{{c.produit.categoryproduit.title}}</td>
-									<td class="text-center">
-										<span class="">{{c.qte}}</span>
-
-									</td>
-
-									<td>
-										{% if is_granted('ROLE_ADMIN') %}
-											<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
-												<i class="fas fa-trash-alt"></i>
-											</a>
-										{% endif %}
-									</td>
-
-								</tbody>
-							{% endif %}
-						{% endif %}
-					{% endfor %}
-
-				</tr>
-
-			</table>
-
-		</div>
-
-
-	</div>
-	<div class="col">
-		<div class="collapse  multi-collapse mt-2" id="multiCollapseExample2">
-			<div class="card card-body">
-				<h2 class="text-center">Commande en cours 
-				
-		
-				</h2>
- <div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-
-							<th class="text-center">Date</th>
-							<th class="text-center">Produit</th>
-							<th class="text-center">Catégorie</th>
-							<th class="text-center">Quantité</th>
-
-							<th>{{ form_start(formcontact_manquant) }}
-		         {% if adherent.email == true %}
-				<button type="submit" class="btn btn-primary">notif</button>
- {% else %}
-	
-	<button type="submit" class="btn btn-primary disabled" disabled="disabled">notif</button>	{% endif %}
-	{{ form_end(formcontact_manquant) }}
-
-	
-	</th>
-						</tr>
-					</thead>
-					
-					{% for c in adherent.commandes|slice(0, 15) %}
-						{% if (c.adherent.id is same as(adherent.id)) %}
-							{% if c.dateattribution == null %}
-							
-							
-								<tbody>
-
-									<td class="text-center">
-										{{c.datecommande|date("d/m/Y")}}
-
-									</td>
-									<td class="text-center">{{c.produit.title}}</td>
-									<td class="text-center">{{c.produit.categoryproduit.title}}</td>
-									<td class="text-center">
-										<span class="">{{c.qte}}</span>
-
-									</td>
-
-									<td>
-
-										{% if is_granted('ROLE_ADMIN') %}
-											<a href="{{ path('commande_validate', {'id': c.id}) }}" class="btn btn-sm btn-primary">
-												<i class="fas fa-angle-down"></i>
-											</a>
-										{% endif %}
-
-									</td>
-
-								</tbody>
-							{% endif %}
-						{% endif %}
-					{% endfor %}
-				</tr>
-
-			</table>
-
-		</div>
-	</div>
- </div></div>
- 
- <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
-  <div class="card card-body">
-	 <h2 class="text-center">Cotisation</h2>
-	
-
-	 {% if adherent.amounts is empty %}
-
-		{{ form_start(form1, { attr: { novalidate: 'novalidate' } }) }}
-
-		{{ form_start(form1) }}
-		<div class="invisible">{{ form_widget(form1) }}</div>
-
-		{% if is_granted('ROLE_ADMIN') %}
-			<button type="submit" class="btn btn-primary">Créer la cotisation</button>
-		{% endif %}
-		{{ form_end(form1) }}
-	 {% endif %}
- 
- {% for a in adherent.amounts %}
-
-	<div class="container">
-		<div class="row">
-			<div class="table-responsive col-md-12">
-				<table id="sort2" class="grid table table-bordered table-sortable">
-					<thead>
-						<tr>
-							<th>Montant</th>
-							{% if is_granted('ROLE_ADMIN') %}
-								<th></th>
-								<th></th>
-								<th>Numéro Chèque</th>
-								<th>Nom Titulaire</th>
-							{% endif %}
-							<th></th>
-							<th>
-								
-									
-										<h3>
-											<span class="badge badge-info">{{montantcot}}€</span>
-										</h3>
-									
-								
-							</th>
-						</tr>
-					</thead>
+					</h2>
 					{% if is_granted('ROLE_ADMIN') %}
-						{{ form_start(form1) }}
+						<div class="container mt-3">
+
+							{{ form_start(form) }}
+							{{ form_widget(form) }}
+
+							<button type="submit" class="btn btn-primary m-2">Créer une nouvelle commande</button>
+							{{ form_end(form) }}
+						</div>
 					{% endif %}
-					<tbody>
-						<tr>
-							<td data-id="11">1</td>
-							{% if is_granted('ROLE_ADMIN') %}
-								<td>{{ form_widget(form1.paymentMethodAmount1) }}</td>
-								<td>{{ form_widget(form1.amount1) }}</td>
-								<td>{{ form_widget(form1.numcheque) }}</td>
-								<td>{{ form_widget(form1.name) }}</td>
-							{% endif %}
-							<td>{{a.paymentMethodAmount1}}</td>
-							<td>{{a.amount1}}€</td>
-						</tr>
-						<tr>
-							<td data-id="22">2</td>
-							{% if is_granted('ROLE_ADMIN') %}
-								<td>{{ form_widget(form1.paymentMethodAmount2) }}</td>
-								<td>{{ form_widget(form1.amount2) }}</td>
-								<td>{{ form_widget(form1.numcheque2) }}</td>
-								<td>{{ form_widget(form1.name2) }}</td>
-							{% endif %}
-							<td>{{a.paymentMethodAmount2}}</td>
-							<td>{{a.amount2}}€</td>
-						</tr>
-						<tr>
-							<td data-id="33">3</td>
-							{% if is_granted('ROLE_ADMIN') %}
-								<td>{{ form_widget(form1.paymentMethodAmount3) }}</td>
-								<td>{{ form_widget(form1.amount3) }}</td>
-								<td>{{ form_widget(form1.numcheque3) }}</td>
-								<td>{{ form_widget(form1.name3) }}</td>
-							{% endif %}
-							<td>{{a.paymentMethodAmount3}}</td>
-							<td>{{a.amount3}}€</td>
-							
-						</tr>
-						<tr>
-							<td data-id="33">4</td>
-							{% if is_granted('ROLE_ADMIN') %}
-								<td>{{ form_widget(form1.paymentMethodAmount4) }}</td>
-								<td>{{ form_widget(form1.amount4) }}</td>
-								<td>{{ form_widget(form1.numcheque4) }}</td>
-								<td>{{ form_widget(form1.name4) }}</td>
-							{% endif %}
-							<td>{{a.paymentMethodAmount4}}</td>
-							<td>{{a.amount4}}€</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th>Total
-								{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}</th>
-							{% if is_granted('ROLE_ADMIN') %}
-								<th></th>
-								<th></th>
-								<th></th>
-								<th></th>
-							{% endif %}
-							<th></th>
-						
-							<th>{{a.amountTotal}}€</th>
-						</tr>
-						<tr>
-							<th>Reste a payer</th>
-							{% if is_granted('ROLE_ADMIN') %}
-								<th></th>
-								<th></th>
-								<th></th>
-								<th></th>
-							{% endif %}
-							<th></th>
-							<th>
-								
-									
-									
+					<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+						<table class="table table-hover">
 
-										
-										{% if a.amountTotal < montantcot  %}
-											<span class="badge badge-danger badge-pill">{{reste}}€</span>
-										{% endif %}
-										{% if a.amountTotal == montantcot  %}
-											<span class="badge badge-success badge-pill">{{reste}}€</span>
-										{% endif %}
+							<thead>
+								<tr>
 
-										{% if a.amountTotal > montantcot  %}
-											<p class=" btn btn-warning">Le montant est supérieur a la cotisation</p>
-										{% endif %}
-									
-							
-							</th>
+									<th class="text-center">distribué le
+									</th>
+									<th class="text-center">Produit</th>
+									<th class="text-center">Catégorie</th>
+									<th class="text-center">Quantité</th>
+
+
+									<th></th>
+
+								</tr>
+
+							</thead>
+
+
+							{% for c in adherent.commandes|slice(0, 10) %}
+								{% if (c.adherent.id is same as(adherent.id)) %}
+
+									{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+									{% set dateTo = date(dateCommandes.dateTo).format('U') %}
+
+									{% if c.dateattribution  != null and date(c.dateattribution).format('U') > dateFrom and date(c.dateattribution).format('U') < dateTo  %}
+
+
+										<tbody>
+
+											<td class="text-center">
+												{{c.dateattribution|date("d/m/Y")}}
+
+											</td>
+											<td class="text-center">{{c.produit.title}}</td>
+											<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+											<td class="text-center">
+												<span class="">{{c.qte}}</span>
+
+											</td>
+
+											<td>
+												{% if is_granted('ROLE_ADMIN') %}
+													<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+														<i class="fas fa-trash-alt"></i>
+													</a>
+												{% endif %}
+											</td>
+
+										</tbody>
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+
 						</tr>
-					</thead>
-				</table>
-				{% if is_granted('ROLE_ADMIN') %}
-					<button type="submit" class="btn btn-primary">Modifier la cotisation</button>
-					{{ form_end(form1) }}
-				{% endif %}
+
+					</table>
+
+				</div>
+
+
 			</div>
-		</div>
-	</div>
-
- {% endfor %}</div>{% endif %}
-</div>
-
- {% if (adherent.subCategory|lower|replace({' ':''}) is same as('boutique')) %}<div class="container mt-3 table-responsive-md">
-
- <div class="container mt-2">
-
-	<table class="table mt-5" class="table table-hover">
-		<thead>
-			<tr class="table table-active">
-				<th class="text-center" scope="col">Nom Prénom</th>			
-				<th class="text-center" scope="col">Catégorie</th>
-               <th class="text-center" scope="col">Enregistrement</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr class="table table-default font-weight-bold">
-				<td class="text-center" scope="row">{{adherent.lastName}}
-					{{adherent.firstName}}</td>
-				
-				<td class="text-center">{{adherent.subCategory}}
-				</td>
- <td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
-			</tr>
-		</tbody>
-
-	
-
-		<thead>
-			<tr class="table table-active">
-
-				
-				
-				<th class="text-center" scope="col">Téléphone maison</th>
-				<th class="text-center" scope="col">Email</th>
-	<th class="text-center" scope="col">Téléphone mobile</th>
-
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr class="table table-default font-weight-bold">
-
-				
-				
-				<td class="text-center" scope="row">{{adherent.homePhone}}</td>
- <td class="text-center">{{adherent.email}}</td>
-	<td class="text-center">{{adherent.mobilePhone}}</td>
-			</tr>
-		</tbody>
-	</td>
-
- </tr></tbody><thead>
- <tr class="table table-active">
+			<div class="col">
+				<div class="collapse  multi-collapse mt-2" id="multiCollapseExample2">
+					<div class="card card-body">
+						<h2 class="text-center">Commande en cours
 
 
-	
-	<th class="text-center" scope="col">Contact</th>
- </tr></thead><tbody>
+						</h2>
+						<div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
+							<table class="table table-hover">
+								<thead>
+									<tr>
 
- <tr class="table table-default font-weight-bold">
+										<th class="text-center">Date</th>
+										<th class="text-center">Produit</th>
+										<th class="text-center">Catégorie</th>
+										<th class="text-center">Quantité</th>
+
+										<th>{{ form_start(formcontact_manquant) }}
+											{% if adherent.email == true %}
+												<button type="submit" class="btn btn-primary">notif</button>
+											{% else %}
+
+												<button type="submit" class="btn btn-primary disabled" disabled="disabled">notif</button>
+											{% endif %}
+											{{ form_end(formcontact_manquant) }}
 
 
-	
-	<td
-		class="text-center">
-		<!-- Button trigger modal Contact-->
-		{% if adherent.email == true %}
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-				Contact
-			</button>
+										</th>
+									</tr>
+								</thead>
 
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Contacter
-								{{adherent.lastName}}
-								{{adherent.firstName}}</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						{{ form_start(formcontact)}}
-						<div class="modal-body">
-							{{form_row(formcontact.title)}}
+								{% for c in adherent.commandes|slice(0, 15) %}
+									{% if (c.adherent.id is same as(adherent.id)) %}
+										{% if c.dateattribution == null %}
 
-							{{form_row(formcontact.message)}}
 
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Envoyer</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+											<tbody>
 
-						</div>
+												<td class="text-center">
+													{{c.datecommande|date("d/m/Y")}}
+
+												</td>
+												<td class="text-center">{{c.produit.title}}</td>
+												<td class="text-center">{{c.produit.categoryproduit.title}}</td>
+												<td class="text-center">
+													<span class="">{{c.qte}}</span>
+
+												</td>
+
+												<td>
+
+													{% if is_granted('ROLE_ADMIN') %}
+														<a href="{{ path('commande_validate', {'id': c.id}) }}" class="btn btn-sm btn-primary">
+															<i class="fas fa-angle-down"></i>
+														</a>
+													{% endif %}
+
+												</td>
+
+											</tbody>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							</tr>
+
+						</table>
+
 					</div>
 				</div>
-				{{ form_end(formcontact) }}
-
 			</div>
-		{% else %}
+		</div>
 
-			<button type="button" class="btn btn-danger">
-				Pas de Mail
-			</button>
+		<div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
+			<div class="card card-body">
+				<h2 class="text-center">Cotisation</h2>
+
+
+				{% if adherent.amounts is empty %}
+
+					{{ form_start(form1, { attr: { novalidate: 'novalidate' } }) }}
+
+					{{ form_start(form1) }}
+					<div class="invisible">{{ form_widget(form1) }}</div>
+
+					{% if is_granted('ROLE_ADMIN') %}
+						<button type="submit" class="btn btn-primary">Créer la cotisation</button>
+					{% endif %}
+					{{ form_end(form1) }}
+				{% endif %}
+
+				{% for a in adherent.amounts %}
+
+					<div class="container">
+						<div class="row">
+							<div class="table-responsive col-md-12">
+								<table id="sort2" class="grid table table-bordered table-sortable">
+									<thead>
+										<tr>
+											<th>Montant</th>
+											{% if is_granted('ROLE_ADMIN') %}
+												<th></th>
+												<th></th>
+												<th>Numéro Chèque</th>
+												<th>Nom Titulaire</th>
+											{% endif %}
+											<th></th>
+											<th>
+
+
+												<h3>
+													<span class="badge badge-info">{{montantcot}}€</span>
+												</h3>
+
+
+											</th>
+										</tr>
+									</thead>
+									{% if is_granted('ROLE_ADMIN') %}
+										{{ form_start(form1) }}
+									{% endif %}
+									<tbody>
+										<tr>
+											<td data-id="11">1</td>
+											{% if is_granted('ROLE_ADMIN') %}
+												<td>{{ form_widget(form1.paymentMethodAmount1) }}</td>
+												<td>{{ form_widget(form1.amount1) }}</td>
+												<td>{{ form_widget(form1.numcheque) }}</td>
+												<td>{{ form_widget(form1.name) }}</td>
+											{% endif %}
+											<td>{{a.paymentMethodAmount1}}</td>
+											<td>{{a.amount1}}€</td>
+										</tr>
+										<tr>
+											<td data-id="22">2</td>
+											{% if is_granted('ROLE_ADMIN') %}
+												<td>{{ form_widget(form1.paymentMethodAmount2) }}</td>
+												<td>{{ form_widget(form1.amount2) }}</td>
+												<td>{{ form_widget(form1.numcheque2) }}</td>
+												<td>{{ form_widget(form1.name2) }}</td>
+											{% endif %}
+											<td>{{a.paymentMethodAmount2}}</td>
+											<td>{{a.amount2}}€</td>
+										</tr>
+										<tr>
+											<td data-id="33">3</td>
+											{% if is_granted('ROLE_ADMIN') %}
+												<td>{{ form_widget(form1.paymentMethodAmount3) }}</td>
+												<td>{{ form_widget(form1.amount3) }}</td>
+												<td>{{ form_widget(form1.numcheque3) }}</td>
+												<td>{{ form_widget(form1.name3) }}</td>
+											{% endif %}
+											<td>{{a.paymentMethodAmount3}}</td>
+											<td>{{a.amount3}}€</td>
+
+										</tr>
+										<tr>
+											<td data-id="33">4</td>
+											{% if is_granted('ROLE_ADMIN') %}
+												<td>{{ form_widget(form1.paymentMethodAmount4) }}</td>
+												<td>{{ form_widget(form1.amount4) }}</td>
+												<td>{{ form_widget(form1.numcheque4) }}</td>
+												<td>{{ form_widget(form1.name4) }}</td>
+											{% endif %}
+											<td>{{a.paymentMethodAmount4}}</td>
+											<td>{{a.amount4}}€</td>
+										</tr>
+									</tbody>
+									<thead>
+										<tr>
+											<th>Total
+												{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}</th>
+											{% if is_granted('ROLE_ADMIN') %}
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											{% endif %}
+											<th></th>
+
+											<th>{{a.amountTotal}}€</th>
+										</tr>
+										<tr>
+											<th>Reste a payer</th>
+											{% if is_granted('ROLE_ADMIN') %}
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											{% endif %}
+											<th></th>
+											<th>
+
+
+												{% if a.amountTotal < montantcot  %}
+													<span class="badge badge-danger badge-pill">{{reste}}€</span>
+												{% endif %}
+												{% if a.amountTotal == montantcot  %}
+													<span class="badge badge-success badge-pill">{{reste}}€</span>
+												{% endif %}
+
+												{% if a.amountTotal > montantcot  %}
+													<p class=" btn btn-warning">Le montant est supérieur a la cotisation</p>
+												{% endif %}
+
+
+											</th>
+										</tr>
+									</thead>
+								</table>
+								{% if is_granted('ROLE_ADMIN') %}
+									<button type="submit" class="btn btn-primary">Modifier la cotisation</button>
+									{{ form_end(form1) }}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+			</div>
 		{% endif %}
-	</td>
- </tr></tbody></table></div></div><div class="container my-3"><h2 class="text-center">Ajouter un article<a class="ml-1" href="{{ path('commande_client', {id: adherent.id}) }}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h2></div><div><table class="table table-hover"><thead>
- <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Factures
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   {% for ad in adherent.factures %}
-    <a class="dropdown-item" href= '{{ asset('/pdf/factures/') }}{{ad.pdf}}'>{{ad.pdf}}</a>
+	</div>
+</div>
+	{% if (adherent.subCategory|lower|replace({' ':''}) is same as('boutique')) %}
+		<div class="container mt-3 table-responsive-md">
+
+			<div class="container mt-2">
+
+				<table class="table mt-5" class="table table-hover">
+					<thead>
+						<tr class="table table-active">
+							<th class="text-center" scope="col">Nom Prénom</th>
+							<th class="text-center" scope="col">Catégorie</th>
+							<th class="text-center" scope="col">Enregistrement</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr class="table table-default font-weight-bold">
+							<td class="text-center" scope="row">{{adherent.lastName}}
+								{{adherent.firstName}}</td>
+
+							<td class="text-center">{{adherent.subCategory}}
+							</td>
+							<td class="text-center">{{adherent.record|date("d/m/Y")}}</td>
+						</tr>
+					</tbody>
+
+
+					<thead>
+						<tr class="table table-active">
+
+
+							<th class="text-center" scope="col">Téléphone maison</th>
+							<th class="text-center" scope="col">Email</th>
+							<th class="text-center" scope="col">Téléphone mobile</th>
+
+						</tr>
+					</thead>
+
+					
+					<tbody>
+
+						<tr class="table table-default font-weight-bold">
+
+
+							<td class="text-center" scope="row">{{adherent.homePhone}}</td>
+							<td class="text-center">{{adherent.email}}</td>
+							<td class="text-center">{{adherent.mobilePhone}}</td>
+						</tr>
+					</tbody>
+				</td>
+
+			</tr>
+		</tbody>
+		</table>
+		<table>
+		<thead>
+			<tr class="table table-active">
+
+
+				<th class="text-center" scope="col">Contact</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr class="table table-default font-weight-bold">
+
+
+				<td
+					class="text-center">
+					<!-- Button trigger modal Contact-->
+					{% if adherent.email == true %}
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+							Contact
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Contacter
+											{{adherent.lastName}}
+											{{adherent.firstName}}</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									{{ form_start(formcontact)}}
+									<div class="modal-body">
+										{{form_row(formcontact.title)}}
+
+										{{form_row(formcontact.message)}}
+
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-primary">Envoyer</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+									</div>
+								</div>
+							</div>
+							{{ form_end(formcontact) }}
+
+						</div>
+					{% else %}
+
+						<button type="button" class="btn btn-danger">
+							Pas de Mail
+						</button>
+					{% endif %}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div></div><div class="container my-3">
+<h2 class="text-center">Ajouter un article<a class="ml-1" href="{{ path('commande_client', {id: adherent.id}) }}" class="btn btn-sm btn-success">
+		<i class="fas fa-plus"></i>
+	</a>
+</h2></div>
+
+<div class="container my-3">
+<table class="table table-hover">
+	<thead>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Factures
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				{% for ad in adherent.factures %}
+					<a class="dropdown-item" href='{{ asset('/pdf/factures/') }}{{ad.pdf}}'>{{ad.pdf}}</a>
+
+
+				{% endfor %}
+			</div>
+		</div>
+		
+		<tr>
+
+			<th class="text-center">commandé le</th>
+			<th class="text-center">distribué le</th>
+			<th class="text-center">Produit</th>
+			<th class="text-center">Mode de paiement</th>
+			<th class="text-center">Quantité</th>
+			<th class="text-center">Prix</th>
+			<th class="text-center">commentaire</th>
+			<th>
+				<a href="{{ path('facture_boutique', {'id': adherent.id}) }}" class="btn btn-sm btn-danger">
+					<i class="fa fa-file-pdf fa-2x"></i>
+				</a>
+			</th>
+		</tr>
+		
+	</thead>
+	{% for c in adherent.commandes|slice(0, 10) %}
+		{% if (c.adherent.id is same as(adherent.id)) %}
+			{% if c.dateattribution  == null %}
+				<tbody>
+
+
+					<td class="text-center">
+						{{c.datecommande|date("d/m/Y")}}
+
+					</td>
+
+					<td class="text-center">
+						Pas encore attribué
+
+					</td>
+					<td class="text-center">{{c.produit.title}}</td>
+					<td class="text-center">{{c.payment}}</td>
+					<td class="text-center">
+						<span class="">{{c.qte}}</span>
+
+					</td>
+					{% set price_total = c.produit.price * c.qte %}
+					<td class="text-center">{{price_total}}
+						€</td>
+					<td class="text-center">{{c.comment}}</td>
+					<td>
+						<a href="{{ path('admin/commande_client_validate', {'id': c.id}) }}" class="btn btn-sm btn-success" data-confirm="Etes-vous certain de vouloir valider?" data-bs-toggle="tooltip" data-bs-placement="right" title="Validez la commande">
+							<i class="fa fa-check"></i>
+						</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+								<i class="fas fa-trash-alt"></i>
+							</a>
+						{% endif %}
+
+					</td>
+
+				</tbody>
+			{% else %}
+				<tbody>
+
+					<td class="text-center">
+						{{c.datecommande|date("d/m/Y")}}
+
+					</td>
+
+					<td class="text-center">
+						{{c.dateattribution|date("d/m/Y")}}
+
+					</td>
+					<td class="text-center">{{c.produit.title}}</td>
+					<td class="text-center">{{c.payment}}</td>
+					<td class="text-center">
+						<span class="">{{c.qte}}</span>
+
+					</td>
+					<td class="text-center">{{c.produit.price}}
+						€</td>
+					<td class="text-center">{{c.comment}}</td>
+					<td>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
+								<i class="fas fa-trash-alt"></i>
+							</a>
+
+
+						{% endif %}
+					</td>
+
+				</tbody>
+				
+			{% endif %}
+
+		{% endif %}
 
 
 	{% endfor %}
-  </div>
- </div><tr>
-
- <th class="text-center">commandé le</th>
- <th class="text-center">distribué le</th>
- <th class="text-center">Produit</th>
- <th class="text-center">Mode de paiement</th>
- <th class="text-center">Quantité</th>
- <th class="text-center">Prix</th>
- <th class="text-center">commentaire</th>
- <th><a href="{{ path('facture_boutique', {'id': adherent.id}) }}" class="btn btn-sm btn-danger" >
-					<i class="fa fa-file-pdf fa-2x"></i></a></th></tr></thead>{% for c in adherent.commandes|slice(0, 10) %}{% if (c.adherent.id is same as(adherent.id)) %}
- {% if c.dateattribution  == null %}
-	<tbody>
-
-	
-	    <td class="text-center">
-			{{c.datecommande|date("d/m/Y")}}
-
-		</td>
-
-		<td class="text-center">
-			Pas encore attribué
-
-		</td>
-		<td class="text-center">{{c.produit.title}}</td>
-		<td class="text-center">{{c.payment}}</td>
-		<td class="text-center">
-			<span class="">{{c.qte}}</span>
-
-		</td>
-		<td class="text-center">{{c.produit.price}} €</td>
-		<td class="text-center">{{c.comment}}</td>
-		<td>
-		<a href="{{ path('admin/commande_client_validate', {'id': c.id}) }}" class="btn btn-sm btn-success" data-confirm="Etes-vous certain de vouloir valider?" data-bs-toggle="tooltip" data-bs-placement="right" title="Validez la commande">
-					<i class="fa fa-check"></i>
-				</a>
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
-					<i class="fas fa-trash-alt"></i>
-				</a>
-			{% endif %}
-			
-		</td>
-
-	</tbody>
-	{% else %}
-	<tbody>
-		
-	    <td class="text-center">
-			{{c.datecommande|date("d/m/Y")}}
-
-		</td>
-
-		<td class="text-center">
-		{{c.dateattribution|date("d/m/Y")}}
-
-		</td>
-		<td class="text-center">{{c.produit.title}}</td>
-		<td class="text-center">{{c.payment}}</td>
-		<td class="text-center">
-			<span class="">{{c.qte}}</span>
-
-		</td>
-		<td class="text-center">{{c.produit.price}} €</td>
-		<td class="text-center">{{c.comment}}</td>
-		<td>
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('commande_delete', {'id': c.id}) }}" class="btn btn-sm btn-danger" data-confirm="Etes-vous certain de vouloir supprimer?">
-					<i class="fas fa-trash-alt"></i>
-				</a>
-				
-				
-			{% endif %}
-		</td>
-
-	</tbody>	
- {% endif %}
-
- {% endif %}
-
-				
- {% endfor %}</tr></table>
-
- {% endif %}
- 
-</div>
-
-
-
-
-
-
-
-
-	
-
-
-{% endblock %}
+</tr></table></div>{% endif %}{% endblock %}
