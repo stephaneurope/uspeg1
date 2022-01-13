@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Uspeg
+			{% endblock %}
+		</title>
+
+	</head>
+	<style>
+		h2 {
+			color: black;
+			text-align: center;
+		}
+		#customers {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#customers td,
+		#customers th {
+			border: 1px solid #ddd;
+			padding: 2px;
+			font-size: 11px;
+		}
+
+		#customers tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		#customers tr:hover {
+			background-color: #ddd;
+		}
+
+		#customers th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: center;
+			background-color: #4CAF50;
+			color: white;
+		}
+		#customers td {
+
+			text-align: center;
+
+		}
+	</style>
+	<body>
+		<h2 class="text-center">Inventaire Boutique
+			</h2>
+
+<div>Début Inventaire: {{dateCommandes.dateFrom|date('d/m/y')}} -- Fin Inventaire: {{dateCommandes.dateTo|date('d/m/y')}}</div>
+		<table class="table table-hover" id="customers">
+			<thead>
+				<tr>
+
+					<th class="text-center">Produit</th>
+                    <th class="text-center">Taille</th>
+					<th class="text-center">Qté</th>
+					
+
+
+				</tr>
+			</thead>
+
+
+			<tbody>
+
+				{% for p in produit %}
+{% set somme = 0 %}
+{% for key, c in commande %}
+
+{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+ {% set dateTo = date(dateCommandes.dateTo).format('U') %}
+ {% if c.dateattribution  != null and date(c.dateattribution).format('U') > dateFrom and date(c.dateattribution).format('U') < dateTo  %}
+
+
+{% if (c.produit.title|lower|replace({' ':''}) is same as(p.title|lower|replace({' ':''}))) %}
+
+{% set somme = somme + c.qte %}
+
+                    
+{% endif %}
+{% endif %}
+{% endfor %}
+
+								<tr>
+
+
+									<td class="text-center">
+						{{ p.title }}
+
+					</td>
+                   <td class="text-center">
+				   {{ p.taille }}
+				   </td>
+                    <td class="text-center">
+						{{ somme }}
+
+					</td>
+								</tr>
+
+							{% endfor %}
+
+			</tbody>
+
+		</table>
+
+	</body>
+</html>
+
+
+
+
