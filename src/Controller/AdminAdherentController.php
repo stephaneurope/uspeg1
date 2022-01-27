@@ -150,5 +150,37 @@ if (in_array($adherent->getSubCategory(), array($liste))) {
         return $this->redirectToRoute("adherent");
     }
 
+    /**
+     * Permet de réinitialiser les catégories sauf la boutique
+     *
+     * @Route("admin/adherent/deleteValCategory", name="admin/adherent_deleteValCategory")
+     * @param Adherent $adherent
+     * @param ObjectManager $manager 
+     * @return Response
+     */
+    public function deleteValCategory()
+    {
+    
+        $em = $this->getDoctrine()->getManager();
+        $adherent = $em->getRepository('App:Adherent');
+        $liste = $adherent->findBy(array());
+        
+        foreach($liste as $unadherent){
+            /*if ($unadherent->getSubCategory() != 'BOUTIQUE'){
+            $unadherent->setSubCategory(NULL);*/
+            if ($unadherent->getSubCategory() == 'BABY'){
+                $unadherent->setSubCategory('u 6');
+            $em->flush();
+            }
+        }
+            $this->addFlash(
+                'success',
+                "Les catégories ont été réinitialisées !"
+            );
+    
+            return $this->redirectToRoute("dashboard");
+           
+        
+    }
 
 }

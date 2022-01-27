@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques Boutique{% endblock %}
+
+{% block body %}
+{% set name = 'Statistiques Boutique' %}
+{% include "header_title.html.twig" %}
+<div class="container my-3">
+
+<div>Début Inventaire: {{dateCommandes.dateFrom|date('d/m/y')}} -- Fin Inventaire: {{dateCommandes.dateTo|date('d/m/y')}} -- <a href="{{ path('statistiqueboutique')}}" class="" data-toggle="tooltip" data-placement="top" title="Imprimer l'inventaire de la boutique">
+								<i class="fas fa-print fa-lg"></i>
+							</a></div>
+<table class="table table-hover">
+	<thead>
+   
+
+<tr>
+
+			<th class="text-center">Produit</th>
+			<th class="text-center">Taille</th>
+			<th class="text-center">Qté</th>
+            <th class="text-center">Prix</th>
+            <th class="text-center">Total</th>
+             <th class="text-center">Total Cumulé</th>
+</tr>
+</thead>
+<tbody>
+ 
+{% set montantAvoir = 0 %}
+
+{% for p in produit %}
+
+{% set somme = 0 %}
+{% for key, c in commande %}
+
+{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+ {% set dateTo = date(dateCommandes.dateTo).format('U') %}
+{% if (c.adherent.subcategory|lower|replace({' ':''}) is same as('BOUTIQUE'|lower|replace({' ':''}))) %}
+ {% if c.dateattribution  != null and date(c.dateattribution).format('U') > dateFrom and date(c.dateattribution).format('U') < dateTo  %}
+
+
+{% if (c.produit.title|lower|replace({' ':''}) is same as(p.title|lower|replace({' ':''}))) %}
+
+{% set somme = somme + c.qte %}
+{% set total = somme * p.price %}
+
+ {% set montantAvoir = montantAvoir + total %}
+
+  {% endif %}                 
+{% endif %}
+{% endif %}
+{% endfor %}
+{% set total = somme * p.price %}
+{% if total != 0 %}
+
+
+					<td class="text-center">
+						{{ p.title }}
+
+					</td>
+                   <td class="text-center">
+				   {{ p.taille }}
+				   </td>
+                    <td class="text-center">
+						{{ somme }}
+
+					</td>
+                   <td class="text-center"> {{ p.price }} €</td>
+
+                   <td  class="text-center"> {{ total }} €</td>
+
+                  <td style="font-weight:bold;" class="text-center">{{montantAvoir}} €</td>
+
+       {% endif %}           
+				</tbody>
+ 
+
+{% endfor %}
+
+</table>
+</div>
+
+ 
+{% endblock %}
