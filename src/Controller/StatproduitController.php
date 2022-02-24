@@ -8,6 +8,9 @@ use Dompdf\Options;
 use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Entity\DateCommandes;
+use App\Form\DateCommandesType;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +29,7 @@ class StatproduitController extends AbstractController
         $repo1 = $this->getDoctrine()->getRepository(Produit::class);
         $produit = $repo1->findBy([],['title' => 'ASC']);
         $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
-        $dateCommandes= $repodc->find(1);
+        $dateCommandes= $repodc->find(2);
       /*foreach($commande->getProduit() as $statproduit) {
         $stat = $statproduit->getTitle();
       }*/
@@ -52,7 +55,7 @@ class StatproduitController extends AbstractController
         $produit = $repo1->findBy([],['title' => 'ASC']);
 
         $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
-        $dateCommandes= $repodc->find(1);
+        $dateCommandes= $repodc->find(3);
       
         
       
@@ -90,7 +93,7 @@ class StatproduitController extends AbstractController
         $repo1 = $this->getDoctrine()->getRepository(Produit::class);
         $produit = $repo1->findBy([],['title' => 'ASC']);
         $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
-        $dateCommandes= $repodc->find(1);
+        $dateCommandes= $repodc->find(2);
 
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('statproduit/printinventaire.html.twig', [
@@ -138,7 +141,7 @@ class StatproduitController extends AbstractController
         $repo1 = $this->getDoctrine()->getRepository(Produit::class);
         $produit = $repo1->findBy([],['title' => 'ASC']);
         $repodc =$this->getDoctrine()->getRepository(DateCommandes::class);
-        $dateCommandes= $repodc->find(1);
+        $dateCommandes= $repodc->find(3);
 
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('statproduit/printstatbout.html.twig', [
@@ -165,5 +168,54 @@ class StatproduitController extends AbstractController
         ]);
     }
 
+/**
+     * Permet de modifier les dates de l'inventaire boutique
+     * 
+     * @Route("statproduit/{id}/edit", name="statproduit/edit2")
+     *
+     */
+    public function edit2(DateCommandes $dateCommandes,Request $request, ObjectManager $manager) {
+        $form = $this->createForm(DateCommandesType::class, $dateCommandes);
 
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($dateCommandes);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "Les dates ont bien étés modifiées !"
+            );
+            return $this->redirectToRoute("dashboard");
+        }
+        return $this->render('statproduit/edit2.html.twig',[
+            'dateCommandes' => $dateCommandes,
+            'form' => $form->createView()
+    ]);
+
+    }
+    /**
+     * Permet de modifier les dates des stats boutique
+     * 
+     * @Route("statbout/{id}/edit", name="statproduit/edit3")
+     *
+     */
+    public function edit3(DateCommandes $dateCommandes,Request $request, ObjectManager $manager) {
+        $form = $this->createForm(DateCommandesType::class, $dateCommandes);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($dateCommandes);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "Les dates ont bien étés modifiées !"
+            );
+            return $this->redirectToRoute("dashboard");
+        }
+        return $this->render('statproduit/edit3.html.twig',[
+            'dateCommandes' => $dateCommandes,
+            'form' => $form->createView()
+    ]);
+
+    }
 }
