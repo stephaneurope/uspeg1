@@ -45,6 +45,23 @@ class AdminCategoryAdherentController extends AbstractController
     }
 
     /**
+     * Permet d'afficher le dashboard des categories d'adherent pour modifier la saison prochaine
+     * 
+     * 
+     * @Route("admin/category-adherent/dashboardOrdreplus1", name="category_adherent_dashboardOrdreplus1")
+     *
+     */
+    public function dashboardOrdreplus1()
+    {
+        $repo = $this->getDoctrine()->getRepository(CategoryAdherent::class);
+        $catadherent = $repo->findBy([], ['ordre' => 'ASC']);
+
+        return $this->render('admin/category_adherent/dashboardOrdreplus1.html.twig', [
+            'catadherent' => $catadherent
+        ]);
+    }
+
+    /**
      * Liste des adhérents par catégorie
      * 
      * 
@@ -127,6 +144,35 @@ class AdminCategoryAdherentController extends AbstractController
             return $this->redirectToRoute("category_adherent_dashboard");
         }
         return $this->render('admin/category_adherent/edit.html.twig',[
+            'categoryadherent' => $categoryadherent,
+            'form' => $form->createView()
+    ]);
+
+}
+/**
+     * Permet de modifier l'ordre pour la saison prochaine
+     *
+     * @Route("/admin/category-adherent/{id}/modifsaison", name="modif_saison")
+     * 
+     * @return Response
+     */
+    public function modifsaison(CategoryAdherent $categoryadherent, Request $request,ObjectManager $manager) {
+
+        
+        $form = $this->createForm(CategoryAdherentType::class, $categoryadherent);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($categoryadherent);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "La catégorie {$categoryadherent->getTitle()} a bien été modifiée !"
+            );
+            return $this->redirectToRoute("category_adherent_dashboardOrdreplus1");
+        }
+        return $this->render('admin/category_adherent/saison.html.twig',[
             'categoryadherent' => $categoryadherent,
             'form' => $form->createView()
     ]);

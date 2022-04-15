@@ -38,6 +38,11 @@ class CategoryAdherent
      */
     private $list;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ordre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class CategoryAdherent
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getOrdre(): ?int
+    {
+        return $this->ordre;
+    }
+
+    public function setOrdre(?int $ordre): self
+    {
+        $this->ordre = $ordre;
+
+        return $this;
     }
 
     

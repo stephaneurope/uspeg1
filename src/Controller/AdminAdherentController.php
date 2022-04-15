@@ -165,12 +165,25 @@ if (in_array($adherent->getSubCategory(), array($liste))) {
         $adherent = $em->getRepository('App:Adherent');
         $liste = $adherent->findBy(array());
         
+        
         foreach($liste as $unadherent){
-            /*if ($unadherent->getSubCategory() != 'BOUTIQUE'){
-            $unadherent->setSubCategory(NULL);*/
-            if ($unadherent->getSubCategory() == 'BABY'){
-                $unadherent->setSubCategory('u 6');
-            $em->flush();
+          
+            $categoryadherent = $em->getRepository('App:CategoryAdherent');
+        $ca = $categoryadherent->findBy(array());
+        foreach($ca as $ca){
+            if ($unadherent->getSubCategory() == $ca->getTitle()){
+             
+               $a = $ca->getList() + 1;
+               $cat = $categoryadherent->findBy(array('ordre' => $a));
+                        
+            }
+            
+            }
+            foreach($cat as $cat){
+                $ca2 = $cat->getTitle();
+
+            $unadherent->setSubCategory($ca2);
+           $em->flush();
             }
         }
             $this->addFlash(

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+	{% form_theme form _self %}
+{% endblock %}
+
+{% block body %}
+	{% set name = 'Ordre pour la saison prochaine ' ~ categoryadherent.title %}
+	{% include "header_title.html.twig" %}
+	<div class="container mt-3">
+
+		{{ form_start(form) }}
+
+		 {{ form_label(form.ordre) }}
+		{{ form_widget(form.ordre) }}
+
+    
+    {{ form_row(form.montantcot, {"attr": {"class": "d-none"},'label':false})}}
+    {{ form_row(form.title, {"attr": {"class": "d-none"},'label':false})}}
+    {{ form_row(form.list, {"attr": {"class": "d-none"},'label':false})}}
+    {{ form_row(form.pack, {"attr": {"class": "d-none"},'label':false})}}
+         
+         
+      
+
+		<button type="submit" class="btn btn-primary">Modifier la catégorie</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
