@@ -146,6 +146,11 @@ class Adherent
      */
     private $factures;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Essayage::class, mappedBy="adherent", cascade={"persist", "remove"})
+     */
+    private $essayage;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -523,6 +528,24 @@ class Adherent
             if ($facture->getAdherent() === $this) {
                 $facture->setAdherent(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getEssayage(): ?Essayage
+    {
+        return $this->essayage;
+    }
+
+    public function setEssayage(?Essayage $essayage): self
+    {
+        $this->essayage = $essayage;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAdherent = null === $essayage ? null : $this;
+        if ($essayage->getAdherent() !== $newAdherent) {
+            $essayage->setAdherent($newAdherent);
         }
 
         return $this;

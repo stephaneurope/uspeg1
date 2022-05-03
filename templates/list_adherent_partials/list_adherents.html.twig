@@ -1,106 +1,118 @@
 <div class="container mt3 overflow-auto table-wrapper-scroll-y-y my-custom-scrollbar-adherent">
-			<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 
-	<thead>
-		<tr>
-			<th>#</th>
-			<th class="text-center">Nom</th>
-			<th class="text-center">Email</th>
-			<th class="text-center">Catégorie</th>
-			<th class="text-center">Licence</th>
-			<th class="text-center">Commande(s)</th>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Catégorie</th>
+            <th class="text-center">Licence</th>
+            <th class="text-center">Commande(s)</th>
+            <th class="text-center">essayage</th>
 
-			<th>
-				<a href="{{path('print_category_adherent',{'id': categoryadherent.id})}}">Imprimer
-					<i class="fas fa-print fa-lg"></i>
-				</a>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th>
+                <a href="{{path('print_category_adherent',{'id': categoryadherent.id})}}">Imprimer
+                    <i class="fas fa-print fa-lg"></i>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
 
-		{% for key,ad in adherent %}
-
-
-			{% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
-
-				<td id="numerotation"></td>
-
-				{% if ad.amounts == false %}
-					<td>{{ad.lastName}}
-						{{ad.firstName}}</td>
-				{% endif %}
-				{% for a in ad.amounts %}
+        {% for key,ad in adherent %}
 
 
-					{% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+            {% if (categoryadherent.title|lower|replace({' ':''}) is same as(ad.subcategory|lower|replace({' ':''}))) %}
 
-					<td class="text-center" style="font-weight:bold;color:
-																		{% for cat in catadherent %}
-						
-																									{% if (cat.title is same as(ad.subcategory) and a is defined) %}
-																									{% set montant_total = cat.montantcot %}
-						
-						
-																										{% if total < cat.montantcot  %}
-																											red
-																										{% endif %}
-																										{% if total == cat.montantcot  %}
-																											green
-																										{% endif %}
-						
-																										{% if total > cat.montantcot  %}
-																											  green
-																										{% endif %}
-						
-																		                                {% if not a.adherent %}
-																										black
-																										{% endif %}
-						
-						
-															                            {% endif %}{% else %}black
-																						{% endfor %}
-						
-																							;">{{ad.lastName}}
-						{{ad.firstName}}</td>
-				{% else %}
-					<td class="text-center" style="font-weight:bold;color:black;">{{ad.lastName}}
-						{{ad.firstName}}</td>
-				{% endfor %}
-				<td class="text-center">{{ad.email}}</td>
-				<td class="text-center">{{ad.subcategory}}</td>
-				<td class="text-center">
-					<span class="">{{ad.toNumber}}</span>
-				</td>
-				<td class="text-center">
-					{% include 'list_adherent_partials/paniers_adherent.html.twig'%}
+                <td id="numerotation"></td>
 
-				</td>
+                {% if ad.amounts == false %}
+                    <td>{{ad.lastName}}
+                        {{ad.firstName}}</td>
+                {% endif %}
+                {% for a in ad.amounts %}
 
 
-				<td>
+                    {% set total = (a.amount1 + a.amount2 + a.amount3 + a.amount4 ) %}
+
+                    <td class="text-center" style="font-weight:bold;color:
+                                                                        {% for cat in catadherent %}
+                        
+                                                                                                    {% if (cat.title is same as(ad.subcategory) and a is defined) %}
+                                                                                                    {% set montant_total = cat.montantcot %}
+                        
+                        
+                                                                                                        {% if total < cat.montantcot  %}
+                                                                                                            red
+                                                                                                        {% endif %}
+                                                                                                        {% if total == cat.montantcot  %}
+                                                                                                            green
+                                                                                                        {% endif %}
+                        
+                                                                                                        {% if total > cat.montantcot  %}
+                                                                                                              green
+                                                                                                        {% endif %}
+                        
+                                                                                                        {% if not a.adherent %}
+                                                                                                        black
+                                                                                                        {% endif %}
+                        
+                        
+                                                                                        {% endif %}{% else %}black
+                                                                                        {% endfor %}
+                        
+                                                                                            ;">{{ad.lastName}}
+                        {{ad.firstName}}</td>
+                {% else %}
+                    <td class="text-center" style="font-weight:bold;color:black;">{{ad.lastName}}
+                        {{ad.firstName}}</td>
+                {% endfor %}
+                <td class="text-center">{{ad.email}}</td>
+                <td class="text-center">{{ad.subcategory}}</td>
+                <td class="text-center">
+                    <span class="">{{ad.toNumber}}</span>
+                </td>
+                <td class="text-center">
+                    {% include 'list_adherent_partials/paniers_adherent.html.twig'%}
+
+                </td>
+
+                 <td class="text-center">
+                 {% if ad.essayage != null %}
+                    {% if ad.essayage.essaie == '1' %}
+                        <span style="color:green;">oui</span>
+                        {% elseif ad.essayage.essaie == '0' %}
+                        <span style="color:red;">non</span>
+                    {% endif %}
+                 {% endif %}
+                    
+                </td>
+
+                <td>
 
 
-					<a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
-						<i class="fas fa-eye"></i>
-					</a>
-					{% if is_granted('ROLE_ADMIN') %}
-						<a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
-							<i class="fas fa-pen"></i>
-						</a>
+                    <a href="{{ path('adherent_show', {'id': ad.id}) }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin/adherent_modif', {'id': ad.id}) }}" class="btn btn-sm btn-secondary">
+                            <i class="fas fa-pen"></i>
+                        </a>
 
-						<a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
-							<i class="fas fa-trash-alt"></i>
-						</a>
+                        <a href="{{ path('admin/adherent_delete', {'id': ad.id}) }}" class="btn btn-sm btn-danger" data-confirm="Vous êtes sur le point se supprimer cet adherent. En êtes vous certains ?">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
 
-					{% endif %}
+                    {% endif %}
 
-				</td>
+                </td>
+                
 
-			</tr>
+            </tr>
 
-		{% endif %}
-	{% endfor %}
+        {% endif %}
+    {% endfor %}
 
 </tbody></table>
 </div>

@@ -11,6 +11,7 @@ use App\Entity\Commande;
 use App\Form\AmountType;
 use App\Form\AdherentType;
 use App\Form\CommandeType;
+use App\Form\EssayageType;
 use App\Entity\PropertySearch;
 use App\Form\AmountCreateType;
 use App\Entity\CategoryAdherent;
@@ -259,7 +260,7 @@ class AdherentController extends AbstractController
              
         }
      }
-	
+    
  $form1 = $this->createForm(AmountType::class, $amount);
  
  $form1->handleRequest($request);
@@ -282,18 +283,40 @@ class AdherentController extends AbstractController
          )
      );
  }
+ /*********************************************************************** */
+ 
+ 
+ 
  
  /*************************************************************************/ 
   
         
        }
+
+       $essayage = $adherent->getEssayage();
+       $form2 = $this->createForm(EssayageType::class, $essayage);
+       $form2->handleRequest($request);
+      //$essayage->getEssaie(1);
+      
+       if ($form2->isSubmitted() and $form2->isValid()) {
+       $manager->persist($essayage);
+       $manager->flush();
+       return $this->redirectToRoute(
+          "adherent_show",
+          array(
+              'id' => $adherent->getId()
+          )
+      );
+      }
+
     if (empty($montantcot) and empty($reste)) {
         return $this->render('adherent/show.html.twig', [
             'adherent'             => $adherent,
             'cat'                  => $cat,
             'commande'             => $commande,
             'form'                 => $form->createView(),
-            'form1'                => $form1->createView(),    
+            'form1'                => $form1->createView(), 
+            'form2'                => $form2->createView(),
             'amount'               => $amount,
             'formcontact'          => $formcontact->createView(),
             'formcontact_manquant' => $formcontact_manquant->createView(),
@@ -306,7 +329,8 @@ class AdherentController extends AbstractController
             'cat'                  => $cat,
             'commande'             => $commande,
             'form'                 => $form->createView(),
-            'form1'                => $form1->createView(),    
+            'form1'                => $form1->createView(),
+            'form2'                => $form2->createView(),
             'amount'               => $amount,
             'formcontact'          => $formcontact->createView(),
             'montantcot'           => $montantcot,

@@ -1,32 +1,49 @@
 {% if ad.commandes is not empty %}
-		{% for a in ad.commandes|reverse(true)|slice(0, 01) %}
+        {% for a in ad.commandes|reverse(true)|slice(0, 10) %}
 
 
-			{% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
-			{% set dateTo = date(dateCommandes.dateTo).format('U') %}
-			{% if date(a.dateattribution).format('U') > dateFrom  %}
-				{% if a.datecommande != null and a.dateattribution == null  %}
+            {% set dateFrom = date(dateCommandes.dateFrom).format('U') %}
+            {% set dateTo = date(dateCommandes.dateTo).format('U') %}
+            {% if date(a.dateattribution).format('U') > dateFrom  %}
+                {% if a.datecommande != null and a.dateattribution == null and ad.essayage != null and ad.essayage.essaie > 0 %}
 
-					<div style="display: inline-block;border:none;color:orange;">
-						<i class="fas fa-shopping-bag "></i>
-					</div>{% endif %}
+                    <div style="display: inline-block;border:none;color:orange;">
+                        <i class="fas fa-shopping-bag "></i>
+                    </div>
 
-
-			{% elseif date(a.dateattribution).format('U') > dateFrom and date(a.dateattribution).format('U') < dateTo %}
-			
-			{% else %}
-			<div style="display: inline-block;border:none;color:white;">
-			<i class="fas fa-shopping-bag"></i>
-		</div>
-			{% endif %}
+                    
 
 
-		{% endfor %}
+                {% elseif a.datecommande != null and a.dateattribution == null and ad.essayage != null and ad.essayage.essaie == 1 %}
+
+                    <div style="display: inline-block;border:none;color:orange;">
+                        <i class="fas fa-shopping-bag "></i>
+                    </div>
+
+                    {% elseif a.datecommande == null and a.dateattribution != null and ad.essayage != null and ad.essayage.essaie == 1 %}
+
+                    <div style="display: inline-block;border:none;color:green;">
+                        <i class="fas fa-shopping-bag "></i>
+                    </div>
+
+                    {% elseif a.datecommande != null and a.dateattribution != null and ad.essayage != null and ad.essayage.essaie == 1 %}
+
+                    <div style="display: inline-block;border:none;color:green;">
+                        <i class="fas fa-shopping-bag "></i>
+                    </div>
+                    
+                    
+                    {% endif %}
+
+            
+            {% endif %}
 
 
-	{% else %}
-		<div style="display: inline-block;border:none;color:white;">
-			<i class="fas fa-shopping-bag"></i>
-		</div>
+        {% endfor %}
 
-	{% endif %}
+
+    {% else %}
+    <div style="display: inline-block;border:none;color:red;">
+                        <i class="fas fa-shopping-bag "></i>
+                    </div>
+    {% endif %}
