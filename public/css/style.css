@@ -599,9 +599,13 @@ html,
   }
 }
 /***********navbar**************/
+.navbar {
+	background-color: #6f648637 !important;
+	border: none !important;
+}
 @media only screen and (max-width: 990px) {
 #navbarColor01{
-  background-color: rgb(197,197,197,1);
+  background-color: #6f648637;
   
 }
 /*************bouton menu cat equipe et recherche***************/

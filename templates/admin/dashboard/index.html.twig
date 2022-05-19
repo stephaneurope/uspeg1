@@ -158,6 +158,7 @@
 		</div>
 	</div>
 	<div class="col">
+
 		<div class="alert alert-success">
 			<h2 class="alert-heading my-3">
 				<i class="fas fa-futbol"></i>
@@ -248,7 +249,63 @@
 			</td>
 		</tr>
 	</tbody>
-</table></div></div><div class="col"><div class="alert alert-info">
+
+</table></div>
+
+
+	
+		<div class="alert alert-danger">
+			<h3 class="alert-heading my-3">
+				<i class="fas fa-arrow-alt-circle-right"></i>
+				Nouvelle Saison</h3>
+
+			<table class="table table-hover">
+				<thead>
+					<tr class="text-primary">
+						<th>Gestion</th>
+						<th>Action</th>
+
+					</tr>
+				</thead>
+				<tbody class="text-primary">
+
+					<tr>
+						<td class="text-light">Nouvelle Saison</td>
+						<td>
+
+							<a href="{{ path('dash_new_season')}}" class="btn btn-sm btn-danger text-light btn disabled">
+								<i class="fas fa-pen"></i>
+							</a>
+							
+						</td>
+
+					</tr>
+					<tr>
+			<td class="text-light">Ordre prochaine saison(essai)</td>
+			<td>
+				<a href="{{ path('category_adherent_dashboardOrdreplus1')}}" class="btn btn-sm btn-danger text-light">
+					<i class="far fa-eye fa-lg "></i>
+				</a>
+			</td>
+		</tr>
+					
+					<tr></tr>
+				</tbody>
+			
+          
+
+		</tr>
+
+		
+		
+	</tbody>
+
+</table></div></div>
+
+
+
+
+<div class="col"><div class="alert alert-info">
 <h2 class="alert-heading my-3">
 	<i class="fas fa-cogs"></i>
 	Paramètres</h2>
@@ -312,17 +369,7 @@
 
 		</tr>
 
-		<tr>
-			<td>Réinitialisation Cotisations</td>
-			<td>
-<form>
-				<a class="btn btn-sm btn-info text-primary"  onClick="passWord()">
-					<i class="fas fa-undo"></i>
-				</a>
-</form>
-			</td>
-
-		</tr>
+	
 		<tr>
 
 		<tr>
@@ -344,14 +391,7 @@
 				</a>
 			</td>
 		</tr>
-		<tr>
-			<td>Ordre prochaine saison(essai)</td>
-			<td>
-				<a href="{{ path('category_adherent_dashboardOrdreplus1')}}" class="btn btn-sm btn-info text-primary">
-					<i class="far fa-eye fa-lg "></i>
-				</a>
-			</td>
-		</tr>
+		
 
 <SCRIPT>
 function passWord() {

@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Changement de saison
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/styledash.css" />
+
+{% endblock %}  
+
+{% block body %}
+{% set name = 'Changement de saison' %}
+	{% include "header_title.html.twig" %}
+<div class="container mt-3">
+
+  <div class="p-4 border ">
+    <div class="attention border-warning">
+      <div class="content rounded p-3 border-warning">
+        <h5 class="fs-3"><i class="fa fa-exclamation-triangle text-warning"></i> Attention le changement de saison est irréversible. Prenez bien en compte 
+        les changements que cela provoque listés ci-dessous:</h5>
+        <p class="mb-0"></p>
+      </div>
+    </div>
+
+    
+
+    
+
+    <section class="admins mt-4">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box">
+            <!-- <h4>Admins:</h4> -->
+<div class="admin  align-items-center rounded-2 p-3 mb-4">
+            
+              <div class="ms-3">
+                <h4 class="fs-5 mb-1 align-center">1-Enregistrement des cotisations impayées</h4>
+              </div>
+                <div class="img d-flex justify-content-center">
+                <img class="img-fluid "
+                    width="50%" height="50%"
+                     src="/image/newSaison/enregistrement_imp.jpg"
+                     alt="admin">
+              </div>
+            </div>
+            
+            <div class="admin  align-items-center rounded-2 p-3 mb-4">
+              
+              <div class="ms-3 mr-5">
+                <h4 class="fs-5 mb-1 align-center">2-Réinitialisation des cotisations</h4>
+               
+              </div>
+
+              <div class="img d-flex justify-content-center">
+                <img class="img-fluid"
+                     width="50%" height="50%"
+                     src="/image/newSaison/rdc.jpg"
+                     alt="admin">
+              </div>
+            </div>
+            
+            <div class="admin  align-items-center rounded-2 p-3 mb-4">
+              
+              <div class="ms-3">
+                <h4 class="fs-5 mb-1">3-Réinitialisation des essayages</h4>
+              
+              </div>
+              <div class="img d-flex justify-content-center">
+                <img class="img-fluid "
+                     width="50%" height="50%"
+                     src="/image/newSaison/essayage.jpg"
+                     alt="admin">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box">
+            <!-- <h4>Moderators:</h4> -->
+            <div class="admin  align-items-center rounded-2 p-3 mb-4">
+              
+              <div class="ms-3">
+                <h4 class="fs-5 mb-1">4-Changement de Catégorie au niveau supérieur</h4>
+                
+              </div>
+              <div class="img d-flex justify-content-center">
+                <img class="img-fluid "
+                     width="45%" height="45%"
+                     src="/image/newSaison/ordre.jpg"
+                     alt="admin">
+              </div>
+            </div>
+<div class="jaune  align-items-center rounded-2 p-3 mb-4">
+
+              
+              <div class="ms-3 mr-5">
+                <h4 class="fs-5 mb-1 text-primary">Après avoir validé une nouvelle saison ne pas oublier de :</h4>
+               
+              </div>
+
+              
+            </div>
+
+
+
+            <div class="admin  align-items-center rounded-2 p-3 mb-4">
+              
+              <div class="ms-3 mr-5">
+                <h4 class="fs-5 mb-1">5-Modifier la plage du calendrier des commandes</h4>
+                
+              </div>
+<div class="d-flex justify-content-center">
+              
+              <div class="img">
+                <img class="img-fluid"
+                     width="50%" height="50%"
+                     src="/image/newSaison/calendrier.jpg"
+                     alt="admin">
+              </div>
+              <div class="align-self-center"> <a href="{{ path('admin/date_commande_edit',{ 'id': 1}) }}" class="btn btn-sm btn-light text-primary">Accés
+					<i class="fas fa-pen"></i>
+				</a></div>
+            </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="charts mt-4">
+      <div class="chart-container p-3 ">
+        <h3 class="fs-6 mb-3 d-flex justify-content-center" ><a href="{{ path('new_saison') }}" class="btn btn-sm btn-light text-primary font-weight-bold text-uppercase" data-confirm="Etes vous sur de vouloir passer à la prochaine saison ?">Passer à la nouvelle saison</a></h3>
+        <div >
+        
+      </div>
+    </section>
+
+    
+  </div>
+</section>
+
+<script src="/js/filedash.js"></script>
+</div>
+{% endblock %}
