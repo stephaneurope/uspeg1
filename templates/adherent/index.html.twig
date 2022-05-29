@@ -74,7 +74,7 @@
 						<th class="text-center">Commande(s)</th>
 
 
-						<th></th>
+						<th class="text-center">Essayage</th>
 						<th>
 							{% if is_granted('ROLE_ADMIN') %}
 								<div class="dropdown">
@@ -139,7 +139,16 @@
 						</td>
 						<td class="text-center">{% include 'list_adherent_partials/paniers_adherent.html.twig'%}
 						</td>
-						<td></td>
+						<td class="text-center">
+                 {% if ad.essayage != null %}
+                    {% if ad.essayage.essaie == '1' %}
+                        <span style="color:green;">oui</span>
+                        {% elseif ad.essayage.essaie == '0' %}
+                        <span style="color:red;">non</span>
+                    {% endif %}
+                 {% endif %}
+                    
+                </td>
 						<td>
 
 
@@ -167,6 +176,9 @@
 
 <div class="container">
 	<ul style="list-style-type: none;">
+	<li>
+			<i style="display: inline-block;border:none;color:red;" class="fas fa-shopping-bag "></i>
+			: Pas de d'article validé ou en commande</li>
 	     <li>
 			<i style="display: inline-block;border:none;color:green;" class="fas fa-shopping-bag "></i>
 			: 1 article validé</li>
