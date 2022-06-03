@@ -86,7 +86,7 @@ class NewSaisonController extends AbstractController
         foreach($ca as $ca){
             if ($unadherent->getSubCategory() == $ca->getTitle()){
              
-               $a = $ca->getList() + 1;
+               $a = $ca->getOrdre() + 1;
                $cat = $categoryadherent->findBy(array('ordre' => $a));
                         
             }
