@@ -16,10 +16,9 @@
 		<body>
 			{% include 'navbar.html.twig' %}
 
-
-			
-
-			{% block body %}{% endblock %}
+          {% block body %}
+		
+			{% endblock %}
 
 			<script src="/js/jquery.min.js"></script>
 			<script src="/js/popper.min.js"></script>
@@ -29,6 +28,11 @@
 			<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 
 			{% block javascripts %}{% endblock %}
-		</body>
+
 		<div class="container my-3"><button class="btn btn-outline-primary mt-3" value="Précédent" onclick="history.go(-1)">Précédent</button></div>
+		
+	{% include 'footer.html.twig' %}
+			</body>
+
+			
 	</html>

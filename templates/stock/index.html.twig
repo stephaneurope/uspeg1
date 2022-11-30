@@ -1,32 +1,36 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Bienvenue sur la Boutique
 {% endblock %}
+
 {% block body %}
+
+
 
 	{% set name = "Familles d'équipements sportif" %}
 	{% include "header_title.html.twig" %}
 
 	<div class="container mt-3">
-		<div>
-
-			<div class="container">
-				<div class="row justify-content-center">
+		<div class="row text-center justify-content-center">
 					{% for categories in category %}
 
 						<figure class="snip1560">
-							<img src="{{asset('image/category_adherent/soccer.jpg')}}" alt="pr-sample23"/>
-							<figcaption>
+					<img src="{{asset('image/category_adherent/soccer.jpg')}}" alt="pr-sample23"/>
+					<figcaption>
 
-								<h2>
-									<span>{{categories.title}}</span>
-								</h2>
-								<h3>Voir</h3>
-							</figcaption>
+					<h2>catégorie
+							<span>{{categories.title}}</span>
+						</h2>
+						<h3>Voir</h3>
+					</figcaption>
+
 							<a href="{{ path('category_produit', {'id': categories.id}) }}" class="link"></a>
-						</figure>
+				</figure>
 
 
-					{% endfor %}
-				</div>
-			</div>
-		{% endblock %}
+			{% endfor %}
+
+		</div>
+
+</div>
+	{% endblock %}
