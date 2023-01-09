@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ProduitType extends ApplicationType
@@ -21,7 +22,7 @@ class ProduitType extends ApplicationType
     {
         $builder
             ->add('title', TextType::class, $this->getConfiguration("Produit", "Nom du produit"))
-            ->add('price', IntegerType::class, $this->getConfiguration("Prix", "Tapez le montant"))
+            ->add('price', NumberType::class, $this->getConfiguration("Prix", "Tapez le montant"))
             ->add('code', TextType::class, $this->getConfiguration("Code barre", "Tapez le code barre"))
             ->add('description', TextType::class, $this->getConfiguration("Description", "Tapez la description"))
             ->add('qteinit', IntegerType::class, $this->getConfiguration("Quantité en stock", "Quantité en stock"))
