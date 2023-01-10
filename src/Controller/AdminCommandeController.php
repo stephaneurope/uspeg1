@@ -1,9 +1,10 @@
 <?php
 namespace App\Controller;
 
-
+use App\Entity\Produit;
 use App\Entity\Adherent;
 use App\Entity\Commande;
+use App\Form\CommandeType;
 use App\Entity\DateCommandes;
 use App\Form\DateCommandesType;
 use App\Form\CommandeclientType;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class AdminCommandeController extends AbstractController
 {
@@ -141,25 +143,61 @@ class AdminCommandeController extends AbstractController
     $formclient = $this->createForm(CommandeclientType::class, $commande);
         $formclient->handleRequest($request);
 
-        if ($formclient->isSubmitted() && $formclient->isValid() && $commande->getQte()!= NULL) {
-            //$manager =$this->getDoctrine()->getManager();
-            $commande->setAdherent($adherent);
+        if ($formclient->isSubmitted() && $formclient->isValid() && $commande->getQte()!= NULL)  {
+            
+            /*Recupere l'Id du produit selectionné*/
+            $p = $formclient['produit']->getData()->getId();
+            /*recupere le produit et lui ajoute l'Id du produit selectionné */
+            $repo1 = $this->getDoctrine()->getRepository(Produit::class);
+            $produit = $repo1->find($p);
+            /*Recupere la quantité du produit attribué a l'adherent */
+            $stockmoins = $formclient['qte']->getData();
+
+
+            /*mis a jour de la quantité du stock initial */
+            if ($stockmoins <= $produit->getQteinit()) {
+                $produit->setQteinit($produit->getQteinit() - $stockmoins);
+            
+
+                /*Attribue l'id de l'adherent a la commande*/
+                $commande->setAdherent($adherent);
+
+                $commande->setDateattribution(new \DateTime('now'));
+                $manager->persist($commande);
+
+                $manager->flush();
+
+                $this->AddFlash(
+                    'success',
+                    "Le produit a bien été enregistré  !"
+                );
+                return $this->redirectToRoute('adherent_show', [
+                    'id' => $adherent->getId(),
+                ]);
+            } else
+                $commande->setAdherent($adherent);
+                $commande->setDatecommande(new \DateTime('now'));
+
             $manager->persist($commande);
+
             $manager->flush();
+
             $this->AddFlash(
-                'success',
-                "Le produit a bien été enregistré  !"
+                'danger',
+                "Vous n'avez pas assez de produit en stock , le produit est passé en commande !"
             );
             return $this->redirectToRoute('adherent_show', [
                 'id' => $adherent->getId(),
             ]);
-         
         }
-        return $this->render('admin/commande/client_for_commande.html.twig', [
-            'formclient' => $formclient->createView()  
-    
-            ]);
+
+        return $this->render("admin/commande/client_for_commande.html.twig", [
+            'adherent' => $adherent,
+            'commande' => $commande,
+            'formclient' => $formclient->createView(),
+        ]);
     }
+
 
 /**
      * Permet de valider une commande client
@@ -170,19 +208,57 @@ class AdminCommandeController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function delete(Commande $commande, ObjectManager $manager)
+    public function validate(Commande $commande,Request $request, ObjectManager $manager)
     {
-        $commande->setDateattribution(new \DateTime('now'));
-        $manager->flush();
+      
+        
+        $form = $this->createForm(CommandeType::class, $commande);
+        $form->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            "La commande a bien été validée !"
-        );
-        return $this->redirectToRoute('adherent_show', [
-            'id' => $commande->getAdherent()->getId(),
+        if($form->isSubmitted() && $form->isValid()) {
+             /*Recupere l'Id du produit selectionné*/
+             $p = $form['produit']->getData()->getId();
+             /*recupere le produit et lui ajoute l'Id du produit selectionné */
+             $repo1 = $this->getDoctrine()->getRepository(Produit::class);
+             $produit = $repo1->find($p);
+             /*Recupere la quantité du produit attribué a l'adherent */
+             $stockmoins = $form['qte']->getData();
+ 
+ 
+             /*mis a jour de la quantité du stock initial */
+             if ($stockmoins <= $produit->getQteinit()) {
+                 $produit->setQteinit($produit->getQteinit() - $stockmoins);
+             
+ 
+                 $commande->setDateattribution(new \DateTime('now'));
+                 $manager->persist($commande);
+ 
+                 $manager->flush();
+ 
+                 $this->AddFlash(
+                     'success',
+                     "Le produit a bien été enregistré  !"
+                 );
+                 return $this->redirectToRoute('adherent_show', [
+                     'id' => $commande->getAdherent()->getId(),
+                 ]);
+             } else
+                 
+ 
+             $this->AddFlash(
+                 'danger',
+                 "Vous n'avez pas assez de produit en stock , le produit est toujours en commande !"
+             );
+            return $this->redirectToRoute('adherent_show', [
+                'id' => $commande->getAdherent()->getId(),
+            ]);
+        }
+        
+
+        return $this->render("commande/validate.html.twig", [
+           'commande' => $commande,
+           'form' => $form->createView(),
         ]);
-        //return $this->redirectToRoute("adherent");
     }
 
 /**
