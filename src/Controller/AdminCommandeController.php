@@ -121,7 +121,7 @@ class AdminCommandeController extends AbstractController
         
     }
 
-    /**
+     /**
      * Permet de créer une commande pour un client boutique
      * 
      * @Route("commande-client/{id}/new", name="commande_client")
@@ -143,61 +143,68 @@ class AdminCommandeController extends AbstractController
     $formclient = $this->createForm(CommandeclientType::class, $commande);
         $formclient->handleRequest($request);
 
-        if ($formclient->isSubmitted() && $formclient->isValid() && $commande->getQte()!= NULL)  {
-            
-            /*Recupere l'Id du produit selectionné*/
-            $p = $formclient['produit']->getData()->getId();
-            /*recupere le produit et lui ajoute l'Id du produit selectionné */
-            $repo1 = $this->getDoctrine()->getRepository(Produit::class);
-            $produit = $repo1->find($p);
-            /*Recupere la quantité du produit attribué a l'adherent */
-            $stockmoins = $formclient['qte']->getData();
+        if ($formclient->isSubmitted() && $formclient->isValid() && $commande->getQte()!= NULL) {
+            //$manager =$this->getDoctrine()->getManager();
+//debut modif
+/*Recupere l'Id du produit selectionné*/
+$p = $formclient['produit']->getData()->getId();
+/*recupere le produit et lui ajoute l'Id du produit selectionné */
+$repo1 = $this->getDoctrine()->getRepository(Produit::class);
+$produit = $repo1->find($p);
+/*Recupere la quantité du produit attribué a l'adherent */
+$stockmoins = $formclient['qte']->getData();
 
 
-            /*mis a jour de la quantité du stock initial */
-            if ($stockmoins <= $produit->getQteinit()) {
-                $produit->setQteinit($produit->getQteinit() - $stockmoins);
-            
+/*mis a jour de la quantité du stock initial */
+if ($stockmoins <= $produit->getQteinit()) {
+    $produit->setQteinit($produit->getQteinit() - $stockmoins);
 
-                /*Attribue l'id de l'adherent a la commande*/
-                $commande->setAdherent($adherent);
 
-                $commande->setDateattribution(new \DateTime('now'));
-                $manager->persist($commande);
+    /*Attribue l'id de l'adherent a la commande*/
+   
 
-                $manager->flush();
+//fin modif
 
-                $this->AddFlash(
-                    'success',
-                    "Le produit a bien été enregistré  !"
-                );
-                return $this->redirectToRoute('adherent_show', [
-                    'id' => $adherent->getId(),
-                ]);
-            } else
-                $commande->setAdherent($adherent);
-                $commande->setDatecommande(new \DateTime('now'));
 
+
+
+            $commande->setAdherent($adherent);
             $manager->persist($commande);
-
             $manager->flush();
-
             $this->AddFlash(
-                'danger',
-                "Vous n'avez pas assez de produit en stock , le produit est passé en commande !"
+                'success',
+                "Le produit a bien été enregistré  !"
             );
             return $this->redirectToRoute('adherent_show', [
                 'id' => $adherent->getId(),
             ]);
-        }
 
-        return $this->render("admin/commande/client_for_commande.html.twig", [
-            'adherent' => $adherent,
-            'commande' => $commande,
-            'formclient' => $formclient->createView(),
-        ]);
+
+            //debut modif
+        } else
+        $commande->setAdherent($adherent);
+        $commande->setDatecommande(new \DateTime('now'));
+
+    $manager->persist($commande);
+
+    $manager->flush();
+
+    $this->AddFlash(
+        'danger',
+        "Vous n'avez pas assez de produit en stock , le produit est passé en commande !"
+    );
+    return $this->redirectToRoute('adherent_show', [
+        'id' => $adherent->getId(),
+    ]);
+}
+            //fin modif
+         
+        
+        return $this->render('admin/commande/client_for_commande.html.twig', [
+            'formclient' => $formclient->createView()  
+    
+            ]);
     }
-
 
 /**
      * Permet de valider une commande client
