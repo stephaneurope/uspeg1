@@ -20,9 +20,12 @@ class DashboardController extends AbstractController
     {
         
         $adherents = $manager->createQuery('SELECT COUNT(a) FROM App\Entity\Adherent a')->getSingleScalarResult();
+        $boutique = $manager->createQuery("SELECT COUNT(b) FROM App\Entity\CategoryAdherent b WHERE b.title = 'BOUTIQUE' ")->getSingleScalarResult();
+        $boutique1 = $manager->createQuery("SELECT COUNT(c) FROM App\Entity\CategoryAdherent c WHERE c.title = 'boutique' ")->getSingleScalarResult();
+        
         $produits = $manager->createQuery('SELECT COUNT(p) FROM App\Entity\Produit p')->getSingleScalarResult();
         return $this->render('admin/dashboard/index.html.twig', [
-            'stats' => compact('adherents','produits')
+            'stats' => compact('adherents','produits','boutique','boutique1')
         ]);
     }
 }

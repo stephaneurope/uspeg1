@@ -17,13 +17,35 @@
 								<i class="fas fa-users fa-3x"></i>
 							</div>
 							<div class="col-8">
-								<h4 class="card-title">{{stats.adherents ~ ' '}}
+							{% set bout = stats.boutique + stats.boutique1 %}
+							{% set catad = stats.adherents - bout %}
+								<h4 class="card-title">{{catad ~ ' '}}
 									Adherents</h4>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+<div class="col">
+				<div class="card bg-warning text-white mb-3 text-center">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<i class="fas fa-euro-sign fa-3x"></i>
+							</div>
+							<div class="col-8">
+							
+								<h4 class="card-title">{{bout ~ ' '}}
+									client(s)</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			
 			<div class="col">
 				<div class="card text-white bg-dark mb-3 text-center">
 					<div class="card-body">
