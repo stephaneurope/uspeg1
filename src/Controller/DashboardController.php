@@ -20,7 +20,7 @@ class DashboardController extends AbstractController
     {
         
         $adherents = $manager->createQuery('SELECT COUNT(a) FROM App\Entity\Adherent a')->getSingleScalarResult();
-        $boutique = $manager->createQuery("SELECT COUNT(b) FROM App\Entity\CategoryAdherent b WHERE b.title = 'BOUTIQUE' ")->getSingleScalarResult();
+        $boutique = $manager->createQuery("SELECT COUNT(b) FROM App\Entity\Adherent b WHERE b.subCategory = 'BOUTIQUE' ")->getSingleScalarResult();
         
         
         $produits = $manager->createQuery('SELECT COUNT(p) FROM App\Entity\Produit p')->getSingleScalarResult();
