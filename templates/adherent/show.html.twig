@@ -305,7 +305,7 @@
                                     </tr>
                                 </thead>
 
-                                {% for c in adherent.commandes|slice(0, 15) %}
+                                {% for c in adherent.commandes %}
                                     {% if (c.adherent.id is same as(adherent.id)) %}
                                         {% if c.dateattribution == null %}
 
